@@ -115,6 +115,8 @@
 	if(. && required_trait && isliving(AM))
 		var/mob/living/L = AM
 		if(HAS_TRAIT(L, required_trait))
+			if(world.time > L.last_client_interact + 0.3 SECONDS)
+				return FALSE // must have moved or clicked recently
 			return TRUE
 		else
 			//to_chat(L, "<b>It is a dead end.</b>")

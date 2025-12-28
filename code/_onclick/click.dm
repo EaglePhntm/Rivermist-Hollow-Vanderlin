@@ -99,6 +99,7 @@
 	if(world.time <= next_click)
 		return
 	next_click = world.time + 1
+	last_client_interact = world.time
 
 	if(check_click_intercept(params,A) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return

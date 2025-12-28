@@ -268,6 +268,8 @@
 	var/sprinted_tiles = 0
 	///how many tiles we can move while casting
 	var/cast_move = 0
+	/// Last tick where we moved or clicked something in-world, used to block AFK shenanigans.
+	var/last_client_interact = 0
 
 	/// pronouns of the mob, set in the character sheet.
 	var/pronouns = null

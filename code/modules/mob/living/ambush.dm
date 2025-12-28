@@ -15,6 +15,9 @@
 	return ambushable && !HAS_TRAIT(src, TRAIT_NOAMBUSH)
 
 /mob/living/proc/consider_ambush()
+	if(!always)
+		if(world.time > last_client_interact + 0.3 SECONDS)
+			return
 	if(!prob(AMBUSH_CHANCE))
 		return
 	if(!MOBTIMER_FINISHED(src, MT_AMBUSHCHECK, 15 SECONDS))
