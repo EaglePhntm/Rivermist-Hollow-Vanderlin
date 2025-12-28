@@ -144,7 +144,7 @@
 				viewing.show_message(span_warning("[leash_pet] has been leashed by [user]!"), 1)
 		START_PROCESSING(SSfastprocess, src) // The original while loop here ran every 2 deciseconds, and so does SSfastprocess.
 
-	leash = target.AddComponent(/datum/component/leash, src, 2, null, null, leash_type, 'icons/effects/beam.dmi', FALSE, CALLBACK(src, PROC_REF(break_callback)))
+	leash = target.AddComponent(/datum/component/leash, src, 2, null, null, leash_type, 'modular_rmh/icons/effect/beam.dmi', FALSE, CALLBACK(src, PROC_REF(break_callback)))
 	leashed = TRUE
 	leash_pet = target
 
@@ -193,7 +193,7 @@
 	leashed = FALSE
 	UnregisterSignal(leash_pet, COMSIG_PARENT_EXAMINE)
 	leash_pet = null
-/*
+
 /obj/item/leash/process(delta_time)
 	if(!leash_pet) //No pet, break loop
 		w_class = WEIGHT_CLASS_SMALL
@@ -208,6 +208,7 @@
 				viewing.show_message("<span class='notice'>[leash_pet] has slipped out of [leash_pet.p_their()]  collar!</span>")
 		leash_pet.remove_status_effect(/datum/status_effect/leash_pet)
 		w_class = WEIGHT_CLASS_SMALL
+		QDEL_NULL(leash)
 
 	if(!leash_pet.has_status_effect(/datum/status_effect/leash_pet)) //If there is no pet, there is no dom. Loop breaks.
 		if(leash_master) UnregisterSignal(leash_master, COMSIG_MOVABLE_MOVED)
@@ -219,7 +220,7 @@
 		leash_master = null
 		leash_pet = null
 		w_class = WEIGHT_CLASS_SMALL
-		return PROCESS_KILL*/
+		return PROCESS_KILL
 
 //Called when someone is clicked with the leash
 /obj/item/leash/attack(mob/living/carbon/C, mob/living/user)

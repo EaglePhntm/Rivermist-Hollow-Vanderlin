@@ -436,6 +436,10 @@
 						user.mind.special_items -= item
 						var/obj/item/I = new path2item(user.loc)
 						user.put_in_hands(I)
+						if (istype(I, /obj/item/clothing)) // commit any pref dyes to our item if it is clothing and we have them available
+							var/dye = user.client?.prefs.resolve_loadout_to_color(path2item)
+							if (dye)
+								I.add_atom_colour(dye, FIXED_COLOUR_PRIORITY)
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/clock/examine(mob/user)
@@ -690,6 +694,10 @@
 						user.mind.special_items -= item
 						var/obj/item/I = new path2item(user.loc)
 						user.put_in_hands(I)
+						if (istype(I, /obj/item/clothing)) // commit any pref dyes to our item if it is clothing and we have them available
+							var/dye = user.client?.prefs.resolve_loadout_to_color(path2item)
+							if (dye)
+								I.add_atom_colour(dye, FIXED_COLOUR_PRIORITY)
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/statue/CanPass(atom/movable/mover, turf/target)
