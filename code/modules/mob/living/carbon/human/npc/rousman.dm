@@ -390,7 +390,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		var/mob/living/carbon/human/species/rousman/ambush/A = new /mob/living/carbon/human/species/rousman/ambush(get_turf(src))
 		A.del_on_deaggro = 1 MINUTES
 		A.ai_controller?.set_blackboard_key(BB_BASIC_MOB_CURRENT_TARGET, ambushed_mob)
-	ambushed_mob.playsound_local(ambushed_mob, pick('sound/misc/jumphumans (1).ogg','sound/misc/jumphumans (2).ogg','sound/misc/jumphumans (3).ogg','sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
+	ambushed_mob.playsound_local(ambushed_mob, pick('sound/misc/jumphumans (1).ogg','sound/misc/jumphumans (2).ogg','sound/misc/jumphumans (3).ogg','modular_rmh/sound/misc/suprised (1).ogg','modular_rmh/sound/misc/suprised (2).ogg','modular_rmh/sound/misc/suprised (3).ogg','modular_rmh/sound/misc/suprised (4).ogg', 'modular_rmh/sound/misc/suprised (5).ogg'), 100)
 	already_ambushed = TRUE
 	icon_state = "rousman_hole_inactive"
 	delete_alarms()
