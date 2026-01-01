@@ -144,9 +144,9 @@ GLOBAL_LIST_INIT(generated_slave_phrases, list()) //retarded dev made GLOB right
 		H.visible_message("<span class='warning'><b>[H] is shocked, collar tightening!</b></span>")
 		H.electrocute_act(5, src)
 		H.emote("choke")
-		if(H.oxyloss > 65)
+		if(H.oxyloss > 45)
 			return
-		H.adjustOxyLoss(35)
+		H.adjustOxyLoss(25)
 		return
 
 	if (msg == normalize_slave_phrase(src.freedom_phrase))
