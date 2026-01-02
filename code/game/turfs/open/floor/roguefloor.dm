@@ -71,11 +71,13 @@
 /turf/open/floor/ruinedwood/herringbone
 	name = "wooden herringbone flooring"
 	desc = "Thin planks of wood carefully arranged in a rather pleasing pattern."
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "herringbonewood"
 
 /turf/open/floor/ruinedwood/herringbone_clear
 	name = "wooden herringbone flooring"
 	desc = "Thin planks of wood carefully arranged in a rather pleasing pattern."
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "herringbonewood2"
 
 /turf/open/floor/tile/kitchen // faded kitchen, too dark floors look bad IMO, this much nicer
