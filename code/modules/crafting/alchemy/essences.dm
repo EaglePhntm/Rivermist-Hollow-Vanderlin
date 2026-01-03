@@ -7,7 +7,8 @@
 	var/datum/thaumaturgical_essence/contained_essence = null
 	var/essence_amount = 0
 	var/max_essence = 60
-	var/extract_amount = 30 // Amount to try to extract when used
+	var/extract_amount = 60 // Amount to try to extract when used
+	var/list/extract_values = list(1,2,3,4,5,10,15,30,60)
 	var/extract_index = 1
 
 /obj/item/essence_vial/Initialize()
@@ -15,10 +16,13 @@
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/essence_vial/attack_self(mob/user, params)
-	if(extract_amount == 30)
-		extract_amount = 1
+
+	if(extract_amount == 60)
+		extract_index = 1
+
 	else
-		extract_amount++
+		extract_index++
+	extract_amount = extract_values[extract_index]
 
 	to_chat(user, span_info("You adjust the vial to extract [extract_amount] unit[extract_amount > 1 ? "s" : ""] of essence."))
 
