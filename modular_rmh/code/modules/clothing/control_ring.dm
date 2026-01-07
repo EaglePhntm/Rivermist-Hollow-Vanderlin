@@ -1,43 +1,38 @@
 /obj/item/clothing/ring/slave_control
 	name = "Slave control ring"
-	desc = "An ominous-looking ring with arcane engravings."
+	desc = "An ominous-looking ring with arcane engravings. \n Click with the middle mouse button to invoke a command."
 	icon_state = "g_ring_ruby"
 	sellprice = 100
 
-	var/pleasure_phrase = ""
-	var/submission_phrase = ""
-	var/freedom_phrase = ""
+	var/list/phrases_list = list()
 	var/ring_bound = FALSE
-	var/bound_collar
+	var/obj/item/clothing/neck/slave_collar/bound_collar
 
 /obj/item/clothing/ring/slave_control/attackby(obj/item/I, mob/living/user)
 	if(!ismob(user))
 		return
-	if(istype(I, /obj/item/clothing/neck/gorget/slave_gorget))
-		if(ring_bound)
-			to_chat(user, "<span class='warning'>The ring is already bound.</span>")
-			return
-		var/obj/item/clothing/neck/gorget/slave_gorget/s_g = I
-		if(s_g.collar_bound)
-			to_chat(user, "<span class='warning'>The collar is already bound.</span>")
-		to_chat(user, "<span class='info'>You bind the ring to the collar, transferring the control words.</span>")
-		user.visible_message("<span class='info'><b>[user] touches the ring and collar together, producing a dull chime.</b></span>")
-		s_g.collar_bound = TRUE
-		ring_bound = TRUE
-		pleasure_phrase = s_g.pleasure_phrase
-		submission_phrase = s_g.submission_phrase
-		freedom_phrase = s_g.freedom_phrase
-		bound_collar = I
+	if(istype(I, /obj/item/clothing/neck/slave_collar))
+		var/obj/item/clothing/neck/slave_collar/sc = I
+		sc.bind_collar(I, src, user)
 		return
 	return ..()
 
+/obj/item/clothing/ring/slave_control/MiddleClick(mob/user, params)
+	if(ring_bound)
+		var/command_input = browser_input_list(user, "SELECT THE DEMAND", "DECREES", GLOB.reverse_slave_phrases_translations, null)
+		if(command_input)
+			if(bound_collar.perform_command(normalize_slave_phrase(phrases_list[GLOB.reverse_slave_phrases_translations[command_input]])))
+				to_chat(user, "<font size='1' color='grey'>The ring vibrates imperceptably - the command was a success.</font>")
+			else
+				to_chat(user, "<font size='1' color='red'>The ring lies still - command failed to perform.</font>")
+		return
+	. = ..()
 
 /obj/item/clothing/ring/slave_control/examine(mob/user)
 	. = ..()
 	. += span_userdanger("You notice three engraved phrases on the ring:")
-	. += "<br><b>Lust:</b> \"[pleasure_phrase]\""
-	. += "<br><b>Submission:</b> \"[submission_phrase]\""
-	. += "<br><b>Freedom:</b> \"[freedom_phrase]\""
+	for(var/el in phrases_list)
+		. += "<br><b>[GLOB.slave_phrases_translations[el]]:</b> \"[phrases_list[el]]\""
 
 /datum/anvil_recipe/slave_control
 	name = "Slave control ring"

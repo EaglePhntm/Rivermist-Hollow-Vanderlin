@@ -39,18 +39,19 @@
 	animate(user, pixel_x = target_x, pixel_y = target_y, time = time)
 	animate(pixel_x = oldx, pixel_y = oldy, time = time)
 
-/mob/living/proc/start_sex_session(mob/living/target)
+/mob/living/proc/start_sex_session(mob/living/target, show_ui = TRUE)
 	if(!target)
 		return
 	var/datum/sex_session/old_session = get_sex_session(src, target)
 	if(old_session && !QDELETED(old_session))
-		old_session.show_ui()
+		if(show_ui)
+			old_session.show_ui()
 		return old_session
 
 
 	var/datum/sex_session/session = new /datum/sex_session(src, target)
 	LAZYADD(GLOB.sex_sessions, session)
-	if(target.client && client)
+	if(target.client && client && show_ui)
 		session.show_ui()
 	return session
 

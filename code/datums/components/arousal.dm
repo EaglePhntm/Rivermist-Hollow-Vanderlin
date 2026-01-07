@@ -356,7 +356,7 @@
 		return
 	ejaculate(s_action, action_initiator, action_target, giving)
 
-/datum/component/arousal/proc/ejaculate(datum/sex_action/s_action, mob/living/carbon/human/action_initiator, mob/living/carbon/human/action_target, giving)
+/datum/component/arousal/proc/ejaculate(datum/sex_action/s_action, mob/living/carbon/human/action_initiator, mob/living/carbon/human/action_target, giving = FALSE)
 
 	var/mob/living/mob = parent
 	var/list/parent_sessions = return_sessions_with_user(parent)
@@ -369,6 +369,8 @@
 	else if(highest_priority)
 		action = highest_priority.current_action
 
+	if(!action_initiator)
+		action_initiator = parent
 
 	var/mob/living/target
 	if(parent == action_initiator)
