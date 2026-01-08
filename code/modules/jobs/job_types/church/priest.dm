@@ -33,6 +33,7 @@
 		/datum/action/cooldown/spell/sacred_flame,
 		/datum/action/cooldown/spell/projectile/eora_curse,
 		/datum/action/cooldown/spell/status/guidance,
+		/datum/action/cooldown/spell/essence/toxic_cleanse,
 	)
 
 	exp_type = list(EXP_TYPE_CHURCH)
