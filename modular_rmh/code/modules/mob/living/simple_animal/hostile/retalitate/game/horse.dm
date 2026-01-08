@@ -5,6 +5,7 @@
 	icon_state = ""
 	icon_living = ""
 	icon_dead = ""
+	gender = "female"
 	SET_BASE_PIXEL(-8, 0)
 
 /mob/living/simple_animal/hostile/retaliate/saiga/horse/Initialize()
@@ -41,7 +42,7 @@
 			CALLBACK(src, PROC_REF(after_birth)),\
 		)
 
-/mob/living/simple_animal/hostile/retaliate/saiga/horse/male
+/mob/living/simple_animal/hostile/retaliate/saiga/horse/male // Делим на два пола, чтобы корректно работал horse/tamed(mob/user)
 	gender = "male"
 
 /mob/living/simple_animal/hostile/retaliate/saiga/horse/kid
@@ -51,6 +52,7 @@
 	icon_living = ""
 	icon_dead = ""
 	icon_gib = "skele"
+	gender = "female"
 
 /mob/living/simple_animal/hostile/retaliate/saiga/horse/kid/Initialize()
 	. = ..()
@@ -59,5 +61,5 @@
 	icon_living = "[foalcolor]"
 	icon_dead = "[foalcolor]_dead"
 
-/mob/living/simple_animal/hostile/retaliate/saiga/horse/kid/boy
+/mob/living/simple_animal/hostile/retaliate/saiga/horse/kid/boy // Делим на два пола, чтобы ничего не сломалось, на всякий случай.
 	gender = "male"
