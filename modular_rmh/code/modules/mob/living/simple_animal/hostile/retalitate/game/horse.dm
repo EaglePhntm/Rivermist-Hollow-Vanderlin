@@ -17,7 +17,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/saiga/horse/update_overlays()
 	. = ..()
-	if(stat <= DEAD)
+	if(stat == DEAD)
 		return
 	if(ssaddle)
 		var/mutable_appearance/saddlet = mutable_appearance(icon, "saddle-above", 4.3)
