@@ -438,7 +438,7 @@
 
 // Emberwine
 /atom/movable/screen/alert/status_effect/emberwine
-	name = "Aphrodisiac"
+	name = "Emberwine"
 	desc = "The warmth is spreading through my body..."
 	icon = 'modular_rmh/icons/mob/screen_alert.dmi'
 	icon_state = "emberwine"

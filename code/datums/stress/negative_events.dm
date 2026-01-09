@@ -5,18 +5,18 @@
 
 /datum/stress_event/vice1
 	timer = 5 MINUTES
-	stress_change = 2
+	stress_change = 1
 	desc = list("<span class='red'>I don't indulge my vice.</span>","<span class='red'>I need to sate my vice.</span>")
 
 /datum/stress_event/vice2
 	timer = 5 MINUTES
-	stress_change = 4
+	stress_change = 2
 	desc = list("<span class='red'>I don't need it. I don't need it. I don't need it.</span>","<span class='red'>I'm better than my vices.</span>")
 
 /datum/stress_event/vice3
 	timer = 5 MINUTES
-	stress_change = 6
-	desc = list("<span class='red'>If I don't sate my desire soon, I am going to kill myself..</span>","<span class='red'>I need it. I need it. I need it.</span>")
+	stress_change = 3
+	desc = list("<span class='red'>I can't thing straight! I need to sate my vice!</span>","<span class='red'>I need it. I need it. I need it.</span>")
 
 /datum/stress_event/miasmagas
 	timer = 10 SECONDS

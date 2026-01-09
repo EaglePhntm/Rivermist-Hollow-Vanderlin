@@ -60,72 +60,50 @@
 				apply_status_effect(/datum/status_effect/stress/stressvgood)
 				remove_status_effect(/datum/status_effect/stress/stressbad)
 				remove_status_effect(/datum/status_effect/stress/stressvbad)
-				remove_status_effect(/datum/status_effect/stress/stressinsane)
 			if(STRESS_VGOOD+1 to STRESS_BAD-1)
 				remove_status_effect(/datum/status_effect/stress/stressvgood)
 				remove_status_effect(/datum/status_effect/stress/stressbad)
 				remove_status_effect(/datum/status_effect/stress/stressvbad)
-				remove_status_effect(/datum/status_effect/stress/stressinsane)
 			if(STRESS_BAD to STRESS_VBAD-1)
 				apply_status_effect(/datum/status_effect/stress/stressbad)
 				remove_status_effect(/datum/status_effect/stress/stressvgood)
 				remove_status_effect(/datum/status_effect/stress/stressvbad)
-				remove_status_effect(/datum/status_effect/stress/stressinsane)
 			if(STRESS_VBAD to STRESS_INSANE-1)
 				apply_status_effect(/datum/status_effect/stress/stressvbad)
 				remove_status_effect(/datum/status_effect/stress/stressvgood)
 				remove_status_effect(/datum/status_effect/stress/stressbad)
-				remove_status_effect(/datum/status_effect/stress/stressinsane)
-			if(STRESS_INSANE to INFINITY)
-				apply_status_effect(/datum/status_effect/stress/stressinsane)
-				remove_status_effect(/datum/status_effect/stress/stressvgood)
-				remove_status_effect(/datum/status_effect/stress/stressbad)
-				remove_status_effect(/datum/status_effect/stress/stressvbad)
-				if(!rogue_sneaking && !HAS_TRAIT(src, TRAIT_IMPERCEPTIBLE))
-					INVOKE_ASYNC(src, PROC_REF(play_mental_break_indicator))
 
 		var/event
 		var/datum/stress_event/last_event = (length(stressors) ? stressors[length(stressors)] : null)
 		var/event_type = last_event?.type
-		
+
 		if(last_event?.desc)
 			var/desc = last_event.get_desc()
 			event = islist(desc) ? jointext(desc, " ") : desc
-			
+
 		if(stress > oldstress)
 			if(event && last_event.stress_change > 0)
 				if(last_announced_event_type != event_type)
 					to_chat(src, "[event]")
 					last_announced_event_type = event_type
 			to_chat(src, span_red(" I gain stress."))
-			
+
 			if(!rogue_sneaking && !HAS_TRAIT(src, TRAIT_IMPERCEPTIBLE))
 				INVOKE_ASYNC(src, PROC_REF(play_stress_indicator))
-			
+
 		else
 			if(event && last_event.stress_change <= 0)
 				if(last_announced_event_type != event_type)
 					to_chat(src, "[event]")
 					last_announced_event_type = event_type
 			to_chat(src, span_green(" I gain peace."))
-			
+
 			if(!rogue_sneaking && !HAS_TRAIT(src, TRAIT_IMPERCEPTIBLE))
 				INVOKE_ASYNC(src, PROC_REF(play_relief_indicator))
 
 		if(hud_used?.stressies)
 			hud_used.stressies.update_appearance(UPDATE_OVERLAYS)
 	oldstress = stress
-
-	if(stress >= STRESS_INSANE && prob(5))
-		var/text = pick_list("stress_messages.json", "insanity")
-		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(show_blurb), \
-			targets = src, \
-			duration = 3 SECONDS, \
-			message = text, \
-			fade_time = 3 SECONDS, \
-			screen_position = "WEST+[rand(2,13)], SOUTH+[rand(1,12)]", \
-			text_alignment = pick("left", "right", "center"), \
-			text_color = "red")
 
 /mob/living/carbon/get_stress_amount()
 	if(HAS_TRAIT(src, TRAIT_NOMOOD))

@@ -1516,10 +1516,7 @@
 			state2use = "stress2"
 		if(stress_amt >= STRESS_VBAD)
 			state2use = "stress3"
-		if(stress_amt == STRESS_INSANE)
-			state2use = "stress4"
-		if(stress_amt >= STRESS_INSANE)
-			state2use = "stress5"
+
 	if(H.has_status_effect(/datum/status_effect/buff/drunk) || H.has_status_effect(/datum/status_effect/buff/druqks))
 		state2use = "mood_drunk"
 	if(H.InFullCritical())
