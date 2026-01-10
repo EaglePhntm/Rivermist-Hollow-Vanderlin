@@ -46,7 +46,7 @@
 	name = "Dusk Spire Manor"
 	first_time_text = "DUSK SPIRE MANOR"
 	icon_state = "manor"
-	background_track = list('sound/music/area/manor.ogg', 'sound/music/area/manor2.ogg')
+	background_track = 'sound/music/area/manor.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/rmh/manorgarri

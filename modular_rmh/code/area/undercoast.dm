@@ -1,8 +1,8 @@
 /area/indoors/cave
 	name = "The Undercoast" // Forgive me I need a better name but Northern Coastl Cave is too wordy
 	icon_state = "cave"
-	background_track = DRONING_CAVE_GENERIC
-	background_track_night = DRONING_CAVE_GENERIC
+	background_track = 'sound/music/area/caves.ogg'
+	background_track_night = 'sound/music/area/caves.ogg'
 	soundenv = 8
 
 /area/indoors/cave/underhamlet
