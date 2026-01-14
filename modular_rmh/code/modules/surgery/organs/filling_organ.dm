@@ -141,6 +141,9 @@
 		var/tempdriprate = driprate
 		if((reagents.total_volume && spiller) || (reagents.total_volume > reagents.maximum_volume)) //spiller or above it's capacity to leak.
 			var/obj/item/clothing/blockingitem = H.mob_slot_wearing(blocker)
+			if(!isnull(additional_blocker))
+				if(H.underwear)
+					blockingitem = H.underwear
 			if(blockingitem && !blockingitem.genital_access) //we aint dripping a drop.
 			/*
 				tempdriprate = 0.1 //if worn slot cover it, drip nearly nothing.
@@ -152,12 +155,12 @@
 						span_info("Some [english_list(reagents.reagent_list)] drips from my [pick(altnames)] to my [blockingitem.name].")))
 			*/
 			else //we drippin
-				if(owner.has_quirk(/datum/quirk/selfawaregeni))
-					if(prob(5)) //with selfawaregeni quirk you got some chance to see what type of liquid is dripping from you.
-						to_chat(H, pick(span_info("A little bit of [english_list(reagents.reagent_list)] drips from my [pick(altnames)]..."),
-						span_info("Some liquid drips from my [pick(altnames)]."),
-						span_info("My [pick(altnames)] spills some liquid."),
-						span_info("Some [english_list(reagents.reagent_list)] drips from my [pick(altnames)].")))
+				if(prob(5)) //with selfawaregeni quirk you got some chance to see what type of liquid is dripping from you.
+					//if(owner.has_quirk(/datum/quirk/selfawaregeni)) //we do have sensitiveness
+					to_chat(H, pick(span_info("A little bit of [english_list(reagents.reagent_list)] drips from my [pick(altnames)]..."),
+					span_info("Some liquid drips from my [pick(altnames)]."),
+					span_info("My [pick(altnames)] spills some liquid."),
+					span_info("Some [english_list(reagents.reagent_list)] drips from my [pick(altnames)].")))
 				var/obj/item/reagent_containers/the_bottle
 				if((owner.mobility_flags & MOBILITY_STAND))
 					for(var/obj/item/reagent_containers/bottle in owner.loc) //having a bottle under us speed up leak greatly and transfer the leak there instead.
