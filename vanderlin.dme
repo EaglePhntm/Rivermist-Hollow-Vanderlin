@@ -3873,6 +3873,7 @@
 #include "modular_rmh\code\game\objects\structures\flora.dm"
 #include "modular_rmh\code\game\objects\structures\fluff.dm"
 #include "modular_rmh\code\game\objects\structures\garlands.dm"
+#include "modular_rmh\code\game\objects\structures\guildvendor.dm"
 #include "modular_rmh\code\game\objects\structures\hangingbanners.dm"
 #include "modular_rmh\code\game\objects\structures\hay.dm"
 #include "modular_rmh\code\game\objects\structures\hookah.dm"
