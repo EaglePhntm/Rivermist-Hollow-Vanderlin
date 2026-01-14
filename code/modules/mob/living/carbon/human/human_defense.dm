@@ -632,6 +632,32 @@
 	if(additional)
 		examination += span_info(span_green("[getToxLoss()] TOXIN"))
 		examination += span_info(span_blue("[getOxyLoss()] OXYGEN"))
+
+	examination += "ø ------------ ø" //automatically lists internal organs that have those functions
+	for(var/obj/item/organ/genitals/filling_organ/forgan in userino.internal_organs)
+		var/health_status = ""
+		var/health_ratio = (forgan.maxHealth - forgan.damage) / forgan.maxHealth
+		if(forgan.maxHealth - forgan.damage < forgan.maxHealth)
+			if(userino.has_quirk(/datum/quirk/selfawaregeni))
+				health_status = " It looks [forgan.maxHealth - forgan.damage]/[forgan.maxHealth] damaged."
+			else
+				health_status = " It looks [round(health_ratio * 100)]% healthy."
+		else
+			health_status = " It looks <span class='green'>OK</span>"
+		if(forgan.reagents.total_volume)
+			if(userino.has_quirk(/datum/quirk/selfawaregeni))
+				examination += span_info("[user == src ? "my" : "[user.p_their()]"] [pick(forgan.altnames)] are <bold>[forgan.reagents.total_volume]/[forgan.reagents.maximum_volume] oz</bold> full.[health_status]")
+			else
+				examination += span_info("[user == src ? "my" : "[user.p_their()]"] [pick(forgan.altnames)] are about <bold>[round(forgan.reagents.total_volume / 3)]/[round(forgan.reagents.maximum_volume / 3)] oz</bold> full.[health_status]")
+		else
+			if(userino.has_quirk(/datum/quirk/selfawaregeni))
+				examination += span_info("[user == src ? "my" : "[user.p_their()]"] [pick(forgan.altnames)] is empty.[health_status]")
+			else
+				examination += span_info("[user == src ? "my" : "[user.p_their()]"] [pick(forgan.altnames)] is empty.[health_status]")
+		if(forgan.contents.len)
+			examination += span_info("There is <bold>[english_list(forgan.contents)]</bold> in [user == src ? "my" : "[user.p_their()]"] [pick(forgan.altnames)].")
+		continue
+
 	examination += "ø ------------ ø</span>"
 	if(!silent)
 		to_chat(user, examination.Join("\n"))
