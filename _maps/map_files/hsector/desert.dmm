@@ -8347,7 +8347,8 @@
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "merchanttown";
 	aportalid = "merchantdesert";
-	alpha = 5
+	required_trait = list("seeprices", "cratemover");
+	name = "Merchant's Boat"
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/rmh_desert/port)

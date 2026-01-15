@@ -348,6 +348,7 @@
 	icon = 'icons/mob/sprite_accessory/tails/tails.dmi'
 	icon_state = "spade"
 	color_key_defaults = list(KEY_SKIN_COLOR)
+	can_wag = FALSE
 
 /datum/sprite_accessory/tail/rattlesnake
 	name = "Rattlesnake"

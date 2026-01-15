@@ -36,6 +36,10 @@
 /area/outdoors/bog/rmh/north)
 "al" = (
 /obj/effect/landmark/start/gravedigger,
+/obj/structure/fluff/railing/wood/north{
+	plane = -6;
+	pixel_y = 7
+	},
 /turf/open/floor/dirt,
 /area/outdoors/woods/rmh)
 "ap" = (
@@ -45,9 +49,8 @@
 /turf/open/floor/twig,
 /area/outdoors/rmh_air)
 "ar" = (
-/obj/effect/spawner/map_spawner/loot/decrepit_equipment_spawner,
-/turf/open/floor/dirt,
-/area/outdoors/woods/rmh/goblincampfire)
+/turf/closed/wall/mineral/wooddark/vertical,
+/area/indoors/shelter/rtfield)
 "at" = (
 /obj/structure/fluff/walldeco/vinez,
 /obj/structure/flora/grass/bush/wall/tundra,
@@ -148,6 +151,10 @@
 /area/under/cave/orcdungeon{
 	name = "oldruins"
 	})
+"aU" = (
+/obj/item/grown/log/tree/small,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
 "aV" = (
 /obj/structure/bars/tough{
 	icon = 'icons/effects/effects.dmi';
@@ -192,6 +199,10 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobble,
 /area/indoors/shelter/bog/rmh/fort)
+"be" = (
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/grass/cold,
+/area/outdoors/woods/rmh/goblincampfire)
 "bf" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 10
@@ -251,6 +262,10 @@
 /obj/structure/vine,
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
+"bB" = (
+/obj/structure/bed/shit,
+/turf/open/floor/dirt,
+/area/indoors/shelter/rtfield)
 "bC" = (
 /obj/effect/decal/cleanable/debris/wood,
 /obj/item/bedsheet/cloth,
@@ -284,7 +299,7 @@
 "bR" = (
 /obj/structure/chair/bench/throne,
 /obj/item/clothing/ring/active/nomag,
-/mob/living/carbon/human/species/orc/npc,
+/mob/living/carbon/human/species/halforc/base/very_skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/weapon/sword/sabre/hook,
 /obj/item/clothing/head/helmet/heavy/sinistar,
@@ -312,6 +327,12 @@
 /obj/structure/flora/newbranch/connector,
 /turf/open/transparent/openspace,
 /area/outdoors/rmh_air)
+"bX" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "ca" = (
 /obj/structure/chair/stool,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -338,6 +359,10 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/cobblerock,
 /area/under/cave/rmh/goblindungeon)
+"co" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/cobblerock,
+/area/outdoors/woods/rmh/goblincampfire)
 "cp" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/shelter/bog)
@@ -533,6 +558,16 @@
 /obj/structure/vine,
 /turf/open/floor/dirt/road,
 /area/indoors/dungeon)
+"dv" = (
+/obj/item/key/custom{
+	lockid = "gcell";
+	name = "Cells key";
+	pixel_x = -8;
+	pixel_y = -4
+	},
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/blocks,
+/area/under/cave/rmh/goblindungeon)
 "dx" = (
 /obj/effect/decal/cleanable/blood/puddle,
 /turf/open/floor/cobblerock,
@@ -615,6 +650,13 @@
 /area/under/cave/orcdungeon{
 	name = "oldruins"
 	})
+"dY" = (
+/turf/open/water/marsh,
+/area/under/cave/rmh/goblindungeon)
+"dZ" = (
+/obj/structure/pillory/double,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
 "ej" = (
 /obj/structure/rack,
 /obj/item/storage/belt/leather/knifebelt/black/iron,
@@ -676,6 +718,11 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
 /turf/open/floor/cobble/alt,
 /area/indoors/shelter/bog/rmh/fort)
+"ey" = (
+/obj/structure/fermentation_keg/random/water,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "ez" = (
 /turf/open/transparent/openspace,
 /area/outdoors/woods/rmh)
@@ -722,6 +769,10 @@
 "eP" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/outdoors)
+"eR" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/dirt,
+/area/outdoors/woods/rmh/goblincampfire)
 "eS" = (
 /obj/structure/flora/newtree,
 /obj/structure/vine,
@@ -753,7 +804,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/woods/rmh)
 "eZ" = (
-/mob/living/carbon/human/species/orc/npc,
+/mob/living/carbon/human/species/halforc/base/skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/rust,
 /obj/item/clothing/gloves/chain/iron,
@@ -777,6 +828,13 @@
 /mob/living/carbon/human/species/rousman/assassin,
 /turf/open/floor/cobblerock,
 /area/outdoors/bog/rmh/north)
+"fg" = (
+/obj/structure/door/iron/bars{
+	lockid = "gcell"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "fi" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 4
@@ -785,6 +843,13 @@
 "fj" = (
 /turf/open/floor/grass/cold,
 /area/outdoors/woods/rmh/goblincampfire)
+"fq" = (
+/obj/structure/door/iron/bars{
+	lockid = "gcell"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/blocks,
+/area/under/cave/rmh/goblindungeon)
 "fr" = (
 /turf/open/floor/naturalstone,
 /area/outdoors/rmh_air)
@@ -798,6 +863,12 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile/checker_green,
 /area/indoors)
+"fx" = (
+/obj/structure/lever{
+	redstone_id = "goblincamp"
+	},
+/turf/open/floor/dirt,
+/area/outdoors/woods/rmh/goblincampfire)
 "fy" = (
 /obj/item/natural/stone,
 /turf/open/floor/naturalstone,
@@ -816,9 +887,19 @@
 /obj/item/needle,
 /turf/open/floor/wood/nosmooth/saiga,
 /area/indoors)
+"fC" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "fD" = (
 /turf/open/floor/rooftop/green/west,
 /area/outdoors/rmh_air)
+"fF" = (
+/obj/structure/closet/crate/chest/wicker,
+/turf/open/floor/dirt,
+/area/indoors/shelter/rtfield)
 "fG" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock,
@@ -914,6 +995,11 @@
 	},
 /turf/open/floor/cobblerock,
 /area/indoors)
+"gl" = (
+/turf/closed/wall/mineral/tent{
+	dir = 2
+	},
+/area/under/cave/rmh/goblindungeon)
 "gp" = (
 /mob/living/simple_animal/hostile/retaliate/gaseousform,
 /turf/open/floor/dirt,
@@ -939,6 +1025,10 @@
 /obj/structure/stalagmite,
 /turf/open/floor/cobblerock,
 /area/under/cavewet/rmh/swamp_caves)
+"gB" = (
+/obj/structure/flora/hotspring_rocks/small/two,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
 "gD" = (
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/rmh/travel/forest_to_main)
@@ -1053,6 +1143,9 @@
 /obj/structure/vine,
 /turf/closed/wall/mineral/wood,
 /area/indoors/dungeon)
+"hG" = (
+/turf/closed/wall/mineral/wood,
+/area/outdoors/woods/rmh/goblincampfire)
 "hH" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
@@ -1095,9 +1188,9 @@
 /turf/closed/mineral/random,
 /area/outdoors/caves)
 "hV" = (
-/obj/machinery/light/fueled/campfire/densefire,
-/turf/open/floor/grass/cold,
-/area/outdoors/woods/rmh/goblincampfire)
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/dirt,
+/area/indoors/shelter/rtfield)
 "hW" = (
 /mob/living/simple_animal/hostile/retaliate/troll/rous{
 	faction = list("Hostile")
@@ -1125,6 +1218,10 @@
 /obj/item/reagent_containers/food/snacks/bread/raisin,
 /obj/item/reagent_containers/food/snacks/bread/raisin,
 /obj/item/reagent_containers/food/snacks/bread/raisin,
+/turf/open/floor/naturalstone,
+/area/under/cave/rmh/goblindungeon)
+"if" = (
+/obj/structure/roguerock,
 /turf/open/floor/naturalstone,
 /area/under/cave/rmh/goblindungeon)
 "ih" = (
@@ -1165,9 +1262,9 @@
 /turf/open/floor/ruinedwood,
 /area/outdoors)
 "iq" = (
-/obj/effect/spawner/map_spawner/loot/decrepit_equipment_spawner,
-/turf/open/floor/hay,
-/area/indoors/shelter/rtfield)
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
 "is" = (
 /obj/effect/decal/cobbleedge{
 	dir = 10
@@ -1214,6 +1311,10 @@
 "iG" = (
 /turf/open/floor/grass/red,
 /area/outdoors/woods/rmh)
+"iI" = (
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/dirt,
+/area/outdoors/woods/rmh/goblincampfire)
 "iJ" = (
 /obj/structure/bridge_stakes{
 	dir = 8
@@ -1400,7 +1501,7 @@
 /turf/open/floor/cobble/alt,
 /area/indoors)
 "jX" = (
-/mob/living/carbon/human/species/orc/npc,
+/mob/living/carbon/human/species/halforc/base/very_skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/ancient,
 /obj/item/clothing/gloves/plate/ancient,
@@ -1510,6 +1611,16 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt/snowy,
 /area/outdoors/bog/rmh/travel/swamp_to_main)
+"kv" = (
+/turf/open/floor/blocks,
+/area/under/cave/rmh/goblindungeon)
+"ky" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "kA" = (
 /turf/open/floor/naturalstone,
 /area/outdoors/woods/rmh)
@@ -1552,6 +1663,12 @@
 "kL" = (
 /turf/closed/wall/mineral/wood,
 /area/outdoors/woods/rmh)
+"kN" = (
+/obj/structure/bars/passage{
+	redstone_id = "goblincamp"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/woods/rmh/goblincampfire)
 "kO" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/dungeon{
@@ -1669,9 +1786,16 @@
 "ly" = (
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/bog/rmh/south)
+"lB" = (
+/obj/item/natural/stone,
+/turf/open/floor/naturalstone,
+/area/under/cave/rmh/goblindungeon)
 "lC" = (
 /turf/open/transparent/openspace,
 /area/indoors/shelter/bog)
+"lD" = (
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/indoors/shelter/rtfield)
 "lG" = (
 /obj/item/natural/rock,
 /obj/effect/decal/cobblerockedge/alt{
@@ -1717,6 +1841,7 @@
 /area/under/cavewet/rmh/wolf)
 "lP" = (
 /mob/living/carbon/human/species/goblin/npc,
+/obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock,
 /area/under/cave/rmh/goblindungeon)
 "lS" = (
@@ -1846,6 +1971,10 @@
 "mR" = (
 /turf/closed/wall/mineral/decostone/fluffstone,
 /area/outdoors/rmh_air)
+"mT" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/blocks,
+/area/under/cave/rmh/goblindungeon)
 "mV" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/shelter/bog)
@@ -1905,6 +2034,10 @@
 /obj/item/reagent_containers/food/snacks/fryfish/eel,
 /turf/open/floor/cobble,
 /area/under/town/basement)
+"nn" = (
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/dirt/road,
+/area/indoors/shelter/rtfield)
 "np" = (
 /obj/structure/vine,
 /turf/open/floor/ruinedwood/platform,
@@ -1945,9 +2078,8 @@
 /turf/open/floor/dirt,
 /area/under/town/basement)
 "nx" = (
-/mob/living/carbon/human/species/goblin/npc,
-/turf/open/floor/grass/cold,
-/area/outdoors/woods/rmh/goblincampfire)
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/indoors/shelter/rtfield)
 "ny" = (
 /obj/item/flashlight/flare/torch/lantern{
 	anchored = 1;
@@ -1980,9 +2112,9 @@
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/under/cave)
 "nJ" = (
-/obj/structure/roguetent,
-/turf/open/floor/grass/cold,
-/area/outdoors/woods/rmh)
+/obj/machinery/light/fueled/campfire/densefire,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
 "nL" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/cobblerock,
@@ -1995,6 +2127,10 @@
 /turf/open/water/swamp/deep,
 /turf/open/floor/dirt,
 /area/outdoors/bog/rmh/north)
+"nQ" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/dirt,
+/area/under/cave/rmh/goblindungeon)
 "nS" = (
 /obj/structure/vine,
 /obj/structure/vine,
@@ -2087,6 +2223,9 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/outdoors)
+"ot" = (
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/outdoors/woods/rmh/goblincampfire)
 "ou" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 4
@@ -2115,6 +2254,9 @@
 /area/under/cave/orcdungeon{
 	name = "oldruins"
 	})
+"oz" = (
+/turf/open/water/marsh/deep,
+/area/under/cave/rmh/goblindungeon)
 "oB" = (
 /obj/effect/decal/remains/human,
 /obj/effect/spawner/map_spawner/loot/medium,
@@ -2211,6 +2353,13 @@
 /obj/item/natural/wood/plank,
 /turf/open/floor/dirt/road,
 /area/indoors/dungeon)
+"pg" = (
+/obj/structure/stairs/stone{
+	dir = 1;
+	damage_deflection = 900
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/woods/rmh/goblincampfire)
 "pk" = (
 /obj/structure/flora/tree/pine/dead,
 /turf/open/floor/dirt/snowy,
@@ -2242,6 +2391,9 @@
 /area/under/cave/orcdungeon{
 	name = "oldruins"
 	})
+"pt" = (
+/turf/open/floor/dirt,
+/area/indoors/shelter/rtfield)
 "pu" = (
 /turf/open/floor/wood,
 /area/indoors)
@@ -2264,7 +2416,7 @@
 /area/indoors/shelter/bog/rmh/fort)
 "pC" = (
 /turf/closed/wall/mineral/wooddark/vertical,
-/area/outdoors/woods/rmh)
+/area/outdoors/woods/rmh/goblincampfire)
 "pD" = (
 /mob/living/simple_animal/hostile/retaliate/gaseousform,
 /turf/open/floor/dirt/road,
@@ -2334,6 +2486,10 @@
 /obj/structure/flora/ausbushes/reedbush,
 /turf/open/floor/dirt/snowy,
 /area/outdoors/woods/rmh)
+"pX" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/dirt/road/snowy,
+/area/outdoors/woods/rmh)
 "pY" = (
 /obj/effect/landmark/mapGenerator/rmh_bog,
 /turf/closed/mineral/bedrock{
@@ -2347,6 +2503,10 @@
 	},
 /turf/open/transparent/openspace,
 /area/outdoors/woods/rmh)
+"qa" = (
+/obj/item/natural/stone,
+/turf/open/floor/dirt/road,
+/area/under/cave/rmh/goblindungeon)
 "qe" = (
 /turf/open/floor/naturalstone,
 /area/indoors/shelter/bog/rmh/fort)
@@ -2361,10 +2521,9 @@
 	name = "oldruins"
 	})
 "qi" = (
-/obj/structure/fluff/railing/wood/east,
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/twig,
-/area/outdoors/rmh_air)
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/naturalstone,
+/area/under/cave/rmh/goblindungeon)
 "qj" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/vine,
@@ -2634,6 +2793,12 @@
 /obj/effect/spawner/map_spawner/loot/decrepit_equipment_spawner,
 /obj/effect/spawner/map_spawner/loot/decrepit_equipment_spawner,
 /obj/effect/spawner/map_spawner/loot/decrepit_equipment_spawner,
+/obj/item/key/custom{
+	lockid = "gcell";
+	name = "Cells key";
+	pixel_x = -8;
+	pixel_y = -4
+	},
 /turf/open/floor/naturalstone,
 /area/under/cave/rmh/goblindungeon)
 "rT" = (
@@ -2649,6 +2814,13 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/rmh_air)
+"rW" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "rX" = (
 /obj/structure/well/climb_up,
 /turf/open/water/cleanshallow,
@@ -2659,6 +2831,12 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/outdoors)
+"sa" = (
+/obj/structure/fluff/walldeco/chains{
+	icon_state = "chains5"
+	},
+/turf/open/floor/blocks,
+/area/under/cave/rmh/goblindungeon)
 "sb" = (
 /obj/structure/fluff/railing/corner/south_west,
 /turf/open/floor/cobblerock,
@@ -2704,6 +2882,9 @@
 	},
 /turf/open/floor/twig,
 /area/outdoors/rmh_air)
+"so" = (
+/turf/closed/wall/mineral/wood,
+/area/indoors/shelter/rtfield)
 "sr" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/closed/mineral/bedrock{
@@ -2736,6 +2917,10 @@
 	},
 /turf/open/floor/naturalstone,
 /area/outdoors/bog/rmh/travel/underdark)
+"sE" = (
+/obj/machinery/light/fueled/campfire/densefire,
+/turf/open/floor/naturalstone,
+/area/under/cave/rmh/goblindungeon)
 "sF" = (
 /obj/effect/decal/cleanable/debris/stone,
 /mob/living/carbon/human/species/orc/ambush,
@@ -2779,6 +2964,15 @@
 /obj/structure/vine,
 /turf/open/floor/naturalstone,
 /area/outdoors/caves)
+"sY" = (
+/obj/effect/decal/cleanable/debris/wood,
+/obj/item/natural/stone,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
+"sZ" = (
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/naturalstone,
+/area/under/cave/rmh/goblindungeon)
 "tc" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 6
@@ -2948,9 +3142,9 @@
 /turf/open/floor/naturalstone,
 /area/outdoors/woods/rmh)
 "ul" = (
-/obj/item/ammo_holder/quiver/arrows,
-/turf/open/floor/twig,
-/area/outdoors/rmh_air)
+/obj/item/natural/stone,
+/turf/open/floor/dirt,
+/area/under/cave/rmh/goblindungeon)
 "um" = (
 /turf/open/water/swamp,
 /area/outdoors/bog/rmh/north)
@@ -2969,6 +3163,10 @@
 	max_integrity = 9999
 	},
 /area/under/rmh_bedrock)
+"uy" = (
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "uA" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/dirt,
@@ -3045,6 +3243,13 @@
 "va" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/outdoors/woods/rmh)
+"vb" = (
+/obj/item/grown/log/tree/small,
+/obj/item/grown/log/tree{
+	pixel_y = -5
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
 "vd" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/floor/dirt/snowy,
@@ -3257,9 +3462,9 @@
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/shelter/bog)
 "wg" = (
-/mob/living/carbon/human/species/goblin/npc,
-/turf/open/floor/twig,
-/area/outdoors/rmh_air)
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "wh" = (
 /obj/item/natural/rock{
 	pixel_y = 7;
@@ -3345,6 +3550,9 @@
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/dirt,
 /area/outdoors)
+"wE" = (
+/turf/open/floor/dirt/road,
+/area/indoors/shelter/rtfield)
 "wG" = (
 /obj/structure/door/viewport{
 	dir = 2;
@@ -3371,10 +3579,18 @@
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/dirt,
 /area/outdoors/bog/rmh/south)
+"wL" = (
+/obj/structure/fluff/nest,
+/turf/open/floor/blocks,
+/area/under/cave/rmh/goblindungeon)
 "wM" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
 /area/outdoors/bog/rmh/north)
+"wN" = (
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/blocks,
+/area/under/cave/rmh/goblindungeon)
 "wO" = (
 /obj/structure/table/wood/plain/alt,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -3417,6 +3633,12 @@
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/dirt,
 /area/outdoors)
+"xy" = (
+/obj/structure/fluff/walldeco/chains{
+	icon_state = "chains7"
+	},
+/turf/open/floor/hay,
+/area/under/cave/rmh/goblindungeon)
 "xB" = (
 /obj/structure/flora/tree/pine/dead{
 	icon_state = "dead3";
@@ -3475,6 +3697,14 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/outdoors)
+"xN" = (
+/obj/item/natural/rock,
+/turf/open/floor/cobblerock,
+/area/outdoors/woods/rmh/goblincampfire)
+"xO" = (
+/obj/structure/roguetent,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "xQ" = (
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/dirt/road,
@@ -3513,8 +3743,9 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/dungeon)
 "yh" = (
-/turf/open/water/swamp/deep,
-/area/outdoors/woods/rmh/goblincampfire)
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/dirt/road,
+/area/indoors/shelter/rtfield)
 "yj" = (
 /obj/structure/fluff/railing/wood/north{
 	pixel_y = 9
@@ -3585,6 +3816,10 @@
 /obj/structure/stalagmite,
 /turf/open/floor/naturalstone,
 /area/under/cavewet/rmh/wolf)
+"yD" = (
+/obj/structure/fluff/nest,
+/turf/open/floor/hay,
+/area/under/cave/rmh/goblindungeon)
 "yE" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/cold,
@@ -3625,6 +3860,10 @@
 "yQ" = (
 /turf/open/floor/dirt/snowy,
 /area/outdoors/woods/rmh)
+"yS" = (
+/obj/structure/closet/crate/chest/wicker,
+/turf/open/floor/dirt/road,
+/area/indoors/shelter/rtfield)
 "yT" = (
 /turf/closed/mineral/bedrock{
 	name = "solid rock"
@@ -3688,7 +3927,9 @@
 /turf/open/transparent/openspace,
 /area/outdoors/woods/rmh)
 "zy" = (
-/obj/structure/door/iron/bars,
+/obj/structure/door/iron/bars{
+	lockid = "gcell"
+	},
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/concrete,
@@ -3730,8 +3971,13 @@
 /turf/open/floor/dirt/snowy,
 /area/outdoors)
 "zJ" = (
-/obj/structure/ladder,
-/turf/open/floor/dirt,
+/turf/open/floor/twig/platform,
+/area/outdoors/rmh_air)
+"zK" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/turf/open/floor/cobblerock,
 /area/outdoors/woods/rmh/goblincampfire)
 "zL" = (
 /obj/effect/decal/cleanable/blood/gibs/torso,
@@ -3859,6 +4105,11 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/tile/checker_green,
 /area/indoors)
+"Ay" = (
+/obj/structure/vine,
+/obj/structure/fluff/railing/wood/east,
+/turf/open/floor/grass/cold,
+/area/outdoors/woods/rmh)
 "Az" = (
 /obj/structure/flora/grass/bush/wall/tundra,
 /turf/open/floor/dirt,
@@ -3925,6 +4176,12 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/cobble/mossy,
 /area/outdoors/woods/rmh)
+"Bk" = (
+/obj/structure/lever{
+	redstone_id = "bogfort"
+	},
+/turf/open/floor/ruinedwood,
+/area/outdoors)
 "Bm" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/herringbone,
@@ -4007,6 +4264,10 @@
 /area/under/cave/orcdungeon{
 	name = "oldruins"
 	})
+"BQ" = (
+/obj/structure/flora/hotspring_rocks/small/two,
+/turf/open/floor/dirt,
+/area/outdoors/woods/rmh/goblincampfire)
 "BS" = (
 /obj/item/natural/wood/plank,
 /obj/structure/vine,
@@ -4060,6 +4321,7 @@
 "Cl" = (
 /obj/structure/table/wood/plain/alt,
 /obj/item/weapon/knife/stone,
+/obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/dirt,
 /area/under/cave/rmh/goblindungeon)
 "Cm" = (
@@ -4107,6 +4369,10 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/outdoors)
+"CN" = (
+/obj/structure/pillory,
+/turf/open/floor/dirt,
+/area/indoors/shelter/rtfield)
 "CO" = (
 /turf/open/floor/twig{
 	baseturfs = /turf/open/water/swamp/deep
@@ -4204,6 +4470,9 @@
 "Dw" = (
 /turf/open/floor/grass/eora,
 /area/under/cavewet/rmh/swamp_caves)
+"DC" = (
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/outdoors/woods/rmh/goblincampfire)
 "DD" = (
 /obj/structure/table/wood/plain/alto,
 /turf/open/floor/ruinedwood/chevron,
@@ -4242,8 +4511,8 @@
 /turf/open/floor/dirt,
 /area/under/cavewet/rmh/wolf)
 "DP" = (
-/turf/open/floor/grass/cold,
-/area/indoors/shelter/rtfield)
+/turf/open/water/marsh,
+/area/outdoors/woods/rmh/goblincampfire)
 "DQ" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood,
@@ -4259,6 +4528,13 @@
 	},
 /turf/open/floor/naturalstone,
 /area/indoors/shelter/bog/rmh/fort)
+"DU" = (
+/obj/structure/chair/bench/throne,
+/mob/living/carbon/human/species/goblin/npc/cave,
+/obj/item/clothing/head/crown/circlet,
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/turf/open/floor/dirt/road,
+/area/indoors/shelter/rtfield)
 "DW" = (
 /obj/structure/flora/newleaf,
 /obj/structure/flora/newbranch/leafless{
@@ -4381,6 +4657,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/outdoors/rmh_air)
+"EG" = (
+/obj/structure/rack,
+/obj/item/rope,
+/obj/item/rope,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "EH" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass/red,
@@ -4432,9 +4714,9 @@
 	name = "oldruins"
 	})
 "ER" = (
-/obj/structure/roguetent,
-/turf/open/floor/grass/cold,
-/area/indoors/shelter/rtfield)
+/obj/structure/bars/steel,
+/turf/open/floor/blocks,
+/area/under/cave/rmh/goblindungeon)
 "ET" = (
 /turf/open/floor/greenstone/runed,
 /area/indoors/town/rmh/magician/pass)
@@ -4514,6 +4796,10 @@
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/cobble/alt,
 /area/outdoors)
+"Fz" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/dirt,
+/area/indoors/shelter/rtfield)
 "FA" = (
 /mob/living/simple_animal/hostile/retaliate/wolf,
 /turf/open/floor/naturalstone,
@@ -4641,8 +4927,8 @@
 	pixel_y = -4
 	},
 /obj/item/key/custom{
-	lockid = "orkcell";
-	name = "Fort Dungeon key";
+	lockid = "gcell";
+	name = "Cells key";
 	pixel_x = -8;
 	pixel_y = -4
 	},
@@ -4830,6 +5116,10 @@
 	},
 /turf/open/floor/dirt/snowy,
 /area/outdoors/bog/rmh/south)
+"Hg" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/dirt/road,
+/area/indoors/shelter/rtfield)
 "Hh" = (
 /obj/structure/fluff/railing/wood/north{
 	layer = 2.7;
@@ -4846,6 +5136,10 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/rmh/south)
+"Hl" = (
+/mob/living/carbon/human/species/goblin/npc/ambush/cave,
+/turf/open/floor/dirt,
+/area/outdoors/woods/rmh)
 "Hm" = (
 /obj/effect/decal/cleanable/food/egg_smudge,
 /obj/structure/vine,
@@ -4866,6 +5160,14 @@
 /mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/cobble,
 /area/indoors/shelter/bog/rmh/fort)
+"Hv" = (
+/obj/item/weapon/pick,
+/turf/open/floor/dirt,
+/area/under/cave/rmh/goblindungeon)
+"Hx" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "Hz" = (
 /turf/open/floor/blocks/stonered,
 /area/indoors)
@@ -4875,6 +5177,10 @@
 "HD" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/shelter/bog/rmh/fort)
+"HE" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/naturalstone,
+/area/under/cave/rmh/goblindungeon)
 "HF" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass/cold,
@@ -4941,12 +5247,13 @@
 /turf/open/floor/dirt,
 /area/outdoors/woods/rmh)
 "Id" = (
-/mob/living/carbon/human/species/goblin/npc,
-/turf/open/floor/hay,
-/area/indoors/shelter/rtfield)
+/obj/item/natural/rock,
+/turf/open/floor/dirt,
+/area/outdoors/woods/rmh/goblincampfire)
 "If" = (
-/obj/item/reagent_containers/glass/bucket/wooden,
-/turf/open/floor/grass/cold,
+/turf/closed/wall/mineral/tent{
+	dir = 2
+	},
 /area/indoors/shelter/rtfield)
 "Ig" = (
 /obj/structure/flora/grass/thorn_bush,
@@ -4976,6 +5283,10 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/outdoors)
+"Iq" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/dirt/road,
+/area/under/cave/rmh/goblindungeon)
 "Iu" = (
 /obj/structure/fermentation_keg/random/water,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -5085,6 +5396,13 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/dungeon)
+"Ja" = (
+/obj/structure/fluff/railing/tall/palisade,
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "Jb" = (
 /obj/structure/flora/newleaf/corner{
 	dir = 5
@@ -5101,6 +5419,10 @@
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/snowy,
 /area/outdoors/bog/rmh/north)
+"Je" = (
+/obj/item/natural/stone,
+/turf/open/floor/dirt,
+/area/outdoors/woods/rmh/goblincampfire)
 "Jf" = (
 /obj/structure/bars/tough{
 	icon = 'icons/effects/effects.dmi';
@@ -5202,6 +5524,13 @@
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobble/mossy,
 /area/outdoors/woods/rmh)
+"JK" = (
+/obj/structure/stairs/stone{
+	dir = 1;
+	damage_deflection = 900
+	},
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "JL" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/floor/dirt,
@@ -5276,7 +5605,7 @@
 /turf/open/floor/cobble/alt,
 /area/under/cave)
 "Kp" = (
-/mob/living/carbon/human/species/orc/npc,
+/mob/living/carbon/human/species/halforc/base/very_skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/ancient,
 /obj/item/clothing/gloves/plate/ancient,
@@ -5331,8 +5660,8 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/rmh/south)
 "KH" = (
-/obj/structure/fluff/nest,
-/turf/open/floor/hay,
+/obj/structure/roguetent,
+/turf/open/floor/dirt,
 /area/indoors/shelter/rtfield)
 "KI" = (
 /obj/structure/fluff/railing/tall/palisade{
@@ -5345,6 +5674,10 @@
 /obj/structure/vine,
 /turf/open/water/swamp/deep,
 /area/under/cavewet/rmh/swamp_caves)
+"KK" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/cobblerock,
+/area/outdoors/woods/rmh/goblincampfire)
 "KL" = (
 /obj/structure/flora/tree/pine/dead,
 /turf/open/floor/grass/red,
@@ -5398,7 +5731,7 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/bog/rmh/travel/swamp_to_main)
 "KY" = (
-/obj/structure/fluff/nest,
+/obj/structure/bed/shit,
 /turf/open/floor/cobblerock,
 /area/under/cave/rmh/goblindungeon)
 "KZ" = (
@@ -5499,6 +5832,9 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/floor/dirt,
 /area/outdoors/bog/rmh/south)
+"LE" = (
+/turf/closed/wall/mineral/wooddark/end,
+/area/outdoors/woods/rmh/goblincampfire)
 "LF" = (
 /mob/living/simple_animal/hostile/retaliate/mole/briars,
 /turf/open/floor/dirt,
@@ -5508,6 +5844,11 @@
 /area/outdoors/bog/rmh/south)
 "LJ" = (
 /obj/structure/rack,
+/obj/item/weapon/hoe/copper,
+/obj/item/neuFarm/seed/apple,
+/obj/item/neuFarm/seed/apple,
+/obj/item/neuFarm/seed/potato,
+/obj/item/neuFarm/seed/potato,
 /turf/open/floor/naturalstone,
 /area/under/cave/rmh/goblindungeon)
 "LM" = (
@@ -5545,7 +5886,7 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/woods/rmh)
 "LZ" = (
-/mob/living/carbon/human/species/orc/npc,
+/mob/living/carbon/human/species/halforc/base/skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/ironplate,
 /obj/item/clothing/gloves/chain/iron/shadowgauntlets,
@@ -5608,6 +5949,10 @@
 /area/under/cave/orcdungeon{
 	name = "oldruins"
 	})
+"Mn" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/grass/cold,
+/area/outdoors/woods/rmh/goblincampfire)
 "Mr" = (
 /obj/item/natural/stoneblock,
 /obj/effect/decal/cleanable/blood/old,
@@ -5630,13 +5975,18 @@
 /obj/structure/vine,
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
+"Mz" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/naturalstone,
+/area/under/cave/rmh/goblindungeon)
 "MA" = (
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/rmh_air)
 "MB" = (
-/turf/open/floor/hay,
-/area/indoors/shelter/rtfield)
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
 "MC" = (
 /obj/structure/stairs{
 	dir = 1
@@ -5680,8 +6030,13 @@
 /turf/open/floor/twig,
 /area/outdoors/rmh_air)
 "MM" = (
-/obj/structure/fluff/railing/wood/east,
-/turf/open/floor/twig,
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 1
+	},
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood,
 /area/outdoors/rmh_air)
 "MO" = (
 /obj/structure/flora/grass/thorn_bush,
@@ -5701,7 +6056,7 @@
 /turf/open/floor/dirt/snowy,
 /area/outdoors/bog/rmh/south)
 "MS" = (
-/mob/living/carbon/human/species/orc/npc,
+/mob/living/carbon/human/species/halforc/base/skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/ironplate,
 /obj/item/clothing/gloves/chain/iron,
@@ -5771,11 +6126,7 @@
 /turf/open/floor/cobblerock,
 /area/indoors)
 "Nh" = (
-/obj/effect/spawner/map_spawner/loot/decrepit_equipment_spawner,
-/obj/structure/rack,
-/obj/effect/spawner/map_spawner/loot/decrepit_equipment_spawner,
-/obj/effect/spawner/map_spawner/loot/decrepit_equipment_spawner,
-/turf/open/floor/dirt,
+/turf/open/floor/hay,
 /area/under/cave/rmh/goblindungeon)
 "Ni" = (
 /turf/open/floor/twig{
@@ -5860,6 +6211,10 @@
 "NS" = (
 /turf/open/transparent/openspace,
 /area/outdoors/caves)
+"NT" = (
+/obj/item/natural/stone,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "NU" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/cobble,
@@ -5987,10 +6342,18 @@
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/dungeon)
+"OO" = (
+/obj/structure/flora/hotspring_rocks/small/two,
+/turf/open/floor/cobblerock,
+/area/outdoors/woods/rmh/goblincampfire)
 "OQ" = (
 /obj/item/natural/stoneblock,
 /turf/open/floor/cobble/alt,
 /area/indoors/shelter/bog/rmh/fort)
+"OR" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/dirt,
+/area/outdoors/woods/rmh/goblincampfire)
 "OS" = (
 /obj/structure/flora/tree/pine/dead{
 	icon_state = "dead3"
@@ -6066,6 +6429,12 @@
 "Pk" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/caves)
+"Pl" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "Pm" = (
 /obj/item/grown/log/tree/stick,
 /obj/effect/decal/remains/human,
@@ -6126,9 +6495,9 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "PH" = (
-/obj/structure/ladder,
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/rmh_air)
+/obj/item/natural/stone,
+/turf/open/floor/dirt/road,
+/area/indoors/shelter/rtfield)
 "PI" = (
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/dirt/snowy,
@@ -6228,6 +6597,11 @@
 /obj/structure/carpet/green,
 /turf/open/floor/wood/nosmooth,
 /area/indoors)
+"Qh" = (
+/turf/closed/wall/mineral/tent{
+	dir = 1
+	},
+/area/under/cave/rmh/goblindungeon)
 "Qi" = (
 /obj/structure/chair/bench/ancientlog,
 /turf/open/floor/dirt,
@@ -6272,6 +6646,14 @@
 "QD" = (
 /turf/open/floor/naturalstone,
 /area/under/cave/spider/rmh)
+"QF" = (
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
+"QG" = (
+/mob/living/carbon/human/species/goblin/npc/ambush/cave,
+/turf/open/floor/dirt/road/snowy,
+/area/outdoors/woods/rmh)
 "QH" = (
 /turf/closed/mineral/bedrock{
 	name = "solid rock"
@@ -6297,6 +6679,13 @@
 "QO" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/floor/dirt,
+/area/outdoors/woods/rmh)
+"QP" = (
+/obj/structure/fluff/railing/wood/north{
+	plane = -6;
+	pixel_y = 7
+	},
+/turf/open/floor/grass/cold,
 /area/outdoors/woods/rmh)
 "QQ" = (
 /obj/structure/flora/tree/dead_bush,
@@ -6431,6 +6820,11 @@
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/dirt,
 /area/outdoors/woods/rmh)
+"RC" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "RF" = (
 /obj/structure/table/wood/plain/alt,
 /obj/item/storage/belt/leather/cloth,
@@ -6467,6 +6861,10 @@
 /area/outdoors/woods/rmh)
 "RP" = (
 /obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/dirt/snowy,
+/area/outdoors/woods/rmh)
+"RR" = (
+/mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/dirt/snowy,
 /area/outdoors/woods/rmh)
 "RT" = (
@@ -6657,6 +7055,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/dungeon)
+"TB" = (
+/obj/structure/flora/hotspring_rocks,
+/turf/open/floor/cobblerock,
+/area/outdoors/woods/rmh/goblincampfire)
 "TD" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass,
@@ -6673,7 +7075,7 @@
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
 "TI" = (
-/obj/structure/fluff/nest,
+/obj/structure/bed/shit,
 /turf/open/floor/naturalstone,
 /area/under/cave/rmh/goblindungeon)
 "TJ" = (
@@ -6780,7 +7182,7 @@
 	},
 /area/under/rmh_bedrock)
 "Uq" = (
-/mob/living/carbon/human/species/orc/npc,
+/mob/living/carbon/human/species/halforc/base/skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/ironplate,
 /obj/item/clothing/gloves/chain/iron,
@@ -6811,6 +7213,12 @@
 "Ux" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors)
+"Uy" = (
+/obj/structure/bars/passage{
+	redstone_id = "bogfort"
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/shelter/bog/rmh/fort)
 "Uz" = (
 /obj/structure/chair/bench/ancientlog,
 /turf/open/floor/dirt,
@@ -6996,6 +7404,19 @@
 /area/indoors/dungeon{
 	name = "Tree House"
 	})
+"VB" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/dirt,
+/area/under/cave/rmh/goblindungeon)
+"VC" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 1
+	},
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "VD" = (
 /turf/open/floor/naturalstone,
 /area/under/cave/rmh/goblindungeon)
@@ -7062,6 +7483,11 @@
 	mineralChance = 5
 	},
 /area/under/cave)
+"Wa" = (
+/mob/living/carbon/human/species/goblin/npc,
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/dirt,
+/area/under/cave/rmh/goblindungeon)
 "Wb" = (
 /turf/open/floor/dirt,
 /area/outdoors/bog/rmh/travel/forest_to_main)
@@ -7069,6 +7495,10 @@
 /obj/item/natural/rock,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/rmh_air)
+"Wf" = (
+/obj/structure/pillory/double,
+/turf/open/floor/cobblerock,
+/area/outdoors/woods/rmh/goblincampfire)
 "Wi" = (
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/volcanic,
@@ -7096,6 +7526,10 @@
 /obj/structure/vine,
 /turf/open/floor/dirt,
 /area/outdoors/woods/rmh)
+"Wu" = (
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "Wv" = (
 /turf/open/floor/naturalstone,
 /area/outdoors/bog/rmh/travel/forest_to_main)
@@ -7107,6 +7541,11 @@
 /obj/structure/barricade/wooden/crude,
 /turf/closed/wall/mineral/wood/window,
 /area/indoors/dungeon)
+"WD" = (
+/obj/item/weapon/axe/boneaxe,
+/obj/structure/table/wood/treestump,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
 "WG" = (
 /turf/open/floor/tile/checker_green,
 /area/indoors)
@@ -7193,6 +7632,12 @@
 /obj/structure/fluff/railing/border/west,
 /turf/open/floor/cobble/alt,
 /area/indoors)
+"WY" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood,
+/area/outdoors/rmh_air)
 "Xc" = (
 /obj/structure/flora/tree/pine/dead{
 	icon_state = "dead3";
@@ -7211,13 +7656,17 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/grass/cold,
 /area/outdoors/woods/rmh)
+"Xh" = (
+/obj/item/natural/stone,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
 "Xi" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 1
 	},
 /area/indoors)
 "Xj" = (
-/mob/living/carbon/human/species/orc/npc,
+/mob/living/carbon/human/species/halforc/base/skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/feld,
 /obj/item/clothing/gloves/chain/iron,
@@ -7246,6 +7695,11 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/metal/barograte,
 /area/indoors/shelter/bog/rmh/fort)
+"Xq" = (
+/obj/structure/rack,
+/obj/item/rope/chain,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "Xr" = (
 /obj/structure/kneestingers,
 /turf/open/water/swamp/deep,
@@ -7326,6 +7780,10 @@
 /obj/machinery/tanningrack,
 /turf/open/floor/cobblerock,
 /area/indoors/shelter/bog/rmh/fort)
+"XM" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/blocks,
+/area/under/cave/rmh/goblindungeon)
 "XQ" = (
 /obj/structure/vine,
 /obj/structure/vine,
@@ -7349,6 +7807,18 @@
 /obj/structure/flora/tree/dying_bush,
 /turf/open/floor/dirt/snowy,
 /area/outdoors/bog/rmh/south)
+"Ya" = (
+/obj/item/natural/rock,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods/rmh/goblincampfire)
+"Yc" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/hay,
+/area/under/cave/rmh/goblindungeon)
+"Yd" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/dirt,
+/area/indoors/shelter/rtfield)
 "Ye" = (
 /obj/structure/vine,
 /turf/open/floor/cobblerock,
@@ -7364,6 +7834,11 @@
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/naturalstone,
 /area/outdoors/rmh_air)
+"Yo" = (
+/turf/closed/wall/mineral/tent{
+	dir = 4
+	},
+/area/indoors/shelter/rtfield)
 "Yp" = (
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/indoors/shelter/bog/rmh/fort)
@@ -7597,12 +8072,20 @@
 /obj/structure/vine,
 /turf/open/floor/dirt,
 /area/under/cavewet/rmh/swamp_caves)
+"ZI" = (
+/obj/machinery/light/fueled/campfire/densefire,
+/turf/open/floor/dirt,
+/area/under/cave/rmh/goblindungeon)
 "ZM" = (
 /mob/living/simple_animal/hostile/retaliate/bogbug{
 	dir = 2
 	},
 /turf/open/floor/dirt/snowy,
 /area/outdoors/bog/rmh/south)
+"ZO" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/cobblerock,
+/area/under/cave/rmh/goblindungeon)
 "ZT" = (
 /obj/structure/ladder/unbreakable,
 /turf/open/floor/naturalstone,
@@ -14682,17 +15165,17 @@ QH
 QH
 QH
 QH
+jb
+jb
+jb
+jb
+jb
 QH
 QH
 QH
 QH
 QH
-QH
-QH
-QH
-QH
-QH
-mh
+gg
 gg
 gg
 gg
@@ -14897,18 +15380,18 @@ QH
 QH
 QH
 QH
-YH
-YH
-YH
-YH
+QH
+jb
+jb
+jb
+kv
+Ri
+Ri
 QH
 QH
 QH
 QH
 QH
-QH
-QH
-mh
 gg
 gg
 gg
@@ -15114,19 +15597,19 @@ QH
 QH
 QH
 QH
-YH
+QH
+QH
 jb
-jb
-jb
-YH
-YH
+ey
+mT
+mT
+EG
+QH
+kv
 QH
 QH
 QH
-QH
-QH
-mh
-gW
+gg
 gg
 gg
 gg
@@ -15329,21 +15812,21 @@ QH
 QH
 QH
 QH
-YH
-YH
-YH
-jb
-jb
-jb
-jb
-jb
-YH
-YH
-YH
 QH
 QH
-mh
-gg
+QH
+QH
+Ri
+Ri
+mT
+kv
+Ri
+ER
+Yc
+QH
+QH
+QH
+QH
 gg
 gg
 gg
@@ -15546,21 +16029,21 @@ QH
 QH
 QH
 QH
-YH
-YH
-YH
-hz
-YH
-YH
-YH
-jb
-jb
-YH
-YH
-YH
-YH
-YH
-gW
+QH
+Nh
+sa
+QH
+Xq
+mT
+wN
+HE
+VD
+ER
+Nh
+Nh
+QH
+QH
+QH
 gW
 gg
 gg
@@ -15763,21 +16246,21 @@ QH
 QH
 QH
 QH
-YH
-ia
+QH
+yD
+kv
+fg
+Ri
 VD
-ia
-ia
-KY
-YH
-jb
-jb
-jb
-jb
-YH
-YH
-YH
-gW
+kv
+kv
+VD
+fq
+kv
+xy
+QH
+QH
+QH
 gg
 gg
 mh
@@ -15980,21 +16463,21 @@ QH
 QH
 QH
 QH
-YH
+QH
 Nh
-Ri
+Yc
+ER
+kv
 VD
+Mz
+qi
 VD
-Ri
-YH
-YH
-YH
+ER
+wL
+QH
+QH
+QH
 jb
-jb
-jb
-jb
-YH
-gW
 gW
 mh
 hU
@@ -16197,20 +16680,20 @@ QH
 QH
 QH
 QH
-YH
-YH
-KY
-ia
-Xu
-ia
-YH
-YH
-YH
-jb
-jb
-jb
-jb
-jb
+QH
+QH
+QH
+Ri
+XM
+kv
+qi
+qi
+kv
+QH
+QH
+QH
+QH
+QH
 jb
 jb
 YH
@@ -16414,21 +16897,21 @@ uM
 QH
 QH
 QH
-YH
-YH
-YH
-YH
-YH
-VD
-VD
-YH
-YH
-YH
 jb
 jb
 jb
-YH
-YH
+jb
+dv
+mT
+qi
+kv
+kv
+QH
+QH
+QH
+QH
+QH
+jb
 jb
 jb
 hU
@@ -16636,14 +17119,14 @@ YH
 jb
 jb
 jb
-YH
+Qh
 Vk
+gl
 YH
 YH
 YH
-YH
-jb
-jb
+QH
+QH
 jb
 jb
 jb
@@ -17072,7 +17555,7 @@ YH
 YH
 YH
 ia
-YH
+ZO
 YH
 YH
 YH
@@ -17284,16 +17767,16 @@ QH
 QH
 QH
 QH
-ia
+ZI
 hz
 YH
 YH
-ia
-YH
+nQ
+Ri
 YH
 YH
 TI
-VD
+sE
 YH
 YH
 YH
@@ -17505,11 +17988,11 @@ VD
 VD
 Vk
 VD
+wg
 Ri
-YH
 ZY
 VD
-ia
+nQ
 ia
 rQ
 YH
@@ -17717,17 +18200,17 @@ rv
 uM
 QH
 ia
-ia
-ia
-Xu
+nQ
+nQ
+Wa
 YH
 YH
-Ri
-Ri
+wg
+wg
 HP
 VD
-VD
-ia
+qi
+nQ
 ia
 YH
 YH
@@ -18156,8 +18639,8 @@ YH
 YH
 YH
 YH
-ia
-ia
+xO
+HP
 YH
 YH
 LJ
@@ -18373,9 +18856,9 @@ YH
 jb
 jb
 YH
-YH
 Ri
-VD
+Ri
+if
 YH
 YH
 YH
@@ -18589,17 +19072,17 @@ QH
 YH
 YH
 jb
-YH
-YH
-YH
+ia
+NT
+Ri
 ia
 YH
 YH
 YH
 YH
 LR
-Ri
-Ri
+wg
+wg
 ia
 YH
 jb
@@ -18805,17 +19288,17 @@ QH
 QH
 YH
 YH
-jb
-jb
-jb
-YH
 ia
-YH
+ia
+RC
+wg
+Ri
+QF
 YH
 YH
 YH
 uA
-Ri
+wg
 ov
 ia
 jb
@@ -19021,14 +19504,14 @@ uM
 uM
 QH
 QH
-YH
-YH
-jb
-jb
-YH
+Ri
+QF
 ia
-VD
 ia
+wg
+Ri
+Ri
+Ri
 HP
 Ri
 Ri
@@ -19239,13 +19722,13 @@ uM
 uM
 QH
 QH
-YH
-YH
-jb
-jb
-YH
 Ri
-VD
+ia
+Wa
+nQ
+wg
+Xw
+Ri
 YH
 YH
 YH
@@ -19258,22 +19741,22 @@ QH
 QH
 QH
 QH
-uM
-uM
-rv
-rv
-rv
-rv
-uM
-uM
-uM
-uM
-uM
-uM
-uM
-rv
-uM
-uM
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
 QH
 QH
 mh
@@ -19456,43 +19939,43 @@ rv
 uM
 QH
 QH
-YH
-YH
-YH
-jb
-jb
 ny
+Ri
 ia
+nQ
+qi
+qi
+ul
 YH
 YH
 YH
 Zh
-Ri
-Ri
+wg
+wg
 YH
 YH
 QH
-uM
-rv
-uM
-uM
-rv
-rv
-uM
-uM
-uM
-rv
-rv
-uM
-uM
-uM
-uM
-uM
-uM
-rv
-rv
-rv
-rv
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
 uM
 uM
 uM
@@ -19674,26 +20157,21 @@ uM
 lM
 QH
 QH
-YH
-YH
-YH
-YH
-YH
+oz
+Ri
 ia
+lB
+qi
 ia
+VB
 YH
 YH
 YH
 YH
 BZ
 BZ
-VD
+lB
 ia
-rv
-uM
-uM
-rv
-rv
 QH
 QH
 QH
@@ -19707,9 +20185,14 @@ QH
 QH
 QH
 QH
-uM
-uM
-rv
+QH
+QH
+QH
+QH
+QH
+QH
+QH
+QH
 rv
 rv
 rv
@@ -19889,24 +20372,24 @@ uM
 Ev
 uM
 lM
-lM
-Ri
-ia
-Ri
-YH
-YH
-YH
-YH
-Vk
+QH
+QH
+oz
+oz
+sZ
+VD
+if
+qi
+VD
 YH
 Wn
 YH
 YH
 VD
 VD
-ia
-ia
-uM
+nQ
+nQ
+QH
 QH
 QH
 QH
@@ -20106,22 +20589,22 @@ QH
 rv
 uM
 uM
-lM
-Ri
-ia
-ia
+QH
+QH
+QH
+dY
 ia
 Ri
 Ri
 VD
-VD
+qi
 ia
 ia
 ia
-VD
+lB
 xp
-VD
-ia
+qi
+Hv
 QH
 QH
 QH
@@ -20326,7 +20809,7 @@ uM
 QH
 QH
 QH
-Ri
+ZO
 Ri
 ia
 ia
@@ -20548,7 +21031,7 @@ QH
 QH
 cj
 Xw
-Ri
+NT
 ia
 Xu
 ia
@@ -20768,7 +21251,7 @@ QH
 PD
 Kv
 VD
-VD
+qi
 YH
 YH
 YH
@@ -20984,8 +21467,8 @@ QH
 QH
 QH
 QH
-ia
-ia
+nQ
+nQ
 YH
 jb
 jb
@@ -21200,9 +21683,9 @@ QH
 QH
 QH
 QH
-xp
-VD
-xp
+JK
+qi
+qa
 YH
 jb
 jb
@@ -21417,8 +21900,8 @@ QH
 QH
 QH
 QH
-xp
-xp
+JK
+Iq
 hk
 YH
 YH
@@ -21635,7 +22118,7 @@ QH
 QH
 QH
 QH
-xp
+Iq
 QH
 QH
 QH
@@ -59742,7 +60225,7 @@ yQ
 cW
 wB
 wB
-cW
+QP
 mL
 xe
 GC
@@ -59959,7 +60442,7 @@ cW
 cW
 PU
 wB
-cW
+QP
 kV
 sc
 cW
@@ -61918,9 +62401,9 @@ ad
 yL
 Qo
 cW
-wB
-wB
-wB
+Ay
+Ay
+Ay
 cW
 tl
 yQ
@@ -65892,7 +66375,7 @@ NH
 NH
 HX
 cW
-yQ
+RR
 cW
 cW
 yQ
@@ -66122,7 +66605,7 @@ HG
 cW
 cW
 yQ
-HX
+Hl
 yQ
 yQ
 yQ
@@ -66328,13 +66811,13 @@ yQ
 cW
 cW
 cW
-yQ
-yQ
-yQ
-cW
-yQ
-yQ
-yQ
+hG
+DC
+DC
+ot
+lD
+lD
+so
 cW
 cW
 yQ
@@ -66543,17 +67026,17 @@ Bb
 iG
 yQ
 cW
-yQ
-yQ
-cW
-cW
-cW
-cW
-cW
-cW
-HX
-yQ
-yQ
+ot
+hG
+hG
+DP
+DP
+UB
+If
+bB
+so
+so
+nx
 yQ
 yQ
 wB
@@ -66760,18 +67243,18 @@ HX
 yQ
 yQ
 cW
-yQ
-yQ
-HX
-HX
-kL
-kL
-kL
-kL
-kL
-kL
-kL
-yQ
+pC
+Jk
+xN
+KK
+OR
+gB
+If
+pt
+Hg
+yS
+ar
+cW
 yQ
 NH
 NH
@@ -66977,18 +67460,18 @@ yQ
 yQ
 yQ
 yQ
-yQ
-yQ
-HX
-nc
-kL
-MB
+pC
+LE
+zK
+eR
+UB
+Xh
 KH
-gf
-UB
-UB
-kL
-nc
+PH
+Hg
+wE
+ar
+cW
 HX
 wB
 NH
@@ -67194,19 +67677,19 @@ yQ
 cW
 cW
 yQ
-yQ
-yQ
-kL
-kL
+pC
+LE
+zK
+Je
 iq
 MB
 If
-gf
-ja
-fj
+Fz
+nn
+bB
 ar
-kL
-kL
+cW
+cW
 wB
 NH
 cW
@@ -67410,20 +67893,20 @@ yQ
 cW
 cW
 yQ
-cW
-yQ
-yQ
-pC
-KH
+so
+nx
+Yo
+Yo
+nx
 Id
-DP
-Lw
-gf
-ja
-fj
 UB
-Jk
-kL
+dZ
+nx
+Lw
+Lw
+nx
+hG
+cW
 wB
 Bb
 Bb
@@ -67626,21 +68109,21 @@ wB
 yQ
 cW
 yQ
-yQ
-yQ
-yQ
-yQ
-kL
-Lw
-Lw
-ER
-fj
+so
+so
+hV
+pt
+pt
+gf
+UB
 ja
-fj
-nx
+ja
+OO
 Jk
+TB
 Jk
-kL
+hG
+hG
 Wt
 Bb
 Bb
@@ -67843,19 +68326,19 @@ wB
 yQ
 cW
 yQ
-yQ
-yQ
-yQ
-HX
-pC
+ar
+pt
+Hg
+pt
+CN
+gf
+pt
+nx
 fj
-fj
-fj
-ja
-ja
-ja
-ja
+KK
+KK
 Jk
+pg
 nU
 pC
 Wt
@@ -68060,19 +68543,19 @@ wB
 NH
 yQ
 yQ
-yQ
-yQ
-yQ
-HX
-pC
+ar
+pt
+DU
+wE
+pt
+KH
+wE
+wE
+ja
+ja
 fj
-ja
-UB
-ja
-hV
-ja
-ja
-UB
+iI
+pg
 nU
 pC
 Wt
@@ -68277,19 +68760,19 @@ wB
 wB
 Bb
 hH
-yQ
-cW
-yQ
-cW
-pC
-yh
+ar
+fF
+pt
+Hg
+Yd
+gf
 yh
 nx
+ja
+Mn
 fj
-fj
-UB
-fj
-UB
+Ya
+Je
 UB
 pC
 Wt
@@ -68494,21 +68977,21 @@ cW
 yQ
 hH
 hH
-NH
-cW
-yQ
-yQ
-kL
-kL
-yh
-fj
-fj
+so
+so
+hV
+pt
+pt
+gf
+KK
+KK
 ja
 fj
-fj
-zJ
-kL
-kL
+WD
+aU
+UB
+hG
+hG
 Wt
 NH
 cW
@@ -68712,19 +69195,19 @@ cW
 yQ
 NH
 NH
-cW
-cW
-yQ
-HX
-nc
-kL
-UB
+so
+nx
+Lw
+Lw
+nx
+Wf
 fj
-ja
 fj
-UB
-kL
-nc
+be
+vb
+OR
+ot
+hG
 HX
 NH
 wB
@@ -68930,18 +69413,18 @@ HX
 yQ
 Wt
 Wt
-NH
-yQ
-HX
-HX
-kL
-ga
-kL
+pC
+DP
+DP
+Jk
+Jk
+co
+fj
 nJ
-nJ
-ga
-kL
-HX
+ja
+DP
+pC
+cW
 NH
 NH
 cW
@@ -69147,20 +69630,20 @@ yQ
 yQ
 HX
 HX
-hH
-Bb
-yQ
-yQ
-yQ
+pC
+DP
+UB
+Ya
+Jk
+co
+ja
+Xh
+iI
+DP
+pC
 cW
-HX
-gL
-gL
-HX
-HX
-HX
 NH
-yQ
+RR
 cW
 gL
 gL
@@ -69364,17 +69847,17 @@ yQ
 yQ
 cW
 yQ
-Bb
-Bb
-cW
-cW
-yQ
-cW
-gL
-gL
-gL
-gL
-cW
+pC
+iI
+fx
+Jk
+iq
+sY
+Jk
+BQ
+DP
+DP
+pC
 cW
 Bb
 Bb
@@ -69581,17 +70064,17 @@ yQ
 yQ
 yQ
 yQ
-yQ
-yQ
-yQ
-yQ
-yQ
-cW
-gL
-gL
-cW
-gL
-cW
+ot
+hG
+hG
+OR
+ja
+iq
+Jk
+OR
+hG
+hG
+ot
 yQ
 Bb
 Bb
@@ -69800,13 +70283,13 @@ yQ
 yQ
 yQ
 yQ
-yQ
-yQ
-yQ
-cW
-gL
-gL
-gL
+hG
+DC
+kN
+kN
+kN
+DC
+hG
 gL
 cW
 yQ
@@ -70012,16 +70495,16 @@ NH
 cW
 yQ
 yQ
+RR
+yQ
+cW
 yQ
 yQ
 cW
 yQ
-yQ
-cW
-yQ
-cW
-gL
-gL
+Uc
+Uc
+Uc
 HX
 gL
 cW
@@ -70237,7 +70720,7 @@ hH
 hH
 yQ
 cW
-cW
+gL
 gL
 HX
 gL
@@ -70454,8 +70937,8 @@ hH
 Bb
 cW
 gL
-cW
-cW
+gL
+gL
 cW
 gL
 gL
@@ -70672,10 +71155,10 @@ NH
 vR
 gL
 gL
-cW
-cW
 gL
 gL
+gL
+pX
 gL
 HG
 iG
@@ -70889,7 +71372,7 @@ NH
 wB
 wB
 gL
-gL
+QG
 gL
 gL
 gL
@@ -98733,7 +99216,7 @@ ly
 ly
 ly
 ly
-rw
+Uy
 KV
 Ab
 Dl
@@ -112984,13 +113467,13 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
+VC
+fC
+fC
+fC
+fC
+fC
+rW
 Pe
 Pe
 Pe
@@ -113199,17 +113682,17 @@ Pe
 Pe
 fr
 Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
+VC
+fC
+Uk
+Uk
+Uk
+Uk
+Uk
+Uk
+Uk
+fC
+rW
 Pe
 Pe
 Pe
@@ -113416,17 +113899,17 @@ Pe
 Pe
 Pe
 Pe
+bX
+Uk
+Uk
+Uk
 Pe
 Pe
-Pe
-Pe
-nY
-nY
-nY
-nY
-nY
-nY
-nY
+aA
+Uk
+Hx
+Uk
+Wu
 Pe
 Pe
 Pe
@@ -113633,18 +114116,18 @@ Pe
 Pe
 Pe
 Pe
+bX
+Pl
 Pe
 Pe
 Pe
-nY
-nY
-aA
-aA
-aA
-aA
-aA
-nY
-nY
+Pe
+zJ
+zJ
+zJ
+Uk
+Wu
+Pe
 Pe
 Pe
 Pe
@@ -113850,19 +114333,19 @@ Pe
 Pe
 Pe
 Pe
+bX
+Pl
 Pe
 Pe
-nY
-nY
-aA
-aA
-aA
-aA
+Pe
 Pe
 aA
-aA
-nY
-nY
+zJ
+zJ
+Uk
+Wu
+Pe
+Pe
 Pe
 Pe
 Pe
@@ -114066,20 +114549,20 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-nY
+VC
+Uk
+Uk
 aA
 aA
-wg
-MM
-MM
+Pe
 Pe
 Pe
 aA
 aA
-nY
+Uk
+Uk
+rW
+Pe
 Pe
 Pe
 Pe
@@ -114282,21 +114765,21 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
-nY
+VC
+Uk
+Uk
+Uk
+zJ
 aA
-MM
-qi
 Pe
 Pe
 Pe
 Pe
 Pe
-aA
-nY
+Pe
+Uk
+Uk
+rW
 Pe
 Pe
 Pe
@@ -114499,21 +114982,21 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
-nY
+bX
+Uk
+Uk
+zJ
+zJ
+aA
+zJ
 aA
 Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-ul
-nY
+Hx
+Uk
+Wu
 Pe
 Pe
 Pe
@@ -114716,21 +115199,21 @@ Pe
 Pe
 Pe
 Pe
+bX
+Uk
+Hx
+zJ
+zJ
+zJ
+zJ
+zJ
 Pe
 Pe
 Pe
 Pe
-nY
-aA
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-aA
-nY
+Uk
+Uk
+Wu
 Pe
 Pe
 Pe
@@ -114933,21 +115416,21 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
-nY
+bX
+Uk
+Uk
+zJ
+zJ
 aA
+zJ
 aA
 Pe
 Pe
 Pe
 Pe
-Pe
-aA
-nY
-nY
+Uk
+Uk
+Wu
 Pe
 Pe
 Pe
@@ -115150,21 +115633,21 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
-nY
-nY
-aA
+MM
+Uk
+Uk
+Uk
+zJ
 aA
 Pe
 Pe
 Pe
-aA
-PH
-nY
-nY
+Pe
+Pe
+Uk
+Uk
+Uk
+ky
 Pe
 Pe
 Pe
@@ -115368,19 +115851,19 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
-nY
-nY
-aA
-wg
+MM
+uy
+Uk
 aA
 aA
-nY
-nY
-nY
+Pe
+Pe
+Pe
+Pe
+Pe
+Uk
+uy
+ky
 Pe
 Pe
 Pe
@@ -115586,17 +116069,17 @@ Pe
 Pe
 Pe
 Pe
+bX
+Uk
 Pe
 Pe
 Pe
 Pe
-nY
-nY
-nY
-nY
-nY
-nY
-nY
+Pe
+Pe
+Pe
+Uk
+Wu
 Pe
 Pe
 Pe
@@ -115803,6 +116286,8 @@ Pe
 Pe
 Pe
 Pe
+bX
+Uk
 Pe
 Pe
 Pe
@@ -115810,10 +116295,8 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
+Uk
+Wu
 Pe
 Pe
 Pe
@@ -116020,17 +116503,17 @@ Pe
 Pe
 Pe
 Pe
+bX
+Uk
+Uk
+Uk
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
+Uk
+Uk
+Uk
+Wu
 Pe
 Pe
 Pe
@@ -116237,17 +116720,17 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
+MM
+WY
+Uk
+Uk
+uy
+Uk
+Uk
+Uk
+Hx
+WY
+Ja
 Pe
 Pe
 Pe
@@ -116456,13 +116939,13 @@ Pe
 Pe
 Pe
 Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
-Pe
+MM
+WY
+WY
+WY
+WY
+WY
+ky
 Pe
 Pe
 Pe
@@ -144956,7 +145439,7 @@ Pe
 Pe
 OL
 LO
-AZ
+Bk
 ke
 Pe
 Pe
