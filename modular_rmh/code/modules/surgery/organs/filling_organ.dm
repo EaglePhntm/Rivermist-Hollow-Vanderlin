@@ -66,8 +66,7 @@
 	if(!isanimal(H) && H.mind)
 		if(!captarget) //like vaginas dont have size selection
 			captarget = max_reagents
-		var/list/stored_items = list()
-		SEND_SIGNAL(H, COMSIG_HOLE_RETURN_ITEM_LIST_SINGLE, stored_items, slot)
+		var/list/stored_items = SEND_SIGNAL(src, COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE)
 		if(length(stored_items))
 			for(var/obj/item/thing as anything in stored_items)
 				if(thing.type != /obj/item/dildo/plug) //plugs wont take space as they are especially for this.
@@ -143,8 +142,7 @@
 		return
 	if(reagents.total_volume && absorbing) //slowly inject to your blood if they have reagents. Will not work if refilling because i cant properly seperate the reagents for which to keep which to dump.
 		reagents.trans_to(owner, absorbrate, absorbmult, TRUE, FALSE)
-	var/list/stored_items = list()
-	SEND_SIGNAL(owner, COMSIG_HOLE_RETURN_ITEM_LIST_SINGLE, stored_items, slot)
+	var/list/stored_items = SEND_SIGNAL(src, COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE)
 	if(!length(stored_items)) //if nothing is plugging the hole, stuff will drip out.
 		var/tempdriprate = driprate
 		if((reagents.total_volume && spiller) || (reagents.total_volume > reagents.maximum_volume)) //spiller or above it's capacity to leak.
@@ -215,7 +213,7 @@
 
 	/*if(!isanimal(H) && H.mind)
 		var/list/stored_items = list()
-		SEND_SIGNAL(H, COMSIG_HOLE_RETURN_ITEM_LIST_SINGLE, stored_items, slot)
+		SEND_SIGNAL(H, COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE, stored_items, slot)
 		if(length(stored_items))
 			for(var/obj/item/forganstored_items as anything in forgan.stored_items)
 				if(!istype(forganstored_items, /obj/item/dildo)) //dildo keeps stuff in even if you have no pants ig

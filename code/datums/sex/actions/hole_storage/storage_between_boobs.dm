@@ -76,8 +76,8 @@
 		return FALSE
 	if(check_sex_lock(target, ORGAN_SLOT_BREASTS))
 		return FALSE
-	var/list/stored_items = list()
-	//SEND_SIGNAL(target, COMSIG_HOLE_RETURN_ITEM_LIST_SINGLE, stored_items, hole_id)
+	target_organ = user.getorganslot(hole_id)
+	var/list/stored_items = SEND_SIGNAL(target_organ, COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE)
 	if(!stored_items.len)
 		return FALSE
 	return TRUE

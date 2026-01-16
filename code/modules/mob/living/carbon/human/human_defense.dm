@@ -645,7 +645,7 @@
 				health_status = " It looks <span class='green'>OK</span>"
 
 			var/list/stored_items = list()
-			SEND_SIGNAL(userino, COMSIG_HOLE_RETURN_ITEM_LIST_SINGLE, stored_items, forgan.slot)
+			SEND_SIGNAL(userino, COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE, stored_items, forgan.slot)
 			if(forgan.reagents.total_volume)
 				examination += span_info("[user == src ? "my" : "[user.p_their()]"] [pick(forgan.altnames)] are <bold>[forgan.reagents.total_volume]/[forgan.reagents.maximum_volume] liguae</bold> full.[health_status]")
 			else

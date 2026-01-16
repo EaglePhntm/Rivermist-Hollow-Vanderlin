@@ -23,10 +23,11 @@
 	if(!hole_id || !stored_item_type)
 		return TRUE // No storage requirements
 
+	var/obj/item/organ/user_o = user.getorganslot(hole_id)
 	// Check if target has hole storage component
-	/*var/datum/component/hole_storage/storage_comp = user.GetComponent(/datum/component/hole_storage)
+	var/datum/component/body_storage/storage_comp = user_o.GetComponent(/datum/component/body_storage)
 	if(!storage_comp)
-		return FALSE*/
+		return FALSE
 
 	// Create the item we want to store for testing
 	var/obj/item/item_to_test
@@ -42,7 +43,7 @@
 			item_to_test.name = stored_item_name
 
 	// Check if the specific hole can fit our item
-	var/can_fit// = SEND_SIGNAL(user, COMSIG_HOLE_TRY_FIT, item_to_test, hole_id, target, TRUE, TRUE) // Silent check
+	var/can_fit = SEND_SIGNAL(user_o, COMSIG_BODYSTORAGE_TRY_INSERT, item_to_test, STORAGE_LAYER_INNER, FALSE) // Silent check
 
 	// Clean up test item
 	qdel(item_to_test)

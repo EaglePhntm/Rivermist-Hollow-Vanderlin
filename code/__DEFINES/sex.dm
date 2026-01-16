@@ -49,9 +49,9 @@ GLOBAL_LIST_EMPTY(locked_sex_objects)
 #define COMSIG_BODYSTORAGE_FORCE_REMOVE "hole_forve_remove"                  // (hole_id, hole_name, storage_type) - Add a new hole with storage capability
 #define COMSIG_BODYSTORAGE_GET_LISTS "hole_remove_hole"            // (hole_id) - Remove a hole and its storage
 #define COMSIG_BODYSTORAGE_GET_RAND_ITEM "hole_modify_hole"            // (hole_id, new_size) - Modify existing hole storage properties
-#define COMSIG_HOLE_GET_FULLNESS "hole_get_fullness"          // (hole_id) - Get fullness information for a specific hole
 #define COMSIG_BODYSTORAGE_IS_ITEM_IN "hole_remove_item"			  // (hole_id, item) -  Removes a specific item from a hole
 #define COMSIG_BODYSTORAGE_IS_ITEM_TYPE_IN "hole_remove_random_item"	// (hole_id, number) -  Removes a random item from a hole
+#define COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE "hole_2d_list"	// (hole_id, number) -  Removes a random item from a hole
 
 #define SEX_SPEED_LOW 1
 #define SEX_SPEED_MID 2
