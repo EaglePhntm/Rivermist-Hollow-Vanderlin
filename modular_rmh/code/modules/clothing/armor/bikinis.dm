@@ -437,12 +437,12 @@
 
 /datum/anvil_recipe/armor/iron/studdedbramail
 	name = "Studded Mail Bra (+Leather Armor, +1 cured leather)"
-	additional_items = list(/obj/item/clothing/armor/leather /obj/item/natural/hide/cured)
+	additional_items = list(/obj/item/clothing/armor/leather, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/leather/studded/bikini/bra
 
 /datum/anvil_recipe/armor/iron/studdedbikinimail
 	name = "Studded Mail bikini (+Leather Armor, +1 cured leather)"
-	additional_items = list(/obj/item/clothing/armor/leather /obj/item/natural/hide/cured)
+	additional_items = list(/obj/item/clothing/armor/leather, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/leather/studded/bikini
 
 /datum/anvil_recipe/armor/iron/ironchainbra
