@@ -19,6 +19,25 @@
 	flags_inv = HIDEBOOB
 	is_bra = TRUE
 
+/obj/item/clothing/armor/leather/studded/mail/bikini
+	name = "studded mail leather bikini"
+	desc = "Studded leather is the most durable of all hides and leathers and about as light. This one is in bikini form. Still somehow protects legs and torso with magic probably."
+	icon = 'modular_rmh/icons/clothing/armor/armor.dmi'
+	mob_overlay_icon = 'modular_rmh/icons/clothing/armor/onmob/armor.dmi'
+	sleeved = 'modular_rmh/icons/clothing/armor/onmob/helpers/sleeves_armor.dmi'
+	icon_state = "studleatherkini"
+	item_state = "studleatherkini"
+	allowed_sex = list(FEMALE)
+	flags_inv = HIDECROTCH|HIDEBOOB
+
+/obj/item/clothing/armor/leather/studded/mail/bikini/bra
+	name = "studded mail Leather bra"
+	icon_state = "studleatherbra"
+	item_state = "studleatherbra"
+	desc = "Studded leather is the most durable of all hides and leathers and about as light. Although the bottom half is literally covered by nothing, it somehow still protects the full torso and.. legs?!"
+	flags_inv = HIDEBOOB
+	is_bra = TRUE
+
 /obj/item/clothing/armor/leather/studded/bikini
 	name = "studded leather bikini"
 	desc = "Studded leather is the most durable of all hides and leathers and about as light. This one is in bikini form."
@@ -370,7 +389,6 @@
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 1
-	category = "Armor"
 
 /datum/repeatable_crafting_recipe/sewing/lgambesonbra
 	name = "light gambeson bra"
@@ -378,7 +396,6 @@
 	requirements = list(/obj/item/natural/cloth = 1,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 1
-	category = "Armor"
 
 /datum/repeatable_crafting_recipe/sewing/gambesonbikini
 	name = "gambeson bikini"
@@ -386,7 +403,6 @@
 	requirements = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 2
-	category = "Armor"
 
 /datum/repeatable_crafting_recipe/sewing/gambesonbra
 	name = "gambeson bra"
@@ -394,7 +410,6 @@
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 2
-	category = "Armor"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/paddedgambesonbikini
 	name = "padded gambeson bikini"
@@ -402,7 +417,6 @@
 	requirements = list(/obj/item/natural/cloth = 5,
 				/obj/item/natural/fibers = 4)
 	craftdiff = 4
-	category = "Armor"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/paddedgambesonbra
 	name = "padded gambeson bra"
@@ -410,58 +424,57 @@
 	requirements = list(/obj/item/natural/cloth = 4,
 				/obj/item/natural/fibers = 3)
 	craftdiff = 4
-	category = "Armor"
 
-/datum/anvil_recipe/armor/studdedbikini
+/datum/anvil_recipe/armor/iron/studdedbikini
 	name = "Studded Leather bikini (+Leather Armor)"
-	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/clothing/armor/leather)
 	created_item = /obj/item/clothing/armor/leather/studded/bikini
 
-/datum/anvil_recipe/armor/studdedbra
+/datum/anvil_recipe/armor/iron/studdedbra
 	name = "Studded Leather Bra (+Leather Armor)"
-	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/clothing/armor/leather)
 	created_item = /obj/item/clothing/armor/leather/studded/bikini/bra
-	category = "Armor"
 
-/datum/anvil_recipe/armor/steel/chainkini
-	name = "Haubergon bikini (+1 Cloth)"
-	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/natural/cloth)
-	created_item = /obj/item/clothing/armor/chainmail/bikini
+/datum/anvil_recipe/armor/iron/studdedbramail
+	name = "Studded Mail Bra (+Leather Armor, +1 cured leather)"
+	additional_items = list(/obj/item/clothing/armor/leather, /obj/item/natural/hide/cured)
+	created_item = /obj/item/clothing/armor/leather/studded/bikini/bra
 
-/datum/anvil_recipe/armor/ironchainbra
+/datum/anvil_recipe/armor/iron/studdedbikinimail
+	name = "Studded Mail bikini (+Leather Armor, +1 cured leather)"
+	additional_items = list(/obj/item/clothing/armor/leather, /obj/item/natural/hide/cured)
+	created_item = /obj/item/clothing/armor/leather/studded/bikini
+
+/datum/anvil_recipe/armor/iron/ironchainbra
 	name = "Maille bikini"
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/armor/chainmail/iron/bikini/bra
-	category = "Armor"
+
+/datum/anvil_recipe/armor/steel/chainkini
+	name = "Haubergon bikini (+1 Cloth)"
+	additional_items = list(/obj/item/natural/cloth)
+	created_item = /obj/item/clothing/armor/chainmail/bikini
 
 /datum/anvil_recipe/armor/steel/platebikini
 	name = "Half-Plate bikini (+1 Steel, +1 Cured Leather)"
-	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/plate/bikini
 	craftdiff = 3
 
-/datum/anvil_recipe/armor/platebra
+/datum/anvil_recipe/armor/steel/platebra
 	name = "Half-Plate Bra (+1 Steel, +1 Cured Leather)"
-	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/plate/bikini/bra
 	craftdiff = 3
-	category = "Armor"
 
 /datum/anvil_recipe/armor/steel/fullplatebikini
 	name = "Full-Plate bikini (+2 Steel, +1 Cured Leather)"
-	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/plate/full/bikini
 	craftdiff = 4
 
-/datum/anvil_recipe/armor/platefullbra
+/datum/anvil_recipe/armor/steel/platefullbra
 	name = "Full-Plate Bra (+2 Steel, +1 Cured Leather)"
-	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/plate/full/bikini/bra
 	craftdiff = 4
@@ -471,7 +484,7 @@
 	output = /obj/item/clothing/armor/leather/advanced/bikini
 	requirements = list(/obj/item/natural/hide/cured = 1,
 				/obj/item/natural/fibers = 1,
-				/obj/item/reagent_containers/food/snacks/tallow = 1,)
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/coat/bra
@@ -479,7 +492,7 @@
 	output = /obj/item/clothing/armor/leather/advanced/bikini/bra
 	requirements = list(/obj/item/natural/hide/cured = 1,
 				/obj/item/natural/fibers = 1,
-				/obj/item/reagent_containers/food/snacks/tallow = 1,)
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/coat/masterwork/bikini

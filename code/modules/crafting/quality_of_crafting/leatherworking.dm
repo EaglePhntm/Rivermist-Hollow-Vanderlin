@@ -36,7 +36,7 @@
 		/obj/item/natural/fibers = 2,
 	)
 	output = /obj/item/ammo_holder/dartpouch
-	
+
 /datum/repeatable_crafting_recipe/leather/storage/bulletpouch
 	name = "bullet pouch"
 	requirements = list(
@@ -711,7 +711,8 @@
 	name = "hardened leather boots"
 	output = /obj/item/clothing/shoes/boots/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers = 1,
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/boots/watch
@@ -740,7 +741,8 @@
 	name = "hardened leather bracers"
 	output = /obj/item/clothing/wrists/bracers/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers = 1,
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/top_hat
@@ -854,14 +856,16 @@
 	name = "hardened leather gloves"
 	output = /obj/item/clothing/gloves/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers = 1,
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/coat
 	name = "hardened leather coat"
 	output = /obj/item/clothing/armor/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 2,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers = 1,
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/inquisitor_duster
@@ -882,14 +886,16 @@
 	name = "hardened leather helmet"
 	output = /obj/item/clothing/head/helmet/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers = 1,
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/chausses
 	name = "hardened leather chausses"
 	output = /obj/item/clothing/pants/trou/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 2,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers = 1,
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
 	craftdiff = 4
 
 /// MASTERWORK

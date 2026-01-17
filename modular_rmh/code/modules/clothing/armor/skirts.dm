@@ -50,52 +50,6 @@
 	item_state = "plate_skirt"
 	genital_access = TRUE
 
-///RECIPES
-
-/datum/repeatable_crafting_recipe/sewing/leatherskirt
-	name = "leather skirt"
-	output = list(/obj/item/clothing/pants/trou/leather/skirt)
-	requirements = list(/obj/item/natural/hide = 1,
-	/obj/item/reagent_containers/food/snacks/tallow = 1,)
-	sellprice = 10
-
-/datum/repeatable_crafting_recipe/leather/standalone/hlskirt
-	name = "hardened leather skirt"
-	output = /obj/item/clothing/pants/trou/leather/advanced/skirt
-	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1,
-				/obj/item/reagent_containers/food/snacks/tallow = 1,)
-	craftdiff = 4
-
-/datum/anvil_recipe/armor/studdedskirt
-	name = "Studded Skirt (+1 Leather Skirt)"
-	req_bar = /obj/item/ingot/iron
-	additional_items = list(/obj/item/clothing/pants/trou/leather/skirt)
-	created_item = /obj/item/clothing/pants/chainlegs/iron/studdedskirt
-	category = "Armor"
-
-/datum/anvil_recipe/armor/chainskirt
-	name = "Chain Skirt"
-	req_bar = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/pants/chainlegs/skirt
-	craftdiff = 2
-	category = "Armor"
-
-/datum/anvil_recipe/armor/ichainskirt
-	name = "Iron Chain Skirt"
-	req_bar = /obj/item/ingot/iron
-	created_item = /obj/item/clothing/pants/chainlegs/iron/skirt
-	craftdiff = 1
-	category = "Armor"
-
-/datum/anvil_recipe/armor/plateskirt
-	name = "Plate Tassets (+1 Steel)"
-	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/pants/platelegs/skirt
-	craftdiff = 4	//It's plate, no easy craft.
-	category = "Armor"
-
 /obj/item/clothing/pants/trou/leather/masterwork/skirt
 	name = "masterwork leather skirt"
 	icon = 'modular_rmh/icons/clothing/armor/pants.dmi'
@@ -103,6 +57,60 @@
 	icon_state = "hlskirt"
 	item_state = "hlskirt"
 	genital_access = TRUE
+
+///RECIPES
+
+/datum/repeatable_crafting_recipe/sewing/leatherskirt
+	name = "leather skirt"
+	output = list(/obj/item/clothing/pants/trou/leather/skirt)
+	requirements = list(/obj/item/natural/hide = 1,
+	/obj/item/reagent_containers/food/snacks/tallow = 1)
+
+/datum/repeatable_crafting_recipe/leather/standalone/hlskirt
+	name = "hardened leather skirt"
+	output = /obj/item/clothing/pants/trou/leather/advanced/skirt
+	requirements = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers = 1,
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/hlskirt
+	name = "hardened leather skirt"
+	output = /obj/item/clothing/pants/trou/leather/advanced/skirt
+	requirements = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers = 1,
+				/obj/item/reagent_containers/food/snacks/tallow = 1)
+	craftdiff = 4
+
+/datum/anvil_recipe/armor/iron/studdedskirt
+	name = "Studded Skirt (+1 Leather Skirt)"
+	additional_items = list(/obj/item/clothing/pants/trou/leather/skirt)
+	created_item = /obj/item/clothing/pants/chainlegs/iron/studdedskirt
+
+/datum/anvil_recipe/armor/steel/chainskirt
+	name = "Chain Skirt"
+	created_item = /obj/item/clothing/pants/chainlegs/skirt
+	craftdiff = 2
+
+/datum/anvil_recipe/armor/iron/ichainskirt
+	name = "Iron Chain Skirt"
+	created_item = /obj/item/clothing/pants/chainlegs/iron/skirt
+	craftdiff = 1
+
+/datum/anvil_recipe/armor/steel/plateskirt
+	name = "Plate Tassets (+1 Steel)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/pants/platelegs/skirt
+	craftdiff = 4	//It's plate, no easy craft.
+
+/datum/repeatable_crafting_recipe/leather/standalone/chausses/masterwork/skirt
+	name = "masterwork leather skirt"
+	output = /obj/item/clothing/pants/trou/leather/masterwork/skirt
+	attacked_atom = /obj/item/clothing/pants/trou/leather
+	requirements = list(/obj/item/clothing/pants/trou/leather = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 5
 
 ///CONVERSIONS
 
