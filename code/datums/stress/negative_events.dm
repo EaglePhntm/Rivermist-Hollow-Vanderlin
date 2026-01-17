@@ -254,11 +254,6 @@
 	stress_change = 2
 	desc = "<span class='red'>Where did everyone go? Did something happen?!</span>"
 
-/datum/stress_event/hunted // When a hunted character sees someone in a mask
-	timer = 2 MINUTES
-	stress_change = 2
-	desc = "<span class='red'>I can't see their face! Have they found me!?</span>"
-
 /datum/stress_event/profane // When a non-assassin touches a profane dagger
 	timer = 3 MINUTES
 	stress_change = 2

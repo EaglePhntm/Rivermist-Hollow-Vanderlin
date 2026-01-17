@@ -20,7 +20,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	"Isolationist" = /datum/charflaw/isolationist,
 	"Fire Servant" = /datum/charflaw/addiction/pyromaniac,
 	"Thief-Borne" = /datum/charflaw/addiction/kleptomaniac,
-	"Hunted" = /datum/charflaw/hunted,
+	"Wanted" = /datum/charflaw/wanted,
 	"Chronic Migraines" = /datum/charflaw/chronic_migraine,
 	"Chronic Back Pain" = /datum/charflaw/chronic_back_pain,
 	"Old War Wound" = /datum/charflaw/old_war_wound,
@@ -341,14 +341,14 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 	head?.add_wound(/datum/wound/facial/tongue/permanent)
 
-/datum/charflaw/hunted
-	name = "Hunted"
-	desc = "Something in my past has made me a target. I'm always looking over my shoulder.	\
-	\nTHIS IS A DIFFICULT FLAW, YOU WILL BE HUNTED AND HAVE ASSASINATION ATTEMPTS MADE AGAINST YOU WITHOUT ANY ESCALATION. \
-	EXPECT A MORE DIFFICULT EXPERIENCE. PLAY AT YOUR OWN RISK."
+/datum/charflaw/wanted
+	name = "Wanted"
+	desc = "Something in my past has made me a target. I am marked as an outlaw in these lands. I'm always looking over my shoulder. And protect my loins...	\
+	\nTHIS IS A DIFFICULT FLAW, YOU WILL BE HUNTED AND HAVE NON-CON AND RAPE ATTEMPTS MADE AGAINST YOU WITHOUT ANY ESCALATION. \
+	PLAY AT YOUR OWN RISK."
 	var/logged = FALSE
 
-/datum/charflaw/hunted/flaw_on_life(mob/user)
+/datum/charflaw/wanted/flaw_on_life(mob/user)
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/H = user
@@ -356,7 +356,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 		if(H.name) // If you don't check this, the log entry wont have a name as flaw_on_life is checked at least once before the name is set.
 			log_hunted("[H.ckey] playing as [H.name] had the hunted flaw by vice.")
 			logged = TRUE
-
+			GLOB.outlawed_players += H.real_name
 
 /datum/charflaw/greedy
 	name = "Greedy"

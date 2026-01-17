@@ -45,7 +45,7 @@
 					//GLOB.job_respawn_delays[src.ckey] = world.time + target_job.same_job_respawn_delay
 		verbs -= GLOB.ghost_verbs
 		mob.returntolobby()
-	/*if((mob.has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(mob, TRAIT_ZIZOID_HUNTED)) && !MOBTIMER_FINISHED(mob, MT_LASTDIED, 60 SECONDS))
+	/*if((mob.has_flaw(/datum/charflaw/wanted) || HAS_TRAIT(mob, TRAIT_ZIZOID_HUNTED)) && !MOBTIMER_FINISHED(mob, MT_LASTDIED, 60 SECONDS))
 		to_chat(src, span_warning("Graggar's influence is currently preventing me from fleeing to the Underworld!"))
 		return
 	var/datum/mind/mind = mob.mind

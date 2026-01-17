@@ -55,7 +55,7 @@
 		return
 
 	if(user.real_name in GLOB.outlawed_players)
-		var/list/funny = list("Yup. My face is on there.", "Wait a minute... That's me!", "Look at that handsome devil...", "At least I am wanted by someone...", "My chin can't be that big... right?")
+		var/list/funny = list("Yup. My face is on there.", "Wait a minute... That's me!", "Look at that handsome devil...", "At least I am wanted by someone...", "Why am I naked?", "WHAT DO YOU MEAN BRED?")
 		to_chat(user, span_notice("[pick(funny)]"))
 		if(!HAS_TRAIT(user, TRAIT_KNOWBANDITS))
 			ADD_TRAIT(user, TRAIT_KNOWBANDITS, TRAIT_GENERIC)
@@ -148,6 +148,7 @@
 		var/icon_html = ""
 		if(outlaw_data["icon"])
 			icon_html = "<img class='wanted-icon' src='data:image/png;base64,[icon2base64(outlaw_data["icon"])]'>"
+
 		else
 			icon_html = "<div class='wanted-icon' style='background:#8B4513;'></div>"
 
@@ -155,7 +156,7 @@
 		<div class='wanted-poster'>
 			<div class='wanted-header'>WANTED</div>
 			<div class='wanted-divider'></div>
-			<div class='wanted-footer'>DEAD OR ALIVE</div>
+			<div class='wanted-footer'>BRED AND ALIVE ONLY</div>
 			<div class='wanted-icon-container'>
 				[icon_html]
 			</div>

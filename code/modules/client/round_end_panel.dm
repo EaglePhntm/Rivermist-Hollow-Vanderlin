@@ -797,7 +797,7 @@
 					<div class='wanted-poster'>
 						<div class='wanted-header'>WANTED</div>
 						<div class='wanted-divider'></div>
-						<div class='wanted-footer'>DEAD OR ALIVE</div>
+						<div class='wanted-footer'>BRED AND ALIVE ONLY</div>
 						<div class='wanted-icon-container'>
 							[icon_html]
 						</div>
