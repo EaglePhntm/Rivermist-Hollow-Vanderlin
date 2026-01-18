@@ -29,23 +29,4 @@
 	if(!storage_comp)
 		return FALSE
 
-	// Create the item we want to store for testing
-	var/obj/item/item_to_test
-	if(stored_item_type == /obj/item/organ/genitals/penis)
-		// Get user's penis and create fake variant for testing
-		var/obj/item/organ/genitals/penis/user_penis = get_users_penis(target)
-		if(!user_penis)
-			return FALSE
-		item_to_test = user_penis.create_fake_variant(target)
-	else
-		item_to_test = new stored_item_type()
-		if(stored_item_name)
-			item_to_test.name = stored_item_name
-
-	// Check if the specific hole can fit our item
-	var/can_fit = SEND_SIGNAL(user_o, COMSIG_BODYSTORAGE_TRY_INSERT, item_to_test, STORAGE_LAYER_INNER, FALSE) // Silent check
-
-	// Clean up test item
-	qdel(item_to_test)
-
-	return can_fit
+	return TRUE

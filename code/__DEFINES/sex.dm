@@ -46,12 +46,15 @@ GLOBAL_LIST_EMPTY(locked_sex_objects)
 #define COMSIG_BODYSTORAGE_FORCE_INSERT "hole_force_insert"   // (hole_id, mob/user) - Open/show the inventory of a specific hole to a user
 #define COMSIG_BODYSTORAGE_CHECK_FIT "hole_check_fit"  // () - Return a simple list of all items across all holes
 #define COMSIG_BODYSTORAGE_TRY_REMOVE "hole_try_remove"  // () - Return a simple list of all items in ONE hole
-#define COMSIG_BODYSTORAGE_FORCE_REMOVE "hole_forve_remove"                  // (hole_id, hole_name, storage_type) - Add a new hole with storage capability
-#define COMSIG_BODYSTORAGE_GET_LISTS "hole_remove_hole"            // (hole_id) - Remove a hole and its storage
-#define COMSIG_BODYSTORAGE_GET_RAND_ITEM "hole_modify_hole"            // (hole_id, new_size) - Modify existing hole storage properties
-#define COMSIG_BODYSTORAGE_IS_ITEM_IN "hole_remove_item"			  // (hole_id, item) -  Removes a specific item from a hole
-#define COMSIG_BODYSTORAGE_IS_ITEM_TYPE_IN "hole_remove_random_item"	// (hole_id, number) -  Removes a random item from a hole
+#define COMSIG_BODYSTORAGE_FORCE_REMOVE "hole_force_remove"                  // (hole_id, hole_name, storage_type) - Add a new hole with storage capability
+#define COMSIG_BODYSTORAGE_GET_LISTS "hole_get_lists"            // (hole_id) - Remove a hole and its storage
+#define COMSIG_BODYSTORAGE_SELECT_RAND_ITEM "hole_sel_item"            // (hole_id, new_size) - Modify existing hole storage properties
+#define COMSIG_BODYSTORAGE_REMOVE_RAND_ITEM "hole_get_item"            // (hole_id, new_size) - Modify existing hole storage properties
+#define COMSIG_BODYSTORAGE_IS_ITEM_IN "hole_check_item"			  // (hole_id, item) -  Removes a specific item from a hole
+#define COMSIG_BODYSTORAGE_IS_ITEM_TYPE_IN "hole_check_item_type"	// (hole_id, number) -  Removes a random item from a hole
 #define COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE "hole_2d_list"	// (hole_id, number) -  Removes a random item from a hole
+#define COMSIG_BODYSTORAGE_UPDATE_SIZE "hole_update_size"	//
+#define COMSIG_BODYSTORAGE_SWAP_LAYERS_RAND "hole_swap_layers"	//
 
 #define SEX_SPEED_LOW 1
 #define SEX_SPEED_MID 2

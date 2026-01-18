@@ -2,7 +2,7 @@
 	abstract_type = /datum/customizer/organ/genitals/vagina
 	name = "Vagina"
 	allows_disabling = TRUE
-	default_disabled = TRUE
+	default_disabled = FALSE
 	gender_enabled = FEMALE
 	abstract_type = /datum/customizer/organ/genitals/vagina
 

@@ -22,12 +22,16 @@
 	RegisterSignal(M, COMSIG_SEX_AROUSAL_CHANGED, PROC_REF(on_arousal_changed), TRUE)
 	if(penis_type in list(PENIS_TYPE_KNOTTED, PENIS_TYPE_TAPERED_DOUBLE_KNOTTED, PENIS_TYPE_BARBED_KNOTTED))
 		M.AddComponent(/datum/component/knotting)
+	add_bodystorage(M, null, /datum/component/body_storage/penis)
 
 /obj/item/organ/genitals/penis/Remove(mob/living/carbon/M, special, drop_if_replaced)
 	. = ..()
 	UnregisterSignal(M, COMSIG_SEX_AROUSAL_CHANGED)
 	if(penis_type in list(PENIS_TYPE_KNOTTED, PENIS_TYPE_TAPERED_DOUBLE_KNOTTED, PENIS_TYPE_BARBED_KNOTTED))
 		qdel(M.GetComponent(/datum/component/knotting))
+	var/datum/component/body_storage/penis/comp = GetComponent(/datum/component/body_storage/penis)
+	comp?.RemoveComponent()
+	qdel(comp)
 
 /obj/item/organ/genitals/penis/proc/on_arousal_changed()
 	var/list/arousal_data = list()
@@ -87,8 +91,7 @@
 	erect_state = source.erect_state
 	penis_type = source.penis_type
 	penis_size = source.organ_size
-	grid_height = 32 * penis_size
-	grid_width = 32
+	body_storage_bulk = source.body_storage_bulk
 	name = "[source.name]"
 
 /obj/item/penis_fake/proc/set_original_owner(mob/living/carbon/human/owner)

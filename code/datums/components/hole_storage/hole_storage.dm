@@ -2,11 +2,23 @@
 #define STORAGE_LAYER_INNER "layer_inner"
 #define STORAGE_LAYER_DEEP "layer_deep"
 
+#define INSERT_FEEDBACK_OK "feedback_ok"
+#define INSERT_FEEDBACK_OK_FORCE "feedback_ok_force"
+#define INSERT_FEEDBACK_OK_OVERRIDE "feedback_override"
+#define INSERT_FEEDBACK_ALMOST_FULL "feedback_almost"
+#define INSERT_FEEDBACK_STUFFED "feedback_stuffed"
+#define INSERT_FEEDBACK_TRY_FORCE "feedback_try_force"
 
+#define OUTER_LAYER_DEFAULT_BULK 1
+#define INNER_LAYER_DEFAULT_BULK 8
+#define DEEP_LAYER_DEFAULT_BULK 15
+
+#define HOLE_MAX_BULK_INSERT 10 //we want to have it possible that a sufficiently big insertible will trigger stretching on it's own
 
 /datum/component/body_storage
-	var/obj/item/organ/storing_organ
+	var/obj/item/organ/organ_storing
 	var/mob/living/owner
+	var/applied_slot
 
 	var/list/available_layers = list(
 		STORAGE_LAYER_OUTER = FALSE,
@@ -16,14 +28,15 @@
 
 	var/list/layer_storage_max_num = list(
 		STORAGE_LAYER_OUTER = 1,
-		STORAGE_LAYER_INNER = 15,
-		STORAGE_LAYER_DEEP = 25,
+		STORAGE_LAYER_INNER = 10,
+		STORAGE_LAYER_DEEP = 20,
 	)
 
+	/// Must specify for every subtype through the def_bulk_inner def_bulk_deep vals // Outer has high bulk because it has a limit of only 1 anyway, and it's a special case
 	var/list/layer_storage_max_bulk = list(
 		STORAGE_LAYER_OUTER = 10,
-		STORAGE_LAYER_INNER = 30,
-		STORAGE_LAYER_DEEP = 50,
+		STORAGE_LAYER_INNER = 1,
+		STORAGE_LAYER_DEEP = 1,
 	)
 
 	var/list/layer_storage_cur_bulk = list(
@@ -36,23 +49,34 @@
 	var/list/inner_layer_contents = list()
 	var/list/deep_layer_contents = list()
 
+	var/def_bulk_inner = INNER_LAYER_DEFAULT_BULK
+	var/def_bulk_deep = DEEP_LAYER_DEFAULT_BULK
+
 	//A linker of index to item list
 	var/list/all_layers = list(
 		STORAGE_LAYER_OUTER = null,
 		STORAGE_LAYER_INNER = null,
 		STORAGE_LAYER_DEEP = null,
 	)
-	var/max_insert_size = WEIGHT_CLASS_NORMAL
+	var/max_insert_size = HOLE_MAX_BULK_INSERT
+	var/max_stretching_mult = 1 /// Will NOT stretch at 1, must specify for subtypes if you want stretching
 
+	var/list/outer_overlays = list()
 
 /datum/component/body_storage/Initialize(obj/item/organ/org, location = null, mob/living/organ_owner)
 	. = ..()
-	storing_organ = org
+	organ_storing = org
 	owner = organ_owner
+	if(location)
+		applied_slot = location
+	else
+		location = organ_storing.slot
+
 	all_layers[STORAGE_LAYER_OUTER] = outer_layer_contents // assembling the linker list
 	all_layers[STORAGE_LAYER_INNER] = inner_layer_contents
 	all_layers[STORAGE_LAYER_DEEP] = deep_layer_contents
 
+	calculate_bulk()
 
 /datum/component/body_storage/RegisterWithParent()
 	. = ..()
@@ -62,10 +86,13 @@
 	RegisterSignal(parent, COMSIG_BODYSTORAGE_TRY_REMOVE, PROC_REF(handle_removal))
 	RegisterSignal(parent, COMSIG_BODYSTORAGE_FORCE_REMOVE, PROC_REF(remove_from_storage))
 	RegisterSignal(parent, COMSIG_BODYSTORAGE_GET_LISTS, PROC_REF(return_contents_lists))
-	RegisterSignal(parent, COMSIG_BODYSTORAGE_GET_RAND_ITEM, PROC_REF(return_random_item_from_layer))
+	RegisterSignal(parent, COMSIG_BODYSTORAGE_SELECT_RAND_ITEM, PROC_REF(return_random_item_from_layer))
+	RegisterSignal(parent, COMSIG_BODYSTORAGE_REMOVE_RAND_ITEM, PROC_REF(remove_random_item_from_layer))
 	RegisterSignal(parent, COMSIG_BODYSTORAGE_IS_ITEM_IN, PROC_REF(check_item_in_layer))
 	RegisterSignal(parent, COMSIG_BODYSTORAGE_IS_ITEM_TYPE_IN, PROC_REF(check_item_type_in_layer))
 	RegisterSignal(parent, COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE, PROC_REF(return_2d_list))
+	RegisterSignal(parent, COMSIG_BODYSTORAGE_UPDATE_SIZE, PROC_REF(update_size))
+	RegisterSignal(parent, COMSIG_BODYSTORAGE_SWAP_LAYERS_RAND, PROC_REF(rand_item_layer_swap))
 
 /datum/component/body_storage/UnregisterFromParent()
 	. = ..()
@@ -75,94 +102,121 @@
 	UnregisterSignal(parent, COMSIG_BODYSTORAGE_TRY_REMOVE)
 	UnregisterSignal(parent, COMSIG_BODYSTORAGE_FORCE_REMOVE)
 	UnregisterSignal(parent, COMSIG_BODYSTORAGE_GET_LISTS)
-	UnregisterSignal(parent, COMSIG_BODYSTORAGE_GET_RAND_ITEM)
+	UnregisterSignal(parent, COMSIG_BODYSTORAGE_SELECT_RAND_ITEM)
+	UnregisterSignal(parent, COMSIG_BODYSTORAGE_REMOVE_RAND_ITEM)
 	UnregisterSignal(parent, COMSIG_BODYSTORAGE_IS_ITEM_IN)
 	UnregisterSignal(parent, COMSIG_BODYSTORAGE_IS_ITEM_TYPE_IN)
 	UnregisterSignal(parent, COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE)
+	UnregisterSignal(parent, COMSIG_BODYSTORAGE_UPDATE_SIZE)
+	UnregisterSignal(parent, COMSIG_BODYSTORAGE_SWAP_LAYERS_RAND)
 
 /datum/component/body_storage/Destroy()
 	. = ..()
+	for (var/obj/item/I in outer_overlays)
+		remove_outer_overlay(I)
 
 /datum/component/body_storage/proc/handle_insertion(datum/source, obj/item/incoming_item, target_layer, force = FALSE)
 	if(!available_layers[target_layer])
 		return FALSE
-	if(check_fit(source, incoming_item, target_layer, force))
+	var/fit_condition = check_fit(source, incoming_item, target_layer, force)
+	if(fit_condition == INSERT_FEEDBACK_OK || fit_condition == INSERT_FEEDBACK_OK_FORCE || fit_condition == INSERT_FEEDBACK_ALMOST_FULL)
 		insert_in_storage(source, incoming_item, target_layer)
-		var/diff = layer_storage_cur_bulk[target_layer] + (layer_storage_cur_bulk[target_layer]-1)/2
-		if(force && (diff >= layer_storage_max_bulk[target_layer]))
+		var/diff = layer_storage_cur_bulk[target_layer] - layer_storage_max_bulk[target_layer]
+		if(diff > 0)
 			handle_stretch(source, diff)
-		return TRUE
-	return FALSE
-
-/*/datum/component/body_storage/proc/handle_bulk_insertion(list/incoming_items, target_layer, force = FALSE)
-	if(!available_layers[target_layer])
-		return FALSE
-	if(check_fit(incoming_item, target_layer, force))
-		insert_in_storage(incoming_item, target_layer)
-		var/diff = layer_storage_cur_bulk[target_layer] + (layer_storage_cur_bulk[target_layer]-1)/2
-		if(force && (diff >= layer_storage_max_bulk[target_layer]))
-			handle_stretch(diff)
-	return FALSE*/
+		if(target_layer == STORAGE_LAYER_OUTER)
+			apply_outer_overlay(incoming_item)
+	return fit_condition
 
 /datum/component/body_storage/proc/insert_in_storage(datum/source, obj/item/incoming_item, target_layer)
 	if(iscarbon(incoming_item.loc))
 		var/mob/living/carbon/M = incoming_item.loc
 		M.dropItemToGround(incoming_item, FALSE, TRUE)
-	storing_organ.contents += incoming_item
-	incoming_item.forceMove(storing_organ)
+	organ_storing.contents += incoming_item
+	incoming_item.forceMove(organ_storing)
 	var/list/t_layer = all_layers[target_layer]
 	t_layer += incoming_item
-	layer_storage_cur_bulk[target_layer] += incoming_item.w_class
+	layer_storage_cur_bulk[target_layer] += incoming_item.body_storage_bulk
 
-/datum/component/body_storage/proc/check_fit(datum/source, obj/item/incoming_item, target_layer, force = FALSE)
+/datum/component/body_storage/proc/check_fit(datum/source, obj/item/incoming_item, target_layer, force = FALSE, override = FALSE)
 	if(!available_layers[target_layer])
 		return FALSE
-	if(incoming_item.w_class > max_insert_size)
+
+	if(incoming_item.body_storage_bulk > max_insert_size)
 		return FALSE
 
 	var/list/t_layer = all_layers[target_layer]
 
 	if(LAZYLEN(t_layer) >= layer_storage_max_num[target_layer]) //hard cap
 		return FALSE
-	if(layer_storage_cur_bulk[target_layer] >= layer_storage_max_bulk[target_layer] || (force && (layer_storage_cur_bulk[target_layer] + (layer_storage_cur_bulk[target_layer]-1)/2 >= layer_storage_max_bulk[target_layer])))
-		return FALSE
+
+	var/incoming_bulk = layer_storage_cur_bulk[target_layer] + incoming_item.body_storage_bulk
+
+	if(incoming_bulk > layer_storage_max_bulk[target_layer])
+		if(incoming_bulk > layer_storage_max_bulk[target_layer] * 1.5 )
+			return INSERT_FEEDBACK_STUFFED
+		else
+			if(force)
+				return INSERT_FEEDBACK_OK_FORCE
+			return INSERT_FEEDBACK_TRY_FORCE
 	else
-		return TRUE
+		if((layer_storage_max_bulk[target_layer] - layer_storage_cur_bulk[target_layer]) / layer_storage_max_bulk[target_layer] < 0.2)
+			return INSERT_FEEDBACK_ALMOST_FULL
+		return INSERT_FEEDBACK_OK
 
-
-/datum/component/body_storage/proc/handle_removal(datum/source, obj/item/removed_item, target_layer, force = FALSE)
+/datum/component/body_storage/proc/handle_removal(datum/source, obj/item/removed_item, target_layer)
 	if(!target_layer)
 		target_layer = find_item_layer(removed_item)
-	if(check_item_in_layer(removed_item, target_layer))
+	if(check_item_in_layer(source, removed_item, target_layer))
 		remove_from_storage(source, removed_item, target_layer)
+		if(target_layer == STORAGE_LAYER_OUTER)
+			remove_outer_overlay(removed_item)
 		return TRUE
-	return FALSE
+	else
+		return FALSE
 
 /datum/component/body_storage/proc/remove_from_storage(datum/source, obj/item/removed_item, target_layer)
-	storing_organ.contents -= removed_item
+	organ_storing.contents -= removed_item
 	var/list/t_layer = all_layers[target_layer]
 	t_layer -= removed_item
-	layer_storage_cur_bulk[target_layer] -= removed_item.w_class
+	layer_storage_cur_bulk[target_layer] -= removed_item.body_storage_bulk
+
+
+/datum/component/body_storage/proc/rand_item_layer_swap(datum/source, source_layer, new_layer, force = FALSE)
+	if(!source_layer || !new_layer)
+		return FALSE
+	var/obj/item/item_a = return_random_item_from_layer(source, source_layer)
+	if(!item_a)
+		return FALSE
+	SEND_SIGNAL(parent, COMSIG_BODYSTORAGE_TRY_REMOVE, item_a, source_layer)
+	return handle_insertion(source, item_a, new_layer, force)
 
 /datum/component/body_storage/proc/handle_stretch(datum/source, size_diff)
-	if(istype(storing_organ, /obj/item/organ/genitals/filling_organ) || storing_organ.stretchable)
-		SEND_SIGNAL(storing_organ, COMSIG_ORGAN_STRETCHED, size_diff)
-	return FALSE
+	if(istype(organ_storing, /obj/item/organ/genitals/filling_organ) || organ_storing.stretchable)
+		if(organ_storing.stretched_coefficient < max_stretching_mult)
+			SEND_SIGNAL(organ_storing, COMSIG_ORGAN_STRETCHED, size_diff)
 
 /datum/component/body_storage/proc/return_contents_lists(datum/source)
 	return all_layers
 
 /datum/component/body_storage/proc/return_2d_list(datum/source)
 	var/list/return_list = list()
-	for(var/list in all_layers)
-		for(var/el in list)
-			return_list += el
+	for(var/list in available_layers)
+		for(var/el in all_layers[list])
+			if(!isnull(el))
+				return_list += el
 	return return_list
 
 /datum/component/body_storage/proc/return_random_item_from_layer(datum/source, target_layer)
 	var/list/t_layer = all_layers[target_layer]
+	if(t_layer.len)
+		return pick(t_layer)
 
-	return pick(t_layer)
+/datum/component/body_storage/proc/remove_random_item_from_layer(datum/source, target_layer)
+	var/obj/item/picked_item = return_random_item_from_layer(source, target_layer)
+	if(picked_item)
+		SEND_SIGNAL(parent, COMSIG_BODYSTORAGE_TRY_REMOVE, picked_item, target_layer)
+		return picked_item
 
 /datum/component/body_storage/proc/return_available_layers(datum/source)
 	return available_layers
@@ -180,11 +234,45 @@
 	return FALSE
 
 /datum/component/body_storage/proc/find_item_layer(datum/source, obj/item/t_item)
-	for(var/list/l in all_layers)
-		for(var/el in all_layers[l])
+	for(var/list in available_layers)
+		for(var/el in all_layers[list])
 			if(el == t_item)
 				return TRUE
 	return null
+
+/datum/component/body_storage/proc/apply_outer_overlay(obj/item/i_item)
+	if(!i_item)
+		return
+
+	var/mutable_appearance/item_overlay = mutable_appearance(i_item.mob_overlay_icon, i_item.icon_state, -BODY_LAYER)
+
+	owner.add_overlay(item_overlay)
+	outer_overlays[i_item] = item_overlay
+
+/datum/component/body_storage/proc/remove_outer_overlay(obj/item/i_item)
+	if(!i_item)
+		return
+	if(!outer_overlays[i_item])
+		return
+	var/mutable_appearance/i_overlay = outer_overlays[i_item]
+	owner.cut_overlay(i_overlay)
+	outer_overlays -= i_item
+	qdel(i_overlay)
+
+/datum/component/body_storage/proc/calculate_bulk()
+	var/organ_size_mult = 1
+	var/organ_size_add = 0
+	if(istype(organ_storing, /obj/item/organ/genitals))
+		var/obj/item/organ/genitals/storing_gen = organ_storing
+		organ_size_mult = storing_gen.organ_size
+	if(organ_size_mult != 1)
+		organ_size_add = organ_size_mult * 2
+
+	layer_storage_max_bulk[STORAGE_LAYER_INNER] = (def_bulk_inner + organ_size_add) * organ_storing.stretched_coefficient //setting up default max bulk
+	layer_storage_max_bulk[STORAGE_LAYER_DEEP] = (def_bulk_deep + organ_size_add) * organ_storing.stretched_coefficient
+
+/datum/component/body_storage/proc/update_size(datum/source)
+	calculate_bulk()
 
 /datum/component/body_storage/proc/return_layer_list_by_index(datum/source, index)
 	switch(index)

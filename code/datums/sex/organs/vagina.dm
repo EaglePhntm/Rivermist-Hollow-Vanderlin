@@ -20,8 +20,7 @@
 	blocker = ITEM_SLOT_PANTS
 	additional_blocker = "underwear"
 	bloatable = TRUE
-
-	grid_width = 32 * 3 // 3 rows
+	stretchable = FALSE
 
 /obj/item/organ/genitals/filling_organ/vagina/Insert(mob/living/carbon/M, special, drop_if_replaced)
 	. = ..()

@@ -35,7 +35,6 @@
 	var/pregnant = FALSE // is it pregnant
 
 	//misc
-	//var/list/altnames = list("bugged place", "bugged organ") //used in thought messages.
 	var/last_size_alert = 0
 
 	COOLDOWN_DECLARE(liquidcd)
@@ -49,14 +48,14 @@
 		startsfilled = FALSE
 	if(special && startsfilled) // won't fill the organ if you insert this organ via surgery
 		reagents.add_reagent(reagent_to_make, reagents.maximum_volume)
+	if(stretchable)
+		RegisterSignal(src, COMSIG_ORGAN_STRETCHED, PROC_REF(get_stretched))
 
 /obj/item/organ/genitals/filling_organ/on_life()
 	var/mob/living/carbon/human/H = owner
 
 	..()
 
-	//get stored items
-	var/list/stored_items = SEND_SIGNAL(src, COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE)
 	//get arousal data
 	var/list/arousal_data = list()
 	SEND_SIGNAL(H, COMSIG_SEX_GET_AROUSAL, arousal_data)
@@ -69,18 +68,19 @@
 			captarget = max_reagents
 		if(fertility && pregnant) //preg size reduce
 			captarget *= 0.5
-		if(length(stored_items))
-			for(var/obj/item/thing as anything in stored_items)
+		if(length(contents))
+			for(var/obj/item/thing as anything in contents)
 				if(thing.type != /obj/item/dildo/plug) //plugs wont take space as they are especially for this.
 					captarget -= thing.w_class*10 //anything else reduce space inside
 		if(damage)
 			captarget = max(0, captarget-damage*10)
 		captarget = max(0, captarget)
 		if(captarget != reagents.maximum_volume)
-			reagents.maximum_volume = captarget
-			if(H.has_quirk(/datum/quirk/selfawaregeni) && world.time > last_size_alert + 12 SECONDS)
-				last_size_alert = world.time
-				to_chat(H, span_blue("My [pick(altnames)] hold a different amount now."))
+			if(!(reagents.has_reagent(/datum/reagent/consumable/femcum) && (reagents.get_reagent_amount(/datum/reagent/consumable/femcum) > captarget*0.8))) //so that vaginas don't spam messages
+				reagents.maximum_volume = captarget
+				if(H.has_quirk(/datum/quirk/selfawaregeni) && world.time > last_size_alert + 12 SECONDS)
+					last_size_alert = world.time
+					to_chat(H, span_blue("My [pick(altnames)] hold a different amount now."))
 
 	//debuff checks
 	if(bloatable) //its bloatable.
@@ -145,7 +145,7 @@
 		return
 	if(reagents.total_volume && absorbing) //slowly inject to your blood if they have reagents. Will not work if refilling because i cant properly seperate the reagents for which to keep which to dump.
 		reagents.trans_to(owner, absorbrate, absorbmult, TRUE, FALSE)
-	if(!length(stored_items)) //if nothing is plugging the hole, stuff will drip out.
+	if(!length(contents)) //if nothing is plugging the hole, stuff will drip out.
 		var/tempdriprate = driprate
 		if((reagents.total_volume && spiller) || (reagents.total_volume > reagents.maximum_volume)) //spiller or above it's capacity to leak.
 			var/obj/item/clothing/blockingitem = H.mob_slot_wearing(blocker)
@@ -153,22 +153,28 @@
 				if(H.underwear)
 					blockingitem = H.underwear
 			if(blockingitem && !blockingitem.genital_access) //we aint dripping a drop.
-			/*
 				tempdriprate = 0.1 //if worn slot cover it, drip nearly nothing.
 				if(owner.has_quirk(/datum/quirk/selfawaregeni))
 					if(prob(5))
+						if(!MOBTIMER_FINISHED(H, "organ_drip", rand(20,120)))
+							return
+
+						MOBTIMER_SET(H, "organ_drip")
 						to_chat(H, pick(span_info("A little bit of [english_list(reagents.reagent_list)] drips from my [pick(altnames)] to my [blockingitem.name]..."),
-						span_info("Some liquid drips from my [pick(altnames)] to my [blockingitem.name]."),
-						span_info("My [pick(altnames)] spills some liquid to my [blockingitem.name]."),
-						span_info("Some [english_list(reagents.reagent_list)] drips from my [pick(altnames)] to my [blockingitem.name].")))
-			*/
+							span_info("Some liquid drips from my [pick(altnames)] to my [blockingitem.name]."),
+							span_info("My [pick(altnames)] spills some liquid to my [blockingitem.name]."),
+							span_info("Some [english_list(reagents.reagent_list)] drips from my [pick(altnames)] to my [blockingitem.name].")))
 			else //we drippin
 				if(prob(5)) //with selfawaregeni quirk you got some chance to see what type of liquid is dripping from you.
-					//if(owner.has_quirk(/datum/quirk/selfawaregeni)) //we do have sensitiveness
-					to_chat(H, pick(span_info("A little bit of [english_list(reagents.reagent_list)] drips from my [pick(altnames)]..."),
-					span_info("Some liquid drips from my [pick(altnames)]."),
-					span_info("My [pick(altnames)] spills some liquid."),
-					span_info("Some [english_list(reagents.reagent_list)] drips from my [pick(altnames)].")))
+					if(owner.has_quirk(/datum/quirk/selfawaregeni))
+						if(!MOBTIMER_FINISHED(H, "organ_drip", rand(20,120)))
+							return
+
+						MOBTIMER_SET(H, "organ_drip")
+						to_chat(H, pick(span_info("A little bit of [english_list(reagents.reagent_list)] drips from my [pick(altnames)]..."),
+							span_info("Some liquid drips from my [pick(altnames)]."),
+							span_info("My [pick(altnames)] spills some liquid."),
+							span_info("Some [english_list(reagents.reagent_list)] drips from my [pick(altnames)].")))
 				var/obj/item/reagent_containers/the_bottle
 				if((owner.mobility_flags & MOBILITY_STAND))
 					for(var/obj/item/reagent_containers/bottle in owner.loc) //having a bottle under us speed up leak greatly and transfer the leak there instead.
@@ -184,17 +190,14 @@
 				else
 					tempdriprate *= 50 //since default values are basically decimals.
 					reagents.trans_to(the_bottle, min(tempdriprate))
+					if(!MOBTIMER_FINISHED(H, "organ_drip", rand(20,120)))
+						return
+
+					MOBTIMER_SET(H, "organ_drip")
 					to_chat(owner, span_info("I collect the fluids dripping from me in \the [the_bottle]."))
-	else //we got something in stored_items
-		for(var/obj/item/reagent_containers/contentitem in stored_items) //we got a bottle inside
+	else //we got something in contents
+		for(var/obj/item/reagent_containers/contentitem in contents) //we got a bottle inside
 			if(contentitem.reagents && contentitem.spillable)
-				/* lets mix things up
-				if(refilling && reagents.total_volume) //producers fill bottles, others get filled.
-					reagents.trans_to(reagents, rand(4,8))
-				else
-					if(contentitem.reagents.total_volume)
-						contentitem.reagents.trans_to(reagents, rand(4,8))
-				*/
 				if(contentitem.reagents.total_volume) //stir the pot
 					contentitem.reagents.trans_to(reagents, rand(4,8))
 				if(refilling && reagents.total_volume)
@@ -204,7 +207,6 @@
 
 /obj/item/organ/genitals/filling_organ/proc/organ_jumped()
 	var/mob/living/carbon/human/H = owner
-	//var/obj/item/organ/genitals/filling_organ/forgan = src
 
 	var/stealth = H.get_skill_level(/datum/skill/misc/sneaking)
 	var/keepinsidechance = CLAMP((rand(25,100) - (stealth * 20)),0,100) //basically cant lose your item if you have 5 stealth.
@@ -213,44 +215,72 @@
 		chem_splash(owner, 3, reagents)
 		playsound(owner, 'sound/foley/waterenter.ogg', 15)
 
-	/*if(!isanimal(H) && H.mind)
-		var/list/stored_items = list()
-		SEND_SIGNAL(H, COMSIG_BODYSTORAGE_RETURN_ITEM_LIST_SINGLE, stored_items, slot)
-		if(length(stored_items))
-			for(var/obj/item/forganstored_items as anything in forgan.stored_items)
-				if(!istype(forganstored_items, /obj/item/dildo)) //dildo keeps stuff in even if you have no pants ig
-					var/obj/item/clothing/blockingitem = get_organ_blocker(H, zone)
-					if(!blockingitem || blockingitem.genital_access) //checks if the item has genital_access, like skirts, if not, it blocks the thing from flying off.
-						if(prob(keepinsidechance))
-							if(H.client?.prefs.showrolls)
-								to_chat(H, span_alert("Damn! I lose my [pick(altnames)]'s grip on [english_list(stored_items)]! [keepinsidechance]%"))
-							else
-								to_chat(H, span_alert("Damn! I lose my [pick(altnames)]'s grip on [english_list(stored_items)]!"))
-							playsound(H, 'sound/misc/mat/insert (1).ogg', 20, TRUE, -2, ignore_walls = FALSE)
-							forganstored_items.doMove(get_turf(H))
-							forgan.stored_items -= forganstored_items
-							var/yeet = rand(4)
-							var/turf/selectedturf = pick(orange(H, yeet)) //object flies off the hole with pressure at a random turf, funny.
-							forganstored_items.throw_at(selectedturf, yeet, 2)
-						else
-							if(H.client?.prefs.showrolls)
-								if(keepinsidechance < 10)
-									to_chat(H, span_blue("I easily maintain my [pick(altnames)]'s grip on [english_list(stored_items)]. [keepinsidechance]%"))
-								else
-									to_chat(H, span_info("Phew, I maintain my [pick(altnames)]'s grip on [english_list(stored_items)]. [keepinsidechance]%"))
-							else
-								if(keepinsidechance < 10)
-									to_chat(H, span_blue("I easily maintain my [pick(altnames)]'s grip on [english_list(stored_items)]."))
-								else
-									to_chat(H, span_info("Phew, I maintain my [pick(altnames)]'s grip on [english_list(stored_items)]."))
-				break*/
+	if(!isanimal(H) && H.mind)
+		if(length(contents))
+			for(var/obj/item/organ_stored_item as anything in contents)
+				if(istype(organ_stored_item, /obj/item/dildo)) //dildo keeps stuff in even if you have no pants ig
+					return
+
+			var/obj/item/clothing/blockingitem = get_organ_blocker(H, zone)
+			if(!blockingitem || blockingitem.genital_access) //checks if the item has genital_access, like skirts, if not, it blocks the thing from flying off.
+				return
+
+			if(prob(keepinsidechance))
+				var/obj/item/rand_item = SEND_SIGNAL(src, COMSIG_BODYSTORAGE_REMOVE_RAND_ITEM, STORAGE_LAYER_INNER)
+				if(!rand_item)
+					return
+				if(H.client?.prefs.showrolls)
+					to_chat(H, span_alert("Damn! I lose my [pick(altnames)]'s grip on [rand_item]! [keepinsidechance]%"))
+				else
+					to_chat(H, span_alert("Damn! I lose my [pick(altnames)]'s grip on [rand_item]!"))
+				playsound(H, 'sound/misc/mat/insert (1).ogg', 20, TRUE, -2, ignore_walls = FALSE)
+
+				rand_item.doMove(get_turf(H))
+				var/yeet = rand(4)
+				var/turf/selectedturf = pick(orange(H, yeet)) //object flies off the hole with pressure at a random turf, funny.
+				rand_item.throw_at(selectedturf, yeet, 2)
+			else
+				if(H.client?.prefs.showrolls)
+					if(keepinsidechance < 10)
+						to_chat(H, span_blue("I easily maintain my [pick(altnames)]'s grip on it's contents. [keepinsidechance]%"))
+					else
+						to_chat(H, span_info("Phew, I maintain my [pick(altnames)]'s grip on it's contents. [keepinsidechance]%"))
+				else
+					if(keepinsidechance < 10)
+						to_chat(H, span_blue("I easily maintain my [pick(altnames)]'s grip on it's contents."))
+					else
+						to_chat(H, span_info("Phew, I maintain my [pick(altnames)]'s grip on it's contents."))
 
 //had to make this ghetto ass shit, fucks sake
 /mob/living/carbon/proc/mob_slot_wearing(zone)
 	if(iscarbon(src))
-		var/mob/living/carbon/human/user = src
-		for(var/obj/item/clothing/equipped_item in user.get_equipped_items(include_pockets = FALSE))
+		var/mob/living/carbon/human/H = src
+		for(var/obj/item/clothing/equipped_item in H.get_equipped_items(include_pockets = FALSE))
 			if(equipped_item.slot_flags & zone)
 				return equipped_item
 			else
 				continue
+
+/obj/item/organ/proc/get_stretched(datum/source, diff)
+	return
+
+/obj/item/organ/genitals/filling_organ/get_stretched(datum/source, diff)
+	var/mob/living/carbon/human/H = owner
+	var/datum/component/arousal/aro = owner.GetComponent(/datum/component/arousal)
+	switch(diff)
+		if(1 to 1.5)
+			stretched_coefficient += 0.05
+			to_chat(owner, span_love("My [pick(src.altnames)] is getting stretched..."))
+		if(1.5 to 2)
+			stretched_coefficient += 0.1
+			to_chat(owner, span_alert("This stretching is hurting my [pick(src.altnames)]!"))
+			aro.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
+		if(2 to INFINITY)
+			stretched_coefficient += 0.5
+			to_chat(owner, span_love("AHH, GET IT ALL OUT OF MY [capitalize(pick(src.altnames))]!"))
+			aro.try_do_pain_effect(PAIN_HIGH_EFFECT, FALSE)
+	if(stretched_coefficient > 2)
+		H.Immobilize(20)
+		//try increase organ size (code later)
+	stretched_coefficient = CLAMP(stretched_coefficient, 1, 5)
+	SEND_SIGNAL(src, COMSIG_BODYSTORAGE_UPDATE_SIZE)

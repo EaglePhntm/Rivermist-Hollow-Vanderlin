@@ -36,7 +36,10 @@
 	var/food_type = /obj/item/reagent_containers/food/snacks/organ
 	/// Original owner of the organ, the one who had it inside them last
 	var/mob/living/carbon/last_owner = null
+
+	// For stretching of the body storages
 	var/stretchable = FALSE
+	var/stretched_coefficient = 1
 
 /obj/item/organ/Initialize()
 	. = ..()

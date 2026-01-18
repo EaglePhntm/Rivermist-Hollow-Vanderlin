@@ -2,7 +2,7 @@
 	abstract_type = /datum/customizer/organ/genitals/breasts
 	name = "Breasts"
 	allows_disabling = TRUE
-	default_disabled = TRUE
+	default_disabled = FALSE
 	gender_enabled = FEMALE
 
 /datum/customizer/organ/genitals/breasts/is_allowed(datum/preferences/prefs)

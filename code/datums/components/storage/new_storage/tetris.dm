@@ -20,6 +20,7 @@
 /obj/item/storage
 	var/grid = TRUE
 	var/storage_flags = NONE
+	body_storage_bulk = 12 // Should not fit into holes at all, too powerfull
 
 /obj/item/storage/Initialize()
 	. = ..()

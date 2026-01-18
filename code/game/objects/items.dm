@@ -297,6 +297,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	///do we block the offhand while wielding
 	var/wield_block = TRUE
+	/// This value is used for calculating bulk when inserting into "body storage". If not specified, uses w_class
+	var/body_storage_bulk
+
 
 /obj/item/proc/set_quality(quality)
 	recipe_quality = clamp(quality, 0, 4)
@@ -486,7 +489,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			RegisterSignal(SSdcs, COMSIG_LORD_COLORS_SET, TYPE_PROC_REF(/obj/item, lordcolor))
 	else if(get_detail_color()) // Lord color does this
 		update_appearance(UPDATE_OVERLAYS)
-
+	if(!body_storage_bulk)
+		body_storage_bulk = w_class
 	update_transform()
 	apply_components()
 
