@@ -230,6 +230,7 @@
 		overlays_standing[ARMOR_LAYER] = standing
 
 	apply_overlay(ARMOR_LAYER)
+	update_body_parts(TRUE)
 
 
 /mob/living/carbon/human/species/goblin/update_inv_head(hide_nonstandard = FALSE)
@@ -246,7 +247,6 @@
 
 /mob/living/carbon/human/species/goblin/after_creation()
 	..()
-	gender = MALE
 	if(src.dna && src.dna.species)
 		src.dna.species.soundpack_m = new /datum/voicepack/goblin()
 		src.dna.species.soundpack_f = new /datum/voicepack/goblin()

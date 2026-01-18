@@ -186,6 +186,8 @@
 			vagina_type = "gaping vagina"
 		if(/datum/sprite_accessory/genitals/vagina/cloaca)
 			vagina_type = "cloaca"
+		if(/datum/sprite_accessory/genitals/vagina/goblin)
+			vagina_type = "extremely hairy vagina"
 	var/list/arousal_data = list()
 	SEND_SIGNAL(H, COMSIG_SEX_GET_AROUSAL, arousal_data)
 	switch(arousal_data["arousal"])
