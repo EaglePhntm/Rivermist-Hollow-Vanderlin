@@ -125,7 +125,7 @@
 
 /mob/living/carbon/human/verb/emote_wag()
 	set name = "Wag"
-	set category = "Wags"
+	set category = "Emotes"
 	emote("wag", intentional = TRUE)
 
 /datum/emote/living/carbon/human/wag
