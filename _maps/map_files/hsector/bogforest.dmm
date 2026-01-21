@@ -63,6 +63,10 @@
 /area/indoors/dungeon{
 	name = "Tree House"
 	})
+"az" = (
+/obj/structure/stairs/stone,
+/turf/open/floor/naturalstone,
+/area/outdoors/woods/rmh)
 "aA" = (
 /turf/open/floor/twig,
 /area/outdoors/rmh_air)
@@ -3522,7 +3526,7 @@
 	icon_state = "subduedstatue";
 	name = "Malar's claw";
 	deconstructible = 0;
-	desc = "Статуя в виде когтистой лапы. Вокруг лежит множество останков разных существ, а трава, будто, окрасилась в цвет крови. "
+	desc = "The statue is in the form of a clawed paw. There are many remains of different creatures lying around, and the grass seems to be painted the color of blood. Or simply - painted with blood itself."
 	},
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/cobblerock/alt,
@@ -3732,6 +3736,12 @@
 "xC" = (
 /turf/closed/wall/mineral/craftstone,
 /area/under/town/basement)
+"xD" = (
+/obj/structure/stairs/stone{
+	dir = 8
+	},
+/turf/open/floor/naturalstone,
+/area/under/cavewet/rmh/swamp_caves)
 "xF" = (
 /obj/structure/table/wood/plain,
 /obj/item/weapon/knife/cleaver{
@@ -4644,8 +4654,6 @@
 "DU" = (
 /obj/structure/chair/bench/throne,
 /mob/living/carbon/human/species/goblin/npc/cave,
-/obj/item/clothing/head/crown/circlet,
-/obj/effect/mapping_helpers/floor_clothing_equipper,
 /turf/open/floor/dirt/road,
 /area/indoors/shelter/rtfield)
 "DW" = (
@@ -5317,6 +5325,12 @@
 "HG" = (
 /turf/open/water/swamp/deep,
 /area/outdoors/woods/rmh)
+"HH" = (
+/obj/structure/stairs/stone{
+	dir = 8
+	},
+/turf/open/floor/naturalstone,
+/area/outdoors/woods/rmh)
 "HI" = (
 /obj/effect/decal/cleanable/debris/wood,
 /obj/structure/vine,
@@ -5420,6 +5434,10 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/dirt/road,
 /area/under/cave/rmh/goblindungeon)
+"It" = (
+/obj/structure/stairs/stone,
+/turf/open/floor/naturalstone,
+/area/under/cavewet/rmh/swamp_caves)
 "Iu" = (
 /obj/structure/fermentation_keg/random/water,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -64549,7 +64567,7 @@ cW
 yQ
 HX
 kA
-kA
+az
 QH
 QH
 QH
@@ -64766,7 +64784,7 @@ yQ
 cW
 kA
 kA
-kA
+az
 QH
 QH
 QH
@@ -66069,8 +66087,8 @@ kA
 kA
 kA
 kA
-kA
-kA
+HH
+HH
 QH
 QH
 QH
@@ -111206,7 +111224,7 @@ Pe
 Pe
 Pe
 Pe
-uM
+It
 uM
 uM
 uM
@@ -111423,7 +111441,7 @@ Pe
 Pe
 Pe
 Pe
-uM
+It
 uM
 uM
 uM
@@ -112508,8 +112526,8 @@ Pe
 Pe
 Ce
 Pe
-uM
-uM
+xD
+xD
 Ce
 QH
 QH

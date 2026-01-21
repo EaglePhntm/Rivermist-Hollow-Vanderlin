@@ -1,6 +1,6 @@
 /datum/job/advclass/combat/puritan
 	title = "Monster Hunter"
-	tutorial = "Monster Hunters dedicate their lives to the eradication of the varied evils infesting Psydonia. They know the vile sorcery of the necromancer, the insidious nature of the cultist and monstrousness of vampires and werevolfs. They also know how best to end them."
+	tutorial = "Monster Hunters dedicate their lives to the eradication of the varied evils infesting Faerun. They know the vile sorcery of the necromancer, the insidious nature of the cultist and monstrousness of vampires and werevolfs. They also know how best to end them."
 	allowed_races = RACES_PLAYER_NONEXOTIC
 	outfit = /datum/outfit/adventurer/puritan
 	total_positions = 1

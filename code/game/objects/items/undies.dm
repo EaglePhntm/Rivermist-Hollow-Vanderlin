@@ -75,7 +75,7 @@
 
 /obj/item/clothing/undies/braies
 	name = "braies"
-	desc = "A pair of linen underpants; Psydonia's most common."
+	desc = "A pair of linen underpants; Faerun's most common." // RMH
 	icon_state = "braies"
 	item_state = "braies"
 

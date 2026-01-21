@@ -910,7 +910,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake
 	name = "griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Faerun, though despite its prevalence no one quite knows its origin." //RMH
 	bitesize = 6
 	icon_state = "griddlecake"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR)
@@ -928,7 +928,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/lemon
 	name = "lemon griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Faerun, though despite its prevalence no one quite knows its origin." //RMH
 	bitesize = 6
 	icon_state = "griddlecakelemon"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR)
@@ -947,7 +947,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/apple
 	name = "apple griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Faerun, though despite its prevalence no one quite knows its origin." //RMH
 	bitesize = 6
 	icon_state = "griddlecakeapple"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR)
@@ -966,7 +966,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/berry
 	name = "jacksberry griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Faerun, though despite its prevalence no one quite knows its origin." //RMH
 	bitesize = 6
 	icon_state = "griddlecakeberry"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR)
@@ -983,7 +983,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/berry_poison
 	name = "jacksberry griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Faerun, though despite its prevalence no one quite knows its origin." //RMH
 	bitesize = 6
 	icon_state = "griddlecakeberry"
 	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT+SNACK_POOR, /datum/reagent/berrypoison = 12)

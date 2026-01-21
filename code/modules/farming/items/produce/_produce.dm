@@ -672,7 +672,7 @@
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/caveweep
 	name = "caveweep"
-	desc = "Once thought to be the wept tears of Psydonia itself, this fungus can be found growing deep within the damp caves along the coasts of Faience. It is known only to those brave enough to delve their depths and discover its unique, briney flavors."
+	desc = "Once believed to be the shed tears of Umberlee, the Bitch Queen herself, this rare fungus grows deep within the damp sea caves along the Sword Coast and the shores of the Sea of Fallen Stars. It is known only to those bold enough to brave the treacherous tides and lightless depths where it thrives, prized for its sharp, brine-soaked flavor reminiscent of the deep ocean." //RMH
 	icon_state = "caveweep"
 	seed = /obj/item/neuFarm/seed/spore/caveweep
 	throwforce = 0
@@ -686,7 +686,7 @@
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki
 	name = "borowiki"
-	desc = "Also known as Cépes to the Drow, this fungus was cultivated over generations into this hearty crop by the Dwarves of the mountain passes. It is not known which of them were the first to discover it, though their use by the surface dwelling species of Psydonia has grown significantly in the last few centuries."
+	desc = "Also known among the drow as Cépes, this hardy fungus was cultivated over many generations into a reliable crop by the shield dwarves of the great mountain passes, particularly those of the Spine of the World and the North. It is unknown which folk first discovered it—drow or dwarf—but its use among the surface peoples of Faerûn has grown steadily over the past few centuries, valued for both its sustenance and rich, earthy flavor."
 	icon_state = "borowiki"
 	seed = /obj/item/neuFarm/seed/spore/borowiki
 	throwforce = 0
