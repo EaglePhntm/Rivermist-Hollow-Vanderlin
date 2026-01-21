@@ -79,3 +79,38 @@
 	pixel_x = -16
 	pixel_y = -12
 	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/structure/flora/grass/bush/wall/green
+	name = "green great bush"
+	icon = 'modular_rmh/icons/obj/flora/greenflora.dmi'
+	icon_state = "bushwall_green1"
+	base_icon_state = "bushwall_green"
+
+/obj/structure/flora/grass/bush/green
+	name = "green bush"
+	icon = 'modular_rmh/icons/obj/flora/greenflora.dmi'
+	icon_state = "bush_green"
+
+/obj/structure/flora/grass/bush/wall/tall/green
+	name = "green great bush"
+	icon = 'modular_rmh/icons/obj/flora/foliagetall.dmi'
+	icon_state = "tallbush_green1"
+	base_icon_state = "tallbush_green"
+
+/obj/structure/flora/grass/bush_meagre/green
+	name = "green bush"
+	icon = 'modular_rmh/icons/obj/flora/greenflora.dmi'
+	icon_state = "bush_green1"
+	base_icon_state = "bush_green1"
+
+/obj/structure/flora/grass/bush_meagre/green2
+	name = "green bush"
+	icon = 'modular_rmh/icons/obj/flora/greenflora.dmi'
+	icon_state = "bush_green2"
+	base_icon_state = "bush_green2"
+
+/obj/structure/flora/grass/bush_meagre/green3
+	name = "green bush"
+	icon = 'modular_rmh/icons/obj/flora/greenflora.dmi'
+	icon_state = "bush_green3"
+	base_icon_state = "bush_green3"

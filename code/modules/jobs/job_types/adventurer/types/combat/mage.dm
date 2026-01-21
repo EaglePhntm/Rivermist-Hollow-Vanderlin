@@ -1,6 +1,6 @@
 /datum/job/advclass/combat/mage
 	title = "Mage"
-	tutorial = "A wandering graduate of the many colleges of magick across Psydonia, you search for a job to put your degree to use. And they say school was hard..."
+	tutorial = "A wandering graduate of the many colleges of magick across Faerun, you search for a job to put your degree to use. And they say school was hard..."
 	outfit = /datum/outfit/adventurer/mage
 	category_tags = list(CTAG_ADVENTURER)
 	total_positions = 4

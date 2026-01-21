@@ -126,6 +126,13 @@
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/cave/mazedungeon)
+"av" = (
+/obj/structure/fluff/steamvent,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8
+	},
+/turf/open/floor/concrete,
+/area/under/cave/mazedungeon)
 "aw" = (
 /turf/closed/wall/mineral/decostone/cand,
 /area/indoors/rmh_desert_phouse)
@@ -414,6 +421,10 @@
 "bj" = (
 /turf/open/floor/dirt,
 /area/outdoors/rmh_desert/dungeon1)
+"bk" = (
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "bl" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 9
@@ -667,6 +678,10 @@
 	},
 /turf/closed/wall/mineral/desert_sandstone/window,
 /area/indoors/rmh_desert_phouse)
+"bQ" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/sand,
+/area/outdoors/rmh_desert/valley)
 "bR" = (
 /obj/effect/decal/cobbleedge{
 	dir = 4;
@@ -879,6 +894,11 @@
 	},
 /turf/open/floor/twig,
 /area/outdoors/rmh_desert/port)
+"cE" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/ausbushes/brflowers,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "cF" = (
 /turf/open/floor/carpet/stellar,
 /area/indoors/rmh_desert_phouse)
@@ -901,6 +921,7 @@
 	name = "sand";
 	color = "#fab507"
 	},
+/obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/rmh_desert/valley)
 "cK" = (
@@ -1221,6 +1242,12 @@
 "dJ" = (
 /turf/open/floor/sand/desertsand/sandpath,
 /area/under/rmh_bedrock)
+"dK" = (
+/obj/structure/door/viewport{
+	dir = 1
+	},
+/turf/open/floor/concrete,
+/area/under/cave/mazedungeon)
 "dL" = (
 /obj/structure/fluff/railing/corner/south_east,
 /obj/effect/decal/edge{
@@ -1255,6 +1282,11 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/sandstone,
 /area/under/rmh_desert/palacecasemates)
+"dS" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "dT" = (
 /obj/structure/chair/bench/couch/right{
 	dir = 4
@@ -1877,6 +1909,13 @@
 	},
 /turf/open/floor/sand,
 /area/under/rmh_desert/spider)
+"fB" = (
+/obj/machinery/light/fueledstreet/orange/wall{
+	name = "kostil";
+	mouse_opacity = 0
+	},
+/turf/open/floor/grass/eora,
+/area/under/cave/mazedungeon)
 "fC" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/junglebush/c,
@@ -2060,6 +2099,14 @@
 	},
 /turf/open/floor/carpet,
 /area/indoors/rmh_desert_phouse)
+"gc" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "gd" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
@@ -2091,6 +2138,11 @@
 	color = "#e3ca4f"
 	},
 /area/under/rmh_desert/spider)
+"gi" = (
+/obj/structure/fluff/steamvent,
+/obj/structure/fluff/walldeco/bath/wallpipes,
+/turf/open/floor/concrete,
+/area/under/cave/mazedungeon)
 "gj" = (
 /obj/structure/fluff/railing/wood/west,
 /obj/structure/fluff/railing/wood,
@@ -2191,6 +2243,10 @@
 "gx" = (
 /turf/closed/wall/mineral/desert_soapstone,
 /area/indoors/rmh_desert_phouse)
+"gy" = (
+/obj/structure/flora/rock,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "gz" = (
 /obj/structure/tent_wall,
 /turf/open/floor/sandstone,
@@ -2502,6 +2558,10 @@
 "gY" = (
 /turf/open/floor/sand/desertsand,
 /area/outdoors/rmh_desert/port)
+"gZ" = (
+/obj/item/natural/wood/plank,
+/turf/open/floor/sand,
+/area/outdoors/rmh_desert/valley)
 "ha" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -2550,6 +2610,9 @@
 	},
 /turf/open/floor/tile/diamond/blue,
 /area/indoors/rmh_desert_phouse)
+"hi" = (
+/turf/open/floor/grass/eora,
+/area/under/cave/mazedungeon)
 "hj" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/effect/spawner/map_spawner/loot/valuable_tableware_spawner,
@@ -2945,6 +3008,10 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/sand,
 /area/under/rmh_desert/spider)
+"iu" = (
+/obj/structure/flora/grass/bush/wall/tall/green,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "iv" = (
 /obj/effect/decal/cobbleedge{
 	dir = 2;
@@ -3234,8 +3301,8 @@
 /turf/open/floor/sandstone_tile/six,
 /area/under/town/rmh/basement)
 "jj" = (
-/obj/structure/flora/astrata,
 /obj/effect/decal/cleanable/roguerune/arcyne/wall,
+/obj/machinery/light/fueled/firebowl/church,
 /turf/open/floor/church/gold,
 /area/indoors/rmh_desert_phouse)
 "jk" = (
@@ -3257,6 +3324,10 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/sandstone,
 /area/under/rmh_desert/palacecasemates)
+"jm" = (
+/obj/structure/flora/rock/coral,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "jn" = (
 /obj/effect/spawner/map_spawner/hauntpile,
 /turf/open/floor/grass/cold,
@@ -3887,6 +3958,18 @@
 /obj/structure/fluff/railing/corner/south_west,
 /turf/open/floor/tile/harem,
 /area/indoors/rmh_desert_phouse)
+"ks" = (
+/obj/structure/flora/grass/herb/random,
+/obj/effect/wisp/prestidigitation{
+	pixel_x = 0;
+	name = "Will-o'-the-wisp";
+	desc = "A small, fiery ball of light made up of mystical energy.";
+	light_inner_range = 1;
+	light_outer_range = 8;
+	light_power = 2
+	},
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "kt" = (
 /turf/open/floor/rooftop/green/corner1{
 	dir = 2
@@ -4072,6 +4155,14 @@
 	},
 /turf/closed/wall/mineral/desert_sandstone/window,
 /area/indoors/rmh_desert_phouse)
+"kI" = (
+/obj/item/natural/wood/plank,
+/turf/open/floor/sand/desertsand/sandpath,
+/area/outdoors/rmh_desert/valley)
+"kJ" = (
+/obj/structure/flora/hotspring_rocks/small/three,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "kK" = (
 /obj/structure/fluff{
 	icon_state = "chest_neu";
@@ -4447,6 +4538,10 @@
 /obj/structure/fluff/railing/border/north,
 /turf/open/floor/sandstone_tile,
 /area/under/rmh_desert/pyramid)
+"lQ" = (
+/obj/item/natural/stone,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/rmh_desert/valley)
 "lR" = (
 /obj/structure/closet/crate/drawer/random,
 /turf/open/floor/carpet/red,
@@ -4952,6 +5047,14 @@
 	},
 /turf/open/floor/tile/harem,
 /area/indoors/rmh_desert_phouse)
+"np" = (
+/obj/structure/flora/grass/herb/random,
+/obj/machinery/light/fueledstreet/orange/wall{
+	name = "kostil";
+	mouse_opacity = 0
+	},
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "nq" = (
 /obj/structure/fluff/railing/corner/north_east,
 /obj/effect/decal/cleanable/blood/tracks,
@@ -4994,6 +5097,10 @@
 /obj/effect/spawner/map_spawner/loot/dungeon/misc,
 /turf/open/floor/wood,
 /area/indoors/rmh_desert_phouse)
+"nx" = (
+/obj/structure/flora/grass/bush/wall/green,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "ny" = (
 /obj/structure/curtain/bounty/dir{
 	dir = 4
@@ -5365,6 +5472,10 @@
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/rmh_desert_phouse)
+"os" = (
+/obj/structure/flora/hotspring_rocks/grassy,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "ot" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -5402,6 +5513,10 @@
 /obj/structure/spider/nest,
 /turf/open/floor/sand,
 /area/under/rmh_desert/spider)
+"oA" = (
+/obj/item/natural/stone,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "oB" = (
 /turf/open/floor/herringbone,
 /area/under/cave/mazedungeon)
@@ -5449,6 +5564,14 @@
 /obj/structure/carpet/blue,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/rmh_desert_phouse)
+"oL" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/rmh_desert/valley)
 "oM" = (
 /obj/structure/water_pipe,
 /turf/open/transparent/openspace,
@@ -5585,6 +5708,10 @@
 /obj/structure/table/wood/folding,
 /turf/open/floor/wood,
 /area/indoors/rmh_desert_phouse)
+"oY" = (
+/obj/structure/door/viewport/stone,
+/turf/open/floor/concrete,
+/area/under/cave/mazedungeon)
 "oZ" = (
 /obj/structure/flora/tree/underworld{
 	opacity = 0
@@ -5847,6 +5974,9 @@
 /obj/structure/vine,
 /turf/open/floor/grass/cold,
 /area/under/cave/mazedungeon)
+"pN" = (
+/turf/open/floor/mushroom/green,
+/area/under/cave/mazedungeon)
 "pO" = (
 /obj/structure/fluff/statue/small,
 /obj/structure/curtain/purple,
@@ -6103,6 +6233,10 @@
 	},
 /turf/open/floor/tile/harem,
 /area/under/rmh_desert/ziqurat)
+"qB" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "qC" = (
 /obj/structure/fluff/railing/corner{
 	dir = 9
@@ -6269,6 +6403,13 @@
 /obj/structure/fluff/railing/corner/south_west,
 /turf/open/floor/sandstone,
 /area/indoors/rmh_desert_phouse)
+"qY" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94";
+	dir = 1
+	},
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert)
 "qZ" = (
 /obj/structure/fluff/railing/border,
 /obj/effect/decal/edge_corner{
@@ -6486,6 +6627,10 @@
 "rL" = (
 /turf/open/floor/sand/desertsand/sandpath,
 /area/indoors/cave/rmh_desertcaves)
+"rM" = (
+/obj/item/natural/rock/random_ore,
+/turf/open/floor/sand/desertsand/sandpath,
+/area/outdoors/rmh_desert/valley)
 "rN" = (
 /obj/machinery/light/fueled/firebowl/church,
 /turf/closed/wall/mineral/underbrick/fake_world,
@@ -6512,6 +6657,10 @@
 /turf/open/water/river{
 	dir = 8
 	},
+/area/under/cave/mazedungeon)
+"rR" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/open/floor/grass/healthy,
 /area/under/cave/mazedungeon)
 "rS" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -6551,6 +6700,11 @@
 /obj/item/clothing/head/turban,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/rmh_desert_phouse)
+"rX" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/structure/flora/ausbushes/brflowers,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "rY" = (
 /obj/structure/fluff/railing/corner/south_east,
 /obj/structure/fluff/pillow{
@@ -6970,6 +7124,18 @@
 	},
 /turf/open/floor/sand/sandbrick,
 /area/outdoors/rmh_desert/port)
+"ti" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/obj/effect/wisp/prestidigitation{
+	pixel_x = 0;
+	name = "Will-o'-the-wisp";
+	desc = "A small, fiery ball of light made up of mystical energy.";
+	light_inner_range = 1;
+	light_outer_range = 8;
+	light_power = 2
+	},
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "tj" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -6991,6 +7157,9 @@
 	pixel_y = 0
 	},
 /turf/open/floor/metal/alt,
+/area/under/cave/mazedungeon)
+"tl" = (
+/turf/open/floor/mushroom/blue,
 /area/under/cave/mazedungeon)
 "tm" = (
 /obj/structure/bookcase/random_recipes,
@@ -7270,6 +7439,9 @@
 /obj/structure/fluff/railing/corner/south_east,
 /turf/open/floor/sandstone_tile/five,
 /area/indoors/rmh_desert_phouse)
+"tN" = (
+/turf/closed/wall/mineral/stone,
+/area/outdoors/rmh_desert/valley)
 "tO" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -7358,6 +7530,10 @@
 /obj/structure/bars/grille,
 /turf/open/water/sewer,
 /area/outdoors/rmh_desert/dungeon1)
+"tZ" = (
+/obj/structure/flora/rock/water,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "ua" = (
 /obj/structure/pillory/reinforced{
 	lockid = "tea"
@@ -7417,6 +7593,11 @@
 /obj/effect/decal/carpet/kover_darkred,
 /turf/open/floor/sandstone,
 /area/indoors/rmh_desert_phouse)
+"uo" = (
+/obj/structure/flora/ausbushes/brflowers,
+/obj/structure/flora/ausbushes/ppflowers,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "up" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 4
@@ -7716,6 +7897,10 @@
 /obj/structure/bars/steel,
 /turf/open/floor/carpet/lord/left,
 /area/under/town/rmh/basement)
+"vb" = (
+/obj/structure/flora/pillar,
+/turf/closed/wall/mineral/decorstone,
+/area/under/cave/mazedungeon)
 "vc" = (
 /obj/structure/fluff/railing/corner/south_east,
 /turf/open/floor/tile/tilerg,
@@ -8037,6 +8222,10 @@
 /obj/structure/fluff/pillow/brown,
 /turf/open/floor/carpet/stellar,
 /area/under/town/rmh/basement)
+"vU" = (
+/obj/structure/flora/grass/herb/random,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "vV" = (
 /obj/effect/landmark/mapGenerator/rmh_desert{
 	endTurfX = 315;
@@ -8237,6 +8426,12 @@
 /obj/effect/spawner/map_spawner/hauntpile,
 /turf/open/floor/tile/harem1,
 /area/under/rmh_desert/hareml)
+"wz" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94"
+	},
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "wA" = (
 /obj/structure/bars/pipe{
 	dir = 4;
@@ -8597,6 +8792,10 @@
 "xC" = (
 /turf/open/floor/wood,
 /area/indoors/rmh_desert_phouse)
+"xD" = (
+/obj/item/natural/rock/random_ore,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/rmh_desert/valley)
 "xE" = (
 /obj/machinery/light/fueled/wallfire/candle/skull{
 	pixel_y = -32
@@ -8887,6 +9086,9 @@
 /obj/structure/fluff/railing/corner/north_east,
 /turf/open/floor/sandstone,
 /area/indoors/rmh_desert_phouse)
+"yx" = (
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/rmh_desert/valley)
 "yy" = (
 /obj/structure/fluff/railing/corner/south_west,
 /obj/machinery/light/fueled/firebowl,
@@ -8915,6 +9117,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/stonered,
 /area/indoors/rmh_desert_phouse)
+"yC" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/sand/desertsand/sandpath,
+/area/outdoors/rmh_desert/valley)
 "yD" = (
 /obj/structure/fluff/railing/border/east,
 /obj/structure/fluff/railing/border,
@@ -8931,6 +9137,12 @@
 	},
 /turf/open/floor/sandstone_tile,
 /area/under/rmh_desert/harem)
+"yF" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94"
+	},
+/turf/open/floor/sand/sandbrick,
+/area/outdoors/rmh_desert)
 "yG" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -9182,6 +9394,10 @@
 	},
 /turf/open/floor/tile/diamond,
 /area/under/rmh_desert/hareml)
+"zp" = (
+/obj/fae_trickery_trap/drop,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "zq" = (
 /obj/machinery/light/fueled/firebowl/firebowlb{
 	name = "health fire"
@@ -9308,6 +9524,11 @@
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/cave/mazedungeon)
+"zE" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "zF" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -9391,6 +9612,14 @@
 	color = "#e3ca4f"
 	},
 /area/under/rmh_desert/spider)
+"zV" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/machinery/light/fueledstreet/orange/wall{
+	name = "kostil";
+	mouse_opacity = 0
+	},
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "zW" = (
 /obj/effect/decal/edge{
 	color = "#7a684b";
@@ -9709,6 +9938,14 @@
 "AD" = (
 /turf/open/floor/cobblerock,
 /area/indoors/cave/rmh_desertcaves)
+"AE" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/item/natural/rock/random_ore,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "AF" = (
 /obj/effect/decal/cobbleedge{
 	dir = 2;
@@ -9726,6 +9963,11 @@
 	},
 /turf/open/floor/sandstone_tile,
 /area/under/rmh_desert/ziqurat)
+"AH" = (
+/obj/structure/flora/grass/herb/random,
+/obj/structure/flora/grass/herb/random,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "AI" = (
 /obj/structure/carpet/red,
 /turf/open/floor/tile/bfloorz,
@@ -9758,6 +10000,10 @@
 	},
 /turf/open/floor/carpet/lord/center,
 /area/under/town/rmh/basement)
+"AN" = (
+/obj/structure/flora/ausbushes/brflowers,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "AO" = (
 /obj/structure/fluff/railing/corner/south_west,
 /turf/open/floor/carpet/red,
@@ -9938,6 +10184,10 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/closed/wall/mineral/desert_soapstone,
 /area/under/town/rmh/basement)
+"Bu" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/turned,
+/area/outdoors/rmh_desert/valley)
 "Bv" = (
 /obj/effect/decal/cobbleedge{
 	dir = 4;
@@ -10028,6 +10278,10 @@
 "BH" = (
 /turf/open/floor/carpet/lord/left,
 /area/under/rmh_desert/harem)
+"BI" = (
+/obj/structure/underworld/barrier,
+/turf/open/floor/underworld/space,
+/area/under/cave/mazedungeon)
 "BJ" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/greenstone/runed,
@@ -10067,6 +10321,10 @@
 	},
 /turf/open/floor/sand/desertsand/sandpath,
 /area/outdoors/rmh_desert)
+"BO" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/rmh_desert/valley)
 "BP" = (
 /obj/effect/spawner/map_spawner/hauntpile,
 /turf/open/floor/cobble,
@@ -10244,11 +10502,26 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/rmh_desert_phouse)
+"Cq" = (
+/obj/structure/flora/starfish,
+/turf/open/floor/grass/eora,
+/area/under/cave/mazedungeon)
 "Cr" = (
 /obj/structure/bed/wool,
 /obj/item/bedsheet/pelt,
 /turf/open/floor/carpet/red,
 /area/under/town/rmh/basement)
+"Cs" = (
+/obj/effect/wisp/prestidigitation{
+	pixel_x = 0;
+	name = "Will-o'-the-wisp";
+	desc = "A small, fiery ball of light made up of mystical energy.";
+	light_inner_range = 1;
+	light_outer_range = 8;
+	light_power = 2
+	},
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "Ct" = (
 /obj/structure/trap/fire{
 	alpha = 0;
@@ -10346,6 +10619,14 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/rmh_desert_phouse)
+"CG" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/rmh_desert/valley)
 "CH" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/effect/spawner/map_spawner/loot/food,
@@ -10531,6 +10812,13 @@
 	},
 /turf/open/floor/sandstone,
 /area/under/town/rmh/basement)
+"Dd" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94";
+	dir = 8
+	},
+/turf/open/floor/sand/sandbrick,
+/area/outdoors/rmh_desert)
 "De" = (
 /obj/effect/decal/edge_corner{
 	dir = 4;
@@ -10548,6 +10836,10 @@
 	},
 /turf/open/floor/sandstone,
 /area/outdoors/rmh_desert/dungeon1)
+"Dg" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/rmh_desert/valley)
 "Dh" = (
 /obj/effect/decal/carpet,
 /obj/structure/fluff/pillow/blue{
@@ -10565,6 +10857,11 @@
 /obj/structure/curtain/brown,
 /turf/open/floor/blocks/stonered/tiny,
 /area/outdoors/rmh_desert/port)
+"Dk" = (
+/obj/structure/minecart_rail/railbreak,
+/obj/structure/closet/crate/miningcar,
+/turf/open/floor/herringbone,
+/area/under/cave/mazedungeon)
 "Dl" = (
 /turf/open/floor/sandstone_tile/four,
 /area/indoors/rmh_desert_phouse)
@@ -10625,6 +10922,10 @@
 /obj/structure/vine,
 /turf/open/floor/grass/cold,
 /area/under/cave/mazedungeon)
+"Dt" = (
+/obj/structure/fluff/steamvent,
+/turf/open/floor/concrete,
+/area/under/cave/mazedungeon)
 "Du" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
@@ -10659,6 +10960,14 @@
 	},
 /turf/open/floor/volcanic,
 /area/outdoors/rmh_desert)
+"DA" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/rmh_desert/valley)
 "DB" = (
 /obj/structure/table/wood/plain/alt,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -10976,6 +11285,14 @@
 	},
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/outdoors/rmh_desert/port)
+"Ey" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/item/natural/wood/plank,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "Ez" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/sandstone_tile,
@@ -11044,6 +11361,14 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/herringbone_clear,
 /area/indoors/rmh_desert_phouse)
+"EI" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/rmh_desert/valley)
 "EJ" = (
 /obj/structure/flora/ausbushes/sunnybush,
 /turf/open/floor/grass/mixyel,
@@ -11152,6 +11477,14 @@
 "ES" = (
 /turf/open/floor/dirt,
 /area/under/rmh_desert/spider)
+"ET" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/structure/flora/driftwood,
+/turf/open/floor/sand,
+/area/outdoors/rmh_desert/valley)
 "EU" = (
 /obj/structure/door/red,
 /turf/open/floor/ruinedwood/spiral,
@@ -11226,6 +11559,18 @@
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/rmh_desert_phouse)
+"Fk" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/item/natural/rock/random_ore,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/rmh_desert/valley)
 "Fl" = (
 /obj/structure/fluff/railing/wood/north,
 /obj/structure/fluff/railing/border/north,
@@ -11427,6 +11772,9 @@
 	},
 /turf/open/floor/grass/cold,
 /area/under/cave/mazedungeon)
+"FR" = (
+/turf/open/floor/dirt/road,
+/area/under/cave/mazedungeon)
 "FS" = (
 /obj/effect/decal/edge{
 	color = "#7a684b";
@@ -11564,6 +11912,13 @@
 "Go" = (
 /turf/open/floor/cobblerock,
 /area/under/cave)
+"Gp" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94";
+	dir = 1
+	},
+/turf/open/floor/sand/sandbrick,
+/area/outdoors/rmh_desert)
 "Gq" = (
 /obj/structure/door/viewport/stone/broken,
 /turf/open/floor/concrete,
@@ -11686,6 +12041,10 @@
 	},
 /turf/open/transparent/openspace,
 /area/indoors/rmh_desert_phouse)
+"GH" = (
+/obj/structure/flora/grass/bush_meagre/green2,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "GI" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/neuFarm/seed/plum,
@@ -11780,6 +12139,10 @@
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
+/area/under/cave/mazedungeon)
+"GV" = (
+/obj/structure/flora/grass/bush_meagre/green3,
+/turf/open/floor/grass/healthy,
 /area/under/cave/mazedungeon)
 "GW" = (
 /obj/structure/flora/grass/bush/wall,
@@ -12250,6 +12613,9 @@
 	},
 /turf/open/floor/tile/diamond,
 /area/indoors/rmh_desert_phouse)
+"Ic" = (
+/turf/closed/wall/mineral/decowood,
+/area/outdoors/rmh_desert/valley)
 "Id" = (
 /obj/effect/decal/carpet/kover_darkred,
 /obj/structure/fluff/pillow{
@@ -12684,6 +13050,10 @@
 	},
 /turf/open/floor/twig,
 /area/outdoors/rmh_desert/port)
+"Jo" = (
+/obj/structure/underworld/barrier,
+/turf/open/floor/underworld/space/sparkle_quiet/fake_world,
+/area/under/cave/mazedungeon)
 "Jp" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "dungeondenter";
@@ -12763,6 +13133,10 @@
 	},
 /turf/open/floor/tile/bfloorz,
 /area/under/rmh_desert/harem)
+"Jz" = (
+/obj/item/natural/wood/plank,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "JA" = (
 /turf/closed/wall/mineral/desert_soapstone,
 /area/under/rmh_bedrock)
@@ -13112,6 +13486,14 @@
 /obj/structure/bed/shit,
 /turf/open/floor/sandstone,
 /area/under/rmh_desert/palacecasemates)
+"KG" = (
+/obj/structure/flora/grass/bush_meagre/green2,
+/obj/machinery/light/fueledstreet/orange/wall{
+	name = "kostil";
+	mouse_opacity = 0
+	},
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "KH" = (
 /obj/structure/fluff/railing/wood/west,
 /turf/open/floor/wood,
@@ -13191,6 +13573,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/sandstone_tile/five,
 /area/indoors/rmh_desert_phouse)
+"KX" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "KY" = (
 /turf/open/floor/tile/brownbrick,
 /area/indoors/rmh_desert_phouse)
@@ -13265,6 +13651,13 @@
 	},
 /turf/open/floor/sand/desertsand,
 /area/outdoors/rmh_desert/valley)
+"Ll" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94";
+	dir = 4
+	},
+/turf/open/floor/sand/sandbrick,
+/area/outdoors/rmh_desert)
 "Lm" = (
 /obj/structure/carpet/red,
 /obj/structure/fluff/pillow/blue{
@@ -13418,6 +13811,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/sand/desertsand/sandpath,
 /area/indoors/cave/rmh_desertcaves)
+"LC" = (
+/obj/fae_trickery_trap/disorient,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "LD" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -13509,6 +13906,14 @@
 /obj/effect/spawner/map_spawner/loot/dungeon/clothing,
 /obj/effect/spawner/map_spawner/loot/valuable_jewelry_spawner,
 /turf/open/floor/cobble,
+/area/under/cave/mazedungeon)
+"LR" = (
+/obj/machinery/light/fueledstreet/orange/wall{
+	name = "kostil";
+	mouse_opacity = 0
+	},
+/obj/structure/flora/hotspring_rocks/small/five,
+/turf/open/floor/grass/healthy,
 /area/under/cave/mazedungeon)
 "LS" = (
 /turf/open/floor/sand/sandbrick,
@@ -14032,6 +14437,13 @@
 "Nl" = (
 /turf/open/floor/dirt,
 /area/outdoors/rmh_desert/oasis)
+"Nm" = (
+/obj/structure/fluff/steamvent,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 9
+	},
+/turf/open/floor/concrete,
+/area/under/cave/mazedungeon)
 "Nn" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/sandstone,
@@ -14106,6 +14518,7 @@
 	name = "sand";
 	color = "#fab507"
 	},
+/obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/rmh_desert/valley)
 "NA" = (
@@ -14556,6 +14969,10 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/under/town/rmh/basement)
+"OG" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "OH" = (
 /obj/effect/decal/shadow_floor{
 	icon = 'icons/effects/atmospherics.dmi';
@@ -14577,6 +14994,18 @@
 	},
 /turf/open/floor/church,
 /area/under/cave/mazedungeon)
+"OK" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/sand,
+/area/outdoors/rmh_desert/valley)
 "OL" = (
 /obj/item/bin/water/gross,
 /turf/open/floor/cobble/mossy,
@@ -14624,6 +15053,10 @@
 "OS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/naturalstone,
+/area/under/cave/mazedungeon)
+"OT" = (
+/obj/structure/flora/grass/bush/green,
+/turf/open/floor/grass/healthy,
 /area/under/cave/mazedungeon)
 "OU" = (
 /obj/structure/underworld/barrier,
@@ -14764,6 +15197,10 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/sandstone,
 /area/under/rmh_desert/palacecasemates)
+"Pu" = (
+/obj/structure/underworld/barrier,
+/turf/open/floor/herringbone,
+/area/under/cave/mazedungeon)
 "Pv" = (
 /obj/structure/fluff/pillow/purple{
 	dir = 1;
@@ -14803,6 +15240,17 @@
 "Py" = (
 /turf/open/floor/sandstone_tile/four,
 /area/outdoors/rmh_desert)
+"Pz" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/obj/machinery/light/fueledstreet/orange/wall{
+	name = "kostil";
+	mouse_opacity = 0
+	},
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
+"PA" = (
+/turf/open/floor/mushroom,
+/area/under/cave/mazedungeon)
 "PB" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/tile,
@@ -14865,6 +15313,10 @@
 /obj/structure/carpet/red,
 /turf/open/floor/tile/kitchen,
 /area/under/rmh_desert/harem)
+"PK" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/rmh_desert/valley)
 "PL" = (
 /obj/machinery/light/fueled/wallfire/candle/weak{
 	pixel_y = -32
@@ -14938,6 +15390,14 @@
 /obj/structure/fluff/railing/border/west,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/rmh_desert/harem)
+"PX" = (
+/obj/structure/fluff/steamvent,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 10;
+	pixel_y = 0
+	},
+/turf/open/floor/concrete,
+/area/under/cave/mazedungeon)
 "PY" = (
 /obj/structure/underworld/barrier,
 /turf/open/floor/sandstone_tile,
@@ -15053,6 +15513,10 @@
 /obj/effect/spawner/map_spawner/loot/potion_stats,
 /turf/open/floor/sand,
 /area/under/rmh_desert/spider)
+"Qr" = (
+/obj/item/natural/stone,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/rmh_desert/valley)
 "Qs" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/fabric_double,
@@ -15356,6 +15820,13 @@
 /obj/structure/window/harem1,
 /turf/closed/wall/mineral/desert_soapstone,
 /area/under/town/rmh/basement)
+"Rm" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94";
+	dir = 8
+	},
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert)
 "Rn" = (
 /obj/effect/decal/mossy{
 	dir = 4;
@@ -15396,6 +15867,13 @@
 /obj/structure/carpet/green,
 /turf/open/floor/sandstone,
 /area/under/town/rmh/basement)
+"Rs" = (
+/obj/machinery/light/fueledstreet/orange/wall{
+	name = "kostil";
+	mouse_opacity = 0
+	},
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "Rt" = (
 /obj/structure/flora/grass,
 /obj/structure/fluff/railing/border/west,
@@ -15435,6 +15913,25 @@
 	},
 /turf/open/floor/sandstone,
 /area/under/rmh_desert/palacecasemates)
+"Ry" = (
+/obj/effect/bump_teleporter{
+	id = "feaportal";
+	id_target = "feaout"
+	},
+/obj/effect/wisp/prestidigitation{
+	pixel_x = -7;
+	name = "portal";
+	light_inner_range = 1;
+	light_outer_range = 8;
+	light_power = 2;
+	alpha = 0;
+	icon_state = "portal";
+	icon = 'modular_rmh/icons/obj/structures/48x48.dmi';
+	desc = "Portal to another dimension";
+	plane = -5
+	},
+/turf/open/floor/dirt/road,
+/area/under/cave/mazedungeon)
 "Rz" = (
 /obj/effect/decal/carpet/kover_darkred{
 	dir = 4;
@@ -15631,6 +16128,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/under/cave/mazedungeon)
+"RT" = (
+/obj/structure/flora/grass/herb/valeriana,
+/turf/open/floor/grass/eora,
+/area/under/cave/mazedungeon)
 "RU" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/sandstone_tile,
@@ -15721,6 +16222,10 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/rmh_desert/oasis)
+"Se" = (
+/obj/structure/flora/grass/thorn_bush,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "Sf" = (
 /obj/effect/decal/edge{
 	dir = 8;
@@ -15746,6 +16251,10 @@
 "Sh" = (
 /turf/open/floor/carpet/stellar,
 /area/under/town/rmh/basement)
+"Si" = (
+/obj/structure/underworld/barrier,
+/turf/open/floor/underworld/space/sparkle_quiet,
+/area/under/cave/mazedungeon)
 "Sj" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/twig,
@@ -16027,6 +16536,10 @@
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/tile/diamond,
 /area/under/rmh_desert/hareml)
+"Ta" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/rmh_desert/valley)
 "Tb" = (
 /turf/open/water/marsh,
 /area/outdoors/rmh_desert/valley)
@@ -16203,6 +16716,14 @@
 /obj/structure/fluff/railing/corner/north_east,
 /turf/open/floor/sandstone,
 /area/under/rmh_desert/palacecellar)
+"Tu" = (
+/obj/machinery/light/fueledstreet/orange/wall{
+	name = "kostil";
+	mouse_opacity = 0
+	},
+/obj/fae_trickery_trap/disorient,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "Tv" = (
 /turf/open/transparent/glass,
 /area/outdoors/rmh_desert/valley)
@@ -16338,6 +16859,10 @@
 /obj/structure/fluff/railing/corner/north_east,
 /turf/open/floor/sandstone,
 /area/under/rmh_desert/pyramid)
+"TN" = (
+/obj/structure/flora/grass/bush_meagre/green,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "TO" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/rmh_desert/port)
@@ -16392,6 +16917,10 @@
 	},
 /turf/open/floor/sand/sandbrick,
 /area/outdoors/rmh_desert)
+"TX" = (
+/obj/item/natural/stone,
+/turf/open/floor/sand,
+/area/outdoors/rmh_desert/valley)
 "TY" = (
 /obj/structure/fluff/pillow/purple,
 /turf/open/floor/carpet/purple,
@@ -16564,6 +17093,12 @@
 	},
 /turf/open/floor/grass/cold,
 /area/under/cave/mazedungeon)
+"UD" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94"
+	},
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert)
 "UE" = (
 /obj/structure/fluff/railing/wood/west,
 /turf/open/floor/ruinedwood/spiral,
@@ -16622,6 +17157,13 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/sandstone_tile/five,
 /area/indoors/rmh_desert_phouse)
+"UP" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94";
+	dir = 1
+	},
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "UQ" = (
 /obj/structure/fluff/railing/wood/north{
 	pixel_y = 9
@@ -16673,6 +17215,13 @@
 /obj/structure/flora/junglebush,
 /turf/open/floor/grass,
 /area/outdoors/rmh_desert/oasis)
+"UY" = (
+/obj/structure/flora/sakura{
+	pixel_x = -58;
+	plane = -6
+	},
+/turf/open/floor/grass/eora,
+/area/under/cave/mazedungeon)
 "UZ" = (
 /obj/effect/decal/carpet/kover_darkred{
 	dir = 4;
@@ -16831,6 +17380,14 @@
 /obj/structure/underworld/ship,
 /turf/open/water/ocean/deep,
 /area/outdoors/rmh_desert/sea)
+"VA" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/item/natural/wood/plank,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/rmh_desert/valley)
 "VB" = (
 /obj/effect/decal/cobbleedge{
 	dir = 4;
@@ -17075,6 +17632,14 @@
 	},
 /turf/open/floor/cobble/mossy,
 /area/outdoors/rmh_desert/port)
+"Wq" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/item/natural/stone,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "Wr" = (
 /obj/structure/underworld/barrier,
 /obj/effect/decal/edge{
@@ -17146,10 +17711,9 @@
 /turf/open/floor/sand/desertsand,
 /area/outdoors/rmh_desert)
 "Wz" = (
-/obj/structure/door/viewport{
-	dir = 4
+/turf/closed/mineral/bedrock{
+	name = "solid rock"
 	},
-/turf/open/floor/concrete,
 /area/under/cave/mazedungeon)
 "WA" = (
 /obj/structure/stairs{
@@ -17226,6 +17790,14 @@
 	},
 /turf/open/floor/cobble/mossy,
 /area/outdoors/rmh_desert/port)
+"WL" = (
+/obj/effect/decal/cleanable/dirt/dust{
+	name = "sand";
+	color = "#fab507"
+	},
+/obj/item/natural/stone,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/rmh_desert/valley)
 "WM" = (
 /obj/structure/bookcase/random/eoratica,
 /turf/closed/wall/mineral/wooddark/horizontal,
@@ -17293,6 +17865,10 @@
 "WX" = (
 /turf/closed/wall/mineral/desert_sandstone,
 /area/outdoors/rmh_desert)
+"WY" = (
+/obj/structure/flora/driftwood,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "WZ" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -17439,6 +18015,9 @@
 /obj/structure/fluff/railing/border/west,
 /turf/open/floor/sandstone_tile/six,
 /area/under/town/rmh/basement)
+"Xx" = (
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "Xy" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -17458,6 +18037,10 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/sand/desertsand,
 /area/outdoors/rmh_desert/port)
+"XC" = (
+/obj/item/natural/rock/mana_crystal,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "XD" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/effect/spawner/map_spawner/loot/valuable_jewelry_spawner,
@@ -17589,6 +18172,12 @@
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/rmh_desert_phouse)
+"XS" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94"
+	},
+/turf/open/floor/sand/sandbrick,
+/area/outdoors/rmh_desert/valley)
 "XT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
@@ -17758,6 +18347,10 @@
 /obj/structure/bed/shit,
 /turf/open/floor/sandstone,
 /area/outdoors/rmh_desert/dungeon1)
+"Yw" = (
+/obj/item/natural/rock/random_ore,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "Yx" = (
 /obj/structure/rack/shelf/biggest,
 /obj/structure/rack/shelf{
@@ -17846,6 +18439,11 @@
 /obj/structure/fermentation_keg,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/rmh_desert_phouse)
+"YK" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/flora/ausbushes/brflowers,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "YL" = (
 /obj/effect/decal/cobbleedge{
 	dir = 4;
@@ -17856,6 +18454,13 @@
 /obj/structure/fluff/railing/corner/south_east,
 /turf/open/floor/sandstone_tile,
 /area/under/rmh_desert/pyramid)
+"YM" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94";
+	dir = 1
+	},
+/turf/open/floor/sand/sandbrick,
+/area/outdoors/rmh_desert/valley)
 "YN" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -17920,6 +18525,13 @@
 /obj/item/storage/sack,
 /turf/open/floor/hexstone,
 /area/indoors/rmh_desert_phouse)
+"YT" = (
+/obj/structure/fluff/railing/stonehedge{
+	color = "#e0cb94";
+	dir = 4
+	},
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert)
 "YU" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/desert_soapstone,
@@ -18061,6 +18673,9 @@
 /area/outdoors/rmh_desert/valley)
 "Zp" = (
 /turf/open/floor/grass/mixyel,
+/area/outdoors/rmh_desert/valley)
+"Zq" = (
+/turf/closed/wall/mineral/desert_soapstone,
 /area/outdoors/rmh_desert/valley)
 "Zr" = (
 /obj/machinery/light/fueled/firebowl/standing,
@@ -18275,12 +18890,24 @@
 	background_track = null;
 	background_track_night = null
 	})
+"ZM" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "ZN" = (
 /turf/open/floor/ruinedwood/herringbone_clear,
 /area/indoors/rmh_desert_phouse)
+"ZO" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/sand/desertsand,
+/area/outdoors/rmh_desert/valley)
 "ZP" = (
 /turf/open/floor/sandstone_tile/two,
 /area/indoors/rmh_desert_phouse)
+"ZQ" = (
+/obj/structure/flora/hotspring_rocks/small/four,
+/turf/open/floor/grass/healthy,
+/area/under/cave/mazedungeon)
 "ZR" = (
 /obj/structure/stairs/stone/reddish,
 /turf/open/floor/sandstone,
@@ -26033,10 +26660,10 @@ GB
 OE
 OE
 Cd
-xl
-xl
-xl
-xl
+gi
+Dt
+Dt
+Dt
 Cd
 oB
 Vo
@@ -26290,11 +26917,11 @@ Cd
 OE
 OE
 Cd
-xl
-xl
-xl
-xl
-xl
+Nm
+av
+av
+PX
+oY
 oB
 oB
 oB
@@ -28274,7 +28901,7 @@ nN
 nN
 UW
 UW
-oB
+Ax
 Ul
 Ax
 Ax
@@ -28348,8 +28975,8 @@ Ax
 Ax
 Ax
 Ax
-Ul
-oB
+Dk
+Ax
 oB
 oB
 Vo
@@ -28865,9 +29492,9 @@ oB
 oB
 oB
 ci
-Cd
-Wz
-Cd
+oB
+oB
+oB
 Cd
 ci
 hV
@@ -29122,9 +29749,9 @@ uv
 JZ
 dQ
 Cd
-pb
-pb
-pb
+oB
+oB
+oB
 pb
 Cd
 hV
@@ -29379,9 +30006,9 @@ pb
 pb
 pb
 Cd
-pb
-pb
-pb
+oB
+oB
+oB
 pb
 Cd
 hV
@@ -29635,10 +30262,10 @@ pb
 pb
 pb
 pb
-RL
-pb
-pb
-pb
+dK
+oB
+oB
+oB
 pb
 Cd
 hV
@@ -29893,11 +30520,11 @@ pb
 pb
 pb
 Cd
-pb
-pb
-pb
-pb
+oB
+oB
+oB
 Cd
+ci
 hV
 hV
 hV
@@ -30150,11 +30777,11 @@ pb
 pb
 pb
 xU
+Pu
+Pu
+Pu
 xU
-xU
-xU
-xU
-VQ
+wV
 hV
 hV
 hV
@@ -30407,11 +31034,11 @@ xU
 xU
 xU
 xU
-wV
-wV
-wV
-wV
-wV
+oB
+oB
+oB
+Cd
+ci
 wV
 wV
 hV
@@ -30663,12 +31290,12 @@ wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
+Cd
+oB
+oB
+oB
+pb
+Cd
 wV
 wV
 hV
@@ -30920,12 +31547,12 @@ wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
+Cd
+oB
+oB
+oB
+pb
+Cd
 wV
 wV
 hV
@@ -31177,12 +31804,12 @@ wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
+Cd
+oB
+oB
+oB
+xU
+VQ
 wV
 wV
 hV
@@ -54543,35 +55170,35 @@ wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
 hV
 "}
 (142,1,1) = {"
@@ -54800,35 +55427,35 @@ wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
 hV
 "}
 (143,1,1) = {"
@@ -55057,6 +55684,9 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
 wV
 wV
 wV
@@ -55066,6 +55696,10 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
+Wz
 wV
 wV
 wV
@@ -55073,19 +55707,12 @@ wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
 hV
 "}
 (144,1,1) = {"
@@ -55314,35 +55941,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+wV
+wV
+Jo
+Jo
+Jo
+BI
+BI
+BI
+BI
+wV
+wV
+Wz
+wV
+wV
+wV
+BI
+Jo
+Jo
+Jo
+Jo
 wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
+Wz
 hV
 "}
 (145,1,1) = {"
@@ -55571,35 +56198,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+wV
+Jo
+Jo
+hi
+hi
+Cq
+hi
+hi
+BI
+Jo
 wV
 wV
 wV
+Jo
+BI
+BI
+nx
+nx
+nx
+Jo
+BI
+BI
+BI
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (146,1,1) = {"
@@ -55828,35 +56455,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
 wV
+Jo
+hi
+RT
+hi
+hi
+RT
+hi
+hi
+Jo
+Jo
+Jo
+Jo
+Jo
+nx
+nx
+os
+OT
+Xx
+TN
+iu
+iu
+Jo
+Jo
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (147,1,1) = {"
@@ -56085,35 +56712,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
 wV
+BI
+hi
+hi
+hi
+fB
+hi
+hi
+RT
+hi
+bk
+nx
+nx
+bk
+bk
+zE
+OG
+vU
+Se
+XC
+vU
+vU
+Xx
+Jo
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (148,1,1) = {"
@@ -56342,35 +56969,35 @@ wV
 wV
 wV
 wV
+Wz
 wV
 wV
+BI
+RT
+hi
+Cq
+hi
+hi
+hi
+hi
+hi
+bk
+bk
+bk
+OG
+OG
+OG
+zE
+vU
+vU
+rR
+rR
+rR
+vU
+Jo
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (149,1,1) = {"
@@ -56599,35 +57226,35 @@ wV
 wV
 wV
 wV
+Wz
 wV
+Jo
+Jo
+hi
+hi
+hi
+hi
+hi
+hi
+UY
+fB
+RT
+bk
+OG
+zE
+zE
+Tu
+Se
+GV
+bk
+rR
+Pz
+rR
+rR
+BI
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (150,1,1) = {"
@@ -56856,35 +57483,35 @@ wV
 wV
 wV
 wV
+Wz
 wV
+BI
+hi
+hi
+hi
+RT
+hi
+hi
+hi
+hi
+hi
+hi
+bk
+vU
+GV
+vU
+vU
+XC
+bk
+bk
+bk
+tZ
+rR
+nx
+BI
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (151,1,1) = {"
@@ -57113,35 +57740,35 @@ wV
 wV
 wV
 wV
+Wz
 wV
+BI
+hi
+hi
+fB
+hi
+hi
+Cq
+hi
+hi
+RT
+bk
+bk
+vU
+zp
+vU
+vU
+Xx
+bk
+bk
+bk
+bk
+rR
+nx
+BI
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (152,1,1) = {"
@@ -57370,35 +57997,35 @@ wV
 wV
 wV
 wV
+Wz
 wV
+BI
+BI
+hi
+hi
+RT
+hi
+hi
+hi
+bk
+bk
+bk
+bk
+vU
+rR
+rR
+Xx
+AN
+AN
+bk
+bk
+bk
+bk
+nx
+BI
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (153,1,1) = {"
@@ -57627,35 +58254,35 @@ wV
 wV
 wV
 wV
+Wz
 wV
 wV
+BI
+BI
+vU
+OG
+uo
+AN
+AN
+LC
+TN
+LR
+Xx
+rR
+rR
+Xx
+Xx
+AN
+zp
+bk
+bk
+bk
+KG
+nx
+Si
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (154,1,1) = {"
@@ -57884,35 +58511,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
 wV
 wV
+Jo
+OT
+AN
+uo
+rR
+rR
+vU
+vU
+Xx
+rR
+ti
+FR
+vb
+FR
+Cs
+Xx
+Xx
+bk
+zp
+Se
+os
+Jo
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
 hV
 "}
 (155,1,1) = {"
@@ -58141,35 +58768,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
 wV
+Jo
+Jo
+rR
+PA
+rR
+rR
+qB
+vU
+vU
+rR
+FR
+FR
+FR
+FR
+FR
+Xx
+Se
+bk
+vU
+OG
+AN
+Jo
+Jo
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
 hV
 "}
 (156,1,1) = {"
@@ -58398,35 +59025,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
 wV
 wV
+Jo
+nx
+pN
+tl
+qB
+qB
+Xx
+vU
+Xx
+FR
+FR
+Ry
+FR
+FR
+Xx
+GV
+vU
+YK
+OG
+OG
+Xx
+Jo
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
 hV
 "}
 (157,1,1) = {"
@@ -58655,35 +59282,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
+Wz
 wV
+Jo
+nx
+pN
+TN
+qB
+Pz
+rR
+jm
+Xx
+FR
+FR
+FR
+FR
+FR
+vU
+zp
+AH
+OG
+YK
+zV
+nx
+Si
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
 hV
 "}
 (158,1,1) = {"
@@ -58912,35 +59539,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
 wV
 wV
+Jo
+nx
+Se
+os
+rR
+rR
+rR
+XC
+Xx
+Cs
+FR
+vb
+FR
+ks
+vU
+Rs
+ZQ
+PA
+PA
+Xx
+nx
+Si
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
 hV
 "}
 (159,1,1) = {"
@@ -59169,35 +59796,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
 wV
 wV
+BI
+BI
+OT
+ZM
+ZM
+rR
+rR
+rR
+Xx
+Rs
+vU
+Xx
+kJ
+Xx
+vU
+Xx
+hi
+hi
+hi
+Cq
+hi
+hi
+Si
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
 hV
 "}
 (160,1,1) = {"
@@ -59426,35 +60053,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
 wV
+BI
+BI
+nx
+dS
+dS
+dS
+ZM
+ZM
+GH
+LC
+rR
+YK
+OG
+pN
+zp
+OT
+hi
+Cq
+RT
+hi
+hi
+RT
+hi
+BI
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
 hV
 "}
 (161,1,1) = {"
@@ -59683,35 +60310,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
 wV
+BI
+nx
+OT
+rR
+rR
+rR
+Xx
+cE
+os
+Xx
+rR
+rR
+zE
+tl
+PA
+Xx
+hi
+hi
+hi
+hi
+hi
+fB
+BI
+BI
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
 hV
 "}
 (162,1,1) = {"
@@ -59940,35 +60567,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+wV
+BI
+nx
+rR
+rR
+jm
+rR
+Pz
+OT
+vU
+rR
+rR
+rR
+Pz
+zE
+OG
+Xx
+hi
+hi
+hi
+RT
+hi
+hi
+BI
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
 hV
 "}
 (163,1,1) = {"
@@ -60197,35 +60824,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
 wV
+BI
+Jo
+rR
+Pz
+rR
+rR
+vU
+nx
+nx
+vU
+rR
+rR
+rR
+rR
+os
+hi
+hi
+hi
+UY
+hi
+RT
+Cq
+BI
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (164,1,1) = {"
@@ -60454,35 +61081,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
 wV
 wV
+Jo
+qB
+rX
+rX
+qB
+vU
+BI
+Jo
+rR
+rR
+rR
+rR
+rR
+np
+hi
+hi
+hi
+fB
+hi
+hi
+hi
+Jo
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (165,1,1) = {"
@@ -60711,35 +61338,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
 wV
+Jo
+vU
+nx
+nx
+BI
+BI
+BI
+Jo
+Jo
+nx
+nx
+Se
+OT
+Se
+RT
+hi
+hi
+Cq
+RT
+hi
+hi
+Jo
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (166,1,1) = {"
@@ -60968,35 +61595,35 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
+wV
+Jo
+Jo
+Jo
+Jo
+Jo
 wV
 wV
 wV
+Jo
+BI
+BI
+nx
+nx
+vU
+hi
+BI
+BI
+BI
+BI
+Jo
+Jo
+Jo
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (167,1,1) = {"
@@ -61225,6 +61852,9 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
 wV
 wV
 wV
@@ -61232,6 +61862,16 @@ wV
 wV
 wV
 wV
+Wz
+wV
+wV
+wV
+BI
+Jo
+Jo
+BI
+BI
+BI
 wV
 wV
 wV
@@ -61239,21 +61879,8 @@ wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
 hV
 "}
 (168,1,1) = {"
@@ -61482,6 +62109,19 @@ wV
 wV
 wV
 wV
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
 wV
 wV
 wV
@@ -61490,27 +62130,14 @@ wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
 hV
 "}
 (169,1,1) = {"
@@ -61739,35 +62366,35 @@ wV
 wV
 wV
 wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
-wV
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
+Wz
 hV
 "}
 (170,1,1) = {"
@@ -135402,7 +136029,7 @@ kU
 kU
 kU
 jD
-DS
+Bu
 ax
 jD
 um
@@ -135659,10 +136286,10 @@ kU
 kU
 kU
 rZ
-Su
+OK
 SG
-Ea
-rZ
+oL
+Wq
 ax
 kU
 kU
@@ -135759,8 +136386,8 @@ kU
 kU
 Qt
 kU
-kU
-kU
+Zq
+Wi
 kU
 kU
 kU
@@ -135914,11 +136541,11 @@ FL
 Qt
 kU
 kU
-kU
+Yw
 ax
 jD
 Su
-Ea
+VA
 Su
 ax
 um
@@ -136016,8 +136643,8 @@ Qt
 Qt
 kU
 kU
-kU
-kU
+UP
+Wi
 kU
 kU
 kU
@@ -136158,7 +136785,7 @@ kU
 kU
 kU
 kU
-ax
+kU
 kU
 kU
 kU
@@ -136173,7 +136800,7 @@ Qt
 kU
 kU
 kU
-um
+TX
 um
 kU
 Su
@@ -136273,7 +136900,7 @@ Qt
 kU
 Qt
 kU
-kU
+YM
 kU
 kU
 kU
@@ -136433,7 +137060,7 @@ ax
 ax
 DS
 ax
-DS
+Bu
 kU
 kU
 kU
@@ -136530,7 +137157,7 @@ kU
 Qt
 Qt
 Wi
-kU
+YM
 kU
 kU
 kU
@@ -136688,7 +137315,7 @@ Qt
 kU
 kU
 kU
-kU
+oA
 kU
 kU
 kU
@@ -136787,7 +137414,7 @@ kU
 Qt
 Qt
 Wi
-kU
+UP
 kU
 kU
 kU
@@ -137044,8 +137671,8 @@ Qt
 Qt
 kU
 Wi
-kU
-kU
+YM
+Wi
 kU
 kU
 kU
@@ -137301,8 +137928,8 @@ Qt
 Qt
 Qt
 kU
-kU
-kU
+Zq
+Wi
 kU
 kU
 kU
@@ -137698,7 +138325,7 @@ kU
 kU
 kU
 kU
-Qt
+yC
 kU
 kU
 kU
@@ -137952,14 +138579,14 @@ kU
 kU
 kU
 kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
+tN
+tN
+yx
+Ic
+Ic
+tN
+tN
+oA
 kU
 kU
 kU
@@ -138209,13 +138836,13 @@ kU
 kU
 kU
 kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
+tN
+lQ
+PK
+PK
+gc
+WL
+tN
 kU
 kU
 QP
@@ -138465,16 +139092,16 @@ kU
 kU
 kU
 kU
+KX
+BO
+AL
+Ey
+gc
+Ey
+PK
+Dg
 kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
+WY
 hA
 hA
 RD
@@ -138491,7 +139118,7 @@ QP
 kU
 kU
 kU
-kU
+Yw
 kU
 kU
 kU
@@ -138723,13 +139350,13 @@ kU
 kU
 kU
 kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
+Ic
+um
+bQ
+AL
+xD
+um
+Dg
 kU
 QP
 hA
@@ -138750,7 +139377,7 @@ QP
 kU
 kU
 kU
-kU
+WY
 kU
 um
 um
@@ -138980,13 +139607,13 @@ kU
 kU
 kU
 kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
+ax
+um
+AL
+Ta
+bQ
+um
+ax
 QP
 lZ
 QP
@@ -139237,13 +139864,13 @@ kU
 kU
 kU
 kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
+ax
+oA
+ax
+ax
+gZ
+jD
+Ic
 QP
 hA
 RD
@@ -139264,12 +139891,12 @@ QP
 QP
 kU
 xW
-kU
+Jz
 kU
 kU
 AL
 Ea
-xB
+BO
 kU
 kU
 kU
@@ -139349,8 +139976,8 @@ kU
 kU
 kU
 kU
-kU
-kU
+Wi
+Zq
 kU
 Wi
 Qt
@@ -139494,13 +140121,13 @@ kU
 kU
 kU
 kU
+BO
 kU
+um
 kU
-Qt
-kU
-kU
-kU
-kU
+rZ
+lQ
+Ic
 QP
 hA
 RD
@@ -139521,10 +140148,10 @@ QP
 QP
 kU
 qj
-Ea
-Ea
+CG
+WL
 jD
-rZ
+Ey
 Ea
 xW
 kU
@@ -139606,8 +140233,8 @@ kU
 kU
 kU
 kU
-kU
-kU
+Wi
+wz
 kU
 kU
 Qt
@@ -139750,14 +140377,14 @@ Qt
 kU
 kU
 kU
-kU
-kU
-Qt
-kU
-kU
-kU
-kU
-kU
+oA
+qj
+Ea
+um
+ax
+um
+Ta
+Ic
 QP
 hA
 RD
@@ -139778,7 +140405,7 @@ QP
 QP
 kU
 qj
-Ea
+CG
 jD
 jD
 kU
@@ -139864,7 +140491,7 @@ kU
 kU
 kU
 kU
-kU
+wz
 kU
 kU
 Qt
@@ -140008,13 +140635,13 @@ kU
 kU
 Qt
 kU
-kU
-Qt
-kU
-kU
-kU
-kU
-kU
+BO
+VA
+oL
+ax
+PK
+gZ
+BO
 QP
 QP
 RD
@@ -140037,8 +140664,8 @@ kU
 MD
 kU
 jD
-Ea
-AL
+VA
+Ta
 Hi
 MD
 um
@@ -140121,7 +140748,7 @@ kU
 kU
 kU
 kU
-kU
+XS
 kU
 kU
 Wi
@@ -140264,14 +140891,14 @@ kU
 Qt
 kU
 kU
-kU
-kU
+ZO
+tN
+rM
 Qt
 Qt
-Qt
-Qt
-kU
-kU
+um
+um
+tN
 QP
 QP
 RD
@@ -140293,11 +140920,11 @@ QP
 kU
 kU
 um
-rZ
+AE
 rZ
 kU
 kU
-qj
+EI
 um
 kU
 kU
@@ -140377,8 +141004,8 @@ kU
 kU
 kU
 kU
-kU
-kU
+Wi
+wz
 kU
 kU
 kU
@@ -140521,14 +141148,14 @@ kU
 kU
 kU
 kU
-kU
-Qt
-kU
-Qt
-kU
-kU
-kU
-kU
+ZO
+tN
+tN
+Ic
+Qr
+ax
+tN
+tN
 Qt
 QP
 RD
@@ -140552,9 +141179,9 @@ xW
 kU
 kU
 Ea
-rZ
+Wq
 jD
-qj
+DA
 kU
 kU
 kU
@@ -140634,8 +141261,8 @@ kU
 kU
 kU
 kU
-kU
-kU
+Wi
+wz
 kU
 kU
 Qt
@@ -140643,8 +141270,8 @@ kU
 Qt
 kU
 kU
-kU
-kU
+Zq
+Wi
 kU
 kU
 kU
@@ -140806,7 +141433,7 @@ QP
 kU
 kU
 xW
-kU
+Jz
 AL
 AL
 AL
@@ -140892,7 +141519,7 @@ kU
 kU
 kU
 kU
-kU
+Zq
 kU
 kU
 Wi
@@ -140900,7 +141527,7 @@ Qt
 kU
 kU
 kU
-kU
+UP
 kU
 kU
 kU
@@ -141157,7 +141784,7 @@ Qt
 Qt
 kU
 kU
-kU
+YM
 kU
 kU
 kU
@@ -141300,7 +141927,7 @@ kU
 kU
 kU
 kU
-kU
+gy
 kU
 QP
 hA
@@ -141414,7 +142041,7 @@ kU
 Qt
 Wi
 kU
-kU
+YM
 kU
 kU
 kU
@@ -141671,8 +142298,8 @@ Qt
 Qt
 Wi
 kU
-kU
-kU
+YM
+Wi
 kU
 kU
 kU
@@ -141928,8 +142555,8 @@ Qt
 Qt
 Wi
 kU
-kU
-kU
+YM
+Wi
 kU
 kU
 kU
@@ -142185,8 +142812,8 @@ kU
 Qt
 kU
 kU
-kU
-kU
+Zq
+Wi
 kU
 kU
 kU
@@ -142329,6 +142956,7 @@ kU
 kU
 kU
 kU
+oA
 kU
 kU
 kU
@@ -142345,8 +142973,7 @@ kU
 kU
 kU
 kU
-kU
-kU
+WY
 kU
 kU
 kU
@@ -142692,7 +143319,7 @@ kU
 kU
 kU
 kU
-kU
+Zq
 kU
 kU
 kU
@@ -142848,7 +143475,7 @@ kU
 kU
 kU
 kU
-kU
+oA
 kU
 kU
 kU
@@ -142948,8 +143575,8 @@ kU
 kU
 kU
 kU
-kU
-kU
+Wi
+XS
 kU
 Qt
 kU
@@ -143206,7 +143833,7 @@ kU
 kU
 kU
 kU
-kU
+XS
 kU
 kU
 kU
@@ -143463,7 +144090,7 @@ kU
 kU
 kU
 kU
-kU
+wz
 kU
 Qt
 Qt
@@ -143622,94 +144249,10 @@ kU
 xW
 Ea
 jD
-Qt
+kI
 kU
-kU
-xB
-Qt
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-dE
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-kU
-Qt
-kU
-Qt
-Qt
-kU
-kU
-kU
-kU
-kU
-Qt
+KX
+BO
 Qt
 kU
 kU
@@ -143721,6 +144264,90 @@ kU
 kU
 kU
 kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+dE
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+Qt
+kU
+Qt
+Qt
+kU
+kU
+kU
+kU
+kU
+Qt
+Qt
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+kU
+XS
 kU
 Wi
 Qt
@@ -143878,13 +144505,13 @@ kU
 kU
 xB
 Su
-jD
+ET
 Ea
 Ea
-kU
+oA
 xW
 kU
-kU
+Yw
 kU
 kU
 kU
@@ -143976,8 +144603,8 @@ kU
 kU
 kU
 kU
-kU
-kU
+Wi
+XS
 kU
 Wi
 Qt
@@ -144139,7 +144766,7 @@ ld
 ld
 gm
 ld
-xB
+Dg
 kU
 kU
 kU
@@ -144233,8 +144860,8 @@ Qt
 kU
 kU
 kU
-kU
-kU
+Wi
+Zq
 kU
 Wi
 kU
@@ -144393,9 +145020,9 @@ kU
 xW
 kU
 ld
-ld
+Fk
 gm
-Ea
+CG
 xW
 kU
 kU
@@ -144649,10 +145276,10 @@ kU
 kU
 xW
 AL
-AL
+Ta
 Ea
 rZ
-rZ
+Ey
 xW
 kU
 kU
@@ -145787,8 +146414,8 @@ Qt
 Wi
 kU
 kU
-kU
-kU
+Zq
+Wi
 kU
 kU
 kU
@@ -146044,8 +146671,8 @@ kU
 kU
 kU
 kU
-kU
-kU
+UP
+Wi
 kU
 kU
 kU
@@ -146301,7 +146928,7 @@ Qt
 kU
 kU
 kU
-kU
+YM
 kU
 kU
 kU
@@ -146549,8 +147176,8 @@ kU
 kU
 kU
 kU
-kU
-kU
+Wi
+Zq
 kU
 Wi
 Qt
@@ -146558,7 +147185,7 @@ Qt
 Qt
 Qt
 kU
-kU
+UP
 kU
 kU
 kU
@@ -146806,8 +147433,8 @@ kU
 kU
 kU
 kU
-kU
-kU
+Wi
+wz
 kU
 kU
 kU
@@ -146815,7 +147442,7 @@ Qt
 Qt
 Wi
 kU
-kU
+Zq
 kU
 kU
 kU
@@ -147064,7 +147691,7 @@ kU
 kU
 kU
 kU
-kU
+XS
 kU
 Wi
 kU
@@ -147321,7 +147948,7 @@ kU
 kU
 kU
 kU
-kU
+XS
 kU
 kU
 Qt
@@ -147578,7 +148205,7 @@ kU
 kU
 kU
 kU
-kU
+XS
 kU
 kU
 Qt
@@ -147835,7 +148462,7 @@ kU
 kU
 kU
 kU
-kU
+XS
 kU
 kU
 Qt
@@ -148092,7 +148719,7 @@ kU
 kU
 kU
 kU
-kU
+Zq
 kU
 kU
 Qt
@@ -176873,7 +177500,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+WX
 Yu
 PC
 CZ
@@ -177129,8 +177756,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+UD
 Yu
 PC
 CZ
@@ -177386,8 +178013,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+yF
 Yu
 Yu
 CZ
@@ -177644,7 +178271,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+UD
 Yu
 Yu
 CZ
@@ -177900,8 +178527,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+yF
 Yu
 Yu
 PC
@@ -178157,8 +178784,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+WX
 Yu
 Yu
 PC
@@ -178423,8 +179050,8 @@ CZ
 CZ
 CZ
 PC
-Yu
-Yu
+WX
+PC
 Yu
 Yu
 Yu
@@ -178680,8 +179307,8 @@ CZ
 CZ
 CZ
 PC
-Yu
-Yu
+qY
+PC
 Yu
 Yu
 Yu
@@ -178937,8 +179564,8 @@ CZ
 CZ
 CZ
 PC
-Yu
-Yu
+Gp
+PC
 Yu
 Yu
 Yu
@@ -179194,8 +179821,8 @@ CZ
 CZ
 CZ
 PC
-Yu
-Yu
+Gp
+PC
 Yu
 Yu
 Yu
@@ -179451,7 +180078,7 @@ CZ
 CZ
 CZ
 PC
-Yu
+qY
 Yu
 Yu
 Yu
@@ -179708,7 +180335,7 @@ CZ
 CZ
 CZ
 Yu
-Yu
+WX
 Yu
 Yu
 Yu
@@ -180472,7 +181099,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+WX
 Yu
 PC
 CZ
@@ -180729,7 +181356,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+UD
 Yu
 PC
 CZ
@@ -180986,7 +181613,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+yF
 Yu
 PC
 CZ
@@ -181242,8 +181869,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+yF
 Yu
 PC
 CZ
@@ -181499,8 +182126,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+yF
 Yu
 PC
 CZ
@@ -181756,8 +182383,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+UD
 Yu
 PC
 CZ
@@ -181766,7 +182393,7 @@ CZ
 CZ
 PC
 Yu
-Yu
+WX
 Yu
 Yu
 Yu
@@ -182013,8 +182640,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+UD
 Yu
 PC
 CZ
@@ -182023,7 +182650,7 @@ CZ
 CZ
 PC
 Yu
-Yu
+Gp
 Yu
 Yu
 Yu
@@ -182271,7 +182898,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+WX
 Yu
 PC
 CZ
@@ -182280,8 +182907,8 @@ CZ
 CZ
 PC
 Yu
-Yu
-Yu
+Gp
+PC
 Yu
 Yu
 Yu
@@ -182537,8 +183164,8 @@ CZ
 CZ
 PC
 Yu
-Yu
-Yu
+Gp
+PC
 Yu
 Yu
 Yu
@@ -182794,8 +183421,8 @@ CZ
 CZ
 PC
 Yu
-Yu
-Yu
+Gp
+PC
 Yu
 Yu
 Yu
@@ -183051,8 +183678,8 @@ CZ
 CZ
 PC
 Yu
-Yu
-Yu
+Gp
+PC
 Yu
 Yu
 Yu
@@ -183308,8 +183935,8 @@ CZ
 CZ
 PC
 Yu
-Yu
-Yu
+WX
+PC
 Yu
 Yu
 Yu
@@ -184849,7 +185476,7 @@ CZ
 CZ
 CZ
 CZ
-Yu
+WX
 Yu
 Yu
 Yu
@@ -185106,7 +185733,7 @@ CZ
 CZ
 CZ
 PC
-Yu
+Gp
 Yu
 Yu
 Yu
@@ -185356,14 +185983,14 @@ Yu
 Yu
 Yu
 Yu
-Yu
+WX
 Yu
 CZ
 CZ
 CZ
 CZ
 PC
-Yu
+Gp
 Yu
 Yu
 Yu
@@ -185612,15 +186239,15 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+yF
 Yu
 Yu
 CZ
 CZ
 CZ
 PC
-Yu
+qY
 Yu
 Yu
 Yu
@@ -185869,15 +186496,15 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+yF
 Yu
 Yu
 CZ
 CZ
 CZ
 PC
-Yu
+WX
 Yu
 Yu
 Yu
@@ -186127,7 +186754,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+yF
 Yu
 PC
 CZ
@@ -186384,7 +187011,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+yF
 Yu
 PC
 CZ
@@ -186641,7 +187268,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+UD
 Yu
 PC
 PC
@@ -186897,8 +187524,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+WX
 Yu
 Yu
 PC
@@ -187154,8 +187781,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+PC
 Yu
 Yu
 CZ
@@ -188698,8 +189325,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+WX
 Yu
 Yu
 CZ
@@ -188955,8 +189582,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+yF
 Yu
 PC
 CZ
@@ -189213,7 +189840,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+yF
 Yu
 PC
 CZ
@@ -189470,7 +190097,7 @@ dE
 Yu
 Yu
 Yu
-Yu
+UD
 Yu
 Yu
 CZ
@@ -189726,8 +190353,8 @@ dE
 dE
 dE
 Yu
-Yu
-Yu
+PC
+WX
 Yu
 Yu
 CZ
@@ -192576,11 +193203,11 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
-Yu
-Yu
-Yu
+PC
+PC
+PC
+PC
+PC
 Yu
 Yu
 Yu
@@ -192773,8 +193400,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+PC
 Yu
 Yu
 Yu
@@ -192832,13 +193459,13 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
-Yu
-Yu
-Yu
-Yu
-Yu
+WX
+YT
+Ll
+Ll
+Ll
+YT
+WX
 Yu
 Yu
 "}
@@ -193028,11 +193655,11 @@ km
 km
 km
 Yu
-Yu
-Yu
-Yu
-Yu
-Yu
+PC
+PC
+PC
+PC
+PC
 Yu
 Yu
 Yu
@@ -193289,7 +193916,7 @@ WX
 WX
 Mt
 WX
-Yu
+PC
 Yu
 Yu
 Yu
@@ -193546,7 +194173,7 @@ lF
 Yu
 HL
 HL
-Yu
+PC
 Yu
 Yu
 Yu
@@ -194618,13 +195245,13 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
-Yu
-Yu
-Yu
-Yu
-Yu
+WX
+Rm
+Rm
+Dd
+Dd
+Rm
+WX
 Yu
 lO
 Yu
@@ -194876,8 +195503,8 @@ CZ
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+PC
 Yu
 Yu
 Yu
@@ -195074,7 +195701,7 @@ zd
 Yu
 km
 km
-Yu
+yF
 Yu
 Yu
 qt
@@ -195331,7 +195958,7 @@ Yu
 Yu
 km
 Yu
-Yu
+yF
 Yu
 Yu
 PC
@@ -195588,13 +196215,13 @@ Yu
 Yu
 km
 Yu
-Yu
+UD
 PC
 PC
 PC
 Yu
 Yu
-Yu
+UD
 km
 km
 PC
@@ -195851,7 +196478,7 @@ PC
 Yu
 Yu
 Yu
-Yu
+UD
 km
 PC
 PC
@@ -196930,7 +197557,7 @@ CZ
 CZ
 PC
 Yu
-Yu
+WX
 Yu
 Yu
 Yu
@@ -197187,8 +197814,8 @@ CZ
 CZ
 Yu
 Yu
-Yu
-Yu
+qY
+PC
 Yu
 Yu
 Yu
@@ -197444,8 +198071,8 @@ CZ
 Yu
 Yu
 Yu
-Yu
-Yu
+Gp
+PC
 Yu
 Yu
 Yu
@@ -197701,8 +198328,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+Gp
+PC
 Yu
 Yu
 Yu
@@ -197900,7 +198527,7 @@ Yu
 Yu
 Yu
 Yu
-Yu
+PC
 WX
 WX
 WX
@@ -197957,8 +198584,8 @@ CZ
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+Gp
 Yu
 Yu
 Yu
@@ -198157,13 +198784,13 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
-Yu
-Yu
-Yu
-Yu
-Yu
+PC
+PC
+PC
+PC
+PC
+PC
+PC
 Yu
 Yu
 Yu
@@ -198214,8 +198841,8 @@ CZ
 PC
 Yu
 Yu
-Yu
-Yu
+PC
+qY
 Yu
 Yu
 Yu
@@ -198417,8 +199044,8 @@ Yu
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+PC
 Yu
 Yu
 Yu
@@ -198472,7 +199099,7 @@ PC
 Yu
 Yu
 Yu
-Yu
+WX
 Yu
 Yu
 Yu
@@ -198729,8 +199356,8 @@ PC
 Yu
 Yu
 Yu
-Yu
-Yu
+PC
+PC
 Yu
 Yu
 Yu
