@@ -193,11 +193,12 @@
 					else if(human_target.cmode)
 						basic_mob.visible_message(span_danger("[basic_mob] manages to tug [human_target]'s [human_target.wear_pants.name] out of the way!"))
 					return
-		else
+		else if(prob(30))
 			for(var/obj/item/item as anything in human_target.get_equipped_items(FALSE))
 				if(istype(item, /obj/item/clothing) || istype(item, /obj/item/storage/belt))
 					if(!do_after(basic_mob, 1 SECONDS, human_target))
-						item.take_damage(damage_amount = item.max_integrity * 0.4, sound_effect = FALSE)
+						if(!istype(item, /obj/item/storage) && !istype(item, /obj/item/clothing/ring))
+							item.take_damage(damage_amount = item.max_integrity * 0.2, sound_effect = FALSE)
 						basic_mob.visible_message(span_danger("[basic_mob] manages to rip [human_target]'s [item] off!"))
 						human_target.dropItemToGround(item)
 						item.throw_at(pick(orange(2, get_turf(human_target))), 2, 1, basic_mob, TRUE)
