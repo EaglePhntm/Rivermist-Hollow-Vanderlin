@@ -13,6 +13,7 @@
 	background_track_dusk = 'modular_rmh/sound/music/area/field_dusk.ogg'
 	background_track_night = 'modular_rmh/sound/music/area/field_night.ogg'
 	background_track_dawn = 'modular_rmh/sound/music/area/field_dawn.ogg'
+	ambient_index = null
 	converted_type = /area/indoors/shelter/rmh_field
 	//deathsight_message = "somewhere nar the town"
 
@@ -22,6 +23,8 @@
 	background_track_dusk = 'modular_rmh/sound/music/area/field_dusk.ogg'
 	background_track_night = 'modular_rmh/sound/music/area/field_night.ogg'
 	background_track_dawn = 'modular_rmh/sound/music/area/field_dawn.ogg'
+	ambient_index = null
+
 /area/outdoors/rmh_field/north
 	name = "North Forest"
 	first_time_text = "NORTH FOREST"
@@ -188,6 +191,7 @@
 	icon_state = "indoors"
 	background_track = 'modular_rmh/sound/music/area/townindoor_day.ogg'
 	background_track_dawn = 'modular_rmh/sound/music/area/townindoor_dawn.ogg'
+	ambient_index = null
 	converted_type = /area/outdoors/exposed/town/rmh
 	//deathsight_message = "the town of Rivermist Hollow and all its bustling souls"
 
@@ -208,6 +212,7 @@
 	background_track_dawn = 'modular_rmh/sound/music/area/town_dawn.ogg'
 	background_track_dusk = 'modular_rmh/sound/music/area/town_dusk.ogg'
 	background_track_night = 'modular_rmh/sound/music/area/town_night.ogg'
+	ambient_index = null
 	converted_type = /area/indoors/shelter/town/rmh
 
 /area/outdoors/town/rmh/roofs

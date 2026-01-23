@@ -248,11 +248,11 @@
 /turf/open/floor/blocks,
 /area/under/town/rmh/sewer)
 "afP" = (
-/obj/item/carvedgem/jade/fancyvase,
-/turf/open/floor/cobble/alt,
-/area/under/underdark/rmh{
-	name = "Caves & Mines"
-	})
+/obj/structure/fluff/railing/stonehedge{
+	dir = 1
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/rmh_field)
 "age" = (
 /obj/structure/waterwheel{
 	pixel_x = -16;
@@ -439,11 +439,9 @@
 /turf/open/floor/wood,
 /area/indoors/town/rmh/tavern)
 "alF" = (
-/obj/item/carvedgem/coral/urn,
-/turf/open/floor/naturalstone,
-/area/under/underdark/rmh{
-	name = "Caves & Mines"
-	})
+/obj/structure/fluff/railing/stonehedge,
+/turf/open/floor/grass/cold,
+/area/outdoors/rmh_field/east)
 "alM" = (
 /turf/open/floor/cobble/snow,
 /area/outdoors/exposed/magiciantower)
@@ -12559,11 +12557,11 @@
 /turf/open/floor/cobble/alt,
 /area/outdoors/town/rmh)
 "fSb" = (
-/obj/effect/spawner/map_spawner/loot/rare,
-/turf/open/floor/cobble/alt,
-/area/under/underdark/rmh{
-	name = "Caves & Mines"
-	})
+/obj/structure/fluff/railing/stonehedge{
+	dir = 1
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/rmh_field/west)
 "fSl" = (
 /obj/effect/landmark/mapGenerator/cave{
 	endTurfX = 255;
@@ -15476,11 +15474,9 @@
 /turf/open/floor/hay,
 /area/indoors/town/rmh)
 "hir" = (
-/obj/item/statue/gold/vase,
-/turf/open/floor/cobble/alt,
-/area/under/underdark/rmh{
-	name = "Caves & Mines"
-	})
+/obj/structure/fluff/railing/stonehedge,
+/turf/open/floor/grass/cold,
+/area/outdoors/rmh_field/west)
 "hit" = (
 /obj/structure/flora/grass/bush/wall/tall/tundra,
 /turf/open/floor/grass/yel,
@@ -15680,11 +15676,11 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/rmh_air)
 "hnl" = (
-/obj/item/carvedgem/onyxa/vase,
-/turf/open/floor/cobblerock/alt,
-/area/under/underdark/rmh{
-	name = "Caves & Mines"
-	})
+/obj/structure/fluff/railing/stonehedge{
+	dir = 1
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/rmh_field/north)
 "hnt" = (
 /obj/effect/lily_petal/three,
 /obj/structure/fluff/statue/femalestatue/cleanlying{
@@ -25460,7 +25456,7 @@
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "gafferin";
 	aportalid = "gafferout";
-	required_trait = list("burden");
+	required_trait = "burden";
 	name = "Gaffer's Secret Vampire Room";
 	alpha = 0;
 	mouse_opacity = 0
@@ -28142,7 +28138,7 @@
 /turf/open/floor/cobble,
 /area/indoors/cave/underhamlet)
 "neB" = (
-/obj/structure/ladder/hatch,
+/obj/structure/ladder,
 /turf/open/floor/metal,
 /area/indoors/cave/underhamlet)
 "neG" = (
@@ -28793,11 +28789,9 @@
 /turf/open/floor/grass/yel,
 /area/outdoors/rmh_field)
 "nvz" = (
-/obj/item/carvedgem/onyxa/fancyvase,
-/turf/open/floor/cobblerock/alt,
-/area/under/underdark/rmh{
-	name = "Caves & Mines"
-	})
+/obj/structure/fluff/railing/stonehedge,
+/turf/open/floor/grass/cold,
+/area/outdoors/rmh_field/north)
 "nvO" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/item/clothing/shirt/tunic/colored/random,
@@ -39383,6 +39377,7 @@
 	name = "Rivermist Hollow westward";
 	desc = "108 metres to village"
 	},
+/obj/structure/fluff/railing/stonehedge,
 /turf/open/floor/grass/cold,
 /area/outdoors/rmh_field/east)
 "sec" = (
@@ -40058,11 +40053,12 @@
 	name = "underdungeon"
 	})
 "swL" = (
-/obj/effect/spawner/map_spawner/loot/rare,
-/turf/open/floor/cobblerock/alt,
-/area/under/underdark/rmh{
-	name = "Caves & Mines"
-	})
+/obj/structure/flora/grass/herb/taraxacum,
+/obj/structure/fluff/railing/stonehedge{
+	dir = 1
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/rmh_field)
 "swN" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/gronnmead{
@@ -45773,6 +45769,10 @@
 /obj/item/natural/rock,
 /turf/open/floor/dirt/road,
 /area/outdoors/rmh_field/east)
+"uWp" = (
+/obj/structure/fluff/railing/stonehedge,
+/turf/open/floor/dirt/snowy,
+/area/outdoors/rmh_field/west)
 "uWv" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 9
@@ -50288,7 +50288,7 @@
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "gafferout";
 	aportalid = "gafferin";
-	required_trait = list("burden");
+	required_trait = "burden";
 	name = "Gaffer's Secret Vampire Room";
 	alpha = 0;
 	mouse_opacity = 0
@@ -58599,7 +58599,7 @@ aoT
 aoT
 eZo
 ceF
-hir
+kRe
 kRe
 vkn
 kRe
@@ -60385,7 +60385,7 @@ dfA
 eZo
 ceF
 tWA
-alF
+dlQ
 dfA
 dfA
 dfA
@@ -62200,7 +62200,7 @@ kRe
 kRe
 kRe
 kRe
-nvz
+vkn
 eZo
 dfA
 dlQ
@@ -62940,7 +62940,7 @@ dfA
 dfA
 dfA
 eZo
-afP
+kRe
 kRe
 pvi
 kRe
@@ -64502,7 +64502,7 @@ dfA
 cyG
 eZo
 kRt
-hnl
+vkn
 vkn
 rPT
 kRe
@@ -65272,7 +65272,7 @@ snm
 snm
 cyG
 cKJ
-fSb
+kRe
 kRe
 kRe
 vkn
@@ -68343,7 +68343,7 @@ dfA
 dfA
 cKJ
 kRt
-swL
+vkn
 vkn
 vkn
 kRt
@@ -188112,7 +188112,7 @@ rsj
 qDI
 qYe
 qYe
-qRr
+fSb
 qRr
 kZQ
 kZQ
@@ -188369,7 +188369,7 @@ qDI
 qDI
 qYe
 qYe
-qRr
+fSb
 qYe
 usv
 mpV
@@ -188626,7 +188626,7 @@ qYe
 qYe
 vQZ
 uAD
-qRr
+fSb
 usv
 usv
 bhS
@@ -192477,7 +192477,7 @@ qRr
 qYe
 qYe
 qYe
-qRr
+fSb
 qRr
 mpV
 kZQ
@@ -192734,7 +192734,7 @@ qRr
 qYe
 qYe
 qYe
-qRr
+fSb
 mpV
 usv
 usv
@@ -196739,7 +196739,7 @@ jbV
 jbV
 jVb
 jVb
-jVb
+nvz
 yci
 oGS
 yci
@@ -196996,7 +196996,7 @@ kOM
 kGC
 tkt
 jVb
-jVb
+nvz
 yci
 oGS
 yci
@@ -197253,7 +197253,7 @@ jHG
 kGC
 jVb
 jVb
-jVb
+nvz
 yci
 yci
 yci
@@ -197510,7 +197510,7 @@ mvc
 mvc
 kqJ
 jVb
-jVb
+nvz
 yci
 yci
 yci
@@ -199827,7 +199827,7 @@ jVb
 oGS
 yci
 oGS
-jVb
+hnl
 jVb
 jVb
 jVb
@@ -200084,7 +200084,7 @@ tkt
 oGS
 oGS
 yci
-jVb
+hnl
 jVb
 jVb
 eHm
@@ -200341,7 +200341,7 @@ jVb
 oGS
 oGS
 yci
-jVb
+hnl
 jVb
 wUP
 wUP
@@ -200437,7 +200437,7 @@ vQZ
 qYe
 qYe
 qYe
-qRr
+fSb
 usv
 aoM
 ezS
@@ -200598,7 +200598,7 @@ jVb
 oGS
 oGS
 yci
-jVb
+hnl
 uFd
 uFd
 kqJ
@@ -200694,7 +200694,7 @@ uAD
 qYe
 qYe
 qYe
-qRr
+fSb
 qRr
 oln
 aoM
@@ -200951,7 +200951,7 @@ qYe
 vQZ
 qYe
 qYe
-qRr
+fSb
 gis
 usv
 qDI
@@ -201204,7 +201204,7 @@ mpV
 kZQ
 usv
 qRr
-qRr
+hir
 vQZ
 vQZ
 qYe
@@ -201461,7 +201461,7 @@ mpV
 xrx
 usv
 qRr
-qRr
+hir
 qYe
 vQZ
 qYe
@@ -201976,7 +201976,7 @@ usv
 xub
 xrx
 qRr
-qRr
+hir
 qYe
 vQZ
 qYe
@@ -202233,7 +202233,7 @@ usv
 qRr
 xrx
 usv
-qRr
+hir
 qYe
 vQZ
 vQZ
@@ -205063,7 +205063,7 @@ mpV
 mpV
 mpV
 usv
-qRr
+vQZ
 qYe
 qYe
 vQZ
@@ -205319,8 +205319,8 @@ qRr
 usv
 mpV
 mpV
-usv
-qRr
+uWp
+vQZ
 qYe
 qYe
 vQZ
@@ -205576,8 +205576,8 @@ qRr
 usv
 usv
 qRr
-usv
-qRr
+uWp
+vQZ
 qYe
 vQZ
 qYe
@@ -205833,8 +205833,8 @@ nph
 qRr
 usv
 usv
-usv
-qRr
+uWp
+qYe
 qYe
 vQZ
 qYe
@@ -206091,7 +206091,7 @@ nph
 nph
 qRr
 qRr
-qRr
+qYe
 qYe
 vQZ
 qYe
@@ -206504,7 +206504,7 @@ jVb
 jVb
 yci
 oGS
-jVb
+hnl
 jVb
 jVb
 jVb
@@ -206761,7 +206761,7 @@ jVb
 jVb
 oGS
 yci
-jVb
+hnl
 jVb
 jVb
 fvQ
@@ -207018,7 +207018,7 @@ yci
 oGS
 yci
 yci
-jVb
+hnl
 xQn
 jVb
 jVb
@@ -216000,7 +216000,7 @@ jVb
 xQn
 xQn
 tkt
-jVb
+nvz
 oGS
 yci
 yci
@@ -216257,7 +216257,7 @@ jsN
 jVb
 jVb
 tkt
-jVb
+nvz
 yci
 yci
 yci
@@ -216514,7 +216514,7 @@ jVb
 jVb
 jVb
 jVb
-jVb
+nvz
 oGS
 yci
 yci
@@ -216771,7 +216771,7 @@ jVb
 jVb
 jVb
 jVb
-jVb
+nvz
 oGS
 yci
 oGS
@@ -217028,7 +217028,7 @@ jVb
 jVb
 tkt
 jVb
-jVb
+nvz
 oGS
 yci
 oGS
@@ -218569,7 +218569,7 @@ jsN
 jVb
 jVb
 jVb
-jVb
+nvz
 oGS
 yci
 yci
@@ -218826,7 +218826,7 @@ gha
 jsN
 jVb
 jVb
-jVb
+nvz
 oGS
 yci
 oGS
@@ -219083,7 +219083,7 @@ jsN
 jsN
 jVb
 jVb
-jVb
+nvz
 yci
 yci
 oGS
@@ -224483,7 +224483,7 @@ jVb
 jVb
 jVb
 jVb
-jVb
+nvz
 yci
 yci
 yci
@@ -224740,7 +224740,7 @@ jsN
 jVb
 jVb
 dNg
-jVb
+nvz
 yci
 yci
 yci
@@ -224997,7 +224997,7 @@ jsN
 tkt
 jVb
 jVb
-jVb
+nvz
 oGS
 yci
 oGS
@@ -225254,7 +225254,7 @@ jVb
 jVb
 jVb
 jVb
-jVb
+nvz
 oGS
 yci
 oGS
@@ -225511,7 +225511,7 @@ min
 jVb
 jVb
 jVb
-jVb
+nvz
 oGS
 yci
 oGS
@@ -231270,7 +231270,7 @@ vSb
 nIu
 mwK
 nIu
-aAt
+swL
 fFw
 gdG
 gdG
@@ -231527,7 +231527,7 @@ vSb
 nIu
 mwK
 nIu
-fFw
+afP
 fFw
 qYL
 gdG
@@ -231784,7 +231784,7 @@ nIu
 nIu
 mwK
 nIu
-fFw
+afP
 fFw
 fFw
 gdG
@@ -232297,7 +232297,7 @@ qrx
 nIu
 nIu
 nIu
-fFw
+afP
 vSb
 vSb
 gdG
@@ -232554,7 +232554,7 @@ dqB
 mwK
 mwK
 nIu
-fFw
+afP
 fFw
 gdG
 tII
@@ -242055,7 +242055,7 @@ jZV
 sJu
 jZV
 cjI
-uEd
+alF
 mwU
 mwU
 beY
@@ -242312,7 +242312,7 @@ sJu
 sJu
 cjI
 pPw
-uEd
+alF
 mwU
 mwU
 beY
@@ -242569,7 +242569,7 @@ sJu
 sJu
 jZV
 vBt
-pPw
+alF
 yiz
 xXp
 mwU
@@ -246168,7 +246168,7 @@ pPw
 sJu
 jZV
 eao
-pPw
+alF
 mwU
 mwU
 mwU
@@ -246425,7 +246425,7 @@ jZV
 sJu
 sJu
 pPw
-pPw
+alF
 xXp
 mwU
 mwU
