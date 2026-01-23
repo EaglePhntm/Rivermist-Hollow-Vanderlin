@@ -10,6 +10,8 @@
 	soundenv = 19
 	ambush_mobs = null
 	first_time_text = "CURSED DESERT"
+	ambientsounds = DRONING_MOUNTAIN
+	ambientnight = DRONING_MOUNTAIN
 	background_track_dawn = 'modular_rmh/sound/music/area/desert_dawn.ogg'
 	background_track = 'modular_rmh/sound/music/area/desert_day.ogg'
 	background_track_dusk = 'modular_rmh/sound/music/area/desert_dusk.ogg'
@@ -24,6 +26,8 @@
 	soundenv = 19
 	ambush_mobs = null
 	first_time_text = "DESERT VALLEY"
+	ambientsounds = DRONING_MOUNTAIN
+	ambientnight = DRONING_MOUNTAIN
 	background_track_dawn = 'modular_rmh/sound/music/area/desert_dawn.ogg'
 	background_track = 'modular_rmh/sound/music/area/desert_day.ogg'
 	background_track_dusk = 'modular_rmh/sound/music/area/desert_dusk.ogg'
@@ -35,9 +39,10 @@
 /area/indoors/shelter/rmh_desert
 	icon = 'modular_rmh/icons/turf/areas.dmi'
 	icon_state = "shelter"
-	background_track = 'sound/music/area/field.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
+	background_track_dusk = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
+	background_track_night = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
+	background_track_dawn = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
 
 // МОРЕ - SEA
 /area/outdoors/rmh_desert/sea
@@ -47,13 +52,13 @@
 	icon_state = "sea"
 
 // ПОРТ - PORT
-/area/indoors/rmh_desert_phouse
+/area/indoors/rmh_desert/phouse
 	name = "indoors"
 	icon = 'modular_rmh/icons/turf/areas.dmi'
 	icon_state = "house"
-	background_track = 'sound/music/area/towngen.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
+	background_track_dusk = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
+	background_track_night = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
 	converted_type = /area/outdoors/rmh_desert/port
 	//deathsight_message = "the port point between sand and salty water"
 
@@ -65,9 +70,10 @@
 	ambientnight = DRONING_MOUNTAIN
 	//spookysounds = SPOOKY_GEN
 	//spookynight = SPOOKY_GEN
-	background_track = 'sound/music/area/field.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_dawn = 'modular_rmh/sound/music/area/desert_town.ogg'
+	background_track = 'modular_rmh/sound/music/area/desert_town.ogg'
+	background_track_dusk = 'modular_rmh/sound/music/area/desert_town.ogg'
+	background_track_night = 'modular_rmh/sound/music/area/desert_town.ogg'
 	soundenv = 17
 	converted_type = /area/indoors/shelter/town/rmh/roofs
 
@@ -75,9 +81,10 @@
 	name = "Rivermist Hollow Rooftops"
 	icon = 'modular_rmh/icons/turf/areas.dmi'
 	icon_state = "roofs"
-	background_track = 'sound/music/area/field.ogg'
-	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
+	background_track_dusk = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
+	background_track_night = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
+	background_track_dawn = 'modular_rmh/sound/music/area/indoorsdesert_alltime.ogg'
 
 /area/outdoors/rmh_desert/port
 	name = "Sea Port"
@@ -87,7 +94,7 @@
 	background_track_dawn = 'modular_rmh/sound/music/area/desert_town.ogg'
 	background_track = 'modular_rmh/sound/music/area/desert_town.ogg'
 	background_track_dusk = 'modular_rmh/sound/music/area/desert_town.ogg'
-	background_track_night = 'sound/music/area/sleeping.ogg'
+	background_track_night = 'modular_rmh/sound/music/area/desert_town.ogg'
 
 // ДАНЖ И ПЕЩЕРЫ - DUNGEON AND CAVES
 /area/under/rmh_desert/ziqurat
@@ -129,7 +136,7 @@
 	converted_type = /area/indoors/shelter/rmh_desert
 
 // ДВОРЦОВЫЙ ПОГРЕБ - PALACE CELLAR
-/area/under/rmh_desert/palacecellar
+/area/under/rmh_desert/tea/palacecellar
 	name = "Palace Cellar"
 	icon_state = "under"
 	first_time_text = "PALACE CELLAR"
@@ -138,8 +145,31 @@
 	background_track_night = null
 	ceiling_protected = TRUE
 
+// TEAPALACE - ЧАЙХАНА
+/area/indoors/rmh_desert/tea
+	name = "Tea Palace"
+	first_time_text = "TEA PALACE"
+	icon = 'modular_rmh/icons/turf/areas.dmi'
+	icon_state = "house"
+	background_track = 'modular_rmh/sound/music/area/teapalace_day.ogg'
+	background_track_dusk = 'modular_rmh/sound/music/area/teapalace_dusk.ogg'
+	background_track_night = 'modular_rmh/sound/music/area/teapalace_night.ogg'
+	background_track_dawn = 'modular_rmh/sound/music/area/teapalace_dawn.ogg'
+	converted_type = /area/outdoors/rmh_desert/port
+	//deathsight_message = "the port point between sand and salty water"
+
+/area/outdoors/rmh_desert/tea
+	name = "Tea Palace Garden"
+	icon = 'modular_rmh/icons/turf/areas.dmi'
+	icon_state = "seaport"
+	background_track = 'modular_rmh/sound/music/area/teapalace_day.ogg'
+	background_track_dusk = 'modular_rmh/sound/music/area/teapalace_dusk.ogg'
+	background_track_night = 'modular_rmh/sound/music/area/teapalace_night.ogg'
+	background_track_dawn = 'modular_rmh/sound/music/area/teapalace_dawn.ogg'
+
+
 // ДВОРЦОВЫЕ КАЗЕМАТЫ - PALACE CASEMATES
-/area/under/rmh_desert/palacecasemates
+/area/under/rmh_desert/tea/palacecasemates
 	name = "Palace Casemates"
 	icon_state = "under"
 	first_time_text = "PALACE CASEMATES"
@@ -149,7 +179,7 @@
 	ceiling_protected = TRUE
 
 // ГАРЕМ - HAREM
-/area/under/rmh_desert/harem
+/area/under/rmh_desert/tea/harem
 	name = "Harem"
 	icon_state = "under"
 	first_time_text = "HAREM"
@@ -163,7 +193,7 @@
 	ceiling_protected = TRUE
 
 // ГАРЕМ НИЖНИЙ УРОВЕНЬ - LOWER HAREM
-/area/under/rmh_desert/hareml
+/area/under/rmh_desert/tea/hareml
 	name = "Lower Harem"
 	icon_state = "under"
 	first_time_text = "LOWER HAREM"
