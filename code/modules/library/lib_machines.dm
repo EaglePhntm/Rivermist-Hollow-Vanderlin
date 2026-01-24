@@ -51,6 +51,18 @@
 		else
 			to_chat(user, span_notice("You decide not to upload the manuscript."))
 		return
+	if(istype(O, /obj/item/book/playerbook)) //yeah it's a little silly, but whatever, we're magic
+		var/obj/item/book/playerbook/B = O
+		// Prompt the user to upload the book
+		var/choice = input(user, "Do you want to add the book to the archive?") in list("Yes", "No")
+		if(choice == "Yes")
+			upload_book(user, B)
+			// // Optionally delete the book after uploading
+			// qdel(B)
+			to_chat(user, span_notice("The book has been uploaded."))
+		else
+			to_chat(user, span_notice("You decide not to upload the book."))
+		return
 	// THIS IS FOR LOADING BLANK PAPER AS MATERIAL
 	if((O.type == /obj/item/paper) && !has_paper)
 		var/obj/item/paper/paper = O
@@ -159,6 +171,11 @@
 
 /obj/machinery/printingpress/proc/upload_manuscript(mob/user, obj/item/manuscript/M)
 	SSlibrarian.playerbook2file(M.compiled_pages, M.name, M.author, M.ckey, M.select_icon, M.category)
+	SSlibrarian.update_books()
+
+/obj/machinery/printingpress/proc/upload_book(mob/user, obj/item/book/playerbook/B)
+	var/result = SSlibrarian.playerbook2file(B.plaintext, B.player_book_title, B.player_book_author, B.player_book_author_ckey, B.player_book_icon, B.category)
+	to_chat(user, span_info(result))
 	SSlibrarian.update_books()
 
 /obj/machinery/printingpress/proc/upload_painting(mob/user, obj/item/canvas/M)

@@ -130,6 +130,9 @@ GLOBAL_LIST_EMPTY(pending_party_invites) // Format: invitee_ckey = list(party, i
 
 	var/mob/living/carbon/inviter = usr
 	var/list/mobs = view(7, inviter)
+	for(var/el in mobs)
+		if(!istype(el, /mob/living))
+			mobs.Remove(el)
 	var/mob/living/carbon/invitee = browser_input_list(inviter, "Choose a target to invite.", "Party Invite", mobs)
 	if(!invitee)
 		return

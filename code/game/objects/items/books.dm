@@ -155,7 +155,7 @@
 			curpage = 1
 //		var/curdat = pages[curpage]
 		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-					<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><style type=\"text/css\">
+					<html><head><meta charset=utf-8"><style type=\"text/css\">
 					body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
 		for(var/A in pages)
 			dat += A
@@ -269,7 +269,7 @@
 		<html lang="en">
 		<meta charset='UTF-8'>
 		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+		<meta charset=UTF-8'/>
 
 		<style>
 			@import url('https://fonts.googleapis.com/css2?family=Charm:wght@700&display=swap');
@@ -1360,6 +1360,17 @@
 	icon_state = "basic_book_0"
 	base_icon_state = "basic_book"
 	override_find_book = TRUE
+	var/plaintext
+
+/obj/item/book/playerbook/proc/generate_book_from_manuscript(mob/living/in_round_player_mob, obj/item/manuscript/inc_manuscript)
+	player_book_author_ckey = in_round_player_mob.ckey
+	player_book_title = inc_manuscript.name
+	player_book_author = inc_manuscript.author
+	player_book_icon = inc_manuscript.select_icon
+	player_book_text = inc_manuscript.compiled_pages
+	category = inc_manuscript.category
+	message_admins("[player_book_author_ckey]([in_round_player_mob.real_name]) has generated the player book: [player_book_title], in category: [category]")
+	update_book_data()
 
 /obj/item/book/playerbook/proc/get_player_input(mob/living/in_round_player_mob, text)
 	player_book_author_ckey = in_round_player_mob.ckey
@@ -1376,11 +1387,14 @@
 	icon_state = "[player_book_icon]_0"
 	base_icon_state = "[player_book_icon]"
 	pages = list("<b3><h3>Title: [player_book_title]<br>Author: [player_book_author]</b><h3>[player_book_text]")
+	plaintext = player_book_text
 
-/obj/item/book/playerbook/Initialize(mapload, in_round_player_generated, mob/living/in_round_player_mob, text, title)
+/obj/item/book/playerbook/Initialize(mapload, in_round_player_generated, mob/living/in_round_player_mob, text, title, obj/item/manuscript/inc_manuscript = null)
 	. = ..()
 	is_in_round_player_generated = in_round_player_generated
-	if(is_in_round_player_generated)
+	if(inc_manuscript)
+		generate_book_from_manuscript(in_round_player_mob, inc_manuscript)
+	else if(is_in_round_player_generated)
 		INVOKE_ASYNC(src, PROC_REF(update_book_data), in_round_player_mob, text)
 	else
 		player_book_titles = SSlibrarian.pull_player_book_titles()
@@ -1453,7 +1467,10 @@
 	// Well, *for some reason*, the crafting system is made in such a way
 	// as to make reworking it to allow you to put reqs vars in the crafted item near *impossible.*
 	if(istype(I, /obj/item/book_crafting_kit))
-		var/obj/item/book/playerbook/PB = new /obj/item/book/playerbook(get_turf(I.loc), TRUE, user, compiled_pages)
+		if(!written)
+			to_chat(user, span_warning("You cannot bind the manuscript until it is finished with the pen!"))
+			return
+		var/obj/item/book/playerbook/PB = new /obj/item/book/playerbook(get_turf(I.loc), TRUE, user, null, null, src)
 		qdel(I)
 		if(user.Adjacent(PB))
 			PB.add_fingerprint(user)
@@ -1462,7 +1479,7 @@
 
 	if((I.type == /obj/item/paper) || (I.type == /obj/item/paper/scroll))
 		var/obj/item/paper/inserted_paper = I
-		if(length(pages) == 8)
+		if(length(pages) == 16)
 			to_chat(user, span_warning("I can not find a place to put [inserted_paper] into [src]..."))
 			return
 
