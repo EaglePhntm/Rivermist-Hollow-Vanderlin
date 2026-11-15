@@ -1,7 +1,7 @@
 /datum/quirk/peculiarity/smell_and_musk
 	name = "Smell & Musk"
-	desc = "Hard work leaves me drenched in a heavy, heady musk."
-	desc_hint = "Every half of the energy bar spent raises Smelling by a level, up to IV. A level fades after 15 minutes without new exertion, and a wash takes it all off. People within 1, 2, 3 or 3 tiles who enabled Musk Susceptibility lose 2 to 5 Intelligence for 5 minutes, and their arousal cannot cool below a floor unless they climaxed in the last 15 minutes. Sweat gathers in your armpits, crotch and butt, twice as fast where hair grows, and opens new interactions. Needs blood."
+	desc = "My body runs hot. Hard toil soaks me through, and what it leaves on my skin is no common sweat but a heavy, heady musk that clings to my armpits, my groin and my hair, and turns the heads of those with a nose for such things."
+	desc_hint = "The harder I labour, the stronger I smell, in four degrees; every quarter-hour of rest softens it by one, and water washes it all away. Those who answer to it, with Musk Susceptibility in their ERP preferences, grow dizzy and dull-witted near me and cannot cool their wanting. My sweat gathers in my armpits, my crotch and between my cheeks, twice as fast where hair grows, ready to be pressed into a face or licked away. The bloodless never sweat."
 	preview_render = FALSE
 
 /datum/quirk/peculiarity/smell_and_musk/on_spawn()
@@ -16,7 +16,7 @@
 
 /datum/erp_preference/boolean/musk_susceptibility
 	name = "Musk Susceptibility"
-	description = "If the sweaty musk of someone with the Smell & Musk quirk reaches you: it makes your head spin, keeps you aroused and lets their sweat interactions work on you."
+	description = "The rank, heady musk of a body worked to a sweat. Near someone with the Smell & Musk quirk it goes to your head, dulls your wits and keeps you wanting, and their sweat-soaked armpits, crotch and cheeks can be pressed into your face or licked clean."
 	default_value = FALSE
 	category = "General"
 

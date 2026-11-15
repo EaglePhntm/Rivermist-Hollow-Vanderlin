@@ -44,12 +44,12 @@
 /datum/status_effect/musk/get_examine_text(mob/user, list/P)
 	switch(level)
 		if(1)
-			return span_notice("SUBJECTPRONOUN is glistening with sweat.")
+			return span_notice("SUBJECTPRONOUN is glistening with fresh sweat.")
 		if(2)
-			return span_notice("SUBJECTPRONOUN is damp with sweat and smells of warm musk.")
+			return span_notice("SUBJECTPRONOUN is damp with sweat, a warm musk clinging to the skin.")
 		if(3)
-			return span_love("SUBJECTPRONOUN is drenched in sweat, wrapped in a heavy musk.")
-	return span_love("SUBJECTPRONOUN is reeking of thick, heady musk.")
+			return span_love("SUBJECTPRONOUN is drenched in sweat and wreathed in a heavy musk.")
+	return span_love("SUBJECTPRONOUN is reeking of labour and heat, a heady musk rolling off the skin like smoke.")
 
 /datum/status_effect/musk/proc/strengthen()
 	fade_at = world.time + MUSK_LEVEL_FADE_TIME
@@ -173,7 +173,7 @@
 	if(!linked_alert)
 		return
 	linked_alert.name = musk_localized(owner, "Musk Haze", "Мускусный дурман")
-	linked_alert.desc = musk_localized(owner, "The smell is so strong it makes your head spin.", "Запах настолько сильный, что у вас от него кружится голова.")
+	linked_alert.desc = musk_localized(owner, "The smell is so strong it makes your head spin. Your thoughts wade through it like flies through honey.", "Запах настолько сильный, что у вас от него кружится голова. Мысли вязнут в нём, как мухи в мёду.")
 
 /datum/status_effect/debuff/musk_haze/proc/on_get_arousal_floor(datum/source, list/floor_data)
 	SIGNAL_HANDLER
@@ -189,12 +189,12 @@
 
 /atom/movable/screen/alert/status_effect/buff/musk
 	name = "Smelling"
-	desc = "I have worked up a musky sweat."
+	desc = "Sweat beads at my temples and in the hollows of my arms. A faint musk follows me like a shadow."
 	icon_state = "stinky"
 
 /atom/movable/screen/alert/status_effect/debuff/musk_haze
 	name = "Musk Haze"
-	desc = "The smell is so strong it makes your head spin."
+	desc = "The smell is so strong it makes your head spin. Your thoughts wade through it like flies through honey."
 	icon_state = "debuff"
 
 /atom/movable/screen/fullscreen/weedsm/musk

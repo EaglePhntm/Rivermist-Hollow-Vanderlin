@@ -18,16 +18,16 @@
 
 /proc/musk_alert_text(mob/reader, level)
 	var/static/list/english = list(
-		"A faint musk clings to my sweaty skin. A wash would take it off.",
-		"Sweat soaks my clothes, and anyone standing close can smell my musk. A wash would take it off.",
-		"I am drenched, and my heavy musk carries a few steps around me. A wash would take it off.",
-		"I reek of musk; it hangs around me like a cloud. A wash would take it off.",
+		"Sweat beads at my temples and in the hollows of my arms. A faint musk follows me like a shadow; a quick wash would rinse it away.",
+		"My clothes cling damply to me, and my musk reaches anyone who comes close enough to share a breath. I could use a bath.",
+		"I am drenched. My musk hangs heavy about me, and heads turn a few steps away. I need a bath.",
+		"I reek of labour and heat. The musk rolls off me like smoke from a censer, and only water will rid me of it.",
 	)
 	var/static/list/russian = list(
-		"Ко вспотевшей коже липнет лёгкий мускус. Его смоет купание.",
-		"Пот пропитал одежду, и мой мускус чувствует любой, кто стоит рядом. Его смоет купание.",
-		"Пот льёт ручьями, и мой тяжёлый мускус разносится на несколько шагов вокруг. Его смоет купание.",
-		"От меня разит мускусом, он висит вокруг облаком. Его смоет купание.",
+		"Пот бисером выступает на висках и во впадинах подмышек. За мной тенью тянется лёгкий мускус; хватит наскоро умыться, чтобы его смыть.",
+		"Одежда влажно липнет к телу, и мой мускус достаётся каждому, кто подойдёт на расстояние вдоха. Не помешало бы искупаться.",
+		"Пот льёт ручьями. Мой мускус тяжело висит вокруг, и на него оборачиваются за несколько шагов. Мне нужно искупаться.",
+		"От меня разит трудом и жаром. Мускус стелется от меня, как дым от кадила, и избавит от него только вода.",
 	)
 	return musk_localized(reader, english[level], russian[level])
 

@@ -82,7 +82,7 @@
 
 /datum/sex_action/musk_press/armpit
 	name = "Press into armpit"
-	menu_tip = "Smother their face in your sweaty armpit."
+	menu_tip = "Smother their face in the musk of your armpit."
 	user_menu_zone_mask = SEX_UI_ZONE_ARMS
 	sweat_zone = MUSK_ZONE_ARMPITS
 	body_zone = BODY_ZONE_CHEST
@@ -92,7 +92,7 @@
 
 /datum/sex_action/musk_press/crotch
 	name = "Press into crotch"
-	menu_tip = "Smother their face in your sweaty crotch."
+	menu_tip = "Smother their face in the musk of your crotch."
 	user_menu_zone_mask = SEX_UI_ZONE_GENITALS
 	sweat_zone = MUSK_ZONE_GROIN
 	body_zone = BODY_ZONE_PRECISE_GROIN
@@ -102,7 +102,7 @@
 
 /datum/sex_action/musk_press/butt
 	name = "Press into butt"
-	menu_tip = "Smother their face between your sweaty cheeks."
+	menu_tip = "Bury their face in the musk between your cheeks."
 	user_menu_zone_mask = SEX_UI_ZONE_GENITALS | SEX_UI_ZONE_MISC
 	sweat_zone = MUSK_ZONE_BUTT
 	body_zone = BODY_ZONE_PRECISE_GROIN
@@ -185,7 +185,7 @@
 
 /datum/sex_action/musk_lick/armpit
 	name = "Lick sweaty armpit"
-	menu_tip = "Lick the musky sweat away until the skin is clean."
+	menu_tip = "Lap the musky sweat from their armpit until it shines."
 	target_menu_zone_mask = SEX_UI_ZONE_ARMS
 	sweat_zone = MUSK_ZONE_ARMPITS
 	body_zone = BODY_ZONE_CHEST
@@ -193,7 +193,7 @@
 
 /datum/sex_action/musk_lick/crotch
 	name = "Lick sweaty crotch"
-	menu_tip = "Lick the musky sweat away until the skin is clean."
+	menu_tip = "Lap the musky sweat from their crotch until it shines."
 	target_menu_zone_mask = SEX_UI_ZONE_GENITALS
 	sweat_zone = MUSK_ZONE_GROIN
 	body_zone = BODY_ZONE_PRECISE_GROIN
@@ -201,7 +201,7 @@
 
 /datum/sex_action/musk_lick/butt
 	name = "Lick sweaty butt"
-	menu_tip = "Lick the musky sweat away until the skin is clean."
+	menu_tip = "Lap the musky sweat from between their cheeks."
 	target_menu_zone_mask = SEX_UI_ZONE_GENITALS | SEX_UI_ZONE_MISC
 	sweat_zone = MUSK_ZONE_BUTT
 	body_zone = BODY_ZONE_PRECISE_GROIN
