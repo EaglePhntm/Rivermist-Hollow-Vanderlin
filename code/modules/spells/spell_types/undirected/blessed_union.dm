@@ -72,14 +72,15 @@
 /datum/status_effect/blessed_union/on_apply()
 	if(!spell_ref?.resolve())
 		return FALSE
+	. = ..()
 	RegisterSignal(owner, COMSIG_SEX_ACTION_TICK, PROC_REF(on_beat))
-	return TRUE
 
 /datum/status_effect/blessed_union/on_remove()
 	UnregisterSignal(owner, COMSIG_SEX_ACTION_TICK)
 	var/datum/action/cooldown/spell/undirected/blessed_union/spell = spell_ref?.resolve()
 	spell_ref = null
 	spell?.build_all_button_icons()
+	return ..()
 
 /// Heals the partner of each act beat and pays the spell's mana cost. Must not sleep.
 /datum/status_effect/blessed_union/proc/on_beat(datum/source, datum/sex_action/action, mob/living/action_user, mob/living/action_target)
