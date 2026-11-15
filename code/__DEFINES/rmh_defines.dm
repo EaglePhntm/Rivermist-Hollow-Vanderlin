@@ -212,3 +212,8 @@
 #ifndef HEARING_MESSAGE_MODE
 #define HEARING_MESSAGE_MODE 7
 #endif
+
+/// Added to the victim's perception when a sneaking thief goes for their underwear.
+#define UNDERWEAR_STEAL_PERCEPTION_BONUS 3
+/// Multiplies pickpocket time for underwear theft.
+#define UNDERWEAR_STEAL_TIME_MULT 2
