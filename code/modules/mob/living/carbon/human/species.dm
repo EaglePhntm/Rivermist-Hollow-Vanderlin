@@ -2674,11 +2674,13 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(!H) //Somewhere in the core code we're getting those procs with H being null
 		return FALSE
 	var/obj/item/organ/tail/T = H.getorganslot(ORGAN_SLOT_TAIL)
-	if(!T)
+	if(!T || !T.can_wag)
 		return FALSE
-	if(T.can_wag)
-		return TRUE
-	return FALSE
+	// The tail's sprite must have wagging states, or the emote would show no change.
+	var/datum/sprite_accessory/tail/tail_sprite = T.accessory_type ? SPRITE_ACCESSORY(T.accessory_type) : null
+	if(istype(tail_sprite) && !tail_sprite.can_wag)
+		return FALSE
+	return TRUE
 
 /datum/species/proc/is_wagging_tail(mob/living/carbon/human/H)
 	if(!H) //Somewhere in the core code we're getting those procs with H being null

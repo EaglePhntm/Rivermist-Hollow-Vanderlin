@@ -85,7 +85,7 @@
 
 /datum/job/heart_priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/churchannouncement
+	add_verb(spawned, /mob/living/carbon/human/proc/churchannouncement)
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)

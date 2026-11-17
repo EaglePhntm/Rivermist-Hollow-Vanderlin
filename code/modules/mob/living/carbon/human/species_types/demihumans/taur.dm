@@ -155,7 +155,6 @@
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 		/datum/customizer/organ/tail/anthro,
-		/datum/customizer/organ/tail_feature/anthro,
 		/datum/customizer/organ/snout/anthro,
 		/datum/customizer/organ/ears/anthro,
 		/datum/customizer/organ/horns/anthro,

@@ -90,7 +90,8 @@
 	has_reflection = FALSE
 
 /mob/living/onZImpact(turf/impacted_turf, levels, impact_flags = NONE)
-	if(isgroundlessturf(impacted_turf) && defeat_rescue_from_hazard())
+	// Only rescue from groundless landings that are actually unsafe (lava), not water or a pipe over open space.
+	if(isgroundlessturf(impacted_turf) && !impacted_turf.can_traverse_safely(src) && defeat_rescue_from_hazard())
 		return
 	if(!isgroundlessturf(impacted_turf))
 		impact_flags |= ZImpactDamage(impacted_turf, levels)
