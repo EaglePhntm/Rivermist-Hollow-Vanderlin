@@ -43,7 +43,7 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 	base_constitution = 8
 	base_strength = 12
 	base_endurance = 15
-	pixel_x = -8
+	SET_BASE_PIXEL(-8, 0)
 	attack_sound = list('sound/vo/mobs/saiga/attack (1).ogg','sound/vo/mobs/saiga/attack (2).ogg')
 	can_buckle = TRUE
 	buckle_lying = 0
@@ -86,11 +86,12 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 			var/mutable_appearance/saddlet = mutable_appearance(icon, "saddle-above", 4.3)
 			saddlet.appearance_flags = RESET_ALPHA|RESET_COLOR
 			add_overlay(saddlet)
-			saddlet = mutable_appearance(icon, "saddle")
+			saddlet = mutable_appearance(icon, "saddle", 4.3)
 			saddlet.appearance_flags = RESET_ALPHA|RESET_COLOR
 			add_overlay(saddlet)
 		if(has_buckled_mobs())
 			var/mutable_appearance/mounted = mutable_appearance(icon, "[icon_state]_mounted", 4.3)
+			mounted.appearance_flags = RESET_ALPHA|RESET_COLOR
 			add_overlay(mounted)
 
 
