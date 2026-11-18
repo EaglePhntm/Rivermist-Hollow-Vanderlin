@@ -5015,7 +5015,7 @@
 #include "modular_rmh\code\modules\mob\living\carbon\human\undismemberable.dm"
 #include "modular_rmh\code\modules\mob\living\carbon\human\weapon_categories.dm"
 #include "modular_rmh\code\modules\mob\living\carbon\human\npc\goblin_genitals.dm"
-#include "modular_rmh\code\modules\mob\living\carbon\human\npc\npc_extra.dm"
+#include "modular_rmh\code\modules\mob\living\carbon\human\npc\npc_breaking_point.dm"
 #include "modular_rmh\code\modules\mob\living\carbon\human\npc\npc_goblin.dm"
 #include "modular_rmh\code\modules\mob\living\carbon\human\npc\npc_orc.dm"
 #include "modular_rmh\code\modules\mob\living\carbon\human\npc\npc_ratman.dm"

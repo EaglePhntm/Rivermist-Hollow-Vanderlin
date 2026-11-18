@@ -110,6 +110,7 @@
 #include "notice_boards.dm"
 #include "npc_act_families.dm"
 #include "npc_act_text.dm"
+#include "npc_breaking_point.dm"
 #include "npc_knotting.dm"
 #include "party_friendly_fire.dm"
 #include "piercing_display.dm"
