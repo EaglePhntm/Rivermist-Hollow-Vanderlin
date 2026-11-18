@@ -409,4 +409,67 @@
 	unbuckle_all_mobs(force = TRUE)
 	. = ..()
 	update_appearance(UPDATE_ICON)
+
+// Fix overlays
+/mob/living/simple_animal/hostile/retaliate/saiga/update_overlays()
+	. = ..()
+	. += build_saiga_overlays(saddle_overlay_state)
+	var/list/animal_overlays = .
+	for(var/mutable_appearance/appearance in animal_overlays.Copy())
+		if(appearance.icon == icon && appearance.icon_state == "[icon_state]_mounted")
+			. -= appearance
+
+/mob/living/simple_animal/hostile/retaliate/saigabuck/update_overlays()
+	. = ..()
+	. += build_saiga_overlays(saddle_overlay_state)
+	var/list/animal_overlays = .
+	for(var/mutable_appearance/appearance in animal_overlays.Copy())
+		if(appearance.icon == icon && appearance.icon_state == "[icon_state]_mounted")
+			. -= appearance
+
+/mob/living/simple_animal/proc/build_saiga_overlays(saddle_state)
+	var/list/appearances = list()
+
+	// Подстрахуемся на случай, если кто-то будет это использовать для horse или terror bird
+	if(istype(genetics))
+		var/datum/animal_gene/coat_color/coat_gene = genetics.get_gene_by_exclusion_group(GENE_GROUP_COAT_COLOR)
+		var/datum/animal_gene/undercoat/undercoat_gene = genetics.get_gene_by_exclusion_group(GENE_GROUP_UNDERCOAT)
+		var/datum/animal_gene/glow_gene = genetics.get_gene_by_exclusion_group(GENE_GROUP_EMISSIVE)
+		var/mutable_appearance/body = mutable_appearance(icon, "[icon_state]_reg1")
+		var/mutable_appearance/undercoat = mutable_appearance(icon, "[icon_state]_reg2")
+
+		if(coat_gene)
+			body.color = coat_gene.get_color()
+			undercoat.color = undercoat_gene ? undercoat_gene.get_color() : coat_gene.get_color()
+		if(glow_gene)
+			appearances += emissive_appearance(icon, "[icon_state]_reg2")
+		appearances += body
+		appearances += undercoat
+
+	if(stat != DEAD && ssaddle)
+		appearances += mutable_appearance(icon, "[saddle_state]-above", 4.3)
+		appearances += mutable_appearance(icon, saddle_state)
+	return appearances
+
+// --- Слои и смещения наездника ---
+/datum/component/riding/creature/saiga/get_rider_offsets_and_layers(pass_index, mob/offsetter)
+	return list(
+		TEXT_NORTH = list(0, 8, 6.1),
+		TEXT_SOUTH = list(0, 8, MOB_LAYER),
+		TEXT_EAST = list(-2, 8, 6.1),
+		TEXT_WEST = list(2, 8, 6.1),
+	)
+
+/datum/component/riding/creature/saiga/get_parent_offsets_and_layers()
+	return list(
+		TEXT_NORTH = list(0, 0, OBJ_LAYER),
+		TEXT_SOUTH = list(0, 0, ABOVE_MOB_LAYER),
+		TEXT_EAST = list(0, 0, OBJ_LAYER),
+		TEXT_WEST = list(0, 0, OBJ_LAYER),
+	)
+
+/datum/component/riding/creature/saiga/vehicle_mob_buckle(mob/living/ridden, mob/living/rider, force = FALSE)
+	. = ..()
+	ridden.update_appearance(UPDATE_ICON)
+
 // RIVERMIST CHANGE END
