@@ -162,7 +162,6 @@
 // Drop saddles when dead
 /mob/living/simple_animal/hostile/retaliate/saiga/horse/death(gibbed)
 	unbuckle_all_mobs(force = TRUE)
-	drop_mount_equipment()
 	. = ..()
 	update_appearance(UPDATE_ICON)
 

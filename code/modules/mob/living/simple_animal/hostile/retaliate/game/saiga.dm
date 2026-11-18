@@ -398,3 +398,15 @@
 	var/obj/item/natural/saddle/S = new(src)
 	ssaddle = S
 	update_appearance(UPDATE_OVERLAYS)
+
+// RIVERMIST CHANGE START - fix not updating sprite after death
+/mob/living/simple_animal/hostile/retaliate/saiga/death(gibbed)
+	unbuckle_all_mobs(force = TRUE)
+	. = ..()
+	update_appearance(UPDATE_ICON)
+
+/mob/living/simple_animal/hostile/retaliate/saigabuck/death(gibbed)
+	unbuckle_all_mobs(force = TRUE)
+	. = ..()
+	update_appearance(UPDATE_ICON)
+// RIVERMIST CHANGE END

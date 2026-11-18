@@ -121,7 +121,6 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 
 /mob/living/simple_animal/hostile/retaliate/honse/death(gibbed)
 	unbuckle_all_mobs(force = TRUE)
-	drop_mount_equipment()
 	. = ..()
 	update_appearance(UPDATE_ICON)
 
