@@ -22,6 +22,13 @@ import {
   type ProstheticData,
   ProstheticsPanel,
 } from './CharacterCreatorProsthetics';
+import {
+  StatEditor,
+  StatParts,
+  type StatPoints,
+  type StatRow,
+  type StatRules,
+} from './CharacterCreatorStats';
 import { PreferencesBadges } from './PreferencesBadges';
 
 // ---------------------------------------------------------------------------
@@ -212,17 +219,6 @@ type SubclassEntry = {
   tutorial: string;
   has_info: Booleanish;
 };
-type StatRow = {
-  name: string;
-  desc?: string;
-  icon?: string | null;
-  icon_state?: string | null;
-  label: string;
-  base: number;
-  species: number;
-  age: number;
-  total: number;
-};
 type DescriptorEntry = {
   choice: string;
   name: string;
@@ -344,6 +340,8 @@ type CreatorData = {
   cc_cultures_available?: string[];
   cc_subclass_prefs?: Record<string, string>;
   cc_stats?: StatRow[];
+  cc_stat_points?: StatPoints;
+  cc_stat_rules?: StatRules;
   cc_quirks?: {
     names: string[];
     entries?: { name: string; desc: string }[];
@@ -516,7 +514,8 @@ type ParsedSpecies = {
 };
 
 /**
- * Species descriptions end with "(+1 PER, Darkvision, ...)" and "Proficiencies: X(4), ...".
+ * Species descriptions end with bonus lines: "(Darkvision, Elvish Language).",
+ * "(+2 Stat Points In Character Creation)." and "Proficiencies: X(4), ...".
  * They are pulled out of the text and shown as bonus rows instead.
  */
 const parseSpeciesDesc = (raw: string): ParsedSpecies => {
@@ -538,18 +537,27 @@ const parseSpeciesDesc = (raw: string): ParsedSpecies => {
     }
     body = body.replace(profMatch[0], '');
   }
-  let stats: string[] = [];
-  let traits: string[] = [];
-  const groups = [...body.matchAll(/\(([^()]*[+-]\d[^()]*)\)\.?/g)];
-  const last = groups[groups.length - 1];
+  const stats: string[] = [];
+  const traits: string[] = [];
+  const takeGroup = (group: string, inner: string) => {
+    for (const token of inner.split(',')) {
+      const entry = token.trim();
+      if (entry) {
+        (/^[+-]\d/.test(entry) ? stats : traits).push(entry);
+      }
+    }
+    body = body.replace(group, '');
+  };
+  // A group with a signed number can sit anywhere; the last one counts.
+  const numbered = [...body.matchAll(/\(([^()]*[+-]\d[^()]*)\)\.?/g)];
+  const last = numbered[numbered.length - 1];
   if (last) {
-    const tokens = last[1]
-      .split(',')
-      .map((token) => token.trim())
-      .filter(Boolean);
-    stats = tokens.filter((token) => /^[+-]\d/.test(token));
-    traits = tokens.filter((token) => !/^[+-]\d/.test(token));
-    body = body.replace(last[0], '');
+    takeGroup(last[0], last[1]);
+  }
+  // A group of traits alone is a parenthesised line at the very end.
+  const trailing = body.match(/(?:^|\n)[ \t]*(\(([^()]*)\)\.?)\s*$/);
+  if (trailing) {
+    takeGroup(trailing[1], trailing[2]);
   }
   body = body.replace(/\n{3,}/g, '\n\n').trim();
   return { body, stats, traits, proficiencies, warning };
@@ -2207,28 +2215,23 @@ export const CharacterCreator = () => {
       <>
         <div className="cc-name">{entry.name}</div>
         <div className="cc-desc">{text(parsed.body, L.noDescription)}</div>
-        <Bonus title={L.statModifiers}>
-          <div className="cc-chips">
-            {entry.stats?.length ? (
-              entry.stats.map((stat) => (
+        {entry.stats?.length ? (
+          <Bonus title={L.statModifiers}>
+            <div className="cc-chips">
+              {entry.stats.map((stat) => (
                 <Tip
                   key={stat.label}
                   className={`cc-chip ${stat.value > 0 ? 'good' : 'bad'}`}
                   title={`${stat.name} ${stat.value > 0 ? '+' : ''}${stat.value}`}
-                  body={
-                    data.cc_stats?.find((row) => row.label === stat.label)
-                      ?.desc || stat.name
-                  }
+                  body={L.statFromRaceHint}
                 >
                   {stat.label} {stat.value > 0 ? '+' : ''}
                   {stat.value}
                 </Tip>
-              ))
-            ) : (
-              <span className="cc-chip">{L.noStatModifiers}</span>
-            )}
-          </div>
-        </Bonus>
+              ))}
+            </div>
+          </Bonus>
+        ) : null}
         {parsed.traits.length ? (
           <Bonus title={L.raceTraits}>
             <div className="cc-chips">
@@ -3130,29 +3133,18 @@ export const CharacterCreator = () => {
       L.abilityTitle,
       <>
         <Ornament>{L.abilityScores}</Ornament>
-        <div
-          className="cc-kv"
-          style={{ gridTemplateColumns: 'minmax(90px, 1fr) auto auto' }}
-        >
-          {(data.cc_stats || []).map((stat) => (
-            <Fragment key={stat.label}>
-              <div>{stat.name}</div>
-              <div className="cc-muted" style={{ fontSize: 10 }}>
-                10
-                {stat.species
-                  ? ` ${stat.species > 0 ? '+' : ''}${stat.species} ${L.raceShort}`
-                  : ''}
-                {stat.age
-                  ? ` ${stat.age > 0 ? '+' : ''}${stat.age} ${L.ageShort}`
-                  : ''}
-              </div>
-              <div className="cc-stat-value" style={{ textAlign: 'right' }}>
-                {stat.total}
-              </div>
-            </Fragment>
-          ))}
-        </div>
-        <Placeholder>{L.pointBuySoon}</Placeholder>
+        {data.cc_stat_points && data.cc_stat_rules ? (
+          <StatEditor
+            stats={data.cc_stats || []}
+            points={data.cc_stat_points}
+            rules={data.cc_stat_rules}
+            labels={L}
+            onSet={(stat, value) => act('cc_stat_set', { stat, value })}
+            onBonus={(slot, stat) => act('cc_stat_bonus', { slot, stat })}
+            onReset={() => act('cc_stat_reset')}
+            onText={(band, value) => act('cc_stat_text', { band, value })}
+          />
+        ) : null}
         <Ornament>{L.quirks}</Ornament>
         <div className="cc-chips">
           {(data.cc_quirks?.names || []).length ? (
@@ -5104,27 +5096,6 @@ export const CharacterCreator = () => {
       .flatMap((faith) => faith.patrons)
       .find((entry) => asBool(entry.selected));
     const quirkEntries = data.cc_quirks?.entries || [];
-    const statBreakdown = (stat: StatRow) => (
-      <>
-        {stat.desc ? <div style={{ marginBottom: 6 }}>{stat.desc}</div> : null}
-        <div className="cc-tip-label">{L.statParts}:</div>
-        <div>
-          {stat.base} {L.statBase}
-        </div>
-        {stat.species ? (
-          <div>
-            {stat.species > 0 ? '+' : ''}
-            {stat.species} {L.statRace}
-          </div>
-        ) : null}
-        {stat.age ? (
-          <div>
-            {stat.age > 0 ? '+' : ''}
-            {stat.age} {L.statAge}
-          </div>
-        ) : null}
-      </>
-    );
     return (
       <Frame className="cc-card">
         <div className="cc-card-scroll cc-scroll">
@@ -5165,7 +5136,7 @@ export const CharacterCreator = () => {
                 className="cc-stat"
                 title={`${stat.name} (${stat.total})`}
                 subtitle={L.ability}
-                body={statBreakdown(stat)}
+                body={<StatParts stat={stat} labels={L} />}
               >
                 {stat.icon && stat.icon_state ? (
                   <DmIcon
@@ -5251,19 +5222,16 @@ export const CharacterCreator = () => {
               {text(speciesEntry?.language)}
             </Tip>
           </div>
-          {parsed.stats.length || speciesEntry?.stats?.length ? (
+          {speciesEntry?.stats?.length ? (
             <div className="cc-card-line">
               <span className="cc-card-key">{L.statModifiers} - </span>
-              {(speciesEntry?.stats || []).map((stat, index) => (
+              {speciesEntry.stats.map((stat, index) => (
                 <Fragment key={stat.label}>
                   {index ? ', ' : ''}
                   <Tip
                     className="cc-link"
                     title={stat.name}
-                    body={
-                      data.cc_stats?.find((row) => row.label === stat.label)
-                        ?.desc || stat.name
-                    }
+                    body={L.statFromRaceHint}
                   >
                     {stat.label} {stat.value > 0 ? '+' : ''}
                     {stat.value}
@@ -5365,7 +5333,7 @@ export const CharacterCreator = () => {
       L.anySubclass,
     deity: text(data.patron_name, L.none),
     background: L.soon,
-    ability: `${L.quirkBalance}: ${data.cc_quirks?.balance ?? 0}`,
+    ability: `${L.statPointsLeft}: ${data.cc_stat_points?.left ?? 0}`,
   };
   const FATE_ICONS: Record<FateCat, string> = {
     identity: 'id-card',

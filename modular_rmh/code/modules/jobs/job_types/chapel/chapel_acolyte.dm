@@ -291,9 +291,7 @@
 
 	traits = list(
 		TRAIT_HOLY,
-		TRAIT_ALLURE,
 		TRAIT_GOODLOVER,
-		TRAIT_BEAUTIFUL,
 		TRAIT_EMPATH
 	)
 
@@ -372,9 +370,7 @@
 	traits = list(
 		TRAIT_HOLY,
 		TRAIT_EMPATH,
-		TRAIT_ALLURE,
 		TRAIT_GOODLOVER,
-		TRAIT_BEAUTIFUL,
 	)
 
 /datum/outfit/acolyte/nun
@@ -452,9 +448,7 @@
 	traits = list(
 		TRAIT_HOLY,
 		TRAIT_EMPATH,
-		TRAIT_ALLURE,
 		TRAIT_GOODLOVER,
-		TRAIT_BEAUTIFUL,
 	)
 
 /datum/outfit/acolyte/nun_regal
@@ -624,9 +618,7 @@
 
 	traits = list(
 		TRAIT_HOLY,
-		TRAIT_ALLURE,
 		TRAIT_GOODLOVER,
-		TRAIT_BEAUTIFUL,
 		TRAIT_EMPATH
 	)
 

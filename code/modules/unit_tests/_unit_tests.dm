@@ -138,6 +138,7 @@
 #include "spell_names.dm"
 #include "spell_shapeshift.dm"
 #include "startup.dm"
+#include "stat_allocation.dm"
 #include "subsystem_init.dm"
 #include "surgeries.dm"
 #include "timer_sanity.dm"

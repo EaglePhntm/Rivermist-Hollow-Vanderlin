@@ -256,13 +256,15 @@ GLOBAL_VAR_INIT(character_setup_debug, FALSE)
 			"value" = value,
 		))
 
+/// What a species gives a creator-made character's stats: extra stat points, if any.
 /datum/preferences/proc/character_setup_species_stat_modifiers(datum/species/species)
-	if(!species)
+	if(!species?.creator_stat_points)
 		return list()
-	var/sheet_type = species.statsheet_male
-	if(read_preference(/datum/preference/choiced/gender) == FEMALE && species.statsheet_female)
-		sheet_type = species.statsheet_female
-	return character_setup_stat_modifiers_for_sheet(sheet_type)
+	return list(list(
+		"name" = "Stat points",
+		"label" = "PTS",
+		"value" = species.creator_stat_points,
+	))
 
 /datum/preferences/proc/character_setup_age_sheet_type(age_name)
 	switch(age_name)
@@ -388,6 +390,7 @@ GLOBAL_VAR_INIT(character_setup_debug, FALSE)
 	var/had_mutant_colors = has_mutant_color_preferences()
 	write_preference(/datum/preference/choiced/selected_accent, ACCENT_NONE)
 	set_species_preference(new_species)
+	validate_stat_allocation() // RMH EDIT: the new species can give fewer stat points
 
 	to_chat(user, "<em>[pref_species.name]</em>")
 	if(pref_species.desc)

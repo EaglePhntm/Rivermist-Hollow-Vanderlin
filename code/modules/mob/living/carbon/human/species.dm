@@ -293,6 +293,10 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	var/datum/attribute_holder/sheet/statsheet_male
 	var/datum/attribute_holder/sheet/statsheet_female
+	/// TRUE for forms a character changes into: the sheets above apply to creator-made characters too.
+	var/forced_attribute_sheets = FALSE
+	/// Extra stat points this species gives in the character creator.
+	var/creator_stat_points = 0
 
 	/// Can we be a youngling?
 	var/can_be_youngling = TRUE
@@ -976,7 +980,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	var/datum/attribute_holder/sheet/species_inherent_sheet = get_inherent_attribute_sheet()
-	if(species_inherent_sheet)
+	if(species_inherent_sheet && applies_attribute_sheets(C))
 		C.attributes?.add_sheet(species_inherent_sheet)
 
 	for(var/component in components_to_add)
@@ -1031,7 +1035,27 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	return statsheet_male
 
+/// FALSE for creator-made characters: their stats and starting skills do not come from the species.
+/datum/species/proc/applies_attribute_sheets(mob/living/carbon/human/C)
+	return forced_attribute_sheets || !C.uses_creator_stats()
+
+/// Takes this species' skill sheet and gender stat sheet off C.
+/datum/species/proc/remove_attribute_sheets(mob/living/carbon/human/C)
+	var/datum/attribute_holder/sheet/species_inherent_sheet = get_inherent_attribute_sheet()
+	if(species_inherent_sheet)
+		C.attributes?.subtract_sheet(species_inherent_sheet)
+
+	var/datum/attribute_holder/sheet/male_sheet = get_gender_attribute_sheet(MALE)
+	var/datum/attribute_holder/sheet/female_sheet = get_gender_attribute_sheet(FEMALE)
+	if(male_sheet || female_sheet)
+		if(C.gender == MALE || !female_sheet)
+			C.attributes?.subtract_sheet(male_sheet)
+		else if(C.gender == FEMALE)
+			C.attributes?.subtract_sheet(female_sheet)
+
 /datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
+	if(!applies_attribute_sheets(C))
+		return
 	var/datum/attribute_holder/sheet/male_sheet = get_gender_attribute_sheet(MALE)
 	var/datum/attribute_holder/sheet/female_sheet = get_gender_attribute_sheet(FEMALE)
 	if(old_gender)
@@ -1053,17 +1077,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	for(var/X in inherent_traits)
 		REMOVE_TRAIT(C, X, SPECIES_TRAIT)
 
-	var/datum/attribute_holder/sheet/species_inherent_sheet = get_inherent_attribute_sheet()
-	if(species_inherent_sheet)
-		C.attributes?.subtract_sheet(species_inherent_sheet)
-
-	var/datum/attribute_holder/sheet/male_sheet = get_gender_attribute_sheet(MALE)
-	var/datum/attribute_holder/sheet/female_sheet = get_gender_attribute_sheet(FEMALE)
-	if(male_sheet || female_sheet)
-		if(C.gender == MALE || !female_sheet)
-			C.attributes?.subtract_sheet(male_sheet)
-		else if(C.gender == FEMALE)
-			C.attributes?.subtract_sheet(female_sheet)
+	if(applies_attribute_sheets(C))
+		remove_attribute_sheets(C)
 
 	if(inherent_factions)
 		for(var/i in inherent_factions)

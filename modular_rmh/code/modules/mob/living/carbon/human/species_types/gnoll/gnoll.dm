@@ -7,9 +7,7 @@
 	id = SPEC_ID_GNOLL
 	desc = "Gnolls are tall hyena-folk known for relentless marches, brutal charges, and a talent for surviving where softer folk would starve. \
 	Many are feared as raiders in frontier tales, yet just as many live as hunters, scouts, sellswords, and clanless wanderers in the wider world. \
-	They are rough-humored, hard to cow, and dangerous up close once teeth and claws are in play. \
-	\n\n\
-	(+2 STR, +1 PER, +1 SPD, -1 INT, -1 LCK)."
+	They are rough-humored, hard to cow, and dangerous up close once teeth and claws are in play."
 
 	use_titles = FALSE
 	use_skintones = TRUE

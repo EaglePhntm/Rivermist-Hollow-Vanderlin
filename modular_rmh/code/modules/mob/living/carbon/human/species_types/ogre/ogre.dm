@@ -9,8 +9,6 @@
 	They are most often found as raiders, mercenaries, caravan bruisers, and wandering clanfolk from beyond settled lands. \
 	Their size makes daily life awkward, but in a straight fight few can match an ogre once steel starts swinging. \
 	\n\n\
-	(+2 STR, +2 CON, +1 END, -3 INT, -1 SPD).\
-	\n\n\
 	THIS IS A DISCRIMINATED SPECIES. PLAY AT YOUR OWN RISK."
 
 	skin_tone_wording = "Hide Color"

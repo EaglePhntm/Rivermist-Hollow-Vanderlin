@@ -38,9 +38,7 @@
 	name = "Seelie"
 	id = SPEC_ID_SEELIE
 	changesource_flags = WABBAJACK
-	desc = "Seelies are tiny fae wanderers whose size, speed, and knack for gentle magic let them slip through the world where larger folk cannot. Their bodies are delicate and their wings are essential, but in return they move with uncanny grace. \
-	\n\n\
-	(-6 STR, +4 PER, +2 INT, -6 CON, -1 END, +7 SPD)."
+	desc = "Seelies are tiny fae wanderers whose size, speed, and knack for gentle magic let them slip through the world where larger folk cannot. Their bodies are delicate and their wings are essential, but in return they move with uncanny grace."
 
 	native_language = "Common"
 

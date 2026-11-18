@@ -543,7 +543,8 @@
 	if(!sheet_to_apply)
 		return FALSE
 
-	spawned_human.attributes?.add_sheet(sheet_to_apply)
+	// Creator-made characters keep the stats they chose; the job gives its skills only.
+	spawned_human.attributes?.add_sheet(sheet_to_apply, spawned_human.uses_creator_stats())
 	return TRUE
 
 /datum/job/proc/build_runtime_attribute_sheet()

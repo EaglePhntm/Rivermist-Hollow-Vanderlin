@@ -658,7 +658,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 //RMH EDITED END
 #define TRAIT_GOODLOVER			"Fabled Lover"
 #define TRAIT_NYMPHO_CURSE 		"Nymphs Curse"
-#define TRAIT_ALLURE 			"Allure"
 #define TRAIT_DARKLING 			"Darkling"
 #define TRAIT_WILDMAGIC 		"Wildmagic"
 #define TRAIT_DRUNKMASTER 		"Drunkmaster"

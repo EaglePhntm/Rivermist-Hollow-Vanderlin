@@ -10,11 +10,7 @@
 	n\n\
 	Despite their small stature, gnomes possess sharp intellects and quick wits. \
 	n\n\
-	They approach life with humor and optimism, believing that curiosity and cleverness can overcome challenges far larger than themselves. \
-	n\n\
-	(+1 INT, +2 LCK).\
-	\n\n\
-	Proficiencies: Engineering(4), Crafting(3), Alchemy(3), Crossbows(2), Reading(4), Mathematics(4), Arcane(3)."
+	They approach life with humor and optimism, believing that curiosity and cleverness can overcome challenges far larger than themselves."
 
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)

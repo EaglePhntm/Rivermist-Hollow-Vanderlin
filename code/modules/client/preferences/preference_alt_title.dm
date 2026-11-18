@@ -271,7 +271,8 @@
 /// Stat, trait and subclass facts for the role window, from the same sources as show_explain().
 /datum/preferences/proc/character_setup_job_details(datum/job/job)
 	var/list/details = list(
-		"stats" = character_setup_stat_lines(job.jobstats),
+		// Jobs give no stats to characters made in the creator.
+		"stats" = list(),
 		"stat_limits" = character_setup_stat_lines(job.stat_ceilings),
 		"spell_points" = job.spell_points || 0,
 		"traits" = character_setup_trait_lines(job.traits),
@@ -288,7 +289,7 @@
 		details["subclasses"] += list(list(
 			"title" = subclass.title,
 			"tutorial" = character_setup_chargen_clean_text(subclass.tutorial, 700),
-			"stats" = character_setup_stat_lines(subclass.jobstats),
+			"stats" = list(),
 			"spell_points" = subclass.spell_points || 0,
 			"languages" = languages,
 			"traits" = character_setup_trait_lines(length(subclass.traits) ? subclass.traits : job.traits),

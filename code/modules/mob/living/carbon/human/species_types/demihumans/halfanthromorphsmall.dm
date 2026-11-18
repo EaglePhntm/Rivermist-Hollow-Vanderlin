@@ -7,7 +7,7 @@
 	desc = "<b>Critterkin</b><br>\
 	A race akin to wild-kin, except afflicted with significantly smaller stature. \
 	Sometimes referred to with the derogatory term 'verminfolk' by those that disrespect the small.<br>\
-	(+1 Speed, Keen Ears Trait)"
+	(Keen Ears Trait)"
 
 	default_color = "444"
 
