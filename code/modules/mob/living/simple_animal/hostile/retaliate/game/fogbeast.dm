@@ -119,6 +119,12 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 	unbuckle_all_mobs()
 	return ..()
 
+/mob/living/simple_animal/hostile/retaliate/honse/death(gibbed)
+	unbuckle_all_mobs(force = TRUE)
+	drop_mount_equipment()
+	. = ..()
+	update_appearance(UPDATE_ICON)
+
 /mob/living/simple_animal/hostile/retaliate/honse/simple_limb_hit(zone)
 	if(!zone)
 		return ""
