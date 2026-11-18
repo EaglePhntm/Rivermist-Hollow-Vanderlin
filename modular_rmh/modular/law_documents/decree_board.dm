@@ -167,13 +167,14 @@
 
 // --- posters.dm ---
 #define RMH_POSTER_FORGE_DELAY (0.5 SECONDS)
+#define RMH_POSTER_REMOVE_DELAY (5 SECONDS)
 
 /// Private physical snapshot: no publication subscriptions or round registry.
 /obj/item/rmh_decree_poster
 	name = "blank decree poster"
 	desc = "A sheet of prepared parchment."
 	icon = 'modular_rmh/icons/obj/structures/laws_objs.dmi'
-	icon_state = "decree_poster_1"
+	icon_state = "decree_poster_3"
 	w_class = WEIGHT_CLASS_TINY
 	max_integrity = 30
 	resistance_flags = FLAMMABLE
@@ -182,6 +183,8 @@
 	throwforce = 0
 	var/list/snapshot
 	var/damaged = FALSE
+	var/torn_title
+	var/torn_title_en
 	var/content_revision = 0
 	var/tmp/prompt_mode = "read"
 	var/tmp/prompt_token = 0
@@ -192,10 +195,12 @@
 
 /obj/item/rmh_decree_poster/update_icon_state()
 	. = ..()
-	icon_state = damaged ? "decree_poster_2" : (snapshot ? "decree_poster_3" : "decree_poster_1")
+	icon_state = damaged ? "decree_poster_2" : (snapshot ? "decree_poster_1" : "decree_poster_3")
 
 /obj/item/rmh_decree_poster/Destroy()
 	snapshot = null
+	torn_title = null
+	torn_title_en = null
 	editor_ref = null
 	source_ref = null
 	tool_ref = null
@@ -204,16 +209,27 @@
 /obj/item/rmh_decree_poster/examine(mob/user)
 	. = ..()
 	if(damaged)
-		. += span_notice(rmh_ui_text(user, "Края порваны, но надпись всё ещё читается.", "Its edges are torn, but the writing is still legible."))
+		. += span_notice(rmh_ui_text(user, "Надпись порвана и не поддаётся прочтению.", "The torn writing is illegible."))
 
 
 /obj/item/rmh_decree_poster/proc/tear_edges()
+	if(damaged)
+		return FALSE
+	torn_title = rmh_decree_title(snapshot?["text"])
+	torn_title_en = rmh_decree_title(snapshot?["text_en"])
 	damaged = TRUE
+	// Keep only the title: no stale UI, forgery or later pickup can recover the body.
+	snapshot = null
+	content_revision++
+	SStgui.close_uis(src)
+	reset_prompt()
+	refresh_title()
 	atom_integrity = min(atom_integrity, max_integrity / 2)
 	update_appearance(UPDATE_ICON_STATE)
+	return TRUE
 
 /obj/item/rmh_decree_poster/proc/copy_decree(list/entry)
-	if(snapshot || !islist(entry) || !rmh_law_text(entry["text"], RMH_LAW_MAX_TEXT, FALSE))
+	if(damaged || snapshot || !islist(entry) || !rmh_law_text(entry["text"], RMH_LAW_MAX_TEXT, FALSE))
 		return FALSE
 	var/english = isnull(entry["text_en"]) ? "" : entry["text_en"]
 	if(!rmh_law_text(english, RMH_LAW_MAX_TEXT))
@@ -262,7 +278,7 @@
 	return host.Adjacent(user) && user.can_perform_action(host, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH)
 
 /obj/item/rmh_decree_poster/proc/can_read_poster(mob/user)
-	return can_handle(user) && user.can_read(ui_host(user), TRUE)
+	return !damaged && can_handle(user) && user.can_read(ui_host(user), TRUE)
 
 /obj/item/rmh_decree_poster/proc/copy_source()
 	var/obj/structure/source = source_ref?.resolve()
@@ -463,6 +479,7 @@
 	resistance_flags = FLAMMABLE
 	max_integrity = 30
 	var/tmp/obj/item/rmh_decree_poster/poster
+	var/tmp/removing = FALSE
 	var/tmp/turf/closed/wall/attached_wall
 
 
@@ -480,18 +497,39 @@
 	if(!isliving(user) || !LAZYACCESS(modifiers, MIDDLE_CLICK) || !istype(user.mmb_intent, INTENT_STEAL))
 		return NONE
 	if(user.next_move <= world.time)
-		try_steal(user)
+		INVOKE_ASYNC(src, PROC_REF(try_steal), user)
 	return COMSIG_MOB_CANCEL_CLICKON
 
+/obj/structure/rmh_decree_poster/proc/can_remove(mob/living/user, tear)
+	if(!poster || poster.damaged || poster.forging || !isliving(user) || !user.Adjacent(src) || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
+		return FALSE
+	if(tear)
+		return istype(user.rmb_intent, /datum/rmb_intent/strong)
+	return istype(user.rmb_intent, /datum/rmb_intent/weak) && user.get_skill_level(/datum/attribute/skill/misc/reading) >= SKILL_RANK_EXPERT
+
 /obj/structure/rmh_decree_poster/proc/try_steal(mob/living/user)
-	if(!poster || !isliving(user) || !user.Adjacent(src) || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
+	var/tear = istype(user?.rmb_intent, /datum/rmb_intent/strong)
+	if(removing || !can_remove(user, tear))
 		return FALSE
-	var/tear = istype(user.rmb_intent, /datum/rmb_intent/strong)
-	if(!tear && !istype(user.rmb_intent, /datum/rmb_intent/weak))
-		return FALSE
+	var/obj/item/rmh_decree_poster/sheet = poster
+	var/turf/closed/wall/wall = attached_wall
+	removing = TRUE
 	add_fingerprint(user)
 	user.changeNext_move(CLICK_CD_MELEE)
-	detach_poster(user, tear)
+	if(tear)
+		playsound(src, 'sound/foley/cloth_rip.ogg', 60, FALSE)
+	var/completed = do_after(user, RMH_POSTER_REMOVE_DELAY, src)
+	if(QDELETED(src))
+		return FALSE
+	removing = FALSE
+	if(!completed || QDELETED(user) || QDELETED(sheet) || poster != sheet || attached_wall != wall || !can_remove(user, tear))
+		return FALSE
+	if(tear)
+		sheet.tear_edges()
+		update_appearance(UPDATE_ICON_STATE)
+		playsound(src, 'sound/foley/cloth_rip.ogg', 60, FALSE)
+	else
+		detach_poster(user)
 	return TRUE
 
 /obj/structure/rmh_decree_poster/proc/attach_poster(obj/item/rmh_decree_poster/sheet, turf/closed/wall/wall)
@@ -542,15 +580,16 @@
 	SIGNAL_HANDLER
 	detach_poster()
 
-/obj/structure/rmh_decree_poster/proc/detach_poster(mob/user, tear = FALSE)
+/obj/structure/rmh_decree_poster/proc/detach_poster(mob/user)
 	if(!poster)
+		return null
+	if(poster.damaged)
+		qdel(src)
 		return null
 	var/obj/item/rmh_decree_poster/sheet = poster
 	poster = null
 	UnregisterSignal(sheet, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
 	SStgui.close_uis(sheet)
-	if(tear)
-		sheet.tear_edges()
 	sheet.forceMove(get_turf(src))
 	if(user)
 		user.put_in_hands(sheet)
@@ -564,9 +603,16 @@
 	if(istype(user.used_intent, INTENT_STEAL))
 		try_steal(user)
 		return TRUE
-	poster.ui_interact(user)
+	if(!poster.damaged)
+		poster.ui_interact(user)
+	return TRUE
 
 /obj/structure/rmh_decree_poster/attackby(obj/item/tool, mob/user, list/modifiers)
+	if(poster?.damaged)
+		if(tool && user?.is_holding(tool) && user.Adjacent(src) && user.used_intent?.blade_class == BCLASS_CUT && user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
+			add_fingerprint(user)
+			qdel(src)
+		return TRUE
 	if(istype(tool, /obj/item/tattoo_machine) && poster)
 		poster.begin_forgery(user, tool)
 		return TRUE
@@ -588,6 +634,7 @@
 	. += get_asset_datum(/datum/asset/simple/rmh_decree_backgrounds)
 
 #undef RMH_POSTER_FORGE_DELAY
+#undef RMH_POSTER_REMOVE_DELAY
 
 
 /proc/rmh_decree_title(text)
@@ -597,13 +644,18 @@
 
 /obj/item/rmh_decree_poster/proc/refresh_title()
 	var/title = rmh_decree_title(snapshot ? snapshot["text"] : "")
-	name = length(title) ? "Указ [html_encode(title)]" : "decree poster"
+	name = damaged ? "torn decree poster" : (length(title) ? "Указ [html_encode(title)]" : "decree poster")
 	if(istype(loc, /obj/structure/rmh_decree_poster))
 		var/obj/structure/rmh_decree_poster/mount = loc
 		if(mount.poster == src)
 			mount.name = name
 
 /obj/item/rmh_decree_poster/get_examine_name(mob/user, use_article = TRUE)
+	if(damaged)
+		var/title = rmh_law_ui_language(user) == "en" && length(torn_title_en) ? torn_title_en : torn_title
+		if(user && user.get_skill_level(/datum/attribute/skill/misc/reading) >= SKILL_RANK_EXPERT && length(title))
+			return "<b>[rmh_ui_text(user, "Порванный указ", "Torn decree")]: [html_encode(title)]</b>"
+		return "<b>[rmh_ui_text(user, "Порванный указ", "Torn decree")]</b>"
 	if(!snapshot)
 		return "<b>[rmh_ui_text(user, "Пустой постер для указа", "Blank decree poster")]</b>"
 	var/text = rmh_law_ui_language(user) == "en" && length(trim(snapshot["text_en"])) ? snapshot["text_en"] : snapshot["text"]
@@ -614,24 +666,28 @@
 
 /obj/item/rmh_decree_poster/get_mechanics_examine(mob/user)
 	. = ..()
+	if(damaged)
+		. += rmh_ui_text(user, "CUT любым предметом: убрать порванный указ.", "CUT with any held item to clear the torn decree.")
+		return
 	if(!snapshot)
 		. += rmh_ui_text(user, "Примените пустой лист к стенду писаря или исправной доске и выберите указ.", "Apply the blank sheet to a scribe's stand or intact decree board and choose a decree.")
 		return
 	. += rmh_poster_mechanics(user)
 
 /obj/structure/rmh_decree_poster/get_mechanics_examine(mob/user)
-	. = ..()
-	. += rmh_poster_mechanics(user)
+	return poster ? poster.get_mechanics_examine(user) : ..()
 
 /proc/rmh_poster_mechanics(mob/user)
 	return list(
-		rmh_ui_text(user, "Нажмите на настенный постер или используйте лист в руке, чтобы прочесть указ.", "Click the mounted poster or use the sheet in hand to read the decree."),
-		rmh_ui_text(user, "Примените заполненный лист к соседней стене, чтобы повесить его.", "Apply a filled sheet to a nearby wall to hang it."),
-		rmh_ui_text(user, "STEAL + WEAK: аккуратно снять целым.", "STEAL + WEAK: remove the poster intact."),
-		rmh_ui_text(user, "STEAL + STRONG: сорвать; края порвутся, текст останется читаемым.", "STEAL + STRONG: tear it down; damaged edges leave the text readable."),
-		rmh_ui_text(user, "Тату-машинка переписывает только этот постер: 0,5 секунды на символ, качество зависит от навыка чтения.", "A tattoo machine rewrites only this poster: 0.5 seconds per character; reading skill determines the handwriting."),
+		rmh_ui_text(user, "STEAL + WEAK: снять целым за 5 секунд; требуется Reading 4+.", "STEAL + WEAK: remove intact in 5 seconds; requires Reading 4+."),
+		rmh_ui_text(user, "STEAL + STRONG: порвать за 5 секунд. Остатки снимаются предметом с интентом CUT.", "STEAL + STRONG: tear in 5 seconds. Clear the remains with an item using CUT."),
+		rmh_ui_text(user, "С помощью тату-машинки можно менять законы на постере.", "A tattoo machine can change the laws on the poster."),
 	)
 
-
 /obj/item/rmh_decree_poster/get_examine_desc(mob/user)
+	if(damaged)
+		return rmh_ui_text(user, "Текст порван и не поддаётся прочтению.", "The torn text is illegible.")
 	return snapshot ? rmh_ui_text(user, "Пергамент с копией указа.", "A parchment bearing a copy of a decree.") : rmh_ui_text(user, "Подготовленный лист пергамента.", "A sheet of prepared parchment.")
+
+/obj/structure/rmh_decree_poster/get_examine_desc(mob/user)
+	return poster?.damaged ? poster.get_examine_desc(user) : ..()

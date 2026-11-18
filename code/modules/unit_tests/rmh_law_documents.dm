@@ -314,7 +314,7 @@
 	var/obj/item/rmh_decree_poster/poster = allocate(/obj/item/rmh_decree_poster)
 	var/list/entry = list("id" = "decree_1", "text" = "Original decree <plain text>", "text_en" = "English copy", "revision" = 1)
 	TEST_ASSERT(poster.copy_decree(entry), "A valid decree could not be copied.")
-	TEST_ASSERT_EQUAL(poster.icon_state, "decree_poster_3", "A filled portable poster is not ready for hanging.")
+	TEST_ASSERT_EQUAL(poster.icon_state, "decree_poster_1", "A filled portable poster uses the wrong sprite.")
 	entry["text"] = "Changed official text"
 	entry["text_en"] = "Changed translation"
 	TEST_ASSERT_EQUAL(poster.snapshot["text"], "Original decree <plain text>", "The poster retained mutable official data.")
@@ -354,23 +354,71 @@
 
 /datum/unit_test/rmh_poster_removal_preserves_sheet
 /datum/unit_test/rmh_poster_removal_preserves_sheet/Run()
-	for(var/tear in list(FALSE, TRUE))
-		var/obj/structure/rmh_decree_poster/mount = allocate(/obj/structure/rmh_decree_poster)
-		var/obj/item/rmh_decree_poster/sheet = allocate(/obj/item/rmh_decree_poster)
-		sheet.copy_decree(list("text" = "A durable local snapshot", "text_en" = "Local translation"))
-		var/snapshot = json_encode(sheet.snapshot)
-		sheet.forceMove(mount)
-		mount.poster = sheet
-		var/obj/item/rmh_decree_poster/removed = mount.detach_poster(null, tear)
-		TEST_ASSERT_EQUAL(removed, sheet, "Removal created a different sheet instead of returning the original.")
-		TEST_ASSERT(!QDELETED(sheet), "Removing the mount deleted the readable sheet.")
-		TEST_ASSERT(QDELETED(mount), "The empty mount survived removal.")
-		TEST_ASSERT_EQUAL(json_encode(sheet.snapshot), snapshot, "Removal changed text, translation or formatting.")
-		TEST_ASSERT_EQUAL(sheet.damaged, tear, "The requested careful/rough removal state was not preserved.")
-		TEST_ASSERT_EQUAL(sheet.icon_state, tear ? "decree_poster_2" : "decree_poster_3", "Removal lost the portable/torn sprite.")
-		TEST_ASSERT(isturf(sheet.loc), "The removed sheet was left inside a deleted mount.")
-		var/obj/structure/rmh_decree_poster/invalid = allocate(/obj/structure/rmh_decree_poster)
-		TEST_ASSERT(!invalid.attach_poster(sheet, null), "A poster can attach without a real wall.")
+	var/obj/structure/rmh_decree_poster/mount = allocate(/obj/structure/rmh_decree_poster)
+	var/obj/item/rmh_decree_poster/sheet = allocate(/obj/item/rmh_decree_poster)
+	TEST_ASSERT_EQUAL(sheet.icon_state, "decree_poster_3", "A blank poster uses the filled sprite.")
+	sheet.copy_decree(list("text" = "A durable local snapshot", "text_en" = "Local translation"))
+	var/snapshot = json_encode(sheet.snapshot)
+	sheet.forceMove(mount)
+	mount.poster = sheet
+	var/obj/item/rmh_decree_poster/removed = mount.detach_poster()
+	TEST_ASSERT_EQUAL(removed, sheet, "Careful removal returned a different sheet.")
+	TEST_ASSERT(!QDELETED(sheet), "Careful removal deleted the sheet.")
+	TEST_ASSERT(QDELETED(mount), "The empty mount survived removal.")
+	TEST_ASSERT_EQUAL(json_encode(sheet.snapshot), snapshot, "Careful removal changed the decree.")
+	TEST_ASSERT(!sheet.damaged, "Careful removal tore the poster.")
+	TEST_ASSERT_EQUAL(sheet.icon_state, "decree_poster_1", "The removed filled poster has the wrong sprite.")
+	TEST_ASSERT(isturf(sheet.loc), "The removed sheet was left inside a deleted mount.")
+	var/obj/structure/rmh_decree_poster/invalid = allocate(/obj/structure/rmh_decree_poster)
+	TEST_ASSERT(!invalid.attach_poster(sheet, null), "A poster can attach without a real wall.")
+
+/datum/unit_test/rmh_torn_poster_privacy
+/datum/unit_test/rmh_torn_poster_privacy/Run()
+	var/obj/structure/rmh_decree_poster/mount = allocate(/obj/structure/rmh_decree_poster)
+	var/obj/item/rmh_decree_poster/sheet = allocate(/obj/item/rmh_decree_poster)
+	var/mob/living/carbon/human/reader = allocate(/mob/living/carbon/human)
+	reader.forceMove(get_turf(mount))
+	reader.set_skillrank(/datum/attribute/skill/misc/reading, SKILL_RANK_JOURNEYMAN)
+	sheet.copy_decree(list("text" = "Hidden title\nSECRET BODY", "text_en" = "English title\nSECRET TRANSLATION"))
+	sheet.forceMove(mount)
+	mount.poster = sheet
+	mount.name = sheet.name
+	sheet.tear_edges()
+	mount.update_appearance(UPDATE_ICON_STATE)
+	TEST_ASSERT(!QDELETED(mount) && sheet.loc == mount, "Tearing removed the poster from its wall mount.")
+	TEST_ASSERT_EQUAL(sheet.icon_state, "decree_poster_2", "The torn sheet has the wrong sprite.")
+	TEST_ASSERT_EQUAL(mount.icon_state, "decree_poster_2", "The mount does not display its torn sheet.")
+	TEST_ASSERT_NULL(sheet.snapshot, "The torn poster retained its readable body.")
+	TEST_ASSERT(!findtext(sheet.name, "Hidden title") && !findtext(mount.name, "Hidden title"), "The ordinary item name leaks the former title.")
+	TEST_ASSERT(!findtext(sheet.get_examine_name(reader), "Hidden title") && !findtext(sheet.get_examine_name(reader), "English title"), "Reading 3 revealed a torn decree's title.")
+	TEST_ASSERT(!sheet.can_read_poster(reader), "A torn poster still permits its reader window.")
+	var/list/redacted = sheet.ui_data(reader)
+	TEST_ASSERT_EQUAL(length(redacted["decrees"]), 0, "A torn poster's UI payload leaks content.")
+	reader.set_skillrank(/datum/attribute/skill/misc/reading, SKILL_RANK_EXPERT)
+	TEST_ASSERT(findtext(sheet.get_examine_name(reader), "English title"), "Reading 4 cannot recognize the old title.")
+	TEST_ASSERT(!sheet.can_read_poster(reader), "Reading 4 recovered the torn body instead of only its title.")
+	TEST_ASSERT(!sheet.copy_decree(list("text" = "Restored")), "Copying restored a torn poster.")
+	TEST_ASSERT(!sheet.replace_forgery("Restored", "", SKILL_RANK_EXPERT, sheet.content_revision), "Forgery restored a torn poster.")
+
+/datum/unit_test/rmh_poster_careful_removal_skill
+/datum/unit_test/rmh_poster_careful_removal_skill/Run()
+	var/obj/structure/rmh_decree_poster/mount = allocate(/obj/structure/rmh_decree_poster)
+	var/obj/item/rmh_decree_poster/sheet = allocate(/obj/item/rmh_decree_poster)
+	var/mob/living/carbon/human/reader = allocate(/mob/living/carbon/human)
+	reader.forceMove(get_turf(mount))
+	sheet.copy_decree(list("text" = "Test decree"))
+	sheet.forceMove(mount)
+	mount.poster = sheet
+	reader.rmb_intent = new /datum/rmb_intent/weak
+	reader.set_skillrank(/datum/attribute/skill/misc/reading, SKILL_RANK_JOURNEYMAN)
+	TEST_ASSERT(!mount.can_remove(reader, FALSE), "Reading 3 allowed careful removal.")
+	reader.set_skillrank(/datum/attribute/skill/misc/reading, SKILL_RANK_EXPERT)
+	TEST_ASSERT(mount.can_remove(reader, FALSE), "Reading 4 did not allow careful removal.")
+	reader.rmb_intent = new /datum/rmb_intent/strong
+	reader.set_skillrank(/datum/attribute/skill/misc/reading, SKILL_RANK_NONE)
+	TEST_ASSERT(mount.can_remove(reader, TRUE), "Tearing incorrectly requires Reading 4.")
+	sheet.tear_edges()
+	TEST_ASSERT(!mount.can_remove(reader, TRUE), "A torn poster can be torn or taken again.")
 
 /datum/unit_test/rmh_mounted_poster_access
 /datum/unit_test/rmh_mounted_poster_access/Run()
@@ -463,7 +511,7 @@
 	TEST_ASSERT(findtext(poster.name, "Первый указ"), "Copying did not name the poster from its title.")
 	TEST_ASSERT(poster.replace_forgery("Другой заголовок\nПодделка", "", SKILL_RANK_EXPERT, 1), "Valid titled forgery failed.")
 	TEST_ASSERT(findtext(poster.name, "Другой заголовок"), "Forgery did not update the poster title.")
-	TEST_ASSERT_EQUAL(length(poster.get_mechanics_examine(null)), 5, "Poster mechanics are missing from the stock collapsible list.")
+	TEST_ASSERT_EQUAL(length(poster.get_mechanics_examine(null)), 3, "Poster mechanics are missing from the stock collapsible list.")
 
 /datum/unit_test/rmh_localized_publication_messages
 /datum/unit_test/rmh_localized_publication_messages/Run()
