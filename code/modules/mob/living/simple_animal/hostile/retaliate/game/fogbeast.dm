@@ -78,22 +78,24 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 	update_icon()
 
 // BEHAVIORS
-/mob/living/simple_animal/hostile/retaliate/honse/update_icon()
-	cut_overlays()
-	..()
-	if(stat != DEAD)
-		if(ssaddle)
-			var/mutable_appearance/saddlet = mutable_appearance(icon, "saddle-above", 4.3)
-			saddlet.appearance_flags = RESET_ALPHA|RESET_COLOR
-			add_overlay(saddlet)
-			saddlet = mutable_appearance(icon, "saddle", 4.3) // Rivermist change - фикс положения всадника
-			saddlet.appearance_flags = RESET_ALPHA|RESET_COLOR
-			add_overlay(saddlet)
-		if(has_buckled_mobs())
-			var/mutable_appearance/mounted = mutable_appearance(icon, "[icon_state]_mounted", 4.3)
-			mounted.appearance_flags = RESET_ALPHA|RESET_COLOR // Rivermist change - фикс оверлеев
-			add_overlay(mounted)
 
+// RIVERMIST REMOVAL START - прок переопределен ниже
+// /mob/living/simple_animal/hostile/retaliate/honse/update_icon()
+// 	cut_overlays()
+// 	..()
+// 	if(stat != DEAD)
+// 		if(ssaddle)
+// 			var/mutable_appearance/saddlet = mutable_appearance(icon, "saddle-above", 4.3)
+// 			saddlet.appearance_flags = RESET_ALPHA|RESET_COLOR
+// 			add_overlay(saddlet)
+// 			saddlet = mutable_appearance(icon, "saddle", 4.3) // Rivermist change - фикс положения всадника
+// 			saddlet.appearance_flags = RESET_ALPHA|RESET_COLOR
+// 			add_overlay(saddlet)
+// 		if(has_buckled_mobs())
+// 			var/mutable_appearance/mounted = mutable_appearance(icon, "[icon_state]_mounted", 4.3)
+// 			mounted.appearance_flags = RESET_ALPHA|RESET_COLOR // Rivermist change - фикс оверлеев
+// 			add_overlay(mounted)
+//RIVERMIST REMOVAL END
 
 /mob/living/simple_animal/hostile/retaliate/honse/get_sound(input)
 	switch(input)
@@ -115,9 +117,16 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 	if(can_buckle)
 		AddElement(/datum/element/ridable, /datum/component/riding/creature/saiga)
 
-/mob/living/simple_animal/hostile/retaliate/honse/death()
-	unbuckle_all_mobs()
-	return ..()
+// RIVERMIST REMOVAL START - прок переопределен ниже
+// /mob/living/simple_animal/hostile/retaliate/honse/death()
+// 	unbuckle_all_mobs()
+// 	return ..()
+// RIVERMIST REMOVAL END
+
+
+
+
+
 
 // Rivermist change start - фикс оверлеев
 /mob/living/simple_animal/hostile/retaliate/honse/death(gibbed)
@@ -261,32 +270,22 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 
 // RIVERMIST CHANGE START - Overlay fix
 /mob/living/simple_animal/hostile/retaliate/honse/update_icon(updates = ALL)
+	// Preserve the existing behaviour: every icon update also refreshes equipment.
+	// Сохраняем прежнее поведение: каждое обновление иконки обновляет и снаряжение.
+	return ..(updates | UPDATE_OVERLAYS)
+
+/mob/living/simple_animal/hostile/retaliate/honse/update_overlays()
+	// The parent supplies barding and caparison; add the saddle to the same list.
+	// Родитель добавляет броню и попону; в тот же список добавляем седло.
 	. = ..()
-
-	// Collect the equipped barding and caparison using their normal visibility and layer rules.
-	// Получаем броню и попону, которые должны быть видны сейчас, с учётом их порядка слоёв.
-	var/list/honse_overlays = update_overlays()
-
-	// Add both saddle sprites only while a living Honse is wearing a saddle.
-	// Седло состоит из двух спрайтов. Добавляем их только живому Honse с надетым седлом.
 	if(stat != DEAD && ssaddle)
 		for(var/saddle_state in list("saddle-above", "saddle"))
 			var/mutable_appearance/saddle_overlay = mutable_appearance(icon, saddle_state, 4.3)
-			honse_overlays += saddle_overlay
+			. += saddle_overlay
 
-	// Prevent coat tint from recolouring equipment. Body pixels inside saddle-above also keep their sprite colour.
-	// Отключаем окрашивание снаряжения цветом Honse. Пиксели тела внутри saddle-above тоже сохранят цвет спрайта.
-	for(var/mutable_appearance/equipment_overlay in honse_overlays)
+	// Keep equipment colours independent of the animal's coat, as before.
+	// Сохраняем прежнее поведение: цвет снаряжения не зависит от окраса животного.
+	var/list/equipment_overlays = .
+	for(var/mutable_appearance/equipment_overlay in equipment_overlays)
 		equipment_overlay.appearance_flags |= RESET_COLOR
-
-	// Keep the update system's tracked list in sync with the list displayed on the mob.
-	// Сохраняем тот же список в учёте обновлений, чтобы следующее обновление могло заменить эти слои.
-	managed_overlays = honse_overlays
-	// Replace all old layers so the original white mounted body cannot remain visible.
-	// Заменяем старые слои целиком, чтобы среди них не остался исходный белый mounted-спрайт. Фиксим глюк с пропажей цвета
-	overlays = honse_overlays
-
-	// Report our overlay rebuild even if the parent result did not include this flag.
-	// Сообщаем вызывающему коду, что мы обновили оверлеи, добавив флаг к результату родителя.
-	return . | UPDATE_OVERLAYS
 // RIVERMIST CHANGE END
