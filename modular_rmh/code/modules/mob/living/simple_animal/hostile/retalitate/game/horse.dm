@@ -157,3 +157,68 @@
 	var/obj/item/natural/saddle/S = new(src)
 	ssaddle = S
 	update_appearance(UPDATE_OVERLAYS)
+
+
+// Drop saddles when dead
+/mob/living/simple_animal/hostile/retaliate/saiga/horse/death(gibbed)
+	unbuckle_all_mobs(force = TRUE)
+	drop_mount_equipment()
+	. = ..()
+	update_appearance(UPDATE_ICON)
+
+/mob/living/simple_animal/proc/drop_mount_equipment()
+	var/turf/drop_turf = get_turf(src)
+	if(!drop_turf)
+		return
+
+	var/obj/item/saddle = ssaddle
+	var/obj/item/clothing/barding/armor = bbarding
+	ssaddle = null
+	bbarding = null
+	saddle?.forceMove(drop_turf)
+	armor?.forceMove(drop_turf)
+
+
+// Barding special
+/obj/item/clothing/barding
+	var/horse_barding_icon = 'modular_rmh/icons/mob/monster/horse_iron (1).dmi'
+	var/horse_barding_state = "horse_iron_onmob"
+
+/obj/item/clothing/barding/chain
+	horse_barding_icon = 'modular_rmh/icons/mob/monster/hor_a (2).dmi'
+	horse_barding_state = "h_a_i"
+
+/obj/item/clothing/barding/gold
+	item_weight = 8 KILOGRAMS
+	name = "golden barding"
+	desc = "A set of golden body armor fitted for a horse."
+	icon_state = "armorkit"
+	armor_type = /datum/armor/maille
+	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	smeltresult = /obj/item/ingot/gold
+	melting_material = /datum/material/gold
+	melt_amount = 100
+	sewrepair = null
+	salvage_result = null
+	salvage_amount = 0
+	fiber_salvage = FALSE
+	horse_barding_icon = 'modular_rmh/icons/mob/monster/hor_a (2).dmi'
+	horse_barding_state = "h_a_g"
+	valid_animal_types = list(/mob/living/simple_animal/hostile/retaliate/saiga/horse)
+
+/mob/living/simple_animal/hostile/retaliate/saiga/horse/update_overlays()
+	var/obj/item/clothing/barding/armor = bbarding
+	if(!armor)
+		return ..()
+
+	var/previous_icon = armor.barding_icon
+	var/previous_state = armor.barding_state
+	var/previous_female_state = armor.female_barding_state
+	armor.barding_icon = armor.horse_barding_icon
+	armor.barding_state = armor.horse_barding_state
+	armor.female_barding_state = null
+	. = ..()
+	armor.barding_icon = previous_icon
+	armor.barding_state = previous_state
+	armor.female_barding_state = previous_female_state
