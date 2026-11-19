@@ -1,14 +1,14 @@
-/datum/quirk/peculiarity/smell_and_musk
+/datum/quirk/neutral/smell_and_musk
 	name = "Smell & Musk"
 	desc = "My body runs hot. Hard toil soaks me through, and what it leaves on my skin is no common sweat but a heavy, heady musk that clings to my armpits, my groin and my hair, and turns the heads of those with a nose for such things."
 	desc_hint = "The harder I labour, the stronger I smell, in four degrees; every quarter-hour of rest softens it by one, and water washes it all away. Those who answer to it, with Musk Susceptibility in their ERP preferences, grow dizzy and dull-witted near me and cannot cool their wanting. My sweat gathers in my armpits, my crotch and between my cheeks, twice as fast where hair grows, ready to be pressed into a face or licked away. The bloodless never sweat."
 	preview_render = FALSE
 
-/datum/quirk/peculiarity/smell_and_musk/on_spawn()
+/datum/quirk/neutral/smell_and_musk/on_spawn()
 	. = ..()
 	owner?.AddComponent(/datum/component/musk)
 
-/datum/quirk/peculiarity/smell_and_musk/on_remove()
+/datum/quirk/neutral/smell_and_musk/on_remove()
 	if(!QDELETED(owner))
 		owner.remove_status_effect(/datum/status_effect/musk)
 		qdel(owner.GetComponent(/datum/component/musk))
@@ -16,7 +16,7 @@
 
 /datum/erp_preference/boolean/musk_susceptibility
 	name = "Musk Susceptibility"
-	description = "The rank, heady musk of a body worked to a sweat. Near someone with the Smell & Musk quirk it goes to your head, dulls your wits and keeps you wanting, and their sweat-soaked armpits, crotch and cheeks can be pressed into your face or licked clean."
+	description = "The rank, heady musk of a body worked to a sweat. Near someone with the Smell & Musk quirk it goes to your head, dulls your wits and keeps you wanting, and their sweat-soaked armpits, crotch and cheeks can be pressed into your face or licked clean. A press also makes you climax, up to twice in a row."
 	default_value = FALSE
 	category = "General"
 
@@ -168,6 +168,9 @@
 /mob/living/carbon/human/proc/take_musk_hit(level, mob/living/source, silent = FALSE)
 	var/datum/status_effect/debuff/musk_haze/haze = has_status_effect(/datum/status_effect/debuff/musk_haze)
 	if(haze && haze.level >= level)
+		// The same scent keeps the haze going, with no new screen effect or message.
+		if(haze.level == level && is_musk_susceptible())
+			haze.refresh()
 		return FALSE
 	if(!is_musk_susceptible())
 		return FALSE

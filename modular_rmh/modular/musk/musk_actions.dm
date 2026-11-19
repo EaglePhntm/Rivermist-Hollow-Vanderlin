@@ -77,7 +77,7 @@
 		perform_sex_action(human_target, user, 2, 0, 1)
 		return TRUE
 	MOBTIMER_SET(human_target, MUSK_PRESS_BURST_TIMER)
-	musk_climax_burst(human_target, stacks)
+	musk_climax_burst(human_target, min(stacks, MUSK_PRESS_MAX_CLIMAXES))
 	return TRUE
 
 /datum/sex_action/musk_press/armpit

@@ -472,6 +472,9 @@ const en = {
   moans: 'Moans',
   moanPreview: 'Moan preview',
   speechMoans: 'Moan while speaking',
+  strengthVoicePitch: 'Strength pitch',
+  strengthVoicePitchHint:
+    'When on, high strength makes the voice deeper and low strength makes it higher.',
   // Gameplay
   classAndRoles: 'Class & roles',
   role: 'Role',
@@ -1056,6 +1059,9 @@ const ru: CharacterCreatorStrings = {
   moans: 'Стоны',
   moanPreview: 'Прослушать стоны',
   speechMoans: 'Стонать при разговоре',
+  strengthVoicePitch: 'Тон от силы',
+  strengthVoicePitchHint:
+    'Если включено, высокая сила делает голос ниже, а низкая сила делает его выше.',
   classAndRoles: 'Класс и роли',
   role: 'Роль',
   readyOrder: 'Порядок готовности',

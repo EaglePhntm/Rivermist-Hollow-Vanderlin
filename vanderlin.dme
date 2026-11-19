@@ -4743,6 +4743,7 @@
 #include "modular_rmh\code\modules\client\customizers\organ\features\neck_feature.dm"
 #include "modular_rmh\code\modules\client\preferences\_preferences.dm"
 #include "modular_rmh\code\modules\client\preferences\preferences_body_markings.dm"
+#include "modular_rmh\code\modules\client\preferences\strength_voice_pitch.dm"
 #include "modular_rmh\code\modules\clothing\_allowed_wear.dm"
 #include "modular_rmh\code\modules\clothing\armor_tooltip.dm"
 #include "modular_rmh\code\modules\clothing\bdsm_gear.dm"

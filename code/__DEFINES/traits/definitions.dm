@@ -222,6 +222,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_THERMAL_VISION "thermal_vision"
 /// Immediately upgrade grabs when in combat mode
 #define TRAIT_STRONG_GRABBER "strong_grabber"
+/// Caffeine hides the Tired debuff without curing it
+#define TRAIT_CAFFEINATED "caffeinated"
 /// Used for the choking status effect
 #define TRAIT_MAGIC_CHOKE "magic_choke"
 /// Immune to nervous cough
