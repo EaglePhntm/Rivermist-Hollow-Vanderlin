@@ -1755,6 +1755,13 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 //		var/obj/machinery/disposal/bin/target_disposal_bin
 		var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
 
+		//RMH EDITED START - a shove out of combat mode presses the target against a wall
+		var/turf/closed/press_wall = target_shove_turf
+		if(istype(press_wall) && press_wall.try_shove_press(user, target))
+			qdel(user.check_arm_grabbed(user.active_hand_index))
+			return TRUE
+		//RMH EDITED END
+
 		if(prob(clamp(30 + (user.stat_compare(target, STAT_STRENGTH, STAT_CONSTITUTION)*10),0,100)))//check if we actually shove them
 			//Thank you based whoneedsspace
 			target_collateral_mob = locate(/mob/living) in target_shove_turf.contents

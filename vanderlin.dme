@@ -4648,6 +4648,7 @@
 #include "modular_rmh\code\game\turfs\jaunt_block.dm"
 #include "modular_rmh\code\game\turfs\maneater_stomach.dm"
 #include "modular_rmh\code\game\turfs\closed\mineral_vein.dm"
+#include "modular_rmh\code\game\turfs\closed\wall_shove_press.dm"
 #include "modular_rmh\code\game\turfs\closed\walls\walls.dm"
 #include "modular_rmh\code\game\turfs\open\floor\azure_floors.dm"
 #include "modular_rmh\code\game\turfs\open\floor\desert_floors.dm"

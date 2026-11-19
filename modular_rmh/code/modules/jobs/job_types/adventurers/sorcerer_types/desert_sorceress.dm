@@ -7,6 +7,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/misc/reading = 40,
 		/datum/attribute/skill/combat/whipsflails = 20
 	)
 
