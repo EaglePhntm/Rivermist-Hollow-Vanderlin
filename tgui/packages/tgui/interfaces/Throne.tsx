@@ -16,7 +16,11 @@ import { useBackend } from '../backend';
 import { Window } from '../layouts';
 import '../styles/interfaces/RmhThrone.scss';
 import { Prose } from './RmhScribeStand/Layout';
-import { RmhLocaleProvider, useRmhLanguage } from './RmhScribeStand/locale';
+import {
+  RmhLocaleProvider,
+  useRmhLanguage,
+  useRmhText,
+} from './RmhScribeStand/locale';
 
 export type ThroneData = {
   language?: string;
@@ -47,7 +51,7 @@ export type ThroneData = {
   voice_commands: string[];
 };
 type Act = (action: string, params?: Record<string, unknown>) => void;
-type Text = (russian: string, english: string) => string;
+type Text = (russian: string) => string;
 type Page =
   | 'overview'
   | 'decrees'
@@ -69,8 +73,7 @@ const pages: { id: Page; ru: string; en: string; icon: string }[] = [
   },
 ];
 function useCourtText(): Text {
-  const language = useRmhLanguage();
-  return (ru, en) => (language === 'ru' ? ru : en);
+  return useRmhText();
 }
 export function Throne() {
   const { data, act } = useBackend<ThroneData>();
@@ -96,11 +99,11 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
   const command = !!data.can_command && !!data.cooldown_ok;
   const announcement = !!data.can_announce && !!data.cooldown_ok;
   const reason = !data.wearing_crown
-    ? t('Нужна корона.', 'The crown is required.')
+    ? t('Нужна корона.')
     : !data.worthy
-      ? t('Только правитель или регент.', 'Ruler or regent required.')
+      ? t('Только правитель или регент.')
       : !data.cooldown_ok
-        ? t('THROAT набирается сил.', 'THROAT is gathering strength.')
+        ? t('THROAT набирается сил.')
         : '';
   const records = data.decree_records || [];
   return (
@@ -120,70 +123,53 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
           <main className="RmhThrone__centerPanel">
             <div className="RmhThrone__statusGrid">
               <CourtStatus
-                label={t('Корона', 'Crown')}
-                value={
-                  data.wearing_crown
-                    ? t('Надета', 'Worn')
-                    : t('Не надета', 'Not worn')
-                }
+                label={t('Корона')}
+                value={data.wearing_crown ? t('Надета') : t('Не надета')}
                 icon="crown"
                 good={!!data.wearing_crown}
               />
               <CourtStatus
-                label={t('Налог', 'Tax')}
+                label={t('Налог')}
                 value={`${data.tax_percent}%`}
                 icon="coins"
                 good
               />
               <CourtStatus
-                label={t('Глас трона', 'Throne voice')}
-                value={
-                  data.cooldown_ok
-                    ? t('Готов', 'Ready')
-                    : t('Набирается сил', 'Gathering strength')
-                }
+                label={t('Глас трона')}
+                value={data.cooldown_ok ? t('Готов') : t('Набирается сил')}
                 icon="bullhorn"
                 good={!!data.cooldown_ok}
               />
             </div>
             <div className="RmhThrone__contentStack">
               {page === 'overview' && (
-                <Section title={t('Положение двора', 'Court standing')}>
+                <Section title={t('Положение двора')}>
                   <div className="RmhThrone__overviewFacts">
                     <CourtFact
-                      label={t('Действующие указы', 'Active decrees')}
+                      label={t('Действующие указы')}
                       value={String(records.length)}
                     />
                     <CourtFact
-                      label={t('Вне закона', 'Outlaws')}
+                      label={t('Вне закона')}
                       value={String(data.outlaws.length)}
                     />
                     <CourtFact
-                      label={t('Корона в землях', 'Crown in the realm')}
-                      value={
-                        data.crown_present
-                          ? t('Есть', 'Present')
-                          : t('Не найдена', 'Not registered')
-                      }
+                      label={t('Корона в землях')}
+                      value={data.crown_present ? t('Есть') : t('Не найдена')}
                     />
                     <CourtFact
-                      label={t('Ключ правителя', 'Ruler key')}
-                      value={
-                        data.key_present
-                          ? t('Есть', 'Present')
-                          : t('Не найден', 'Not registered')
-                      }
+                      label={t('Ключ правителя')}
+                      value={data.key_present ? t('Есть') : t('Не найден')}
                     />
                   </div>
                   <p>
                     {t(
                       'Законы града публикуются на стенде писаря. Здесь издаются и отзываются указы.',
-                      'Town laws are published at the scribe stand. Issue and revoke decrees here.',
                     )}
                   </p>
                   {!!data.throat_mode && data.throat_mode !== 'None' && (
                     <p>
-                      {t('Голосовой режим: ', 'Voice mode: ')}
+                      {t('Голосовой режим: ')}
                       <b>{data.throat_mode}</b>
                     </p>
                   )}
@@ -191,21 +177,14 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
               )}
               {page === 'decrees' && (
                 <Section
-                  title={t('Действующие указы', 'Active decrees')}
+                  title={t('Действующие указы')}
                   buttons={
                     <Button onClick={() => setPreviewEnglish(!previewEnglish)}>
                       {previewEnglish ? 'RU' : 'EN'}
                     </Button>
                   }
                 >
-                  {!records.length && (
-                    <p>
-                      {t(
-                        'Действующих указов нет.',
-                        'There are no active decrees.',
-                      )}
-                    </p>
-                  )}
+                  {!records.length && <p>{t('Действующих указов нет.')}</p>}
                   {records.map((entry, index) => (
                     <div className="RmhThrone__decree" key={entry.id}>
                       <Button
@@ -215,7 +194,7 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
                           setSelected(selected === entry.id ? null : entry.id)
                         }
                       >
-                        {t('Указ', 'Decree')} {index + 1}
+                        {t('Указ')} {index + 1}
                       </Button>
                       {(selected === entry.id || records.length === 1) && (
                         <Prose
@@ -231,7 +210,7 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
                         color="bad"
                         disabled={!command}
                         tooltip={reason}
-                        confirmContent={t('Подтвердить', 'Confirm')}
+                        confirmContent={t('Подтвердить')}
                         onClick={() =>
                           act('remove_decree', {
                             index: String(index + 1),
@@ -240,15 +219,15 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
                           })
                         }
                       >
-                        {t('Отозвать', 'Revoke')}
+                        {t('Отозвать')}
                       </Button.Confirm>
                     </div>
                   ))}
                   <CourtTextForm
                     action="make_decree"
                     param="text"
-                    title={t('Новый указ', 'New decree')}
-                    button={t('Издать указ', 'Issue decree')}
+                    title={t('Новый указ')}
+                    button={t('Издать указ')}
                     enabled={command}
                     reason={reason}
                     act={act}
@@ -273,7 +252,7 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
                 />
               )}
               {page === 'heraldry' && (
-                <Section title={t('Знамя града', 'Town standard')}>
+                <Section title={t('Знамя града')}>
                   <div className="RmhThrone__heraldry">
                     <DmIcon
                       icon={data.flag_icon}
@@ -284,20 +263,19 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
                     <span
                       style={{ background: data.lord_primary || '#183a56' }}
                     >
-                      {t('Основной цвет', 'Primary')}
+                      {t('Основной цвет')}
                     </span>
                     <span
                       style={{ background: data.lord_secondary || '#e0cc9b' }}
                     >
-                      {t('Второй цвет', 'Secondary')}
+                      {t('Второй цвет')}
                     </span>
                   </div>
                   <CourtAction
                     icon="palette"
-                    title={t('Изменить цвета', 'Change colours')}
+                    title={t('Изменить цвета')}
                     description={t(
                       'Выбрать гербовые цвета существующим порядком.',
-                      'Choose heraldic colours through the existing selectors.',
                     )}
                     enabled={command}
                     reason={reason}
@@ -306,13 +284,10 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
                 </Section>
               )}
               {page === 'voice' && (
-                <Section
-                  title={t('Голосовые команды THROAT', 'THROAT voice commands')}
-                >
+                <Section title={t('Голосовые команды THROAT')}>
                   <p>
                     {t(
                       'Команды произносятся рядом с троном. Действуют обычные проверки полномочий.',
-                      'Speak commands beside the throne. The normal authority checks apply.',
                     )}
                   </p>
                   <ul className="RmhThrone__voiceList">
@@ -323,7 +298,7 @@ export function CourtWorkspace({ data, act }: { data: ThroneData; act: Act }) {
                     ))}
                   </ul>
                   <Button icon="circle-question" onClick={() => act('help')}>
-                    {t('Справка THROAT', 'THROAT help')}
+                    {t('Справка THROAT')}
                   </Button>
                 </Section>
               )}
@@ -468,33 +443,27 @@ function Governance({
   const t = useCourtText();
   return (
     <>
-      <Section title={t('Объявления', 'Announcements')}>
+      <Section title={t('Объявления')}>
         <CourtTextForm
           action="make_announcement"
           param="text"
-          title={t('Объявить всем землям', 'Address the realm')}
-          button={t('Объявить', 'Announce')}
+          title={t('Объявить всем землям')}
+          button={t('Объявить')}
           enabled={announcement}
           reason={
             !data.wearing_crown
-              ? t('Нужна корона.', 'The crown is required.')
-              : t('THROAT набирается сил.', 'THROAT is gathering strength.')
+              ? t('Нужна корона.')
+              : t('THROAT набирается сил.')
           }
           act={act}
         />
       </Section>
-      <Section title={t('Управление градом', 'Town governance')}>
-        <CourtFact
-          label={t('Текущий налог', 'Current tax')}
-          value={`${data.tax_percent}%`}
-        />
+      <Section title={t('Управление градом')}>
+        <CourtFact label={t('Текущий налог')} value={`${data.tax_percent}%`} />
         <CourtAction
           icon="coins"
-          title={t('Изменить налог', 'Set taxes')}
-          description={t(
-            'Открыть существующий выбор налога.',
-            'Open the existing tax selector.',
-          )}
+          title={t('Изменить налог')}
+          description={t('Открыть существующий выбор налога.')}
           enabled={command}
           reason={reason}
           onClick={() => act('set_taxes')}
@@ -518,8 +487,8 @@ function Justice({
   const [outlaw, setOutlaw] = useState(''),
     [pardon, setPardon] = useState('');
   return (
-    <Section title={t('Правосудие', 'Justice')}>
-      <h3>{t('Объявить вне закона', 'Declare outlaw')}</h3>
+    <Section title={t('Правосудие')}>
+      <h3>{t('Объявить вне закона')}</h3>
       <Input fluid value={outlaw} onChange={setOutlaw} maxLength={128} />
       <Button
         color="bad"
@@ -530,9 +499,9 @@ function Justice({
           setOutlaw('');
         }}
       >
-        {t('Объявить вне закона', 'Declare outlaw')}
+        {t('Объявить вне закона')}
       </Button>
-      <h3>{t('Помиловать', 'Pardon')}</h3>
+      <h3>{t('Помиловать')}</h3>
       <Input fluid value={pardon} onChange={setPardon} maxLength={128} />
       <Button
         color="good"
@@ -543,7 +512,7 @@ function Justice({
           setPardon('');
         }}
       >
-        {t('Помиловать', 'Pardon')}
+        {t('Помиловать')}
       </Button>
       <ul>
         {data.outlaws.map((name) => (
@@ -570,43 +539,36 @@ function CourtHeader({
       </span>
       <div className="RmhThrone__rulerBlock">
         <div>
-          <b>{t('Правитель', 'Ruler')}</b>
-          <span>
-            {data.ruler_name === 'None' ? t('Нет', 'None') : data.ruler_name}
-          </span>
+          <b>{t('Правитель')}</b>
+          <span>{data.ruler_name === 'None' ? t('Нет') : data.ruler_name}</span>
         </div>
         <div>
-          <b>{t('Регент', 'Regent')}</b>
+          <b>{t('Регент')}</b>
           <span>
-            {data.regent_name === 'None' ? t('Нет', 'None') : data.regent_name}
+            {data.regent_name === 'None' ? t('Нет') : data.regent_name}
           </span>
         </div>
       </div>
       <div>
         <div className="RmhThrone__eyebrow">Rivermist Hollow</div>
-        <h1 className="RmhThrone__title">
-          {t('Двор Ривермиста', 'Court of Rivermist')}
-        </h1>
+        <h1 className="RmhThrone__title">{t('Двор Ривермиста')}</h1>
         <div className="RmhThrone__subtitle">
-          {t(
-            'Воля града звучит через THROAT',
-            'The voice of the town speaks through THROAT',
-          )}
+          {t('Воля града звучит через THROAT')}
         </div>
       </div>
       <div className="RmhThrone__rulerBlock">
         <div>
-          <b>{t('Ваш статус', 'Your standing')}</b>
+          <b>{t('Ваш статус')}</b>
           <span>
             {data.is_ruler
-              ? t('Правитель', 'Ruler')
+              ? t('Правитель')
               : data.is_regent
-                ? t('Регент', 'Regent')
-                : t('Подданный', 'Subject')}
+                ? t('Регент')
+                : t('Подданный')}
           </span>
         </div>
         <Button icon="rotate" onClick={() => act('refresh')}>
-          {t('Обновить', 'Refresh')}
+          {t('Обновить')}
         </Button>
       </div>
       <span className="RmhThrone__standard RmhThrone__standard--right">
@@ -630,10 +592,7 @@ function CourtNavigation({
       <div className="RmhThrone__throneEmblem">
         <Icon name="chess-king" />
       </div>
-      <nav
-        className="RmhThrone__nav"
-        aria-label={t('Разделы двора', 'Court sections')}
-      >
+      <nav className="RmhThrone__nav" aria-label={t('Разделы двора')}>
         {pages.map((item) => (
           <Button
             key={item.id}
@@ -641,7 +600,7 @@ function CourtNavigation({
             icon={item.icon}
             onClick={() => onPage(item.id)}
           >
-            {t(item.ru, item.en)}
+            {t(item.ru)}
           </Button>
         ))}
       </nav>
@@ -666,49 +625,40 @@ function CourtRegalia({
 }) {
   return (
     <aside className="RmhThrone__rightRail">
-      <Section title={t('Регалии', 'Regalia')}>
+      <Section title={t('Регалии')}>
         <CourtAction
           icon="crown"
-          title={t('Призвать корону', 'Summon crown')}
-          description={t(
-            'Позвать существующую корону.',
-            'Call the existing crown.',
-          )}
+          title={t('Призвать корону')}
+          description={t('Позвать существующую корону.')}
           enabled
           onClick={() => act('summon_crown')}
         />
         <CourtAction
           icon="key"
-          title={t('Призвать ключ', 'Summon key')}
-          description={t('Нужна надетая корона.', 'Requires the worn crown.')}
+          title={t('Призвать ключ')}
+          description={t('Нужна надетая корона.')}
           enabled={announcement}
           reason={
             !data.wearing_crown
-              ? t('Нужна корона.', 'The crown is required.')
-              : t('THROAT набирается сил.', 'THROAT is gathering strength.')
+              ? t('Нужна корона.')
+              : t('THROAT набирается сил.')
           }
           onClick={() => act('summon_key')}
         />
       </Section>
-      <Section title={t('Приказы двору', 'Court orders')}>
+      <Section title={t('Приказы двору')}>
         <CourtAction
           icon="user-tie"
-          title={t('Назначить регента', 'Appoint regent')}
-          description={t(
-            'Назначить представителя правителя.',
-            'Appoint the ruler’s representative.',
-          )}
+          title={t('Назначить регента')}
+          description={t('Назначить представителя правителя.')}
           enabled={command}
           reason={reason}
           onClick={() => act('appoint_regent')}
         />
         <CourtAction
           icon="users"
-          title={t('Изменить должность', 'Change position')}
-          description={t(
-            'Изменить службу подданного.',
-            'Change a subject’s office.',
-          )}
+          title={t('Изменить должность')}
+          description={t('Изменить службу подданного.')}
           enabled={command}
           reason={reason}
           onClick={() => act('change_position')}
@@ -716,10 +666,7 @@ function CourtRegalia({
         <CourtAction
           icon="volume-xmark"
           title="SILENCE!!"
-          description={t(
-            'Потребовать тишины в зале.',
-            'Demand silence in the hall.',
-          )}
+          description={t('Потребовать тишины в зале.')}
           enabled={command}
           reason={reason}
           onClick={() => act('silence')}

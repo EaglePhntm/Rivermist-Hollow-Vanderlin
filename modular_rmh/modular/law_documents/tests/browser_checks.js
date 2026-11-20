@@ -5,7 +5,7 @@
     if (!condition) throw new Error(name);
     passed.push(name);
   }
-  function update(data) { rmhScomUpdate(encodeURIComponent(JSON.stringify(data))); }
+  function update(data) { rmhScomUpdate(JSON.stringify(data)); }
   var fixture = { language: "ru", mode: "normal", laws: [],
     decrees: [{id:"ignored",text:"SECRET DECREE MUST NOT APPEAR",text_en:"SECRET DECREE MUST NOT APPEAR"}]
   };
@@ -15,7 +15,9 @@
   }
   fixture.laws[0].text = "<img src=x onerror=alert(1)> & <script>bad()</script>";
   try {
+    fixture.laws[0].text += " 10% tax A+B 100% & Кириллица 😀";
     update(fixture);
+    check(document.getElementById("scom-text").textContent.indexOf("10% tax A+B 100% & Кириллица 😀") >= 0, "already-decoded output preserves percent, plus, ampersand and Unicode");
     var box = document.getElementById("scom-text");
     check(!document.getElementById("scom-edition"), "laws window has no edition label");
     check(!document.getElementById("scom-title"), "laws window has no heading label");

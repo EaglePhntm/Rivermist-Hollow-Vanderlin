@@ -1,4 +1,4 @@
-import { Fragment, type ReactNode } from 'react';
+import { Fragment, type ReactNode, useState } from 'react';
 import {
   Box,
   Button,
@@ -7,6 +7,7 @@ import {
   NoticeBox,
   Section,
 } from 'tgui-core/components';
+import { payloadChunkCount } from '../../events/act';
 import { useRmhText } from './locale';
 import {
   type Act,
@@ -204,14 +205,24 @@ export function DocumentToolbar(props: DocumentControls) {
   const current = publication(data, id);
   const stale =
     working.epoch !== data.epoch || working.revision !== current.revision;
-  const send = (action: string) =>
-    props.act(action, {
+  const [sendError, setSendError] = useState(false);
+  const [announce, setAnnounce] = useState(id === 'law_code');
+  const send = (action: string) => {
+    const payload = {
       document: id,
       epoch: data.epoch,
       editor_key: data.editor_key,
       revision: working.revision,
       content: JSON.stringify(working.content),
-    });
+      announce,
+    };
+    if (payloadChunkCount(action, payload) > (data.max_action_chunks ?? 64)) {
+      setSendError(true);
+      return;
+    }
+    setSendError(false);
+    props.act(action, payload);
+  };
   return (
     <Section
       className="RmhCodex__toolbar"
@@ -273,6 +284,19 @@ export function DocumentToolbar(props: DocumentControls) {
               </Button.Confirm>
             </NoticeBox>
           )}
+          {sendError && (
+            <NoticeBox danger>
+              {t(
+                'Документ слишком велик для отправки. Текст сохранён в окне; сократите его перед повтором.',
+              )}
+            </NoticeBox>
+          )}
+          <Button.Checkbox
+            checked={announce}
+            onClick={() => setAnnounce(!announce)}
+          >
+            {t('Глобальное оглашение (с перезарядкой)')}
+          </Button.Checkbox>
           <Box className="RmhCodex__actions" mt={1}>
             <Button
               icon="floppy-disk"
@@ -302,22 +326,5 @@ export function DocumentToolbar(props: DocumentControls) {
         </>
       )}
     </Section>
-  );
-}
-
-// Decoration only. Callers must supply trusted sovereign attribution before using it.
-export function SovereignCard({ children }: { children: ReactNode }) {
-  return (
-    <section className="RmhSovereignCard">
-      <span className="RmhSovereignCard__lily" aria-hidden="true">
-        <svg width="20" height="24" viewBox="0 0 40 48">
-          <path
-            fill="currentColor"
-            d="M20 1C12 10 10 16 16 24L14 29C12 18 1 17 2 26C3 33 11 34 15 32L17 37H12V41H18L20 47L22 41H28V37H23L25 32C29 34 37 33 38 26C39 17 28 18 26 29L24 24C30 16 28 10 20 1Z"
-          />
-        </svg>
-      </span>
-      {children}
-    </section>
   );
 }

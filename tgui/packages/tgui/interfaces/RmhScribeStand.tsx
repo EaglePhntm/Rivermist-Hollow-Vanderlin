@@ -1,4 +1,4 @@
-// RMH: visual adaptation of the supplied Rivermist_Lawbook.html.
+// RMH: law-document editor.
 import { useState } from 'react';
 import { RmhLocaleProvider } from './RmhScribeStand/locale';
 import '../styles/interfaces/RmhScribeStand.scss';

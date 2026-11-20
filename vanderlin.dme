@@ -6,6 +6,7 @@
 // BEGIN_PREFERENCES
 #define DEBUG
 // END_PREFERENCES
+#include "modular_rmh\code\_DEFINES\law_documents.dm"
 // BEGIN_INCLUDE
 #include "_odlint.dm"
 #include "_bootstrap\genesis_call.dm"
@@ -4489,7 +4490,6 @@
 #include "modular_ratwood\modular_deserttown\desertstuff.dm"
 #include "modular_ratwood\modular_deserttown\desertwalls.dm"
 #include "modular_rmh\code\tweaks.dm"
-#include "modular_rmh\code\__DEFINES\law_documents.dm"
 #include "modular_rmh\code\_DEFINES\gnoll.dm"
 #include "modular_rmh\code\_DEFINES\mothbug.dm"
 #include "modular_rmh\code\_DEFINES\partial_transformation.dm"
@@ -5214,9 +5214,15 @@
 #include "modular_rmh\modular\hypnosis\hypnosis_quirk.dm"
 #include "modular_rmh\modular\hypnosis\hypnosis_spell.dm"
 #include "modular_rmh\modular\hypnosis\hypnosis_tie_ins.dm"
+#include "modular_rmh\modular\law_documents\announcements.dm"
 #include "modular_rmh\modular\law_documents\decree_board.dm"
+#include "modular_rmh\modular\law_documents\decrees.dm"
+#include "modular_rmh\modular\law_documents\document_types.dm"
 #include "modular_rmh\modular\law_documents\documents.dm"
 #include "modular_rmh\modular\law_documents\drafts.dm"
+#include "modular_rmh\modular\law_documents\lawbook.dm"
+#include "modular_rmh\modular\law_documents\localization.dm"
+#include "modular_rmh\modular\law_documents\posters.dm"
 #include "modular_rmh\modular\law_documents\scom_reader.dm"
 #include "modular_rmh\modular\law_documents\scribe_stand.dm"
 #include "modular_rmh\modular\lipstick_marks\_lipstick_defines.dm"

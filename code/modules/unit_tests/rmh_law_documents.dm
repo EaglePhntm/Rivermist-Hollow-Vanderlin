@@ -1,4 +1,4 @@
-// Public payload literals are intentional: modular defines are included after core tests.
+// Shared law defines are loaded before core tests.
 #if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
 /datum/unit_test/rmh_law_publications_independent
 /datum/unit_test/rmh_law_publications_independent/Run()
@@ -59,7 +59,7 @@
 	var/list/bodies = list()
 	for(var/list/article as anything in articles)
 		bodies += article["body"]
-	var/regex/whitespace = regex("\\s+", "g")
+	var/regex/whitespace = regex("\[[ascii2text(9)][ascii2text(10)][ascii2text(13)] ]+", "g")
 	var/expected = whitespace.Replace(trim(html_decode(GLOB.html_tags.Replace(jointext(source_pages, "\n"), ""))), " ")
 	var/actual = whitespace.Replace(jointext(bodies, " "), " ")
 	TEST_ASSERT_EQUAL(actual, expected, "The starter book changed or omitted the Tome of Justice wording.")
@@ -90,7 +90,7 @@
 	var/list/saved_code = list("epoch" = "old-round", "revision" = 7, "content" = list(list("id" = "draft_saved", "text" = "")))
 	var/list/record = list("character" = "Character A", "role" = "burgmeister", "documents" = list("law_code" = saved_code))
 	TEST_ASSERT(pref.is_valid(list(record)), "A valid unfinished account draft was rejected.")
-	TEST_ASSERT(!pref.is_accessible(null), "Private law drafts are exposed as a generic preference.")
+	TEST_ASSERT(!pref.should_apply && pref.savefile_identifier == PREF_PLAYER, "Private law drafts lost their account-only storage boundary.")
 	TEST_ASSERT(!pref.is_valid(list(record, record)), "Ambiguous duplicate character/office records were accepted.")
 	var/list/other_role = record.Copy()
 	other_role["role"] = "councilor"
@@ -118,8 +118,16 @@
 	TEST_ASSERT(!(book.resistance_flags & ON_FIRE), "The Tome caught fire.")
 	var/snapshot = json_encode(book.documents.lawbook.content)
 	var/revision = book.documents.lawbook.revision
-	TEST_ASSERT(!book.ui_act("publish", list("document" = "lawbook", "content" = "forged")), "The reader accepted a forged publication.")
-	TEST_ASSERT(!book.ui_act("save_draft", list()), "The reader accepted a draft action.")
+	var/mob/living/carbon/human/reader = allocate(/mob/living/carbon/human)
+	reader.forceMove(get_turf(book))
+	var/datum/tgui/reader_ui = new(reader, book, "RmhLawbook")
+	var/mob/previous_usr = usr
+	usr = reader
+	var/denied_publish = book.ui_act("publish", list("document" = RMH_LAW_BOOK, "content" = "forged"), reader_ui, reader_ui.state)
+	var/denied_draft = book.ui_act("save_draft", list(), reader_ui, reader_ui.state)
+	usr = previous_usr
+	qdel(reader_ui)
+	TEST_ASSERT(!denied_publish && !denied_draft, "The book reader accepted a mutation from its own UI actor.")
 	TEST_ASSERT_EQUAL(book.documents.lawbook.revision, revision, "A rejected reader action changed the revision.")
 	TEST_ASSERT_EQUAL(json_encode(book.documents.lawbook.content), snapshot, "A rejected reader action changed the book.")
 	var/list/redacted = book.ui_data(null)
@@ -226,7 +234,7 @@
 	var/list/entries = list(list("id" = "note_1", "title" = "Private", "body" = "<plain text>"))
 	var/list/record = list("character" = "Character A", "role" = "burgmeister", "revision" = 2, "next_id" = 1, "entries" = entries, "schema" = 1)
 	TEST_ASSERT(pref.is_valid(list(record)), "A valid private note record was rejected.")
-	TEST_ASSERT(!pref.is_accessible(null), "Private notes are exposed in generic preferences.")
+	TEST_ASSERT(!pref.should_apply && pref.savefile_identifier == PREF_PLAYER, "Private notes lost their account-only storage boundary.")
 	TEST_ASSERT(!pref.is_valid(list(record, record)), "Duplicate private identities were accepted.")
 	var/list/other = record.Copy()
 	other["role"] = "councilor"
@@ -252,8 +260,18 @@
 	TEST_ASSERT(!throat.purge_laws(), "THROAT still purges laws.")
 	for(var/command in list("make law", "remove law 1", "purge laws"))
 		TEST_ASSERT(!throat.recognize_command(null, command), "A disabled voice command was accepted.")
+	var/mob/living/carbon/human/actor = allocate(/mob/living/carbon/human)
+	actor.forceMove(get_turf(throat))
+	ADD_TRAIT(actor, TRAIT_PRESERVE_UI_WITHOUT_CLIENT, TRAIT_SOURCE_UNIT_TESTS)
+	var/datum/tgui/court_ui = new(actor, throat, "Throne")
+	var/mob/previous_usr = usr
+	var/accepted = FALSE
+	usr = actor
 	for(var/action in list("make_law", "remove_law", "purge_laws"))
-		TEST_ASSERT(!throat.ui_act(action, list("text" = "Forbidden", "index" = "1")), "A forged disabled UI command was accepted.")
+		accepted = throat.ui_act(action, list("text" = "Forbidden", "index" = "1"), court_ui, court_ui.state) || accepted
+	usr = previous_usr
+	qdel(court_ui)
+	TEST_ASSERT(!accepted, "The actor's real court UI accepted a disabled command.")
 	throat.switch_mode("Make Law")
 	TEST_ASSERT_EQUAL(throat.mode, "None", "The disabled law-writing mode is still reachable.")
 	TEST_ASSERT(!("Make Law" in throat.command_list) && !("Remove Law" in throat.command_list) && !("Purge Laws" in throat.command_list), "Help still advertises disabled law commands.")
@@ -263,19 +281,19 @@
 /datum/unit_test/rmh_decree_board_states
 /datum/unit_test/rmh_decree_board_states/Run()
 	var/obj/structure/rmh_decree_board/board = allocate(/obj/structure/rmh_decree_board)
-	board.UnregisterSignal(board.documents, list("rmh_decrees_changed", COMSIG_PARENT_QDELETING))
+	board.UnregisterSignal(board.documents, list(COMSIG_RMH_DECREES_CHANGED, COMSIG_PARENT_QDELETING))
 	board.on_documents_deleted(board.documents)
 	var/datum/rmh_law_documents/store = allocate(/datum/rmh_law_documents)
 	store.decrees = list()
 	board.documents = store
-	board.RegisterSignal(store, "rmh_decrees_changed", "on_decrees_changed")
-	board.RegisterSignal(store, COMSIG_PARENT_QDELETING, "on_documents_deleted")
+	board.RegisterSignal(store, COMSIG_RMH_DECREES_CHANGED, TYPE_PROC_REF(/obj/structure/rmh_decree_board, on_decrees_changed))
+	board.RegisterSignal(store, COMSIG_PARENT_QDELETING, TYPE_PROC_REF(/obj/structure/rmh_decree_board, on_documents_deleted))
 	board.update_appearance()
 	TEST_ASSERT_NULL(board.count_message(), "An empty board announces.")
 	TEST_ASSERT_EQUAL(board.icon_state, "decree_board_1", "An empty board is not intact.")
 	TEST_ASSERT_EQUAL(length(board.overlays), 0, "An empty board displays notices.")
 	store.decrees = list(list("id" = "decree_1", "text" = "An active decree", "text_en" = "", "revision" = 1))
-	SEND_SIGNAL(store, "rmh_decrees_changed")
+	SEND_SIGNAL(store, COMSIG_RMH_DECREES_CHANGED)
 	TEST_ASSERT_EQUAL(board.icon_state, "decree_board_2", "A decree notification did not select the populated sprite.")
 	TEST_ASSERT_EQUAL(length(board.overlays), 0, "A legacy paper overlay covers the new board sprite.")
 	var/snapshot = json_encode(store.decrees)
@@ -286,7 +304,16 @@
 	TEST_ASSERT_EQUAL(length(board.overlays), 0, "A broken board still displays notices.")
 	TEST_ASSERT_NOTEQUAL(board.count_message(), message, "A broken board's announcement is not distorted.")
 	TEST_ASSERT(!board.can_read_decrees(null), "A broken board permits reading.")
-	TEST_ASSERT(!board.ui_act("make_decree", list("text" = "Forged")), "A read-only board accepted an editing action.")
+	var/mob/living/carbon/human/actor = allocate(/mob/living/carbon/human)
+	actor.forceMove(get_turf(board))
+	ADD_TRAIT(actor, TRAIT_PRESERVE_UI_WITHOUT_CLIENT, TRAIT_SOURCE_UNIT_TESTS)
+	var/datum/tgui/board_ui = new(actor, board, "RmhDecree")
+	var/mob/previous_usr = usr
+	usr = actor
+	var/accepted = board.ui_act("make_decree", list("text" = "Forged"), board_ui, board_ui.state)
+	usr = previous_usr
+	qdel(board_ui)
+	TEST_ASSERT(!accepted, "The board's own UI actor could issue a decree.")
 	TEST_ASSERT_EQUAL(json_encode(store.decrees), snapshot, "Breaking or reading the board changed central decrees.")
 	var/obj/item/natural/glass/pane = allocate(/obj/item/natural/glass)
 	var/obj/item/natural/glass/shard/shard = allocate(/obj/item/natural/glass/shard)
@@ -302,7 +329,7 @@
 	TEST_ASSERT_EQUAL(length(board.overlays), 0, "Repair restored the obsolete paper overlay.")
 	TEST_ASSERT_EQUAL(board.count_message(), message, "Repair did not restore clear speech.")
 	store.decrees = list()
-	SEND_SIGNAL(store, "rmh_decrees_changed")
+	SEND_SIGNAL(store, COMSIG_RMH_DECREES_CHANGED)
 	TEST_ASSERT_EQUAL(board.icon_state, "decree_board_1", "Revocation did not restore the empty sprite.")
 	TEST_ASSERT_NULL(board.count_message(), "A board without active decrees still announces.")
 	qdel(store)
@@ -349,7 +376,7 @@
 	for(var/index in 1 to length(marks))
 		var/letter = copytext_char(text, index, index + 1)
 		TEST_ASSERT(marks[index] in list(0, 1, 2), "Client markup or an unknown style reached the snapshot.")
-		if(uppertext(letter) == lowertext(letter))
+		if(uppertext(letter) == LOWER_TEXT(letter))
 			TEST_ASSERT_EQUAL(marks[index], 0, "Non-letter punctuation was randomly emphasized.")
 
 /datum/unit_test/rmh_poster_removal_preserves_sheet
@@ -524,4 +551,166 @@
 	TEST_ASSERT_NOTEQUAL(ru["title"], en["title"], "Publication headers ignore language.")
 	TEST_ASSERT_EQUAL(rmh_law_revision_message("law_code", 4, "ru"), "Опубликована 4-я редакция свода.", "Russian revision feedback exposes internal document IDs.")
 	TEST_ASSERT(findtext(rmh_law_revision_message("lawbook", 4, "en"), "revision 4"), "English revision feedback is missing.")
+
+/datum/unit_test/rmh_law_legacy_archive_preserved/Run()
+	var/datum/preference/list_type/rmh_law_drafts/pref = allocate(/datum/preference/list_type/rmh_law_drafts)
+	var/list/laws = list()
+	for(var/i in 1 to RMH_LAW_MAX_LAWS)
+		laws += list(list("id" = "draft_[i]", "text" = repeat_string(RMH_LAW_MAX_TEXT, "x")))
+	var/list/legacy = list(list("character" = "Legacy", "role" = "burgmeister", "documents" = list(RMH_LAW_CODE = list("epoch" = "legacy", "revision" = 1, "content" = laws))))
+	TEST_ASSERT(length(json_encode(legacy)) > RMH_LAW_MAX_NEW_SAVED_TEXT, "The legacy fixture does not exceed the new write limit.")
+	var/list/loaded = pref.deserialize(legacy)
+	TEST_ASSERT_EQUAL(json_encode(loaded), json_encode(legacy), "Loading a v1 archive lost its text.")
+	TEST_ASSERT(pref.is_valid(loaded), "A valid old archive is rejected after the new write limit.")
+	TEST_ASSERT(rmh_law_storage_growth_allowed(loaded, loaded), "An existing archive cannot be saved unchanged.")
+	TEST_ASSERT(!rmh_law_storage_growth_allowed(list(), list(repeat_string(140000, "x"))), "New oversized archive growth was accepted.")
+
+/datum/unit_test/rmh_law_published_seed_is_immutable/Run()
+	var/datum/rmh_law_documents/store = allocate(/datum/rmh_law_documents)
+	var/datum/preferences/prefs = allocate(/datum/preferences)
+	var/mob/living/carbon/human/actor = allocate(/mob/living/carbon/human)
+	store.has_publication = TRUE
+	var/before = json_encode(list(GLOB.laws_of_the_land, GLOB.lord_decrees, store.lawbook.content))
+	TEST_ASSERT(!store.seed_role_preferences(actor, prefs), "A new ruler reseeded published laws.")
+	TEST_ASSERT_EQUAL(json_encode(list(GLOB.laws_of_the_land, GLOB.lord_decrees, store.lawbook.content)), before, "Rejected reseeding changed publications.")
+
+/datum/unit_test/rmh_law_ids_never_reused/Run()
+	var/datum/rmh_law_documents/store = allocate(/datum/rmh_law_documents)
+	var/list/previous_laws = GLOB.laws_of_the_land
+	var/error_first = store.publish(RMH_LAW_CODE, store.law_code.revision, list(list("id" = "draft_first", "text" = "First")))
+	var/list/first = store.law_code.content[1]
+	var/id_first = first["id"]
+	var/error_delete = store.publish(RMH_LAW_CODE, store.law_code.revision, list())
+	var/error_second = store.publish(RMH_LAW_CODE, store.law_code.revision, list(list("id" = "draft_second", "text" = "Second")))
+	var/list/second = store.law_code.content[1]
+	GLOB.laws_of_the_land = previous_laws
+	TEST_ASSERT_NULL(error_first, "Initial publication failed.")
+	TEST_ASSERT_NULL(error_delete, "Deleting a law failed.")
+	TEST_ASSERT_NULL(error_second, "Recreating a law failed.")
+	TEST_ASSERT_NOTEQUAL(id_first, second["id"], "A deleted official law ID was reused.")
+	TEST_ASSERT_NULL(store.law_code.normalize(list(first)), "A stale deleted ID was accepted.")
+
+/datum/unit_test/rmh_law_observers_read_only/Run()
+	var/mob/dead/observer/reader = allocate(/mob/dead/observer)
+	var/obj/structure/rmh_scribe_stand/stand = allocate(/obj/structure/rmh_scribe_stand)
+	var/obj/structure/rmh_decree_board/board = allocate(/obj/structure/rmh_decree_board)
+	var/obj/item/book/law/book = allocate(/obj/item/book/law)
+	var/obj/item/rmh_decree_poster/poster = allocate(/obj/item/rmh_decree_poster)
+	poster.copy_decree(list("text" = "Visible decree", "text_en" = ""))
+	TEST_ASSERT_EQUAL(stand.ui_status(reader, GLOB.default_state), UI_UPDATE, "Observer cannot read the stand.")
+	TEST_ASSERT_EQUAL(board.ui_status(reader, GLOB.default_state), UI_UPDATE, "Observer cannot read the board.")
+	TEST_ASSERT_EQUAL(book.ui_status(reader, GLOB.default_state), UI_UPDATE, "Observer cannot read the book.")
+	TEST_ASSERT_EQUAL(poster.ui_status(reader, GLOB.default_state), UI_UPDATE, "Observer cannot read the poster.")
+	TEST_ASSERT(!stand.can_edit(reader) && !poster.can_handle(reader) && !poster.can_forge(reader), "Read access grants physical actions.")
+	var/datum/tgui/reader_ui = new(reader, stand, "RmhScribeStand")
+	var/before = json_encode(stand.documents.law_code.content)
+	var/mob/previous_usr = usr
+	usr = reader
+	var/accepted = stand.ui_act("publish", list("document" = RMH_LAW_CODE, "epoch" = stand.documents.epoch, "revision" = stand.documents.law_code.revision, "content" = "[]"), reader_ui, reader_ui.state)
+	usr = previous_usr
+	qdel(reader_ui)
+	TEST_ASSERT(!accepted, "A forged observer action was accepted.")
+	TEST_ASSERT_EQUAL(json_encode(stand.documents.law_code.content), before, "Observer changed the published code.")
+
+/datum/unit_test/rmh_scribe_publication_actor/Run()
+	var/obj/structure/rmh_scribe_stand/stand = allocate(/obj/structure/rmh_scribe_stand)
+	var/mob/living/carbon/human/editor = allocate(/mob/living/carbon/human)
+	if(!editor.mind)
+		editor.mind = new
+	editor.mind.set_assigned_role(/datum/job/burgmeister::title)
+	editor.set_skillrank(/datum/attribute/skill/misc/reading, SKILL_RANK_EXPERT)
+	editor.forceMove(get_turf(stand))
+	ADD_TRAIT(editor, TRAIT_PRESERVE_UI_WITHOUT_CLIENT, TRAIT_SOURCE_UNIT_TESTS)
+	var/datum/lock/key/stand_lock = stand.lock
+	stand_lock.locked = FALSE
+	TEST_ASSERT(stand.can_edit(editor), "The authorized ruler cannot edit an unlocked stand.")
+	TEST_ASSERT_EQUAL(GLOB.default_state.can_use_topic(stand, editor), UI_INTERACTIVE, "The editor does not reach real TGUI action logic.")
+	var/list/old_laws = GLOB.laws_of_the_land
+	var/datum/rmh_law_documents/old_store = stand.documents
+	stand.UnregisterSignal(old_store, list(COMSIG_RMH_LAW_PUBLISHED, COMSIG_RMH_DECREES_CHANGED, COMSIG_PARENT_QDELETING))
+	var/datum/rmh_law_documents/store = allocate(/datum/rmh_law_documents)
+	stand.documents = store
+	var/datum/tgui/editor_ui = new(editor, stand, "RmhScribeStand")
+	var/list/params = list("document" = RMH_LAW_CODE, "epoch" = store.epoch, "revision" = store.law_code.revision, "editor_key" = json_encode(list(editor.ckey, rmh_law_character(editor), rmh_law_editor_role(editor))), "content" = json_encode(list(list("id" = "draft_actor", "text" = "10% tax + tea & bread"))), "announce" = FALSE)
+	var/mob/previous_usr = usr
+	usr = editor
+	stand.ui_act("publish", params, editor_ui, editor_ui.state)
+	var/revision = store.law_code.revision
+	var/after = json_encode(store.law_code.content)
+	stand.ui_act("publish", params, editor_ui, editor_ui.state)
+	usr = previous_usr
+	qdel(editor_ui)
+	GLOB.laws_of_the_land = old_laws
+	var/list/row = store.law_code.content[1]
+	TEST_ASSERT_EQUAL(row["text"], "10% tax + tea & bread", "The real editor UI did not publish literal content.")
+	TEST_ASSERT_EQUAL(store.law_code.revision, revision, "Retrying a stale request changed the revision.")
+	TEST_ASSERT_EQUAL(json_encode(store.law_code.content), after, "Retrying a request changed the content.")
+	TEST_ASSERT(!store.last_announcement_sent, "An explicitly quiet publication announced globally.")
+
+/datum/unit_test/rmh_law_announcement_cooldown/Run()
+	var/datum/rmh_law_documents/store = allocate(/datum/rmh_law_documents)
+	var/mob/living/carbon/human/editor = allocate(/mob/living/carbon/human)
+	var/old_cooldown = SScommunications.nonsilicon_message_cooldown
+	var/old_stat = GLOB.vanderlin_round_stats[STATS_LAWS_AND_DECREES_MADE]
+	var/list/old_laws = GLOB.laws_of_the_land
+	SScommunications.nonsilicon_message_cooldown = world.time + 30 SECONDS
+	var/error = store.publish(RMH_LAW_CODE, store.law_code.revision, list(list("id" = "draft_cooldown", "text" = "Quiet new law")), editor, TRUE)
+	var/announced = store.last_announcement_sent
+	var/stat_after_publish = GLOB.vanderlin_round_stats[STATS_LAWS_AND_DECREES_MADE]
+	var/revision = store.law_code.revision
+	store.publish(RMH_LAW_CODE, revision, store.law_code.content, editor, TRUE)
+	var/stat_after_repeat = GLOB.vanderlin_round_stats[STATS_LAWS_AND_DECREES_MADE]
+	GLOB.laws_of_the_land = old_laws
+	SScommunications.nonsilicon_message_cooldown = old_cooldown
+	GLOB.vanderlin_round_stats[STATS_LAWS_AND_DECREES_MADE] = old_stat
+	TEST_ASSERT_NULL(error, "The global announcement cooldown blocked saving.")
+	TEST_ASSERT(!announced, "A publication bypassed the announcement cooldown.")
+	TEST_ASSERT_EQUAL(stat_after_publish, old_stat + 1, "A real publication was not counted once.")
+	TEST_ASSERT_EQUAL(stat_after_repeat, stat_after_publish, "A duplicate publication was counted twice.")
+	TEST_ASSERT_EQUAL(store.law_code.revision, revision, "A duplicate publication changed the revision.")
+
+/datum/unit_test/rmh_scom_remote_read_gate/Run()
+	var/obj/structure/fake_machine/scomm/scom = allocate(/obj/structure/fake_machine/scomm)
+	var/mob/living/carbon/human/reader = allocate(/mob/living/carbon/human)
+	reader.forceMove(run_loc_floor_top_right)
+	TEST_ASSERT(!in_range(reader, scom), "The remote reading fixture is too close.")
+	TEST_ASSERT(!rmh_law_can_read(reader, scom), "Physical reading ignored distance.")
+	TEST_ASSERT(rmh_law_can_read(reader, scom, allow_remote = TRUE), "The existing SCOM chat link cannot open remotely.")
+
+/datum/unit_test/rmh_poster_forgery_close_cancels/Run()
+	var/mob/living/carbon/human/editor = allocate(/mob/living/carbon/human)
+	ADD_TRAIT(editor, TRAIT_PRESERVE_UI_WITHOUT_CLIENT, TRAIT_SOURCE_UNIT_TESTS)
+	var/obj/item/rmh_decree_poster/poster = allocate(/obj/item/rmh_decree_poster)
+	var/obj/item/tattoo_machine/tool = allocate(/obj/item/tattoo_machine)
+	editor.put_in_hands(poster)
+	editor.put_in_hands(tool)
+	poster.copy_decree(list("text" = "Original", "text_en" = ""))
+	poster.editor_ref = WEAKREF(editor)
+	poster.tool_ref = WEAKREF(tool)
+	poster.prompt_mode = "forge"
+	var/datum/tgui/editor_ui = new(editor, poster, "RmhDecree")
+	TEST_ASSERT(poster.can_forge(editor), "The tattoo machine fixture cannot forge.")
+	TEST_ASSERT_EQUAL(editor_ui.state.can_use_topic(poster, editor), UI_INTERACTIVE, "The real forgery UI cannot dispatch.")
+	var/before = json_encode(poster.snapshot)
+	var/mob/previous_usr = usr
+	usr = editor
+	poster.ui_act("forge", list("text" = "AB", "text_en" = "", "token" = poster.prompt_token, "revision" = poster.content_revision), editor_ui, editor_ui.state)
+	usr = previous_usr
+	var/started = poster.forging
+	poster.ui_close(editor)
+	qdel(editor_ui)
+	sleep(2 SECONDS)
+	TEST_ASSERT(started, "Forgery did not start asynchronously from its real UI.")
+	TEST_ASSERT(!poster.forging, "Closing the UI left the forgery busy.")
+	TEST_ASSERT_EQUAL(json_encode(poster.snapshot), before, "Cancelled forgery changed the poster.")
+
+/datum/unit_test/rmh_poster_forgery_length_limit/Run()
+	var/obj/item/rmh_decree_poster/poster = allocate(/obj/item/rmh_decree_poster)
+	poster.copy_decree(list("text" = "Original", "text_en" = ""))
+	var/revision = poster.content_revision
+	var/before = json_encode(poster.snapshot)
+	TEST_ASSERT(!poster.replace_forgery(repeat_string(181, "Ж"), repeat_string(180, "x"), SKILL_RANK_EXPERT, revision), "The combined 361-character forgery bypassed the limit.")
+	TEST_ASSERT_EQUAL(json_encode(poster.snapshot), before, "Rejecting an over-limit forgery changed the poster.")
+	TEST_ASSERT(poster.replace_forgery(repeat_string(180, "Ж"), repeat_string(180, "x"), SKILL_RANK_EXPERT, revision), "The combined 360-character forgery was rejected.")
+
 #endif

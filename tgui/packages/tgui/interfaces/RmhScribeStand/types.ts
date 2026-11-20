@@ -32,6 +32,7 @@ export type Draft<T extends Content = Content> = {
   content: T;
 };
 export type Data = {
+  max_action_chunks?: number;
   language?: 'en' | 'ru';
   epoch: string;
   role: string | null;

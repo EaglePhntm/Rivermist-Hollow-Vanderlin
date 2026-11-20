@@ -1,5 +1,5 @@
-// RMH: visual tokens and layout adapted from the user's Rivermist_Lawbook.html.
-@use './RmhScribeStand.fonts.scss';
+// RMH: law-document visual tokens and layout.
+
 
 .theme-rmh-lawbook:root {
   --color-base: #0c0907;
@@ -308,23 +308,5 @@
   background: #000 !important;
   .Layout, .Window, .Layout__content, .Window__rest, .Window__content, .Window__contentPadding {
     background: transparent !important;
-  }
-}
-
-// Prepared sovereign presentation. Attribution must come from trusted metadata.
-.RmhSovereignCard {
-  position: relative; background: linear-gradient(135deg, #301014, #180d0f) !important;
-  border: 1px solid #7b2434 !important; box-shadow: inset 0 0 0 4px #210d12, inset 0 0 0 5px #5e1b2a;
-  padding: 28px 24px 20px !important; color: #e4c4bc;
-  &::before, &::after {
-    content: ''; position: absolute; top: 50%; width: 9px; height: 12px;
-    background: #8c263a; border-radius: 60% 5% 60% 60%; transform: rotate(-45deg);
-  }
-  &::before { left: -5px; } &::after { right: -5px; }
-  &__lily {
-    position: absolute; left: 50%; top: -14px; transform: translateX(-50%);
-    display: grid; place-items: center; width: 28px; height: 28px;
-    color: #b85a67; border: 1px solid #872839; border-radius: 50%; background: #210b10;
-    font: 24px/1 Georgia, serif;
   }
 }

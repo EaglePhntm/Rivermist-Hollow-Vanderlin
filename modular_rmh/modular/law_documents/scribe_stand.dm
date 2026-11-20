@@ -60,6 +60,11 @@
 	if(user.can_read(src, TRUE))
 		ui_interact(user)
 
+/obj/structure/rmh_scribe_stand/ui_status(mob/user, datum/ui_state/state)
+	if(isobserver(user))
+		return documents ? UI_UPDATE : UI_CLOSE
+	return ..()
+
 /obj/structure/rmh_scribe_stand/ui_interact(mob/user, datum/tgui/ui)
 	if(!documents)
 		return
@@ -80,12 +85,13 @@
 	var/role = rmh_law_editor_role(user)
 	var/list/saved = can_edit(user) ? rmh_law_saved_record(user, role) : null
 	var/list/notes = can_edit(user) ? rmh_law_note_record(user, role) : null
-	var/can_read = user.can_read(src, TRUE)
+	var/can_read = rmh_law_can_read(user, src)
 	var/list/decrees = list()
 	if(can_read)
 		decrees = documents.decrees
 	return list(
-		"language" = rmh_law_ui_language(user),
+		"language" = get_preferred_ui_language(user),
+		"max_action_chunks" = CONFIG_GET(number/tgui_max_chunk_count),
 		"epoch" = documents.epoch,
 		"decrees" = decrees,
 		"role" = role,
@@ -154,11 +160,13 @@
 		return TRUE
 	var/raw = params["content"]
 	if(!istext(raw) || length(raw) > RMH_LAW_MAX_PAYLOAD)
+		to_chat(user, span_warning(rmh_ui_text(user, "Запрос слишком велик или повреждён. Рабочий текст не опубликован.", "The request is oversized or malformed. Your working text was not published.")))
 		return FALSE
 	var/list/payload
 	try
 		payload = json_decode(raw)
 	catch
+		to_chat(user, span_warning(rmh_ui_text(user, "Повреждённый запрос. Рабочий текст не опубликован.", "Malformed request. Your working text was not published.")))
 		return FALSE
 	var/list/normalized = doc.normalize(payload, check_ids = action == "publish", for_draft = action == "save_draft")
 	if(!normalized)
@@ -166,10 +174,11 @@
 		return FALSE
 	var/error
 	if(action == "publish")
-		error = documents.publish(params["document"], revision, normalized, user)
+		error = documents.publish(params["document"], revision, normalized, user, params["announce"] == TRUE)
 		if(!error)
-			log_game("[key_name(user)] published [params["document"]] revision [doc.revision] at [AREACOORD(src)].")
-			to_chat(user, span_notice(rmh_law_revision_message(params["document"], doc.revision, rmh_law_ui_language(user))))
+			to_chat(user, span_notice(rmh_law_revision_message(params["document"], doc.revision, get_preferred_ui_language(user))))
+			if(!documents.last_announcement_sent)
+				to_chat(user, span_notice(rmh_ui_text(user, "Документ сохранён без глобального оглашения (не запрошено либо действует перезарядка).", "Published without a global announcement (not requested or on cooldown).")))
 			// The publication signal already pushes all stands once.
 			return FALSE
 	else
@@ -180,110 +189,12 @@
 		to_chat(user, span_notice(rmh_law_feedback(user, "Personal draft saved. The official document has not changed.")))
 	return TRUE
 
-// --- lawbook.dm ---
-/// Existing mapped/vended Tomes become views of the one published lawbook.
-/obj/item/book/law
-	desc = "A lawbook inlaid with resonant minerals. Its pages follow the official publication and tremble when amended."
-	resistance_flags = FIRE_PROOF
-	firefuel = 0
-	override_find_book = TRUE
-	var/tmp/datum/rmh_law_documents/documents
 
-/obj/item/book/law/Initialize(mapload)
-	. = ..()
-	documents = rmh_get_law_documents()
-	RegisterSignal(documents, COMSIG_RMH_LAW_PUBLISHED, PROC_REF(on_lawbook_publication))
-	RegisterSignal(documents, COMSIG_PARENT_QDELETING, PROC_REF(on_lawbook_documents_deleted))
-
-/obj/item/book/law/Destroy()
-	if(documents)
-		UnregisterSignal(documents, list(COMSIG_RMH_LAW_PUBLISHED, COMSIG_PARENT_QDELETING))
-	documents = null
-	return ..()
-
-/obj/item/book/law/proc/on_lawbook_publication(datum/source, document_id)
-	SIGNAL_HANDLER
-	if(document_id != RMH_LAW_BOOK)
-		return
-	SStgui.update_uis(src)
-	// Native animation only on exposed copies; books in shelves/bags do no visual work.
-	// The global amendment announcement already supplies the temporary sound cue.
-	if(isturf(loc) || ismob(loc))
-		rmh_resonate()
-
-/obj/item/book/law/proc/on_lawbook_documents_deleted(datum/source)
-	SIGNAL_HANDLER
-	documents = null
-	SStgui.close_uis(src)
-
-/obj/item/book/law/attack_self(mob/user, list/modifiers)
-	// Replace only this subtype's legacy HUD/browser reader.
-	return read(user)
-
-/obj/item/book/law/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	if(!open)
-		SStgui.close_uis(src)
-
-/obj/item/book/law/read(mob/user)
-	if(!user || !in_range(user, src) || !user.can_read(src))
-		return FALSE
-	if(!user.can_perform_action(src, NEED_LITERACY|FORBID_TELEKINESIS_REACH))
-		return FALSE
-	if(!open)
-		attack_hand_secondary(user)
-	if(!rmh_can_read(user) || ui_status(user, GLOB.default_state) < UI_UPDATE)
-		return FALSE
+/obj/structure/rmh_scribe_stand/attack_ghost(mob/dead/observer/user)
 	ui_interact(user)
-	SEND_SIGNAL(user, COMSIG_BOOK_READ)
-	return TRUE
 
-/obj/item/book/law/proc/rmh_can_read(mob/user)
-	return documents && open && user && in_range(user, src) && user.can_read(src, TRUE) \
-		&& user.can_perform_action(src, NEED_LITERACY|FORBID_TELEKINESIS_REACH)
 
-/obj/item/book/law/ui_status(mob/user, datum/ui_state/state)
-	if(!rmh_can_read(user))
-		return UI_CLOSE
-	return ..()
-
-/obj/item/book/law/ui_interact(mob/user, datum/tgui/ui)
-	if(!rmh_can_read(user))
-		return
-	ui = SStgui.try_update_ui(user, src, ui)
-	if(!ui)
-		ui = new(user, src, "RmhLawbook", name)
-		ui.set_autoupdate(FALSE)
-		ui.open()
-
-/obj/item/book/law/ui_data(mob/user)
-	if(!rmh_can_read(user))
-		return list("language" = rmh_law_ui_language(user), "revision" = 0, "lawbook" = list("title" = "", "chapters" = list()))
-	return list("language" = rmh_law_ui_language(user), "revision" = documents.lawbook.revision, "lawbook" = documents.lawbook.content)
-
-/obj/item/book/law/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
-	..()
-	// Intentionally no domain actions, including forged editor/draft requests.
-	// Contents navigation and search are entirely local to the reader.
-	return FALSE
-
-/// Add one Tome alongside the existing recipe selection; do not replace recipes.
-/obj/structure/bookcase/random_recipes/Initialize(mapload)
+/obj/structure/rmh_scribe_stand/picked(mob/living/user, obj/tool, skill_level, difficulty)
 	. = ..()
-	if(!(locate(/obj/item/book/law) in src))
-		new /obj/item/book/law(src)
-	update_appearance(UPDATE_ICON_STATE)
-
-/obj/structure/bookcase/fancy/random_recipes/Initialize(mapload)
-	. = ..()
-	if(!(locate(/obj/item/book/law) in src))
-		new /obj/item/book/law(src)
-	update_appearance(UPDATE_ICON_STATE)
-
-
-/obj/item/book/law/proc/rmh_resonate()
-	var/rest_x = pixel_x
-	var/rest_y = pixel_y
-	animate(src, pixel_x = rest_x + 3, pixel_y = rest_y + 1, time = 1, loop = 4)
-	animate(pixel_x = rest_x - 3, pixel_y = rest_y - 1, time = 1)
-	animate(pixel_x = rest_x, pixel_y = rest_y, time = 1)
+	update_appearance()
+	SStgui.update_uis(src)

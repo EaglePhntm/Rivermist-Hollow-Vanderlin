@@ -7,10 +7,6 @@
 	savefile_identifier = PREF_PLAYER
 	should_apply = FALSE
 
-/datum/preference/list_type/rmh_law_drafts/is_accessible(datum/preferences/prefs)
-	. = ..()
-	return FALSE
-
 /datum/preference/list_type/rmh_law_drafts/is_valid(value, datum/preferences/prefs)
 	if(!islist(value) || length(value) > RMH_LAW_MAX_DRAFT_RECORDS)
 		return FALSE
@@ -100,6 +96,8 @@
 	var/datum/rmh_law_documents/store = rmh_get_law_documents()
 	var/list/documents = record["documents"]
 	documents[document_id] = list("epoch" = store.epoch, "revision" = revision, "content" = content)
+	if(!rmh_law_storage_growth_allowed(old_records, records))
+		return "New archive data exceeds 128 KiB. Existing saved text has been kept; shorten the edit."
 	prefs.rmh_law_next_draft_write = world.time + 2 SECONDS
 	if(!prefs.write_preference(/datum/preference/list_type/rmh_law_drafts, records))
 		return "The account draft size limit was reached."
@@ -138,10 +136,6 @@
 	savefile_key = "rmh_law_notes_v1"
 	savefile_identifier = PREF_PLAYER
 	should_apply = FALSE
-
-/datum/preference/list_type/rmh_law_notes/is_accessible(datum/preferences/prefs)
-	. = ..()
-	return FALSE
 
 /datum/preference/list_type/rmh_law_notes/is_valid(value, datum/preferences/prefs)
 	if(!islist(value) || length(value) > RMH_LAW_MAX_DRAFT_RECORDS)
@@ -245,6 +239,8 @@
 		records[index] = record
 	else
 		records += list(record)
+	if(!rmh_law_storage_growth_allowed(old_records, records))
+		return "New archive data exceeds 128 KiB. Existing saved text has been kept; shorten the edit."
 	prefs.rmh_law_next_draft_write = world.time + 2 SECONDS
 	if(!prefs.write_preference(/datum/preference/list_type/rmh_law_notes, records))
 		return "The account note storage limit was reached."
@@ -252,3 +248,9 @@
 		prefs.write_preference(/datum/preference/list_type/rmh_law_notes, old_records)
 		return "Could not write the account savefile."
 	return null
+
+
+/// Grandfather valid v1 archives. Over-limit archives may shrink, never grow.
+/proc/rmh_law_storage_growth_allowed(list/old_records, list/records)
+	var/next_size = length(json_encode(records))
+	return next_size <= RMH_LAW_MAX_NEW_SAVED_TEXT || next_size <= length(json_encode(old_records))

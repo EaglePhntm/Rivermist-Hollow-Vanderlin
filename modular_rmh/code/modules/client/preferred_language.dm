@@ -28,6 +28,15 @@
 	if(!selection)
 		return
 
-	preferred_ui_language = sanitize_preferred_ui_language(language_choices[selection])
+	set_preferred_ui_language(language_choices[selection])
 	prefs?.save_preferences()
 	to_chat(src, span_notice("Preferred UI language set to [selection]. Reopen interfaces to apply it."))
+
+/// Shared RMH language setter; Character Creator and the OOC verb use one value.
+/client/proc/set_preferred_ui_language(language, refresh = TRUE)
+	preferred_ui_language = sanitize_preferred_ui_language(language)
+	if(prefs)
+		prefs.character_creator_lang = preferred_ui_language
+	if(refresh)
+		SStgui.update_user_uis(mob)
+		rmh_scom_reader?.send_publication()

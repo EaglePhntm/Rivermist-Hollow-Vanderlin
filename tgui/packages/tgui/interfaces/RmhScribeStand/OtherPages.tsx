@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Box, Button, Input, Section, TextArea } from 'tgui-core/components';
+import { payloadChunkCount } from '../../events/act';
 import {
   CodexFrame,
   matches,
@@ -217,7 +218,7 @@ export function DraftLibrary(
           <Button onClick={() => setDocuments(false)}>
             {t('Личные записи')}
           </Button>
-          <Box className="RmhCodex__tag">{office(data.role)}</Box>
+          <Box className="RmhCodex__tag">{t(office(data.role))}</Box>
           <h3>{data.character}</h3>
           <Box className="RmhCodex__muted">
             {t(
@@ -293,6 +294,19 @@ function NoteLibrary(
   },
 ) {
   const t = useRmhText();
+  const [sendError, setSendError] = useState(false);
+  const sendNotes = (payload: Record<string, unknown>) => {
+    if (
+      payloadChunkCount('save_notes', payload) >
+      (props.data.max_action_chunks ?? 64)
+    ) {
+      setSendError(true);
+      return;
+    }
+    setSendError(false);
+    props.act('save_notes', payload);
+  };
+
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const saved = props.data.notes || { revision: 1, entries: [] };
@@ -377,7 +391,7 @@ function NoteLibrary(
           icon="floppy-disk"
           disabled={!editable || stale || working === saved}
           onClick={() =>
-            props.act('save_notes', {
+            sendNotes({
               epoch: props.data.epoch,
               editor_key: props.data.editor_key,
               revision: working.revision,
@@ -387,6 +401,13 @@ function NoteLibrary(
         >
           {t('Сохранить записи')}
         </Button>
+        {sendError && (
+          <Box color="bad">
+            {t(
+              'Документ слишком велик для отправки. Текст сохранён в окне; сократите его перед повтором.',
+            )}
+          </Box>
+        )}
         <Button.Confirm
           confirmContent={t('Заменить рабочий текст')}
           onClick={() => props.onNotes(null)}

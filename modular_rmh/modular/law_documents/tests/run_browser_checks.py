@@ -1,4 +1,4 @@
-"""Run shipped SCOM HTML/JS checks in Edge, without BYOND, TGUI or extra Python packages."""
+"""Run shipped SCOM HTML/JS checks in Chromium/Edge, without BYOND, TGUI or extra Python packages."""
 import argparse
 import html
 import json
@@ -11,20 +11,18 @@ from urllib.parse import quote
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--edge", default="C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
+    parser.add_argument("--edge", default=shutil.which("google-chrome") or shutil.which("chromium") or "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[4]
     assets = root/"modular_rmh/modular/law_documents/assets"
     out = Path(tempfile.mkdtemp(prefix="rmh-scom-checks-"))
     for name in ("scom-frame.png","scom-frame-active.png"):
         shutil.copyfile(assets/name,out/name)
-    shutil.copyfile(root/"interface/fonts/Deutsch Gothic.ttf",out/"rmh-scom-gothic.ttf")
     shutil.copyfile(Path(__file__).with_name("browser_checks.js"),out/"browser_checks.js")
     fixture = {"language":"ru","laws":[],"mode":"normal"}
     page = (assets/"scom-reader.html").read_text(encoding="utf-8")
     for key,value in {"@FRAME@":json.dumps((out/"scom-frame.png").as_uri()),
                       "@ACTIVE@":json.dumps((out/"scom-frame-active.png").as_uri()),
-                      "@FONT@":json.dumps((out/"rmh-scom-gothic.ttf").as_uri()),
                       "@REF@":"preview","@DATA@":quote(json.dumps(fixture))}.items():
         page = page.replace(key,value)
     # A standalone test must never launch a registered byond:// handler.

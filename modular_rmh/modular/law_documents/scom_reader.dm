@@ -4,7 +4,6 @@
 	assets = list(
 		"scom-frame.png" = 'modular_rmh/modular/law_documents/assets/scom-frame.png',
 		"scom-frame-active.png" = 'modular_rmh/modular/law_documents/assets/scom-frame-active.png',
-		"rmh-scom-gothic.ttf" = 'interface/fonts/Deutsch Gothic.ttf',
 	)
 
 /client
@@ -71,7 +70,7 @@
 	return list(
 		"laws" = documents.law_code.content,
 		"mode" = mode,
-		"language" = rmh_law_ui_language(user),
+		"language" = get_preferred_ui_language(user),
 	)
 
 /datum/browser/rmh_scom/build_page()
@@ -81,7 +80,6 @@
 	// JSON strings are quoted CSS URLs; mappings work with browse_rsc and CDN transports.
 	page = replacetext(page, "@FRAME@", json_encode(urls["scom-frame.png"]))
 	page = replacetext(page, "@ACTIVE@", json_encode(urls["scom-frame-active.png"]))
-	page = replacetext(page, "@FONT@", json_encode(urls["rmh-scom-gothic.ttf"]))
 	page = replacetext(page, "@REF@", REF(src))
 	// Encoded JSON cannot break out of its script string, even with hostile legal text.
 	return replacetext(page, "@DATA@", url_encode(json_encode(publication_data())))
@@ -94,7 +92,7 @@
 	return ..()
 
 /datum/browser/rmh_scom/proc/send_publication()
-	if(!viewer || viewer.mob != user || !user.is_literate() || !documents)
+	if(!viewer || viewer.mob != user || (!isobserver(user) && !user.is_literate()) || !documents)
 		close()
 		qdel(src)
 		return
@@ -112,14 +110,14 @@
 	// No legal mutations or remote SCOM controls exist on this Topic.
 
 /obj/structure/fake_machine/scomm/proc/rmh_open_laws(mob/user, allow_remote = FALSE)
-	if(obj_broken || !user?.client || !user.can_read(src))
+	if(obj_broken || !user?.client || !rmh_law_can_read(user, src, allow_remote))
 		return FALSE
-	if(!allow_remote && !in_range(user, src))
+	if(!isobserver(user) && !allow_remote && !in_range(user, src))
 		return FALSE
 	var/action_flags = NEED_LITERACY
 	if(!allow_remote)
 		action_flags |= FORBID_TELEKINESIS_REACH
-	if(!user.can_perform_action(src, action_flags))
+	if(!isobserver(user) && !user.can_perform_action(src, action_flags))
 		return FALSE
 	var/client/player = user.client
 	if(player.rmh_scom_reader)
@@ -129,15 +127,7 @@
 	player.rmh_scom_reader.open()
 	return TRUE
 
-/obj/structure/fake_machine/scomm/examine(mob/user)
-	. = ..()
-	// Core appends its whole legacy law list after this exact marker.
-	// Trim only that suffix; preserve base examine text and RMH designation.
-	var/list/description = .
-	var/law_start = description.Find("<b>THE LAWS OF THE LAND:</b>")
-	if(law_start)
-		description.Cut(law_start)
-	. += "<a href='byond://?src=[REF(src)];rmh_laws=1'>[rmh_ui_text(user, "Читать законы", "Read laws")]</a>"
+
 
 /obj/structure/fake_machine/scomm/Topic(href, list/href_list)
 	. = ..()
@@ -145,19 +135,10 @@
 		// Existing chat links may reopen the public laws after walking away.
 		rmh_open_laws(usr, allow_remote = TRUE)
 
-/obj/structure/fake_machine/scomm/attack_hand_secondary(mob/user, list/modifiers)
-	// Replace only the legacy decree popup, preserving normal/middle-click radio controls.
-	rmh_open_laws(user)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/fake_machine/scomm/Initialize()
-	. = ..()
-	// Core process() only announces random decrees; speech/ring routing does not need it.
-	STOP_PROCESSING(SSroguemachine, src)
 
-/obj/structure/fake_machine/scomm/dictate_laws()
-	// The old voice command no longer broadcasts the law list.
-	return
+
+
 
 
 /datum/browser/rmh_scom/proc/on_scom_mode_changed(obj/structure/fake_machine/scomm/source)
@@ -193,3 +174,6 @@
 	SEND_SIGNAL(src, COMSIG_RMH_SCOM_MODE_CHANGED)
 
 #undef COMSIG_RMH_SCOM_MODE_CHANGED
+
+/obj/structure/fake_machine/scomm/attack_ghost(mob/dead/observer/user)
+	return rmh_open_laws(user, allow_remote = TRUE)

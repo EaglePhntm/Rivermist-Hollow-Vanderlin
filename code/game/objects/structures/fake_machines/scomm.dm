@@ -46,15 +46,7 @@
 	if(scom_number)
 		. += span_smallnotice("Its designation is #[scom_number][scom_tag ? ", labeled as [scom_tag]" : ""].")
 	//RMH EDITED END
-	. += "<b>THE LAWS OF THE LAND:</b>"
-	if(!length(GLOB.laws_of_the_land))
-		. += "<span class='danger'>The land has no laws! <b>We are doomed!</b></span>"
-		return
-	if(!user.is_literate())
-		. += "<span class='warning'>Uhhh... I can't read them...</span>"
-		return
-	for(var/i in 1 to length(GLOB.laws_of_the_land))
-		. += span_info("[i]. [GLOB.laws_of_the_land[i]]")
+	. += "<a href='byond://?src=[REF(src)];rmh_laws=1'>[rmh_ui_text(user, "Читать законы", "Read laws")]</a>"
 
 /obj/structure/fake_machine/scomm/process()
 	if(obj_broken)
@@ -78,31 +70,14 @@
 	update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/fake_machine/scomm/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	user.changeNext_move(CLICK_CD_MELEE)
-	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
-	var/canread = user.can_read(src, TRUE)
-	var/contents
-	var/datum/job/lord/ruler_job = SSjob.GetJobType(/datum/job/lord)
-	contents += "<center>[ruler_job.get_informed_title(SSticker.rulermob)]'s DECREES<BR>"
-
-	contents += "-----------<BR><BR></center>"
-	for(var/i = GLOB.lord_decrees.len to 1 step -1)
-		contents += "[i]. <span class='info'>[GLOB.lord_decrees[i]]</span><BR>"
-	if(!canread)
-		contents = stars(contents)
-	var/datum/browser/popup = new(user, "VENDORTHING", "", 370, 400)
-	popup.set_content(contents)
-	popup.open()
+	rmh_open_laws(user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fake_machine/scomm/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_SHAKY_SPEECH, TRAIT_GENERIC)
 	become_hearing_sensitive()
-	START_PROCESSING(SSroguemachine, src)
+	// RMH: decree announcements belong to boards; radio routing is event-driven.
 	SSroguemachine.scomm_machines += src
 	//RMH EDITED START - garrison SCOM ring integration: sequential designation number
 	scom_number = SSroguemachine.scomm_machines.len
@@ -184,11 +159,7 @@
 			S.repeat_message(raw_message, src, usedcolor, message_language)
 
 /obj/structure/fake_machine/scomm/proc/dictate_laws()
-	if(dictating)
-		return
-	dictating = TRUE
-	repeat_message("THE LAWS OF THE LAND ARE...", tcolor = COLOR_RED)
-	INVOKE_ASYNC(src, PROC_REF(dictation))
+	say("Read the laws through the link when examining me. / Законы доступны по ссылке при осмотре.")
 
 /obj/structure/fake_machine/scomm/proc/dictation()
 	if(!length(GLOB.laws_of_the_land))
