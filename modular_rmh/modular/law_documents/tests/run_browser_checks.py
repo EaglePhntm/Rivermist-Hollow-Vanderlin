@@ -7,7 +7,7 @@ import re
 import shutil
 import subprocess
 import tempfile
-from urllib.parse import quote
+from urllib.parse import quote_plus
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -19,11 +19,11 @@ def main():
     for name in ("scom-frame.png","scom-frame-active.png"):
         shutil.copyfile(assets/name,out/name)
     shutil.copyfile(Path(__file__).with_name("browser_checks.js"),out/"browser_checks.js")
-    fixture = {"language":"ru","laws":[],"mode":"normal"}
+    fixture = {"language":"ru","mode":"normal","laws":[{"id":"bootstrap","text":"Первый закон: 10% tax + A+B & хлеб","text_en":"First law: 10% tax + A+B & bread"}]}
     page = (assets/"scom-reader.html").read_text(encoding="utf-8")
     for key,value in {"@FRAME@":json.dumps((out/"scom-frame.png").as_uri()),
                       "@ACTIVE@":json.dumps((out/"scom-frame-active.png").as_uri()),
-                      "@REF@":"preview","@DATA@":quote(json.dumps(fixture))}.items():
+                      "@REF@":"preview","@DATA@":quote_plus(json.dumps(fixture, separators=(",", ":")))}.items():
         page = page.replace(key,value)
     # A standalone test must never launch a registered byond:// handler.
     page = page.replace("window.location.href = 'byond://?src=preview;ready=1';","")

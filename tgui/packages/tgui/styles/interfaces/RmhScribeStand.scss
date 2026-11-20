@@ -14,7 +14,7 @@
   --section-separator-color: #5a4528;
   --titlebar-background: #18120d;
   --titlebar-text: #c9a764;
-  --font-family: 'RMH Codex Body', Georgia, serif;
+  --font-family: Georgia, serif;
   --input-background: #100c08;
   --input-color: #dccfb4;
   --input-color-placeholder: #8f8069;
@@ -41,7 +41,7 @@
   min-height: 0;
   padding: 1rem;
   color: #dccfb4;
-  font: 1.05rem/1.5 'RMH Codex Body', Georgia, serif;
+  font: 1.05rem/1.5 Georgia, serif;
   background: radial-gradient(ellipse at 70% 0%, #241a22 0%, transparent 55%),
     radial-gradient(ellipse at 0% 100%, #1d140c 0%, transparent 50%), #0c0907;
 
@@ -91,7 +91,7 @@
     padding: 1.5rem 1rem 1.1rem;
     text-align: center;
     border-bottom: 1px solid var(--codex-dim);
-    h1 { font: 2rem/1.15 'RMH Codex Display', Georgia, serif; color: var(--codex-gold); letter-spacing: 0.04em; }
+    h1 { font: 2rem/1.15 Georgia, serif; color: var(--codex-gold); letter-spacing: 0.04em; }
     > div { margin-top: 0.6rem; color: var(--codex-muted); }
   }
   &__tabs { display: flex; margin: 1rem; border: 1px solid var(--codex-dim); background: #0a0806; }
@@ -137,7 +137,7 @@
     border: 1px solid transparent;
     line-height: 1.4;
     &.Button--selected, &:hover { background: linear-gradient(90deg,rgba(201,167,100,0.18),transparent); border-color: var(--codex-border); }
-    &.RmhCodex__tocEntry--sub { padding-left: 1.3rem; font-family: 'RMH Codex Title', Georgia, serif; }
+    &.RmhCodex__tocEntry--sub { padding-left: 1.3rem; font-family: Georgia, serif; }
   }
   &__tocText { flex: 1; min-width: 0; overflow-wrap: anywhere; small { display: block; color: var(--codex-muted); font-size: 0.9rem; } }
   &__tocHeading.Button {
@@ -150,14 +150,14 @@
     white-space: normal;
     background: transparent;
     color: var(--codex-gold);
-    font: 1.1rem/1.4 'RMH Codex Display', Georgia, serif;
+    font: 1.1rem/1.4 Georgia, serif;
     border-bottom: 1px solid var(--codex-dim);
   }
   &__sideFoot { border-top: 1px solid var(--codex-dim); padding: 0.9rem 1rem; font-size: 0.95rem; > div + div { margin-top: 0.4rem; } }
   &__status { color: var(--codex-gold); }
   &__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 1.5rem 2rem 1.2rem; border-bottom: 1px solid var(--codex-dim); }
-  &__heading { flex: 1; min-width: 12rem; h2 { margin: 0.3rem 0; font: 2.65rem/1.1 'RMH Codex Display', Georgia, serif; color: var(--codex-bright); } }
-  &__tag { color: var(--codex-muted); font: 1.05rem/1.4 'RMH Codex Display', Georgia, serif; letter-spacing: 0.08em; }
+  &__heading { flex: 1; min-width: 12rem; h2 { margin: 0.3rem 0; font: 2.65rem/1.1 Georgia, serif; color: var(--codex-bright); } }
+  &__tag { color: var(--codex-muted); font: 1.05rem/1.4 Georgia, serif; letter-spacing: 0.08em; }
   &__subtitle { color: var(--codex-muted); max-width: 65ch; }
   &__meters { display: flex; gap: 0.6rem; flex-wrap: wrap; }
   &__meter {
@@ -175,7 +175,7 @@
   &__chapter { margin-bottom: 2rem; }
   &__chapterHead {
     margin: 1.5rem 0 1rem; text-align: center;
-    h3 { margin: 0.4rem 0; font: 2.1rem/1.2 'RMH Codex Display', Georgia, serif; color: var(--codex-bright); }
+    h3 { margin: 0.4rem 0; font: 2.1rem/1.2 Georgia, serif; color: var(--codex-bright); }
   }
   &__intro { font-family: 'Courier New', Courier, monospace; color: var(--codex-muted); font-style: italic; white-space: pre-wrap; max-width: 60ch; margin: auto; }
   &__ornament { display: flex; align-items: center; gap: 0.8rem; justify-content: center; color: var(--codex-border); margin-top: 1.4rem;
@@ -185,7 +185,7 @@
   &__chapterTools { .Button { background: transparent; color: var(--codex-muted); } display: flex; justify-content: center; gap: 0.4rem; margin: 1rem 0; }
   &__article {
     position: relative; padding: 1rem 1.2rem; margin-bottom: 0.8rem; border-left: 2px solid var(--codex-dim); scroll-margin-top: 1rem;
-    h4 { padding-right: 0; margin-bottom: 0.5rem; font: 1.45rem/1.4 'RMH Codex Title', Georgia, serif; color: var(--codex-bright); span { color: var(--codex-gold); } }
+    h4 { padding-right: 0; margin-bottom: 0.5rem; font: 1.45rem/1.4 Georgia, serif; color: var(--codex-bright); span { color: var(--codex-gold); } }
     > .RmhCodex__tools { position: static; justify-content: flex-end; flex-wrap: wrap; margin-top: 0.5rem; }
     &:hover { border-left-color: var(--codex-border); background: rgba(201,167,100,0.025); }
   }
@@ -198,7 +198,7 @@
   &__bookName { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-bottom: 1rem; }
   &__addArticle { text-align: center; margin-top: 0.8rem; }
   &__empty { padding: 2rem 1rem; color: var(--codex-muted); text-align: center; font-style: italic; }
-  &__archive { padding: 1rem; h3 { color: var(--codex-bright); margin: 0.7rem 0; font: 1.6rem/1.3 'RMH Codex Display', Georgia, serif; } }
+  &__archive { padding: 1rem; h3 { color: var(--codex-bright); margin: 0.7rem 0; font: 1.6rem/1.3 Georgia, serif; } }
 }
 @media (max-width: 900px) {
   .RmhCodex { grid-template-columns: 18rem minmax(0,1fr); &__head, &__view { padding-left: 1rem; padding-right: 1rem; } }
@@ -224,7 +224,7 @@
   --input-background: transparent;
   --input-color: #261b12;
   --input-color-placeholder: #555c42;
-  --font-family: 'RMH Codex Body', Georgia, serif;
+  --font-family: Georgia, serif;
   .TitleBar { display: none; }
   .Window__rest { top: 0; }
   .Window__contentPadding { margin: 0; height: 100%; }
@@ -236,7 +236,7 @@
   height: 100%;
   overflow: hidden;
   color: #261b12;
-  font: 18px/1.4 'RMH Codex Body', Georgia, serif;
+  font: 18px/1.4 Georgia, serif;
   &__art, &__hover {
     position: absolute; inset: 0; width: 100%; height: 100%;
     image-rendering: pixelated; pointer-events: none;
@@ -254,12 +254,12 @@
   &__content { position: absolute; z-index: 2; display: flex; flex-direction: column; min-height: 0; }
   &__header { display: flex; align-items: center; justify-content: center; height: 28px; min-height: 28px; flex: 0 0 28px; position: relative; }
   h2, h3 { margin: 0; padding: 0; font-weight: 400; color: #321e0d; }
-  h2 { font: 24px/1.1 'RMH Codex Display', Georgia, serif; }
-  h3 { font: 1.1em/1.2 'RMH Codex Display', Georgia, serif; margin-bottom: 0.4rem; }
+  h2 { font: 24px/1.1 Georgia, serif; }
+  h3 { font: 1.1em/1.2 Georgia, serif; margin-bottom: 0.4rem; }
   &__language.Button {
     position: absolute; right: 0; top: 0; margin: 0; padding: 0.2rem 0.35rem;
     border: 1px solid #586040; border-radius: 0; background: #b1b296; color: #263519;
-    font: 12px 'RMH Codex Body', Georgia, serif;
+    font: 12px Georgia, serif;
   }
   &__search.Input {
     flex: 0 0 28px; height: 28px; margin: 4px 0 8px; font-size: 14px;

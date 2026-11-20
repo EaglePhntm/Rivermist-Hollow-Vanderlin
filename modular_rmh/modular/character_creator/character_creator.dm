@@ -90,7 +90,6 @@ GLOBAL_LIST_INIT(character_creator_view_actions, list(
 	var/loaded_lang
 	S["character_creator_lang"] >> loaded_lang
 	character_creator_lang = (loaded_lang == CC_LANG_RU) ? CC_LANG_RU : CC_LANG_EN
-	parent?.set_preferred_ui_language(character_creator_lang, refresh = FALSE)
 
 /datum/preferences/character_setup_save_menu_prefs(savefile/S)
 	. = ..()
@@ -553,7 +552,6 @@ GLOBAL_LIST_INIT(character_creator_view_actions, list(
 			return character_creator_stat_act(user, action, params)
 		if("cc_set_lang")
 			character_creator_lang = (params["lang"] == CC_LANG_RU) ? CC_LANG_RU : CC_LANG_EN
-			parent?.set_preferred_ui_language(character_creator_lang)
 			save_preferences()
 			return TRUE
 		if("cc_set_culture")

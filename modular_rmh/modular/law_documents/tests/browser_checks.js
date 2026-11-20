@@ -15,6 +15,13 @@
   }
   fixture.laws[0].text = "<img src=x onerror=alert(1)> & <script>bad()</script>";
   try {
+    var initialText = "Первый закон: 10% tax + A+B & хлеб";
+    check(document.getElementById("scom-text").textContent.indexOf(initialText) >= 0, "inline initial data decodes form-encoded spaces and keeps literal plus and percent");
+    // Captured from native BYOND 516 url_encode(json_encode(data)), not encodeURIComponent.
+    var nativeEncoded = "%7b%22language%22%3a%22ru%22%2c%22mode%22%3a%22normal%22%2c%22laws%22%3a%5b%7b%22id%22%3a%22bootstrap%22%2c%22text%22%3a%22%5cu041f%5cu0435%5cu0440%5cu0432%5cu044b%5cu0439+%5cu0437%5cu0430%5cu043a%5cu043e%5cu043d%3a+10%25+tax+%2b+A%2bB+%26+%5cu0445%5cu043b%5cu0435%5cu0431%22%2c%22text_en%22%3a%22First+law%3a+10%25+tax+%2b+A%2bB+%26+bread%22%7d%5d%7d";
+    check(nativeEncoded.indexOf("+") >= 0 && /%2b/i.test(nativeEncoded), "native fixture distinguishes encoded spaces from literal plus");
+    rmhScomInitial(nativeEncoded);
+    check(document.getElementById("scom-text").textContent.indexOf(initialText) >= 0, "native DM initial fixture keeps spaces, percent, plus, ampersand and Cyrillic");
     fixture.laws[0].text += " 10% tax A+B 100% & Кириллица 😀";
     update(fixture);
     check(document.getElementById("scom-text").textContent.indexOf("10% tax A+B 100% & Кириллица 😀") >= 0, "already-decoded output preserves percent, plus, ampersand and Unicode");

@@ -606,9 +606,11 @@
 	var/before = json_encode(stand.documents.law_code.content)
 	var/mob/previous_usr = usr
 	usr = reader
-	var/accepted = stand.ui_act("publish", list("document" = RMH_LAW_CODE, "epoch" = stand.documents.epoch, "revision" = stand.documents.law_code.revision, "content" = "[]"), reader_ui, reader_ui.state)
+	var/list/params = list("document" = RMH_LAW_CODE, "epoch" = stand.documents.epoch, "revision" = stand.documents.law_code.revision, "content" = "\[]")
+	var/accepted = stand.ui_act("publish", params, reader_ui, reader_ui.state)
 	usr = previous_usr
 	qdel(reader_ui)
+	TEST_ASSERT_EQUAL(params["content"], json_encode(list()), "The observer request must contain the JSON empty array, not an empty interpolated string.")
 	TEST_ASSERT(!accepted, "A forged observer action was accepted.")
 	TEST_ASSERT_EQUAL(json_encode(stand.documents.law_code.content), before, "Observer changed the published code.")
 
@@ -712,5 +714,66 @@
 	TEST_ASSERT(!poster.replace_forgery(repeat_string(181, "Ж"), repeat_string(180, "x"), SKILL_RANK_EXPERT, revision), "The combined 361-character forgery bypassed the limit.")
 	TEST_ASSERT_EQUAL(json_encode(poster.snapshot), before, "Rejecting an over-limit forgery changed the poster.")
 	TEST_ASSERT(poster.replace_forgery(repeat_string(180, "Ж"), repeat_string(180, "x"), SKILL_RANK_EXPERT, revision), "The combined 360-character forgery was rejected.")
+
+/datum/unit_test/rmh_throat_active_commands/Run()
+	var/obj/structure/fake_machine/titan/throat = allocate(/obj/structure/fake_machine/titan)
+	var/mob/living/carbon/human/ruler = allocate(/mob/living/carbon/human)
+	ruler.mind_initialize()
+	ruler.mind.set_assigned_role(/datum/job/burgmeister::title)
+	ADD_TRAIT(ruler, TRAIT_PRESERVE_UI_WITHOUT_CLIENT, TRAIT_SOURCE_UNIT_TESTS)
+	var/old_crown = SSroguemachine.crown
+	var/old_key = SSroguemachine.key
+	var/old_ruler = SSticker.rulermob
+	var/old_cooldown = SScommunications.nonsilicon_message_cooldown
+	var/old_decree_cooldown = SScommunications.silicon_message_cooldown
+	var/old_stat = GLOB.vanderlin_round_stats[STATS_LAWS_AND_DECREES_MADE]
+	var/list/old_decrees = GLOB.lord_decrees.Copy()
+	var/datum/rmh_law_documents/store = rmh_get_law_documents()
+	var/list/old_records = store.decrees
+	var/old_next_id = store.next_decree_id
+	var/old_publication = store.has_publication
+	var/laws_before = json_encode(GLOB.laws_of_the_land)
+	var/obj/item/clothing/head/crown/serpcrown/surplus/crown = allocate(/obj/item/clothing/head/crown/serpcrown/surplus)
+	var/obj/item/key/lord/key = allocate(/obj/item/key/lord)
+	ruler.equip_to_slot_if_possible(crown, ITEM_SLOT_HEAD, disable_warning = TRUE, bypass_equip_delay_self = TRUE)
+	ruler.put_in_hands(key)
+	SSroguemachine.crown = crown
+	SSroguemachine.key = key
+	SSticker.rulermob = ruler
+	SScommunications.nonsilicon_message_cooldown = 0
+	var/datum/tgui/court_ui = new(ruler, throat, "Throne")
+	var/ready = throat.perform_check(ruler) && throat.ui_status(ruler, GLOB.physical_state) == UI_INTERACTIVE
+	var/mob/previous_usr = usr
+	var/issued = FALSE
+	var/revoked = FALSE
+	var/announced = FALSE
+	var/summons = FALSE
+	var/projected = FALSE
+	if(ready)
+		usr = ruler
+		summons = throat.ui_act("summon_crown", list(), court_ui, court_ui.state) && throat.ui_act("summon_key", list(), court_ui, court_ui.state)
+		issued = throat.ui_act("make_decree", list("text" = "Regression decree"), court_ui, court_ui.state)
+		var/list/record = store.decrees[length(store.decrees)]
+		projected = record["text"] == "Regression decree" && length(GLOB.lord_decrees) == length(old_decrees) + 1
+		revoked = throat.ui_act("remove_decree", list("index" = "[length(store.decrees)]", "id" = record["id"], "revision" = record["revision"]), court_ui, court_ui.state)
+		announced = throat.ui_act("make_announcement", list("text" = "Regression announcement"), court_ui, court_ui.state)
+	usr = previous_usr
+	qdel(court_ui)
+	SSroguemachine.crown = old_crown
+	SSroguemachine.key = old_key
+	SSticker.rulermob = old_ruler
+	SScommunications.nonsilicon_message_cooldown = old_cooldown
+	SScommunications.silicon_message_cooldown = old_decree_cooldown
+	GLOB.vanderlin_round_stats[STATS_LAWS_AND_DECREES_MADE] = old_stat
+	GLOB.lord_decrees = old_decrees
+	store.decrees = old_records
+	store.next_decree_id = old_next_id
+	store.has_publication = old_publication
+	TEST_ASSERT(ready, "The crowned ruler did not reach the real court UI.")
+	TEST_ASSERT(summons, "Crown or key commands stopped dispatching.")
+	TEST_ASSERT(issued && projected, "A decree was not issued and projected to the board records.")
+	TEST_ASSERT(revoked, "A decree could not be revoked by its stable ID and revision.")
+	TEST_ASSERT(announced, "The crowned ruler could not announce.")
+	TEST_ASSERT_EQUAL(json_encode(GLOB.laws_of_the_land), laws_before, "Active court commands changed the law code.")
 
 #endif

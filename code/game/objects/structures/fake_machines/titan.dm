@@ -185,11 +185,6 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 		playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 		switch_mode(MODE_MAKE_DECREE)
 		return
-	if(findtext(message, "make law") && perform_check(user))
-		say("Speak and they will obey.")
-		playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
-		switch_mode(MODE_MAKE_LAW)
-		return
 	if(findtext(message, "declare outlaw") && perform_check(user))
 		say("Who should be outlawed?")
 		playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
@@ -209,14 +204,8 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	if(findtext(message, "summon key") && perform_check(user, FALSE))
 		summon_key(user)
 		return
-	if(findtext(message, "remove law") && perform_check(user))
-		remove_law(message)
-		return
 	if(findtext(message, "remove decree") && perform_check(user))
 		remove_decree(message)
-		return
-	if(findtext(message, "purge laws") && perform_check(user))
-		purge_laws()
 		return
 	if(findtext(message, "set taxes") && perform_check(user))
 		set_taxes(user)
@@ -576,33 +565,12 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 			user.say(message)
 			make_decree(user, message)
 			return TRUE
-		if("make_law")
-			var/message = trim(params["text"])
-			if(!message)
-				return FALSE
-			if(!perform_check(user))
-				return FALSE
-			user.say(message)
-			make_law(user, message)
-			return TRUE
-		if("remove_law")
-			if(!perform_check(user))
-				return FALSE
-			var/idx = text2num(params["index"])
-			if(idx)
-				remove_law("remove law [idx]")
-			return TRUE
 		if("remove_decree")
 			if(!perform_check(user))
 				return FALSE
 			var/idx = text2num(params["index"])
 			if(idx)
 				remove_decree("remove decree [idx]")
-			return TRUE
-		if("purge_laws")
-			if(!perform_check(user))
-				return FALSE
-			purge_laws()
 			return TRUE
 		if("declare_outlaw")
 			var/name = trim(params["name"])
@@ -669,8 +637,6 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 			recognize_command(speaker, sanitized_message)
 		if(MODE_MAKE_ANNOUNCEMENT)
 			make_announcement(speaker, raw_message)
-		if(MODE_MAKE_LAW)
-			make_law(speaker, raw_message)
 		if(MODE_DECLARE_OUTLAW)
 			declare_outlaw(speaker, raw_message)
 		if(MODE_PARDON_OUTLAW)

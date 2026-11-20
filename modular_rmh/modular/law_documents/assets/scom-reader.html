@@ -83,6 +83,9 @@ html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background:
     if (mode !== "muted" && mode !== "garrison") mode = "normal";
     document.getElementById("scom").setAttribute("data-mode", mode);
   };
+  window.rmhScomInitial = function (encoded) {
+    window.rmhScomUpdate(decodeURIComponent(encoded.replace(/\+/g, " ")));
+  };
   window.rmhScomUpdate = function (encoded) {
     data = JSON.parse(encoded);
     if (language === null) language = data.language === "en" ? "en" : "ru";
@@ -240,7 +243,8 @@ html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background:
      onfocus="rmhScomGlow(true)" onblur="rmhScomGlow(false)"></a>
 </div>
 <script>
-rmhScomUpdate(decodeURIComponent('@DATA@'));
+// DM url_encode uses '+' for spaces; unescape percent sequences exactly once.
+rmhScomInitial('@DATA@');
 window.location.href = 'byond://?src=@REF@;ready=1';
 </script>
 </body>

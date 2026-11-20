@@ -8,10 +8,8 @@
 	blade_dulling = DULLING_BASH
 	SET_BASE_PIXEL(0, 32)
 	anchored = TRUE
-	var/next_decree = 0
 	var/listening = TRUE
 	var/speaking = TRUE
-	var/dictating = FALSE
 	//RMH EDITED START - garrison SCOM ring integration: stationary SCOMs can now
 	//be retuned to the exclusive garrison line, same as crownstone/houndstone
 	var/garrisonline = FALSE
@@ -47,14 +45,6 @@
 		. += span_smallnotice("Its designation is #[scom_number][scom_tag ? ", labeled as [scom_tag]" : ""].")
 	//RMH EDITED END
 	. += "<a href='byond://?src=[REF(src)];rmh_laws=1'>[rmh_ui_text(user, "Читать законы", "Read laws")]</a>"
-
-/obj/structure/fake_machine/scomm/process()
-	if(obj_broken)
-		return
-	if(world.time > next_decree)
-		next_decree = world.time + rand(3 MINUTES, 8 MINUTES)
-		if(GLOB.lord_decrees.len)
-			say("The King Decrees: [pick(GLOB.lord_decrees)]", spans = list("info"))
 
 /obj/structure/fake_machine/scomm/attack_hand(mob/living/user)
 	. = ..()
@@ -106,7 +96,6 @@
 /obj/structure/fake_machine/scomm/Destroy()
 	lose_hearing_sensitivity()
 	SSroguemachine.scomm_machines -= src
-	STOP_PROCESSING(SSroguemachine, src)
 	set_light(0)
 	return ..()
 
@@ -160,17 +149,6 @@
 
 /obj/structure/fake_machine/scomm/proc/dictate_laws()
 	say("Read the laws through the link when examining me. / Законы доступны по ссылке при осмотре.")
-
-/obj/structure/fake_machine/scomm/proc/dictation()
-	if(!length(GLOB.laws_of_the_land))
-		sleep(2)
-		repeat_message("THE LAND HAS NO LAWS!", tcolor = COLOR_RED)
-		dictating = FALSE
-		return
-	for(var/i in 1 to length(GLOB.laws_of_the_land))
-		sleep(2)
-		repeat_message("[i]. [GLOB.laws_of_the_land[i]]", tcolor = COLOR_RED)
-	dictating = FALSE
 
 /proc/scom_announce(message)
 	for(var/obj/structure/fake_machine/scomm/S in SSroguemachine.scomm_machines)
