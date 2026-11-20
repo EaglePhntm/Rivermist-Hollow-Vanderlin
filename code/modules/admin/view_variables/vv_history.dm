@@ -62,27 +62,28 @@
 	vv_history_pos = clamp(vv_history_pos, 1, max(length(vv_history), 1))
 
 /**
- * Checks a Back/Forward/Recent link before it is followed.
- * Returns TRUE when the entry still points at the object it was recorded for.
+ * Checks a Back/Forward/Recent link before it is followed. Looks the entry up by its reference:
+ * every new view shifts the positions, so the one in a link drawn earlier may be stale.
+ * Returns the entry's index, or 0 when it is gone or its reference now points at something else.
  */
-/datum/admins/proc/vv_history_validate(ref, nav)
-	if(!nav || nav < 1 || nav > length(vv_history))
-		return FALSE
-	var/list/entry = vv_history[nav]
-	if(entry["ref"] != ref)
-		return FALSE
-	var/thing = locate(ref)
-	if(isnull(thing))
-		return FALSE
-	var/type_now
-	if(islist(thing))
-		type_now = istype(thing, /alist) ? "/alist" : "/list"
-	else if(isdatum(thing))
-		var/datum/datum_thing = thing
-		type_now = "[datum_thing.type]"
-	if(type_now && entry["type"] && type_now != entry["type"])
-		return FALSE // the reference was reused by something else
-	return TRUE
+/datum/admins/proc/vv_history_find(ref)
+	for(var/index in 1 to length(vv_history))
+		var/list/entry = vv_history[index]
+		if(entry["ref"] != ref)
+			continue
+		var/thing = locate(ref)
+		if(isnull(thing))
+			return 0
+		var/type_now
+		if(islist(thing))
+			type_now = istype(thing, /alist) ? "/alist" : "/list"
+		else if(isdatum(thing))
+			var/datum/datum_thing = thing
+			type_now = "[datum_thing.type]"
+		if(type_now && entry["type"] && type_now != entry["type"])
+			return 0 // the reference was reused by something else
+		return index
+	return 0
 
 /datum/admins/proc/vv_history_link(index, label)
 	var/list/entry = vv_history[index]

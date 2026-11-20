@@ -1,5 +1,6 @@
 /**
  * Admin ghost hands and inventory. Only ghosts controlled by an admin get them; player ghosts never do.
+ * Off by default: each admin turns them on with Toggle Admin Ghost Hands (a saved preference).
  *
  * Ctrl + click an object        : take it into the active hand (the other hand if that one is full)
  * Ctrl + click with a held one  : give it to a mob, or put it on the clicked tile
@@ -7,7 +8,7 @@
  * Bag button on the HUD         : the inventory window: two hands plus a bag of BM_GHOST_BAG_SIZE slots
  *
  * Nearly any object can be taken: items, structures, machines, even if anchored or worn by a mob.
- * Effects (decals, landmarks, helpers) and turfs cannot.
+ * Effects (decals, landmarks, helpers), turfs and containers with a mob inside cannot.
  *
  * What the admin carries belongs to their account for the round: it follows them from one ghost
  * to the next (aghost, re-enter body, aghost again, reconnect) and is lost when the round ends.
@@ -104,8 +105,11 @@ GLOBAL_LIST_EMPTY(admin_ghost_inventories)
 	/// The admin inventory this ghost carries; null for player ghosts.
 	var/datum/admin_ghost_inventory/admin_inventory
 
+/// Gives this admin ghost its hands, when the admin has them turned on (Toggle Admin Ghost Hands).
 /mob/dead/observer/proc/setup_admin_hands()
 	if(!client?.holder || admin_inventory)
+		return
+	if(!client.prefs?.read_preference(/datum/preference/toggle/admin_ghost_hands))
 		return
 	admin_inventory = get_admin_ghost_inventory(ckey)
 	admin_inventory.ghost?.drop_admin_hands() // only one ghost uses an inventory at a time
@@ -116,7 +120,6 @@ GLOBAL_LIST_EMPTY(admin_ghost_inventories)
 		hud_used.build_hand_slots()
 		hud_used.add_admin_ghost_buttons()
 	update_inv_hands()
-	to_chat(src, span_notice("Admin ghost hands: Ctrl + click an object to take it, Ctrl + click with it to give it or put it down. Click with an item uses it at once; Alt + click the active hand uses it in hand. Q / E or the hand slots switch hands; the bag button opens your inventory."))
 
 /// Detaches the inventory from this ghost. What it carries stays with the account.
 /mob/dead/observer/proc/drop_admin_hands()
@@ -200,6 +203,10 @@ GLOBAL_LIST_EMPTY(admin_ghost_inventories)
 	if(!admin_ghost_can_take(target))
 		return FALSE
 	var/obj/thing = target
+	// Carried objects wait in nullspace: anyone inside would go there with it.
+	if(locate(/mob) in thing.get_all_contents())
+		to_chat(src, span_warning("Someone is inside [thing]. Get them out first."))
+		return TRUE
 	var/index = held_items[active_hand_index] ? get_inactive_hand_index() : active_hand_index
 	if(!index || held_items[index])
 		to_chat(src, span_warning("Both hands are full. Put something in the bag first."))
@@ -297,6 +304,45 @@ GLOBAL_LIST_EMPTY(admin_ghost_inventories)
 	var/mob/dead/observer/ghost = user
 	return istype(ghost) && !!ghost.admin_inventory
 
+/// Toggle ------------------------------------------------------------------------------------
+
+/// Persistent, per-admin choice: an admin ghost with hands and inventory, or a plain ghost.
+/datum/preference/toggle/admin_ghost_hands
+	savefile_key = "admin_ghost_hands"
+	savefile_identifier = PREF_PLAYER
+	category = "ghost"
+	can_randomize = FALSE
+	should_update_preview = FALSE
+	default_value = FALSE
+
+/datum/preference/toggle/admin_ghost_hands/is_accessible(datum/preferences/prefs)
+	. = ..()
+	if(!.)
+		return
+	return !!prefs?.parent?.holder
+
+/client/proc/toggle_admin_ghost_hands()
+	set name = "Toggle Admin Ghost Hands"
+	set category = "Preferences.Admin"
+	set desc = "Turn the hands and inventory of your admin ghost on or off."
+
+	if(!holder || !prefs)
+		return
+	var/enable = !prefs.read_preference(/datum/preference/toggle/admin_ghost_hands)
+	prefs.write_preference(/datum/preference/toggle/admin_ghost_hands, enable)
+	prefs.save_preferences()
+	var/mob/dead/observer/ghost = mob
+	if(istype(ghost))
+		if(enable)
+			ghost.setup_admin_hands()
+		else
+			ghost.drop_admin_hands()
+	if(enable)
+		to_chat(src, span_notice("Admin ghost hands are ON. Ctrl + click an object to take it, Ctrl + click with it to give it or put it down. Click with an item uses it at once; Alt + click the active hand uses it in hand. Q / E or the hand slots switch hands; the bag button opens your inventory."))
+	else
+		to_chat(src, span_notice("Admin ghost hands are OFF. What you carry stays in your admin inventory until you turn them on again."))
+	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Admin Ghost Hands", "[enable ? "Enabled" : "Disabled"]"))
+
 /// Inventory window --------------------------------------------------------------------------
 
 /datum/admin_ghost_inventory/ui_state(mob/user)
@@ -384,6 +430,9 @@ GLOBAL_LIST_EMPTY(admin_ghost_inventories)
 			log_admin("[key_name(ghost)] deleted [thing] ([thing.type]) from the admin inventory.")
 			forget(thing)
 			unshow(thing)
+			// In nullspace a container would dump its contents into nullspace, where they would stay.
+			for(var/atom/movable/content as anything in thing.contents)
+				qdel(content)
 			qdel(thing)
 			refresh()
 			return TRUE

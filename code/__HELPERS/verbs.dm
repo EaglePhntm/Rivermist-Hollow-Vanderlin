@@ -106,8 +106,8 @@
 		var/procpath/verb_to_remove = thing
 		if(admin_registry && !isnull(admin_registry[verb_to_remove]))
 			admin_menu_changed = TRUE
-		// Never listed on the panel, and the panel removes by name: do not let it drop a same-named player verb.
-		if(target.admin_menu_hides_verb(verb_to_remove))
+		// Never listed on the panel, and the panel removes by name: do not let it drop a same-named verb.
+		if(!istext(verb_to_remove.category) || target.admin_menu_hides_verb(verb_to_remove))
 			continue
 		output_list[++output_list.len] = list(verb_to_remove.category, verb_to_remove.name)
 

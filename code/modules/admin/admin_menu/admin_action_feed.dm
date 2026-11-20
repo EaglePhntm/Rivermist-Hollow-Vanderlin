@@ -84,7 +84,8 @@ GLOBAL_PROTECT(round_log_last_text)
 		return
 	GLOB.round_log_last_text = text
 	if(isnull(actor_ckey))
-		actor_ckey = usr?.ckey
+		var/mob/user = usr // usr can be 0 in subsystem code, which ?. does not guard against
+		actor_ckey = ismob(user) ? user.ckey : null
 	var/id = ++GLOB.round_log_last_id
 	GLOB.round_log += list(list(
 		"id" = id,
@@ -108,7 +109,8 @@ GLOBAL_PROTECT(round_log_last_text)
 
 /// For the plain log_*() procs: keeps the line only when a player caused it (usr has a client).
 /proc/round_log_add_from_player(category, text)
-	if(!usr?.client)
+	var/mob/user = usr
+	if(!ismob(user) || !user.client)
 		return
 	round_log_add(category, text)
 

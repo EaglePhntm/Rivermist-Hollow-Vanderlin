@@ -81,6 +81,10 @@
 		if(new_key in A)
 			if(alert(src, "Key \[[new_key]] already exists and will be overwritten. Continue?", "Confirm", "Yes", "No") != "Yes")
 				return
+		if(!(key in A)) // the prompts wait for input: the entry may be gone, or changed, by now
+			to_chat(src, "That alist entry no longer exists.")
+			return
+		current_value = A[key]
 		A.Remove(key)
 		A[new_key] = current_value
 		log_world("### alistVarEdit by [src]: [(O ? O.type : "/alist")] [objectvar]: KEY [html_encode("[key]")] => [html_encode("[new_key]")]")
@@ -107,6 +111,9 @@
 		var/list/varsvars = vv_parse_text(O, new_value)
 		for(var/V in varsvars)
 			new_value = replacetext(new_value, "\[[V]]", "[O.vars[V]]")
+	if(!(key in A)) // removed while the prompt waited: do not add it back
+		to_chat(src, "That alist entry no longer exists.")
+		return
 	A[key] = new_value
 	log_world("### alistVarEdit by [src]: [(O ? O.type : "/alist")] [objectvar]: \[[html_encode("[key]")]] => [html_encode("[new_value]")]")
 	log_admin("[key_name(src)] modified [original_name]'s [objectvar]: [key] => [new_value]")

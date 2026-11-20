@@ -284,30 +284,46 @@
 		return // it stayed on one tile: the ordinary click (copy, delete one object) handles it
 	INVOKE_ASYNC(src, PROC_REF(apply_area), corner_a, corner_b, erase)
 
-/// Outlines the dragged rectangle. Only the border is drawn, so big rectangles stay cheap.
+/// Outlines the dragged rectangle. Called on every tile the mouse crosses, so it walks only the
+/// border and moves the images it already has instead of making and removing them each time.
 /datum/buildmode/proc/draw_area()
-	if(holder && length(area_images))
-		holder.images -= area_images
-	area_images = list()
 	if(!holder || !area_start || !area_end)
 		return
 	var/min_x = min(area_start.x, area_end.x)
 	var/max_x = max(area_start.x, area_end.x)
 	var/min_y = min(area_start.y, area_end.y)
 	var/max_y = max(area_start.y, area_end.y)
-	var/overlay_state = area_erase ? "redOverlay" : "greenOverlay"
+	var/z_level = area_start.z
+	var/list/border = list()
 	for(var/x in min_x to max_x)
-		for(var/y in min_y to max_y)
-			if(x != min_x && x != max_x && y != min_y && y != max_y)
-				continue
-			var/turf/border = locate(x, y, area_start.z)
-			if(!border)
-				continue
-			var/image/outline = image('icons/turf/overlays.dmi', border, overlay_state)
-			outline.plane = ABOVE_LIGHTING_PLANE
-			outline.alpha = 170
-			area_images += outline
-	holder.images += area_images
+		border += locate(x, min_y, z_level)
+		if(max_y != min_y)
+			border += locate(x, max_y, z_level)
+	for(var/y in (min_y + 1) to (max_y - 1))
+		border += locate(min_x, y, z_level)
+		if(max_x != min_x)
+			border += locate(max_x, y, z_level)
+	if(!area_images)
+		area_images = list()
+	var/needed = length(border)
+	var/had = length(area_images)
+	if(had > needed)
+		var/list/extra = area_images.Copy(needed + 1)
+		area_images.Cut(needed + 1)
+		holder.images -= extra
+	var/overlay_state = area_erase ? "redOverlay" : "greenOverlay"
+	for(var/index in 1 to needed)
+		var/image/outline
+		if(index <= had)
+			outline = area_images[index]
+			outline.loc = border[index]
+			outline.icon_state = overlay_state
+			continue
+		outline = image('icons/turf/overlays.dmi', border[index], overlay_state)
+		outline.plane = ABOVE_LIGHTING_PLANE
+		outline.alpha = 170
+		area_images += outline
+		holder.images += outline
 	var/width = max_x - min_x + 1
 	var/height = max_y - min_y + 1
 	// Called on every tile the mouse crosses: the catalogue window is refreshed a few times a second, not each time.
@@ -429,8 +445,10 @@
 		if(isdatum(value))
 			continue // the copy would share, then break, the original's datum
 		if(islist(value))
-			var/list/value_list = value
-			value = value_list.Copy()
+			// A shared list of objects lets the copy's Destroy delete the original's limbs, organs or actions.
+			if(!buildmode_list_is_plain(value))
+				continue
+			value = deepCopyList(value)
 		try
 			copy.vars[var_name] = value
 		catch
@@ -440,3 +458,21 @@
 		copy.forceMove(newloc)
 	copy.update_appearance()
 	return copy
+
+/// TRUE when a list holds only text, numbers, paths, files and such lists, so its copy owns nothing of the original.
+/proc/buildmode_list_is_plain(list/checked, depth = 0)
+	if(depth > 3)
+		return FALSE
+	for(var/key in checked)
+		if(!buildmode_value_is_plain(key, depth))
+			return FALSE
+		if(!isnum(key) && !buildmode_value_is_plain(checked[key], depth))
+			return FALSE
+	return TRUE
+
+/proc/buildmode_value_is_plain(value, depth)
+	if(isnull(value) || istext(value) || isnum(value) || ispath(value) || isfile(value))
+		return TRUE
+	if(islist(value))
+		return buildmode_list_is_plain(value, depth + 1)
+	return FALSE

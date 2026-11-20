@@ -74,8 +74,12 @@
 	trashed = list()
 	for(var/atom/movable/thing as anything in kept)
 		UnregisterSignal(thing, COMSIG_PARENT_QDELETING) // or every qdel below rescans the list
-		if(!QDELETED(thing))
-			qdel(thing)
+		if(QDELETED(thing))
+			continue
+		// In nullspace a container would dump its contents into nullspace, where they would stay.
+		for(var/atom/movable/content as anything in thing.contents)
+			qdel(content)
+		qdel(thing)
 	qdel(src)
 
 /// Reverts the step. Returns how many changes were reverted. The caller deletes the step.
@@ -105,8 +109,10 @@
 		if(home)
 			thing.forceMove(home)
 			restored++
-		else
-			qdel(thing) // nowhere to go back to: do not leave it in nullspace
+		else // nowhere to go back to: do not leave it, or its contents, in nullspace
+			for(var/atom/movable/content as anything in thing.contents)
+				qdel(content)
+			qdel(thing)
 	return restored
 
 /datum/buildmode
@@ -132,8 +138,9 @@
 	item_browser?.send_selection()
 
 /// Removes thing so that step can bring it back. Mobs, and objects past the step's limit, are deleted for good.
+/// A container with a mob inside is deleted on its tile too, so it drops them there instead of taking them to nullspace.
 /datum/buildmode/proc/undoable_delete(atom/movable/thing, datum/buildmode_undo/step)
-	if(!step || ismob(thing) || !step.trash(thing))
+	if(!step || ismob(thing) || (locate(/mob) in thing.get_all_contents()) || !step.trash(thing))
 		qdel(thing)
 
 /datum/buildmode/proc/undo_last()

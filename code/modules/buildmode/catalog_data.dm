@@ -66,6 +66,13 @@ GLOBAL_VAR_INIT(buildmode_catalog_warming, FALSE)
 	buildmode_catalog_index(TRUE)
 	GLOB.buildmode_catalog_warming = FALSE
 
+/// TRUE once the shared catalogue is built. Starts the background build when nobody has started it.
+/proc/buildmode_catalog_ready()
+	if(GLOB.buildmode_catalog_index_cache)
+		return TRUE
+	warm_buildmode_catalog()
+	return !!GLOB.buildmode_catalog_index_cache
+
 /proc/build_buildmode_catalog_entries(can_sleep)
 	var/list/built = list()
 	var/list/paths = list()

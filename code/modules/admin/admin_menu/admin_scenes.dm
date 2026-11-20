@@ -437,12 +437,15 @@ GLOBAL_LIST_EMPTY(scene_runs)
 					continue
 				for(var/i in 1 to item["amount"])
 					var/atom/movable/made = new target_type(where)
-					if(QDELETED(made))
-						continue
-					made.flags_1 |= ADMIN_SPAWNED_1
-					made.setDir(item["dir"])
-					spawned += made
-					RegisterSignal(made, COMSIG_PARENT_QDELETING, PROC_REF(forget_spawned), override = TRUE)
+					if(!QDELETED(made))
+						made.flags_1 |= ADMIN_SPAWNED_1
+						made.setDir(item["dir"])
+						spawned += made
+						RegisterSignal(made, COMSIG_PARENT_QDELETING, PROC_REF(forget_spawned), override = TRUE)
+					// A step can make up to SCENE_MAX_ITEMS x 50 objects: spread them over ticks.
+					CHECK_TICK
+					if(stopped || QDELETED(src))
+						return
 		if("narrate")
 			if(!length(step["text"]))
 				return
@@ -540,6 +543,7 @@ GLOBAL_LIST_EMPTY(scene_runs)
 				UnregisterSignal(made, COMSIG_PARENT_QDELETING) // or every qdel below rescans the list
 				if(!QDELETED(made))
 					qdel(made)
+				CHECK_TICK
 
 /proc/scene_styled_text(text, style)
 	if(!length(text))
@@ -979,6 +983,9 @@ GLOBAL_LIST_EMPTY(scene_runs)
 	var/list/terms = splittext(LOWER_TEXT(search_query), " ")
 	terms -= ""
 	if(!length(terms))
+		return
+	if(!buildmode_catalog_ready()) // building it here in one go would freeze the server
+		status = "The object list is still loading. Search again in a few seconds."
 		return
 	var/list/entries = buildmode_catalog_entries()
 	var/list/search_text = buildmode_catalog_index()["search_text"]

@@ -24,7 +24,6 @@ GLOBAL_LIST_INIT(admin_menu_extra_verbs, list(
 	// Existing tools of this build that were never handed out (they all check R_ADMIN themselves),
 	// plus ports from Azure Peak / Ratwood 2.0 (see admin_menu_ports.dm).
 	"[R_ADMIN]" = list(
-		/client/proc/toggle_admin_menu_mode,
 		/client/proc/toggleannouncelogin,
 		/client/proc/cmd_admin_godmode,
 		/client/proc/cmd_admin_rejuvenate,
@@ -85,9 +84,14 @@ GLOBAL_PROTECT(admin_menu_verbs_checked)
 		list(GLOB.admin_verbs_debug_mapping, R_DEBUG),
 		list(list(/client/proc/disable_debug_verbs), R_DEBUG),
 		list(list(/client/proc/show_verbs, /client/proc/open_admin_menu, /client/proc/readmin), NONE),
+		list(admin_menu_toggle_verbs(), NONE),
 	)
 	for(var/flag_text in GLOB.admin_menu_extra_verbs)
 		. += list(list(GLOB.admin_menu_extra_verbs[flag_text], text2num(flag_text)))
+
+/// Per-admin preference toggles. Every admin gets them, whatever their rights.
+/proc/admin_menu_toggle_verbs()
+	return list(/client/proc/toggle_admin_menu_mode, /client/proc/toggle_admin_context_menu_mode, /client/proc/toggle_admin_ghost_hands)
 
 /// Returns the assoc list of admin-granted verbs: verb path -> rights bitfield (0 = any admin).
 /proc/get_admin_menu_verbs()
@@ -119,20 +123,20 @@ GLOBAL_PROTECT(admin_menu_verbs_checked)
 /client/proc/add_admin_menu_verbs()
 	if(!holder)
 		return
-	add_verb(src, /client/proc/open_admin_menu)
+	add_verb(src, list(/client/proc/open_admin_menu) + admin_menu_toggle_verbs())
 	// Build the spawn catalogue in the background now, so the first F7 does not freeze the server.
 	if(holder.rank.rights & R_BUILD)
 		warm_buildmode_catalog()
-	// Right-click menu entries. Not in the registry: they have no stat panel tab to hide from.
-	add_verb(src, admin_context_menu_verbs())
 	var/rights = holder.rank.rights
 	for(var/flag_text in GLOB.admin_menu_extra_verbs)
 		if(rights & text2num(flag_text))
 			add_verb(src, GLOB.admin_menu_extra_verbs[flag_text])
+	// Right-click entries last: the classic list only offers verbs the admin was granted above.
+	refresh_admin_context_verbs()
 
 /// Removes everything add_admin_menu_verbs() adds. Called from remove_admin_verbs().
 /client/proc/remove_admin_menu_verbs()
-	var/list/to_remove = list(/client/proc/open_admin_menu) + admin_context_menu_verbs()
+	var/list/to_remove = list(/client/proc/open_admin_menu) + admin_menu_toggle_verbs() + admin_context_menu_verbs() + classic_admin_context_verbs()
 	for(var/flag_text in GLOB.admin_menu_extra_verbs)
 		to_remove += GLOB.admin_menu_extra_verbs[flag_text]
 	remove_verb(src, to_remove)

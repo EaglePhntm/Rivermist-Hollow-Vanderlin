@@ -95,15 +95,26 @@
 	if(registered_mob == new_mob)
 		return
 	if(registered_mob)
-		UnregisterSignal(registered_mob, list(COMSIG_USER_MOUSE_ENTERED, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(registered_mob, list(COMSIG_USER_MOUSE_ENTERED, COMSIG_PARENT_QDELETING, COMSIG_MOB_LOGOUT))
 	registered_mob = new_mob
 	if(registered_mob)
 		RegisterSignal(registered_mob, COMSIG_USER_MOUSE_ENTERED, PROC_REF(on_mouse_entered))
 		RegisterSignal(registered_mob, COMSIG_PARENT_QDELETING, PROC_REF(on_mob_deleted))
+		RegisterSignal(registered_mob, COMSIG_MOB_LOGOUT, PROC_REF(on_mob_logout))
 
 /datum/buildmode/proc/on_mob_deleted(datum/source)
 	SIGNAL_HANDLER
 	register_mob(null)
+
+/datum/buildmode/proc/on_mob_logout(datum/source)
+	SIGNAL_HANDLER
+	// A disconnect or only a change of mob: tell them apart once the logout is over.
+	addtimer(CALLBACK(src, PROC_REF(quit_if_disconnected)), 10 SECONDS, TIMER_UNIQUE)
+
+/// A build mode without its client is never used again (a reconnect quits it), so free its undo trash now.
+/datum/buildmode/proc/quit_if_disconnected()
+	if(!holder)
+		quit()
 
 /datum/buildmode/proc/create_buttons()
 	modebutton = new(null, null, src)
@@ -403,8 +414,22 @@
 			B.quit()
 			log_admin("[key_name(usr)] has left build mode.")
 		else
+			// Building the catalogue in one go would freeze the server: wait for the background build.
+			if(!buildmode_catalog_ready())
+				to_chat(M, span_notice("Build mode: the spawn catalogue is still loading. Build mode opens when it is ready."))
+				INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(enter_buildmode_when_ready), M.client)
+				return
 			new /datum/buildmode(M.client)
 			log_admin("[key_name(usr)] has entered build mode.")
+
+/// Opens build mode for user once the background catalogue build is done (or after a minute, if it failed).
+/proc/enter_buildmode_when_ready(client/user)
+	var/give_up_at = world.time + 1 MINUTES
+	UNTIL(!user || buildmode_catalog_ready() || world.time > give_up_at)
+	if(!user || istype(user.click_intercept, /datum/buildmode))
+		return
+	new /datum/buildmode(user)
+	log_admin("[key_name(user)] has entered build mode.")
 
 /// Used by the blueprint system to read pixel offsets from mouse params.
 /proc/get_pixel_offsets_from_screenloc(params)

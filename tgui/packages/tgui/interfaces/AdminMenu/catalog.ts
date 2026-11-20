@@ -210,6 +210,8 @@ const BY_PROC: Record<string, Place> = {
   // Preferences
   toggle_AI_interact: ['prefs', 'Visibility & Verbs'],
   toggle_admin_menu_mode: ['prefs', 'Visibility & Verbs'],
+  toggle_admin_context_menu_mode: ['prefs', 'Visibility & Verbs'],
+  toggle_admin_ghost_hands: ['prefs', 'Visibility & Verbs'],
   toggle_context_menu: ['prefs', 'Visibility & Verbs'],
 };
 
@@ -312,6 +314,8 @@ const ICON_BY_PROC: Record<string, string> = {
   hide_verbs: 'eye-slash',
   hide_most_verbs: 'low-vision',
   toggle_admin_menu_mode: 'columns',
+  toggle_admin_context_menu_mode: 'mouse-pointer',
+  toggle_admin_ghost_hands: 'hand-paper',
   enable_browser_debug: 'tools',
   vv_history_panel: 'history',
   map_export: 'file-export',

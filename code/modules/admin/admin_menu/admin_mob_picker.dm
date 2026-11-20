@@ -19,6 +19,10 @@
 		return null
 	var/datum/admin_mob_picker/picker = new(user, title, message, default_tab)
 	picker.ui_interact(user)
+	if(!LAZYLEN(picker.open_uis)) // no window opened, so ui_close() would never end the wait
+		to_chat(user, span_warning("The mob picker could not open. Close some windows and try again."))
+		qdel(picker)
+		return null
 	picker.wait()
 	var/mob/choice = picker.choice?.resolve()
 	qdel(picker)

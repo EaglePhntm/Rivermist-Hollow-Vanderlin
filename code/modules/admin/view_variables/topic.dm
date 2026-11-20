@@ -16,8 +16,9 @@
 		vv_do_list(target, href_list)
 	if(href_list["Vars"])
 		var/datum/vars_target = locate(href_list["Vars"])
-		var/history_index = text2num(href_list["vv_nav"])
-		if(history_index && !holder.vv_history_validate(href_list["Vars"], history_index))
+		var/from_history = !!text2num(href_list["vv_nav"])
+		var/history_index = from_history ? holder.vv_history_find(href_list["Vars"]) : null
+		if(from_history && !history_index)
 			// A Back / Forward / Recent link whose object is gone, or whose reference BYOND gave to something else.
 			holder.vv_history_drop(href_list["Vars"])
 			to_chat(src, span_warning("View Variables: that object no longer exists, it was removed from your VV history."))
