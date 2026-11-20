@@ -212,3 +212,41 @@
 #ifndef HEARING_MESSAGE_MODE
 #define HEARING_MESSAGE_MODE 7
 #endif
+
+/// Added to the victim's perception when a sneaking thief goes for their underwear.
+#define UNDERWEAR_STEAL_PERCEPTION_BONUS 3
+/// Multiplies pickpocket time for underwear theft.
+#define UNDERWEAR_STEAL_TIME_MULT 2
+
+
+// Character creator stats: a point budget spent on the eight stats, plus two bonuses.
+
+/// Points a character spends on stats in the character creator. Some species add to it.
+#define STAT_ALLOC_BUDGET 26
+/// Value of a stat before any point is spent. Lower values give no points back.
+#define STAT_ALLOC_FREE 8
+/// Highest value points can buy. The two bonuses go on top.
+#define STAT_ALLOC_BUY_MAX 15
+/// Each step above this value costs two points instead of one.
+#define STAT_ALLOC_STEEP_ABOVE 13
+/// Lowest value a player can set.
+#define STAT_ALLOC_FLOOR 3
+/// Value of every stat on a character with no saved choice.
+#define STAT_ALLOC_DEFAULT 10
+/// The two bonuses a player puts on two different stats.
+#define STAT_ALLOC_BONUS_MAJOR 2
+#define STAT_ALLOC_BONUS_MINOR 1
+
+/// Charisma at or below this gives a poor impression on examine.
+#define CHARISMA_POOR_MAX 7
+/// Charisma at or above this gives a strong impression on examine.
+#define CHARISMA_STRONG_MIN 14
+/// The impression a character gives, from Charisma.
+#define IMPRESSION_POOR -1
+#define IMPRESSION_ORDINARY 0
+#define IMPRESSION_STRONG 1
+/// Longest custom impression line a player can write.
+#define IMPRESSION_TEXT_MAX 200
+
+/// Trait source for traits an origin gives.
+#define ORIGIN_TRAIT "origin"

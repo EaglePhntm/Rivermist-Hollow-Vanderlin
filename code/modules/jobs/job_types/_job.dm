@@ -120,6 +120,9 @@
 	/// Default patron in case the patron is not allowed
 	var/datum/patron/default_patron
 
+	/// Job typepaths. This job opens only while at least one of them is taken.
+	var/list/required_present_jobs
+
 	/// Voicepack to grant to males
 	var/datum/voicepack/voicepack_m
 	/// Voicepack to grant to females
@@ -540,7 +543,8 @@
 	if(!sheet_to_apply)
 		return FALSE
 
-	spawned_human.attributes?.add_sheet(sheet_to_apply)
+	// Creator-made characters keep the stats they chose; the job gives its skills only.
+	spawned_human.attributes?.add_sheet(sheet_to_apply, spawned_human.uses_creator_stats())
 	return TRUE
 
 /datum/job/proc/build_runtime_attribute_sheet()
@@ -775,6 +779,28 @@
 /datum/job/proc/has_open_position(latejoin = FALSE)
 	var/position_limit = get_position_limit(latejoin)
 	return position_limit == -1 || get_position_count() < position_limit
+
+/// TRUE when the job has no required jobs, or one of them is taken now.
+/datum/job/proc/required_jobs_present()
+	if(!length(required_present_jobs))
+		return TRUE
+	for(var/required_type in required_present_jobs)
+		var/datum/job/required_job = SSjob.GetJobType(required_type)
+		if(required_job?.current_positions > 0)
+			return TRUE
+	return FALSE
+
+/// Display titles of the required jobs.
+/datum/job/proc/get_required_job_titles()
+	. = list()
+	for(var/required_type in required_present_jobs)
+		var/datum/job/required_job = SSjob.GetJobType(required_type)
+		if(required_job)
+			. += required_job.title
+
+/// Player-facing text that names the jobs this job needs.
+/datum/job/proc/get_required_jobs_text()
+	return "Opens only when a [english_list(get_required_job_titles(), and_text = " or ")] is in the round."
 
 /datum/job/proc/set_total_positions(new_total_positions)
 	if(uses_adventurer_slot_pool())
