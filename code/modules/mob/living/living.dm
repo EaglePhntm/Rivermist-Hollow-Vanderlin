@@ -1457,11 +1457,7 @@
 			changeNext_move(CLICK_CD_EXHAUSTED)
 			if(cmode)
 				toggle_cmode()
-			var/image/flaggy = image('icons/effects/effects.dmi',src,"surrender",ABOVE_MOB_LAYER)
-			flaggy.appearance_flags = RESET_TRANSFORM|KEEP_APART
-			flaggy.transform = null
-			flaggy.pixel_y = 12
-			flick_overlay_view(flaggy, 150)
+			show_surrender_flag()
 			drop_all_held_items()
 			Stun(20)
 			Knockdown(200)
@@ -1480,6 +1476,13 @@
 				REMOVE_TRAIT(src, TRAIT_PACIFISM, TRAIT_GENERIC)
 			had_pacifist = FALSE
 			src.visible_message("<span class='notice'>[src] no longer yields!</span>")
+
+/mob/living/proc/show_surrender_flag()
+	var/image/flaggy = image('icons/effects/effects.dmi', src, "surrender", ABOVE_MOB_LAYER)
+	flaggy.appearance_flags = RESET_TRANSFORM|KEEP_APART
+	flaggy.transform = null
+	flaggy.pixel_y = 12
+	flick_overlay_view(flaggy, 150)
 
 /mob/living/verb/swap_lying_direction_verb()
 	set name = "Swap Lying Direction"

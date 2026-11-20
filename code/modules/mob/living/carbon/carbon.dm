@@ -443,6 +443,9 @@
 		breakouttime = I.breakouttime
 	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 15 || (mind && mind.has_antag_datum(/datum/antagonist/zombie)) )
 		cuff_break = INSTANT_CUFFBREAK
+	// A beaten NPC struggles slower, up to twice as long.
+	if(!client)
+		breakouttime *= 1 + get_ai_hurt_fraction()
 
 	if(instant)
 		cuff_break = INSTANT_CUFFBREAK

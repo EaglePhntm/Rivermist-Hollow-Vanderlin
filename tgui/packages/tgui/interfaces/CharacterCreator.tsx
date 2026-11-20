@@ -305,6 +305,7 @@ type CreatorData = {
   voice_pack: string;
   speech_bark: string;
   speech_moans: Booleanish;
+  strength_voice_pitch: Booleanish;
   moan_selection: string;
   selected_accent: string;
   loadout_catalog: LoadoutCatalogEntry[];
@@ -3142,6 +3143,7 @@ export const CharacterCreator = () => {
             onSet={(stat, value) => act('cc_stat_set', { stat, value })}
             onBonus={(slot, stat) => act('cc_stat_bonus', { slot, stat })}
             onReset={() => act('cc_stat_reset')}
+            onAuto={() => act('cc_stat_auto')}
             onText={(band, value) => act('cc_stat_text', { band, value })}
           />
         ) : null}
@@ -4359,6 +4361,12 @@ export const CharacterCreator = () => {
                   L.speechMoans,
                   data.speech_moans ? L.on : L.off,
                   () => doPref('speech_moans', 'input'),
+                )}
+                {kvButton(
+                  L.strengthVoicePitch,
+                  data.strength_voice_pitch ? L.on : L.off,
+                  () => doPref('strength_voice_pitch', 'input'),
+                  L.strengthVoicePitchHint,
                 )}
               </div>
               <div className="cc-grow" />

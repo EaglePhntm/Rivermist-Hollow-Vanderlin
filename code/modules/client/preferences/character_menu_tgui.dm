@@ -940,6 +940,7 @@ GLOBAL_VAR_INIT(character_setup_debug, FALSE)
 	data["voice_pack"] = voice_pack || VOICE_PACK_DEFAULT
 	data["speech_bark"] = read_preference(/datum/preference/choiced/speech_bark)
 	data["speech_moans"] = !!read_preference(/datum/preference/toggle/speech_moans)
+	data["strength_voice_pitch"] = !!read_preference(/datum/preference/toggle/strength_voice_pitch)
 	data["moan_selection"] = moan_selection || MOANPACK_TYPE_DEF
 	data["selected_accent"] = selected_accent || "None"
 
