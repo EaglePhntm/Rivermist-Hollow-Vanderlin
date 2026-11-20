@@ -69,7 +69,11 @@
 		return
 
 	for(var/skill_type in skill_rank_minima)
-		human_owner.adjust_skillrank_up_to(skill_type, skill_rank_minima[skill_type], TRUE)
+		var/translated_skill = canonical_skill_type(skill_type)
+		var/minimum_level = skill_rank_minima[skill_type]
+		if(nulltozero(human_owner.attributes?.raw_attribute_list[translated_skill]) >= minimum_level)
+			continue
+		human_owner.attributes?.set_skill_level(translated_skill, minimum_level, TRUE)
 
 /datum/quirk/positive/proc/grant_stashed_items(mob/living/carbon/human/human_owner, list/item_map)
 	if(!ishuman(human_owner))

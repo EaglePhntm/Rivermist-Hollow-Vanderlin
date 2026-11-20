@@ -522,7 +522,7 @@
 	var/current = nulltozero(raw_attribute_list[skill_type])
 	var/target = clamp(current + delta, skill_min, skill_max)
 	if(!isnull(max_level))
-		target = min(target, max_level)
+		target = min(target, max(current, max_level))
 	if(target == current)
 		return
 	set_skill_level(skill_type, target, silent)
