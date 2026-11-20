@@ -27,6 +27,7 @@
 	var/list/diceroll_modification //Lazy list, see attribute_modifier.dm
 	/// Diceroll modifier immunities
 	var/list/diceroll_mod_immunities //Lazy list, see attribute_modifier.dm
+	var/list/clamped_sheet_gains
 
 /datum/attribute_holder/New(mob/new_parent)
 	. = ..()
