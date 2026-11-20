@@ -49,7 +49,7 @@
   .Button { font-family: inherit; }
   .Input { background: #100c08; border-color: #5a4528; color: #dccfb4; }
   .Input:focus-within { border-color: var(--codex-gold); }
-  .TextArea { line-height: 1.6; font-family: inherit; }
+  .TextArea { line-height: 1.6; font-family: 'Courier New', Courier, monospace; }
   .Section {
     background: #1a130d;
     border: 1px solid #5a4528;
@@ -177,7 +177,7 @@
     margin: 1.5rem 0 1rem; text-align: center;
     h3 { margin: 0.4rem 0; font: 2.1rem/1.2 'RMH Codex Display', Georgia, serif; color: var(--codex-bright); }
   }
-  &__intro { color: var(--codex-muted); font-style: italic; white-space: pre-wrap; max-width: 60ch; margin: auto; }
+  &__intro { font-family: 'Courier New', Courier, monospace; color: var(--codex-muted); font-style: italic; white-space: pre-wrap; max-width: 60ch; margin: auto; }
   &__ornament { display: flex; align-items: center; gap: 0.8rem; justify-content: center; color: var(--codex-border); margin-top: 1.4rem;
     &::before, &::after { content: ''; height: 1px; width: 9rem; background: linear-gradient(90deg,transparent,var(--codex-border)); }
     &::after { transform: scaleX(-1); }
@@ -190,7 +190,7 @@
     &:hover { border-left-color: var(--codex-border); background: rgba(201,167,100,0.025); }
   }
   &__tools { display: flex; gap: 0.2rem; flex: none; .Button { padding: 0.1rem 0.4rem; background: transparent; color: var(--codex-muted); &:hover { color: var(--codex-bright); background: rgba(201,167,100,0.1); } } }
-  &__prose { p { margin: 0 0 0.65rem; &:last-child { margin-bottom: 0; } } white-space: pre-wrap; overflow-wrap: anywhere; font-size: 1.15rem; line-height: 1.65; }
+  &__prose { font-family: 'Courier New', Courier, monospace; p { margin: 0 0 0.65rem; &:last-child { margin-bottom: 0; } } white-space: pre-wrap; overflow-wrap: anywhere; font-size: 1.15rem; line-height: 1.65; }
   &__number { flex: none; color: var(--codex-gold); font-variant-numeric: tabular-nums; }
   &__law { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.9rem 0; border-bottom: 1px solid var(--codex-dim); scroll-margin-top: 1rem; }
   &__lawText { flex: 1; min-width: 0; }
