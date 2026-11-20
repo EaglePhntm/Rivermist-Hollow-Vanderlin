@@ -309,6 +309,11 @@ const en = {
   statFromRace: 'from race',
   statFromRaceHint: 'Extra stat points this race gives in the Ability window.',
   statReset: 'Reset',
+  statAutoOn: 'Spread unspent points at random: on',
+  statAutoOff: 'Spread unspent points at random: off',
+  statAutoHintOn:
+    'Points and bonuses you leave unspent are spread at random each round. A chat line tells you what you got.',
+  statAutoHintOff: 'Points and bonuses you leave unspent stay unused.',
   statNoRefund: 'Going below the starting value gives no points back.',
   statStepCost: 'Point cost',
   statBonusTip:
@@ -899,6 +904,11 @@ const ru: CharacterCreatorStrings = {
   statFromRaceHint:
     'Дополнительные очки характеристик, которые эта раса даёт в окне способностей.',
   statReset: 'Сбросить',
+  statAutoOn: 'Распределять остаток случайно: вкл.',
+  statAutoOff: 'Распределять остаток случайно: выкл.',
+  statAutoHintOn:
+    'Неизрасходованные очки и бонусы каждый раунд распределяются случайно. В чате будет сказано, что вы получили.',
+  statAutoHintOff: 'Неизрасходованные очки и бонусы остаются неиспользованными.',
   statNoRefund: 'Снижение ниже начального значения не возвращает очки.',
   statStepCost: 'Цена шага',
   statBonusTip:

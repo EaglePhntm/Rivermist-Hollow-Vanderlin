@@ -3143,6 +3143,7 @@ export const CharacterCreator = () => {
             onSet={(stat, value) => act('cc_stat_set', { stat, value })}
             onBonus={(slot, stat) => act('cc_stat_bonus', { slot, stat })}
             onReset={() => act('cc_stat_reset')}
+            onAuto={() => act('cc_stat_auto')}
             onText={(band, value) => act('cc_stat_text', { band, value })}
           />
         ) : null}
