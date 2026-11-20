@@ -222,7 +222,7 @@
 // Character creator stats: a point budget spent on the eight stats, plus two bonuses.
 
 /// Points a character spends on stats in the character creator. Some species add to it.
-#define STAT_ALLOC_BUDGET 30
+#define STAT_ALLOC_BUDGET 26
 /// Value of a stat before any point is spent. Lower values give no points back.
 #define STAT_ALLOC_FREE 8
 /// Highest value points can buy. The two bonuses go on top.
