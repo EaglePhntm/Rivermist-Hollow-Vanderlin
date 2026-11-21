@@ -408,6 +408,8 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			dellog += "<li>Highest Time Spent Hard Deleting: [I.hard_delete_max]ms</li>"
 			if (I.hard_deletes_over_threshold)
 				dellog += "<li>Hard Deletes Over Threshold: [I.hard_deletes_over_threshold]</li>"
+		if(I.hard_deletes_skipped)
+			dellog += "<li>Hard Deletes Skipped (left in memory): [I.hard_deletes_skipped]</li>"
 		if(I.slept_destroy)
 			dellog += "<li>Sleeps: [I.slept_destroy]</li>"
 		if(I.no_respect_force)
