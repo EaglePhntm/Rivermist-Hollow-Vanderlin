@@ -126,17 +126,21 @@
 	desc = "An artificial eye that sees."
 
 //native see_in_dark is too buggy so just use night vision eyes i guess.
+/obj/item/organ/eyes/night_vision/prosthetic
+	implant_socket_kind = PROSTHETIC_KIND_EYE
+
 /obj/item/organ/eyes/night_vision/prosthetic/gem
 	name = "gem eye"
 	desc = "A gem eye. It glows and sees in the dark."
 	glows = TRUE
+
+/obj/item/organ/eyes/night_vision/left/prosthetic
 	implant_socket_kind = PROSTHETIC_KIND_EYE
 
 /obj/item/organ/eyes/night_vision/left/prosthetic/gem
 	name = "gem eye"
 	desc = "A gem eye. It glows and sees in the dark."
 	glows = TRUE
-	implant_socket_kind = PROSTHETIC_KIND_EYE
 
 /// The blind-spot trait for the side a glass eye sits on.
 /obj/item/organ/eyes/proc/glass_eye_trait()

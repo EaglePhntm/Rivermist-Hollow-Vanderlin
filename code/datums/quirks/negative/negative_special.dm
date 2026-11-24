@@ -371,10 +371,3 @@
 	else // Outlaw
 		GLOB.outlawed_players |= H.real_name
 		to_chat(H, span_boldwarning("Whether for crimes I did or was accused of, I have been declared an outlaw!"))*/
-
-/datum/quirk/negative/gifted
-	name = "Gifted"
-	desc = "I am an above average individual."
-	desc_hint = "This is a free quirk for bonus points to spend. \
-	This does not provide any downsides whatsoever."
-	point_value = 5
