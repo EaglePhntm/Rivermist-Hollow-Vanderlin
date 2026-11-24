@@ -20,7 +20,7 @@
 	name = "studded leather skirt"
 	icon = 'modular_rmh/icons/clothing/armor/pants.dmi'
 	mob_overlay_icon = 'modular_rmh/icons/clothing/armor/onmob/pants.dmi'
-	armor_type = /datum/armor/rmh/pants/studded_skirt
+	armor_type = /datum/armor/rmh/leather/studded
 	desc = "Short studded skirt made of fine leather and iron."
 	icon_state = "studdedskirt"
 	genital_access = TRUE
