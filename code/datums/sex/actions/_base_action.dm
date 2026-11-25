@@ -130,8 +130,6 @@
 	var/gags_user = FALSE
 	/// Used for determining if the target should be gagged
 	var/gags_target = FALSE
-	/// Sound volume for actions
-	var/action_volume = 50
 	/// So that we don't spam messages with every thrust for example
 	var/next_message_time = 0
 	/// Whether this running action should stop on its next loop check
@@ -1189,6 +1187,8 @@
 
 
 /datum/sex_action/proc/do_onomatopoeia(mob/living/user)
+	if(user.rogue_sneaking || user.m_intent == MOVE_INTENT_SNEAK || user.alpha <= 100)
+		return
 	user.balloon_alert_to_viewers("Plap!")
 
 /datum/sex_action/proc/show_sex_effects(mob/living/user)
