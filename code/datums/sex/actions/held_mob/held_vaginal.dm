@@ -17,7 +17,10 @@
 	if(can_show_action_message(user, target))
 		user.visible_message(spanify_force("[user] [get_generic_force_adjective()] works [target] up and down [user.p_their()] cock like a toy."))
 
-	playsound(user, get_force_sound(), sex_volume, TRUE, -2, ignore_walls = FALSE)
+	var/used_sex_volume = sex_volume
+	if(user.rogue_sneaking || user.m_intent == MOVE_INTENT_SNEAK || user.alpha <= 100)
+		used_sex_volume *= 0.3
+	playsound(user, get_force_sound(), used_sex_volume, TRUE, -2, ignore_walls = FALSE)
 
 	if(user.has_kink(KINK_ONOMATOPOEIA))
 		do_onomatopoeia(user)

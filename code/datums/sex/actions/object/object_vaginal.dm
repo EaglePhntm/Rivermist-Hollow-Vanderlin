@@ -49,7 +49,7 @@
 	user.visible_message(span_warning("[user] stuffs \the [dildo] in their cunt..."))
 	var/used_sex_volume = sex_volume
 	if(user.rogue_sneaking || user.m_intent == MOVE_INTENT_SNEAK || user.alpha <= 100)
-		used_sex_volume *= 0.5
+		used_sex_volume *= 0.3
 	playsound(target, list('sound/misc/mat/insert (1).ogg','sound/misc/mat/insert (2).ogg'), used_sex_volume, TRUE, ignore_walls = FALSE)
 
 /datum/sex_action/object_fuck/object_vaginal/on_perform(mob/living/user, mob/living/target)
@@ -60,7 +60,7 @@
 		user.visible_message(spanify_force("[user] [get_generic_force_adjective()] fucks their cunt with \the [dildo]."))
 	var/used_sex_volume = sex_volume
 	if(user.rogue_sneaking || user.m_intent == MOVE_INTENT_SNEAK || user.alpha <= 100)
-		used_sex_volume *= 0.5
+		used_sex_volume *= 0.3
 	playsound(target, get_force_sound(), used_sex_volume, TRUE, -2, ignore_walls = FALSE)
 
 	if(user.has_kink(KINK_ONOMATOPOEIA))

@@ -61,6 +61,8 @@
 /datum/sex_action/npc/npc_anal_ride_sex/show_penetration_start(mob/living/user, mob/living/target)
 	show_act_lines(get_start_lines(user, target), user, target, "warning")
 	var/used_sex_volume = sex_volume
+	if(user.rogue_sneaking || user.m_intent == MOVE_INTENT_SNEAK || user.alpha <= 100)
+		used_sex_volume *= 0.3
 	playsound(target, list('sound/misc/mat/insert (1).ogg','sound/misc/mat/insert (2).ogg'), used_sex_volume, TRUE, ignore_walls = FALSE)
 
 /datum/sex_action/npc/npc_anal_ride_sex/compose_start_lines(mob/living/user, mob/living/target)
@@ -81,6 +83,8 @@
 	if(can_show_action_message(user, target))
 		show_perform_lines(user, target)
 	var/used_sex_volume = sex_volume
+	if(user.rogue_sneaking || user.m_intent == MOVE_INTENT_SNEAK || user.alpha <= 100)
+		used_sex_volume *= 0.3
 	playsound(target, get_force_sound(), used_sex_volume, TRUE, -2, ignore_walls = FALSE)
 	do_thrust_animate(user, target)
 
