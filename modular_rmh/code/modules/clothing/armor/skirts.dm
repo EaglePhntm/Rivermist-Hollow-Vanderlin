@@ -83,7 +83,7 @@
 	name = "Studded Skirt (+1 Leather Skirt)"
 	recipe_name = "studded leather skirt"
 	additional_items = list(/obj/item/clothing/pants/trou/leather/skirt)
-	created_item = /obj/item/clothing/pants/trou/leather/skirt/studdedskirt
+	created_item = /obj/item/clothing/pants/trou/leather/skirt/studded
 
 /datum/anvil_recipe/armor/steel/chainskirt
 	name = "Chain Skirt"

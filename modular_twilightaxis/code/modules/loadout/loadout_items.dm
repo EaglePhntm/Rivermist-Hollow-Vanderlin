@@ -413,7 +413,7 @@
 
 /datum/loadout_item/ta_wrists_iron_jackchain
 	name = "iron jack chain"
-	item_path = /obj/item/clothing/wrists/bracers/iron/jackchain
+	item_path = /obj/item/clothing/wrists/bracers/ironjackchain
 	point_cost = 1
 
 // CLOAKS
