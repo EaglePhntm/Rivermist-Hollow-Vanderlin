@@ -127,7 +127,14 @@
 
 //native see_in_dark is too buggy so just use night vision eyes i guess.
 /obj/item/organ/eyes/night_vision/prosthetic
+	abstract_type = /obj/item/organ/eyes/night_vision/prosthetic
 	implant_socket_kind = PROSTHETIC_KIND_EYE
+	organ_flags = ORGAN_ROBOTIC
+	blood_req = 0
+	oxygen_req = 0
+	nutriment_req = 0
+	hydration_req = 0
+	healing_factor = 0
 
 /obj/item/organ/eyes/night_vision/prosthetic/gem
 	name = "gem eye"
@@ -135,7 +142,14 @@
 	glows = TRUE
 
 /obj/item/organ/eyes/night_vision/left/prosthetic
+	abstract_type = /obj/item/organ/eyes/night_vision/left/prosthetic
 	implant_socket_kind = PROSTHETIC_KIND_EYE
+	organ_flags = ORGAN_ROBOTIC
+	blood_req = 0
+	oxygen_req = 0
+	nutriment_req = 0
+	hydration_req = 0
+	healing_factor = 0
 
 /obj/item/organ/eyes/night_vision/left/prosthetic/gem
 	name = "gem eye"

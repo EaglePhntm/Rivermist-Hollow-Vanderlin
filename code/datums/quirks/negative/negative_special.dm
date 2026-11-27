@@ -371,3 +371,4 @@
 	else // Outlaw
 		GLOB.outlawed_players |= H.real_name
 		to_chat(H, span_boldwarning("Whether for crimes I did or was accused of, I have been declared an outlaw!"))*/
+
